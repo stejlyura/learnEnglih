@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Научные Методологии Изучения Английского: Аудит Шэдоуинга, 4 Потока и Дейли-Рутина</title>
+  <meta name="description" content="Полное исследование Second Language Acquisition (SLA): почему шэдоуинга и чанков недостаточно для спонтанной речи, гипотеза аутпута Меррилл Суэйн, Four Strands Пола Нэйшна и 5 практик в дейли-рутину.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="img/favicon-methodology.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-methodology-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-methodology-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-methodology.png">
+
+  <style>
+    :root {
+      --bg-page: #0B0F17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1A2234;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(59, 130, 246, 0.35);
+      --text-heading: #F8FAFC;
+      --text-body: #CBD5E1;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --accent-primary: #3B82F6;
+      --accent-secondary: #06B6D4;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --accent-purple: #8B5CF6;
+      --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-reading: 'Lora', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      font-family: var(--font-reading);
+      font-size: 19px;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-emerald));
+      z-index: 1000;
+      transition: width 0.1s ease-out;
+    }
+
+    header.article-header-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 15, 23, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 900;
+      padding: 14px 24px;
+      font-family: var(--font-ui);
+    }
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-badge {
+      font-size: 0.72rem;
+      background: rgba(59, 130, 246, 0.18);
+      color: #93C5FD;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .header-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 14px;
+      transition: color 0.2s;
+    }
+    .header-links a:hover {
+      color: #FFF;
+    }
+
+    article.longread-container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    .article-meta-top {
+      font-family: var(--font-ui);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-secondary);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1.article-title {
+      font-family: var(--font-ui);
+      font-size: clamp(2.1rem, 4vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-heading);
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    p.article-lead {
+      font-size: 1.22rem;
+      line-height: 1.7;
+      color: #E2E8F0;
+      margin-bottom: 32px;
+    }
+
+    .article-info-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 48px;
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+    }
+    .info-item span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .info-item strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    nav.toc-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-primary);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 60px;
+      font-family: var(--font-ui);
+    }
+    .toc-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-heading);
+      margin-bottom: 14px;
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-list li {
+      margin-bottom: 10px;
+    }
+    .toc-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.15s ease;
+      display: inline-block;
+    }
+    .toc-list a:hover {
+      color: var(--accent-secondary);
+    }
+    .toc-num {
+      color: var(--accent-primary);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    section {
+      margin-bottom: 64px;
+    }
+    h2.chapter-heading {
+      font-family: var(--font-ui);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    h3.subchapter-heading {
+      font-family: var(--font-ui);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-top: 36px;
+      margin-bottom: 16px;
+    }
+    p {
+      margin-bottom: 22px;
+    }
+
+    blockquote.quote-callout {
+      border-left: 3px solid var(--accent-primary);
+      padding: 16px 24px;
+      margin: 32px 0;
+      background: var(--bg-surface);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      color: #E2E8F0;
+    }
+    blockquote.quote-callout cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-style: normal;
+      font-family: var(--font-ui);
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    .method-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .method-card h4 {
+      font-family: var(--font-ui);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: var(--text-heading);
+    }
+
+    /* Comparison Table */
+    .table-container {
+      overflow-x: auto;
+      margin: 32px 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      background: var(--bg-surface);
+    }
+    table.editorial-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      font-family: var(--font-ui);
+      text-align: left;
+    }
+    table.editorial-table th {
+      background: var(--bg-surface-elevated);
+      color: #FFF;
+      padding: 14px 18px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    table.editorial-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-body);
+      vertical-align: top;
+    }
+    table.editorial-table tr:last-child td {
+      border-bottom: none;
+    }
+    table.editorial-table strong {
+      color: var(--text-heading);
+    }
+
+    /* Grid cards */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 28px 0;
+    }
+    @media (max-width: 700px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .badge-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .tag-blue { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .tag-green { background: rgba(16, 185, 129, 0.15); color: #6EE7B7; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-amber { background: rgba(245, 158, 11, 0.15); color: #FCD34D; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .tag-rose { background: rgba(244, 63, 94, 0.15); color: #FDA4AF; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+    footer.article-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 32px;
+      margin-top: 60px;
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+    footer.article-footer a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="reading-progress"></div>
+
+  <!-- Header Nav -->
+  <header class="article-header-nav">
+    <div class="header-content">
+      <a href="#top" class="header-title">
+        <span>SLA LEARNING METHODOLOGY</span>
+        <span class="header-badge">Daily Protocol</span>
+      </a>
+      <div class="header-links">
+        <a href="learn-chanks.html">База чанков</a>
+        <a href="tense-chunks.html">Временные чанки</a>
+        <a href="dense-structure.html">Плотные чанки</a>
+        <a href="chunks.html">Мастерство чанков</a>
+        <a href="longread.html">← Главный лонгрид</a>
+      </div>
+    </div>
+  </header>
+
+  <article class="longread-container" id="top">
+
+    <div class="article-meta-top">
+      <span>Прикладная лингвистика & Когнитивная наука SLA</span>
+      <span>•</span>
+      <span>Время чтения: 14 минут</span>
+    </div>
+
+    <h1 class="article-title">Научные Методологии Изучения Языка: Аудит Рутины, 4 Потока и Автономная Беглость</h1>
+
+    <p class="article-lead">
+      Научный разбор того, почему связки «учу чанки + слушаю и повторяю 3 раза» недостаточно для спонтанного говорения на созвонах, как устроен когнитивный барьер порождения речи (Production Gap) и какие 5 практик сделают вашу дейли-рутину полноценной.
+    </p>
+
+    <div class="article-info-strip">
+      <div class="info-item"><span>Научные основы:</span> <strong>The Four Strands (Nation), Output Hypothesis (Swain)</strong></div>
+      <div class="info-item"><span>Аудит рутины:</span> <strong>3-ступенчатый шэдоуинг vs спонтанная речь</strong></div>
+      <div class="info-item"><span>Практический итог:</span> <strong>3 тайм-плана (20 / 35 / 50 минут в день)</strong></div>
+    </div>
+
+    <!-- Table of Contents -->
+    <nav class="toc-box">
+      <div class="toc-title">Содержание исследования</div>
+      <ul class="toc-list">
+        <li><a href="#part-1"><span class="toc-num">01.</span> Аудит вашей текущей рутины: Сильные стороны и слепые зоны</a></li>
+        <li><a href="#part-2"><span class="toc-num">02.</span> Фундаментальные научные теории SLA (Nation, Swain, Schmidt, Ericsson)</a></li>
+        <li><a href="#part-3"><span class="toc-num">03.</span> 5 недостающих элементов: Что внедрить в ежедневную практику</a></li>
+        <li><a href="#part-4"><span class="toc-num">04.</span> Три готовых сценария идеальной дейли-рутины (Sprint, Standard, Immersion)</a></li>
+        <li><a href="#part-5"><span class="toc-num">05.</span> Ежедневный чек-лист эффективности и объективные метрики прогресса</a></li>
+      </ul>
+    </nav>
+
+    <!-- SECTION 1 -->
+    <section id="part-1">
+      <h2 class="chapter-heading">01. Аудит вашей текущей рутины: Сильные стороны и слепые зоны</h2>
+
+      <p>
+        Ваша текущая методика состоит из двух сильных инструментов: <strong>изучение лексических чанков</strong> и <strong>трехступенчатый шэдоуинг аудио</strong> (1-й раз: слушаю и повторяю на слух; 2-й раз: слушаю, смотрю текст и повторяю; 3-й раз: снова повторяю только на слух).
+      </p>
+
+      <div class="grid-2col">
+        <div class="method-card" style="border-left: 3px solid var(--accent-emerald);">
+          <h4 style="color: var(--accent-emerald);">Что работает превосходно:</h4>
+          <ul style="padding-left: 20px; font-size: 0.93rem;">
+            <li style="margin-bottom: 8px;"><strong>Фонологическая петля (Phonological Loop):</strong> Активируется моторная кора и мышечная память связок по модели Алана Баддели.</li>
+            <li style="margin-bottom: 8px;"><strong>Связная речь (Connected Speech):</strong> Шэдоуинг автоматически приучает к редукциям, слиянию звуков и ритму ударений без заучивания правил транскрипции.</li>
+            <li style="margin-bottom: 8px;"><strong>Защита от слуховых иллюзий:</strong> Второй проход с текстом снимает эффект «ослышки», не давая заучить ошибочное звучание.</li>
+          </ul>
+        </div>
+
+        <div class="method-card" style="border-left: 3px solid var(--accent-rose);">
+          <h4 style="color: var(--accent-rose);">Главная когнитивная ловушка:</h4>
+          <ul style="padding-left: 20px; font-size: 0.93rem;">
+            <li style="margin-bottom: 8px;"><strong>Внешне направляемая речь (Mimicry):</strong> Диктор уже выбрал грамматику, нашел слова и задал интонацию. Ваш мозг работает как ретранслятор, а не генератор.</li>
+            <li style="margin-bottom: 8px;"><strong>The Production Gap:</strong> На созвоне диктора нет. Мозг должен сам за 200 мс извлечь мысль из ментального лексикона под давлением.</li>
+            <li style="margin-bottom: 8px;"><strong>Иллюзия беглости:</strong> Вы можете идеально повторять за спикером в наушниках, но при спонтанном вопросе тимлида язык застывает.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="part-2">
+      <h2 class="chapter-heading">02. Фундаментальные научные теории Second Language Acquisition (SLA)</h2>
+
+      <p>
+        Чтобы устная речь стала свободной, методика должна опираться на доказательную прикладную лингвистику, а не на советы из блогов.
+      </p>
+
+      <div class="table-container">
+        <table class="editorial-table">
+          <thead>
+            <tr>
+              <th>Теория & Автор</th>
+              <th>Суть открытия</th>
+              <th>Применение в вашей практике</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>The Four Strands</strong><br><span class="badge-tag tag-blue">Пол Нэйшн (Paul Nation)</span></td>
+              <td>Сбалансированная система требует строго равного времени: 25% Input, 25% Output, 25% Language Study, 25% Fluency.</td>
+              <td>У вас перекос в сторону Input и Study. Нужно добавить <strong>25% самостоятельного Output</strong> и <strong>25% Fluency</strong> (скорость на знакомом).</td>
+            </tr>
+            <tr>
+              <td><strong>Output Hypothesis</strong><br><span class="badge-tag tag-green">Меррилл Суэйн (Merrill Swain)</span></td>
+              <td>Одного слушания недостаточно. Только порождая речь, мозг замечает «дыру» (Noticing the Gap) между замыслом и возможностями.</td>
+              <td>Каждый день обязательно говорить <strong>свои собственные мысли</strong> без подсказок диктора (голосовые заметки, монологи).</td>
+            </tr>
+            <tr>
+              <td><strong>The Noticing Hypothesis</strong><br><span class="badge-tag tag-amber">Ричард Шмидт (Richard Schmidt)</span></td>
+              <td>Пассивное слушание фоном не дает эффекта у взрослых. Усваивается только то, на что направлено сфокусированное осознанное внимание.</td>
+              <td>Короткие сессии по 15–20 минут с полным погружением дают в 5 раз больше, чем часовое фоновое радио.</td>
+            </tr>
+            <tr>
+              <td><strong>Deliberate Practice</strong><br><span class="badge-tag tag-rose">Андерс Эрикссон (K. Anders Ericsson)</span></td>
+              <td>Повторение без локальной микро-цели не развивает беглость. Нужен режим легкого когнитивного дискомфорта и быстрая обратная связь.</td>
+              <td>Тренировать не «весь английский», а конкретный микро-навык: например, подстановка 4 глаголов в чанк за 30 секунд.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <blockquote class="quote-callout">
+        «Производство собственной речи заставляет учащегося перейти от чисто семантической обработки (понимание общего смысла) к синтаксической (конструирование формы). Слушание показывает, как говорят другие; только говорение учит говорить вас».
+        <cite>Меррилл Суэйн, профессор прикладной лингвистики, University of Toronto</cite>
+      </blockquote>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="part-3">
+      <h2 class="chapter-heading">03. 5 недостающих элементов: Что внедрить в ежедневную практику</h2>
+
+      <p>
+        Вам не нужно ломать текущую рутину — она дает отличную фонетическую базу. Нужно добавить <strong>генеративный контур</strong>:
+      </p>
+
+      <div class="method-card">
+        <h4 style="color: var(--accent-primary);">1. Задержанный эхо-повтор (Delayed Shadowing)</h4>
+        <p>
+          Вместо одновременного бормотания встык за диктором сделайте задержку: прослушайте смысловой чанк из 3–6 слов (<em>«...when we ran into an unexpected latency spike...»</em>), поставьте паузу, задержите дыхание на 1.5 секунды и воспроизведите фразу из оперативной памяти с точно такой же просодией.
+        </p>
+        <p style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+          <strong>Научный эффект (Norman de Silva, Shuhei Kadota):</strong> Тренирует буфер кратковременной памяти. Фраза сохраняется не как набор звуков, а как целостный лексический блок.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <h4 style="color: var(--accent-emerald);">2. Дрилл «Speed Swapping» для каждого выученного чанка</h4>
+        <p>
+          Выучили чанк <code>Have you had a chance to [verb] yet?</code> — не останавливайтесь на одном примере. Засеките 30 секунд и вслух без пауз подставьте 4–5 своих реальных действий: <em>«to review my PR»</em>, <em>«to check the build»</em>, <em>«to look at the Figma mockups»</em>, <em>«to reply to the email»</em>.
+        </p>
+        <p style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+          <strong>Научный эффект:</strong> Мозг цементирует неизменяемый грамматический каркас и освобождает ресурсы для выбора глагола.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <h4 style="color: var(--accent-amber);">3. Техника 4/3/2 (Разгон беглости по Полу Нэйшну)</h4>
+        <p>
+          Выберите одну тему (например, итоги вчерашнего спринта или решение бага):
+        </p>
+        <ul style="padding-left: 20px; font-size: 0.92rem; margin-bottom: 12px;">
+          <li><strong>Раунд 1 (4 минуты):</strong> Говорите на эту тему без подготовки на диктофон.</li>
+          <li><strong>Раунд 2 (3 минуты):</strong> Расскажите то же самое за 3 минуты. Темп вырастет, вода уйдет.</li>
+          <li><strong>Раунд 3 (2 минуты):</strong> Уложите всю суть в 2 минуты плотной речи.</li>
+        </ul>
+        <p style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+          <strong>Научный эффект:</strong> Автоматически выбрасываются междометия («эээ», «you know») и включаются компактные чанки.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <h4 style="color: var(--accent-rose);">4. Микро-транскрибирование (Dictogloss / 2 минуты в день)</h4>
+        <p>
+          Возьмите 15–20 секунд сложного подкаста без субтитров. Запишите в блокнот каждое слово дословно, прослушав 3 раза. Затем откройте субтитры и сличите красной ручкой.
+        </p>
+        <p style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+          <strong>Научный эффект:</strong> Вы физически увидите беглые редукции (<em>«what did you» → «whaddya»</em>, <em>«should have» → «shoulda»</em>). Слух учится декодировать сжатый нативный звук.
+        </p>
+      </div>
+
+      <div class="method-card">
+        <h4 style="color: var(--accent-purple);">5. Вечерний 2-минутный Voice Journal (Генеративный аутпут)</h4>
+        <p>
+          Перед сном запишите в «Избранное» Telegram или на диктофон 2 минуты голосового сообщения на английском: что сделано за день, с каким багом воевали, что в планах на завтра. Обязательно примените <strong>минимум 2 чанка</strong>, выученных сегодня.
+        </p>
+        <p style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+          <strong>Научный эффект:</strong> Ломает языковой барьер генерации собственных мыслей без текстовой опоры.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="part-4">
+      <h2 class="chapter-heading">04. Три готовых сценария идеальной дейли-рутины</h2>
+
+      <p>
+        Выбирайте сценарий в зависимости от плотности рабочего дня. Главное правило нейропластичности — <strong>ежедневная непрерывность</strong>, даже если у вас есть всего 20 минут.
+      </p>
+
+      <div class="table-container">
+        <table class="editorial-table">
+          <thead>
+            <tr>
+              <th>Сценарий</th>
+              <th>Время</th>
+              <th>Пошаговая структура тренировки</th>
+              <th>Фокус дня</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sprint</strong><br><span class="badge-tag tag-amber">Дни высокой загрузки</span></td>
+              <td><strong>20 мин</strong></td>
+              <td>
+                • <strong>6 мин:</strong> 3-ступенчатый шэдоуинг 45-сек аудио<br>
+                • <strong>6 мин:</strong> 2 чанка через дрилл Speed Swapping (вслух)<br>
+                • <strong>8 мин:</strong> Сжатый монолог 3/2 мин на диктофон
+              </td>
+              <td>Поддержание моторного тонуса и закрытие речевого затыка.</td>
+            </tr>
+            <tr>
+              <td><strong>Standard</strong><br><span class="badge-tag tag-blue">Золотой стандарт B2→C1</span></td>
+              <td><strong>35 мин</strong></td>
+              <td>
+                • <strong>10 мин:</strong> Delayed Shadowing (слушаю чанк → пауза → повтор)<br>
+                • <strong>8 мин:</strong> 3–4 новых чанка (Tense Chunks или Dense Chunks)<br>
+                • <strong>8 мин:</strong> Техника 4/3/2 на рабочую тему дня<br>
+                • <strong>9 мин:</strong> AI Voice Sparring с Claude / ChatGPT Voice
+              </td>
+              <td>Баланс 4 потоков (Input, Output, Chunks, Fluency).</td>
+            </tr>
+            <tr>
+              <td><strong>Immersion</strong><br><span class="badge-tag tag-green">Выходной / Подготовка к офферу</span></td>
+              <td><strong>50 мин</strong></td>
+              <td>
+                • <strong>5 мин:</strong> Микро-транскрибирование 20 сек быстрой речи<br>
+                • <strong>10 мин:</strong> Delayed Shadowing с акцентом на просодию<br>
+                • <strong>10 мин:</strong> База карточек (<a href="learn-chanks.html">learn-chanks.html</a>) + Speed Swapping<br>
+                • <strong>15 мин:</strong> Спарринг с AI по вопросам поведенческого интервью (STAR)<br>
+                • <strong>10 мин:</strong> Voice Journaling и анализ пауз
+              </td>
+              <td>Максимальный прорыв в спонтанной речи и словарном поиске.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="part-5">
+      <h2 class="chapter-heading">05. Ежедневный чек-лист эффективности и объективные метрики</h2>
+
+      <p>
+        В конце дня оцените тренировку по 3 контрольным вопросам:
+      </p>
+
+      <div class="method-card" style="border-left: 3px solid var(--accent-primary);">
+        <ul style="padding-left: 20px; font-size: 0.95rem;">
+          <li style="margin-bottom: 12px;"><strong>1. Был ли сегодня самостоятельный Output?</strong> Говорил ли я собственные мысли из головы хотя бы 3 минуты, а не только повторял за диктором?</li>
+          <li style="margin-bottom: 12px;"><strong>2. Был ли Speed Swapping?</strong> Подставил ли я в выученный чанк 4 своих рабочих действия вслух?</li>
+          <li style="margin-bottom: 12px;"><strong>3. Сработал ли замок губ (The Breath Lock)?</strong> Заменял ли я мычание («эээ») немой паузой и вдохом носом?</li>
+        </ul>
+      </div>
+
+      <p>
+        Если на все 3 вопроса ответ «Да» — ваш день дал чистый прирост к беглости речи уровня C1.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="article-footer">
+      <p>Материал входит в образовательный комплекс <strong>English Learn</strong>. Разбор чанков читайте в <a href="chunks.html">Мастерстве чанков (chunks.html)</a>, временные шаблоны в <a href="tense-chunks.html">tense-chunks.html</a>, а карточки в <a href="learn-chanks.html">learn-chanks.html</a>.</p>
+      <p style="margin-top: 8px;">2026 • Доказательная методология беглости B2 → C1</p>
+    </footer>
+
+  </article>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

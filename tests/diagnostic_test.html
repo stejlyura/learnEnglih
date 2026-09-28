@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep English Diagnostic Test: 16-Year Gap & Fossilization Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #0B0F17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1A2234;
+      --bg-surface-subtle: rgba(255, 255, 255, 0.03);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.3);
+      --border-cyan: rgba(6, 182, 212, 0.3);
+      --border-emerald: rgba(16, 185, 129, 0.3);
+
+      --text-heading: #F8FAFC;
+      --text-body: #CBD5E1;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+
+      --accent-primary: #6366F1;
+      --accent-primary-hover: #4F46E5;
+      --accent-secondary: #06B6D4;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+
+      --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-reading: 'Lora', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-card: 0 14px 34px -5px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+      --shadow-glow: 0 0 35px rgba(99, 102, 241, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: 20%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.09) 0%, rgba(6, 182, 212, 0.04) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px 80px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid var(--border-accent);
+      border-radius: 9999px;
+      color: #A5B4FC;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Sticky Progress Bar */
+    .progress-bar-container {
+      position: sticky;
+      top: 15px;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin-bottom: 30px;
+      z-index: 100;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-heading);
+      white-space: nowrap;
+      font-family: var(--font-mono);
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      color: var(--accent-secondary);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    /* Screen Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Welcome Screen */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .intro-feature {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .intro-feature-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .intro-feature h3 {
+      font-size: 16px;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .intro-feature p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: var(--font-ui);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-primary), #4338CA);
+      color: #FFFFFF;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4F46E5, #3730A3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.55);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-heading);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--accent-emerald), #059669);
+      color: #FFFFFF;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-emerald:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+
+    /* Question Screen */
+    .q-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-secondary);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+    }
+
+    .q-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .q-sentence {
+      background: var(--bg-surface-elevated);
+      border-left: 4px solid var(--accent-primary);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 24px;
+      font-size: 18px;
+      font-family: var(--font-reading);
+      color: #E2E8F0;
+      line-height: 1.6;
+    }
+
+    .q-sentence .blank {
+      display: inline-block;
+      min-width: 90px;
+      border-bottom: 2px dashed var(--accent-secondary);
+      text-align: center;
+      color: var(--accent-secondary);
+      font-weight: bold;
+      padding: 0 8px;
+      font-family: var(--font-ui);
+    }
+
+    .options-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .option-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .option-item:hover {
+      background: rgba(99, 102, 241, 0.06);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateX(4px);
+    }
+
+    .option-item.selected {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+    }
+
+    .option-key {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-item.selected .option-key {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    .option-text {
+      font-size: 16px;
+      color: var(--text-body);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .option-item.selected .option-text {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* Confidence Selector (Scientific Calibration) */
+    .confidence-section {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-bottom: 28px;
+    }
+
+    .confidence-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .confidence-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .conf-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+      font-family: var(--font-ui);
+    }
+
+    .conf-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-heading);
+    }
+
+    .conf-btn.selected {
+      border-color: var(--accent-secondary);
+      background: rgba(6, 182, 212, 0.15);
+      color: #FFFFFF;
+    }
+
+    .conf-btn.selected.conf-high {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.15);
+      color: #6EE7B7;
+    }
+
+    .conf-btn.selected.conf-med {
+      border-color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.15);
+      color: #FCD34D;
+    }
+
+    .conf-btn.selected.conf-low {
+      border-color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.15);
+      color: #FDA4AF;
+    }
+
+    /* Action footer */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+    }
+
+    .nav-hint {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    /* Results Dashboard */
+    .results-hero {
+      text-align: center;
+      padding: 30px 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 30px;
+    }
+
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(17, 24, 39, 0.8) 70%);
+      border: 4px solid var(--accent-primary);
+      box-shadow: 0 0 35px rgba(99, 102, 241, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .score-num {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    .diagnosis-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .diagnosis-badge.gold {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+    }
+
+    .diagnosis-badge.indigo {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #A5B4FC;
+    }
+
+    .diagnosis-badge.cyan {
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #67E8F9;
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .metric-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .metric-title {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Breakdown Bars */
+    .breakdown-section {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .breakdown-row {
+      margin-bottom: 18px;
+    }
+
+    .breakdown-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .breakdown-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .breakdown-track {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .breakdown-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* JSON Export Card */
+    .json-card {
+      background: #06090F;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+      margin-top: 30px;
+    }
+
+    .json-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .json-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    pre.json-display {
+      background: #030712;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: #94A3B8;
+      max-height: 280px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-emerald);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Resume Banner */
+    .resume-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .resume-info h4 {
+      color: #6EE7B7;
+      font-size: 16px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .resume-info p {
+      color: var(--text-body);
+      font-size: 13.5px;
+    }
+
+    .resume-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .save-indicator-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #6EE7B7;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .save-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 24px 18px;
+      }
+      .confidence-options {
+        grid-template-columns: 1fr;
+      }
+      .progress-bar-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="badge-pill">🔬 SLA Scientific Diagnostic Engine</div>
+      <h1>Тест-Аудит: Анатомия Пробелов после 16 Лет Обучения</h1>
+      <p class="subtitle">
+        Выясняем точную природу ваших языковых затыков: реальный дефицит знаний, скрытая фоссилизация (закостенелые кальки с русского), задержка извлечения (Procedural Lag) или синдром гипер-мониторинга.
+      </p>
+    </header>
+
+    <!-- Sticky Progress Bar (shown during test) -->
+    <div id="progressBar" class="progress-bar-container hidden">
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div class="progress-meta">
+        <span id="questionCounter">Вопрос 1 / 25</span>
+        <div class="timer-badge">
+          ⏱ <span id="timerDisplay">00:00</span>
+        </div>
+        <div class="save-indicator-badge">
+          <span class="save-dot"></span>
+          <span id="saveStatus">Сохранено</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 1: Welcome & Intro -->
+    <div id="screenIntro" class="card">
+      <!-- Resume Banner (shown if localStorage has saved state) -->
+      <div id="resumeBanner" class="resume-banner hidden">
+        <div class="resume-info">
+          <h4>💾 Найдена сохраненная сессия!</h4>
+          <p id="resumeText">У вас есть сохраненные ответы. Вы можете продолжить с того же места.</p>
+        </div>
+        <div class="resume-actions">
+          <button type="button" id="btnResume" class="btn btn-emerald" style="padding: 10px 20px; font-size: 14px;">
+            ▶ Продолжить тест
+          </button>
+          <button type="button" id="btnResetIntro" class="btn btn-secondary" style="padding: 10px 16px; font-size: 14px;">
+            🗑 Сбросить
+          </button>
+        </div>
+      </div>
+
+      <h2 style="font-size: 24px; color: var(--text-heading); margin-bottom: 12px;">Как устроен этот тест?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">
+        Обычные тесты в интернете просто ставят оценку «B1» или «C1», проверяя сухое узнавание правил. Данный диагностический инструмент разработан на базе исследований Селинкера, ДеКейзера и Шмидта:
+      </p>
+
+      <div class="intro-grid">
+        <div class="intro-feature">
+          <div class="intro-feature-icon">🎯</div>
+          <h3>Скрытые Ловушки L1</h3>
+          <p>Проверка типичных русскоязычных калек, которые звучат естественно для вас, но режут слух носителю.</p>
+        </div>
+        <div class="intro-feature">
+          <div class="intro-feature-icon">🧠</div>
+          <h3>Калибровка Уверенности</h3>
+          <p>К каждому ответу вы указываете уровень уверенности. Это отделяет истинное незнание от заученных ошибок.</p>
+        </div>
+        <div class="intro-feature">
+          <div class="intro-feature-icon">⚡</div>
+          <h3>Замер Скорости Извлечения</h3>
+          <p>Фиксация времени ответа: правильный ответ через 30 секунд — это процедурный пробел для спонтанной речи.</p>
+        </div>
+        <div class="intro-feature">
+          <div class="intro-feature-icon">💾</div>
+          <h3>Защита от Перезагрузки</h3>
+          <p>Все ваши ответы мгновенно пишутся в LocalStorage. Даже при обновлении страницы ничего не пропадет.</p>
+        </div>
+      </div>
+
+      <div style="background: rgba(99, 102, 241, 0.08); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 18px 22px; margin-bottom: 28px;">
+        <h4 style="color: #A5B4FC; margin-bottom: 6px;">💡 Инструкция перед стартом:</h4>
+        <p style="font-size: 14.5px; color: var(--text-body);">
+          1. Не гуглите и не используйте переводчик — цель не получить 100%, а найти реальные слепые зоны.<br>
+          2. Отвечайте в темпе естественной речи. Если не знаете — честно выбирайте вариант или нажимайте «Наугад».<br>
+          3. Всего 25 вопросов (грамматические тонкости, коллокации, предлоги, исправление ошибок + 4 вопроса самодиагностики).
+        </p>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="button" id="btnStart" class="btn btn-primary" style="font-size: 18px; padding: 16px 42px;">
+          🚀 Начать Диагностический Тест
+        </button>
+      </div>
+    </div>
+
+    <!-- Screen 2: Question Container -->
+    <div id="screenQuestion" class="card hidden">
+      <div id="qCategory" class="q-category-tag">Грамматическая Тонкость</div>
+      <h2 id="qTitle" class="q-title">Выберите наиболее точный вариант заполнения пропуска:</h2>
+      
+      <div id="qSentence" class="q-sentence">
+        If we <span class="blank">______</span> the requirements earlier, we wouldn't be in this crisis right now.
+      </div>
+
+      <div id="optionsList" class="options-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Confidence Selector -->
+      <div class="confidence-section">
+        <div class="confidence-title">
+          <span>🎯 Насколько вы уверены в своем ответе? (Критично для SLA-диагностики):</span>
+        </div>
+        <div class="confidence-options">
+          <button type="button" class="conf-btn conf-high" data-confidence="high">
+            <span>🟢 100% Уверен(а)</span>
+            <span style="font-size: 11px; opacity: 0.8;">Знаю правило точно</span>
+          </button>
+          <button type="button" class="conf-btn conf-med" data-confidence="medium">
+            <span>🟡 Сомневаюсь (50/50)</span>
+            <span style="font-size: 11px; opacity: 0.8;">Интуитивно, без уверенности</span>
+          </button>
+          <button type="button" class="conf-btn conf-low" data-confidence="low">
+            <span>🔴 Наугад / Пальцем в небо</span>
+            <span style="font-size: 11px; opacity: 0.8;">Вообще не знаю структуру</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" id="btnPrev" class="btn btn-secondary" style="padding: 12px 18px;" disabled>
+            ← Назад
+          </button>
+          <button type="button" id="btnResetTest" class="btn btn-secondary" style="padding: 12px 14px; color: var(--text-dim); font-size: 13px;" title="Сбросить все ответы">
+            Сброс
+          </button>
+        </div>
+        <span class="nav-hint">Клавиши 1-4, Enter</span>
+        <button type="button" id="btnNext" class="btn btn-primary" disabled>
+          Следующий вопрос →
+        </button>
+      </div>
+    </div>
+
+    <!-- Screen 3: Results & JSON Dashboard -->
+    <div id="screenResults" class="card hidden">
+      <div class="results-hero">
+        <div class="score-circle">
+          <div id="finalScore" class="score-num">0%</div>
+          <div class="score-label">Точность</div>
+        </div>
+        <div id="diagnosisBadge" class="diagnosis-badge gold">Идет анализ...</div>
+        <h2 id="diagnosisHeadline" style="color: var(--text-heading); font-size: 24px; margin-bottom: 10px;">Профиль ваших языковых систем</h2>
+        <p id="diagnosisDescription" style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 15px;">
+          Ваш профиль сформирован на основе баланса правильности, времени отклика и калибровки уверенности.
+        </p>
+      </div>
+
+      <!-- 4 Core Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div id="metricFossilized" class="metric-val" style="color: var(--accent-rose);">0</div>
+          <div class="metric-title">Фоссилизированные ошибки</div>
+          <div style="font-size: 11.5px; color: var(--text-dim); margin-top: 4px;">Уверен, но ошибся</div>
+        </div>
+        <div class="metric-card">
+          <div id="metricLatent" class="metric-val" style="color: var(--accent-emerald);">0</div>
+          <div class="metric-title">Скрытые знания</div>
+          <div style="font-size: 11.5px; color: var(--text-dim); margin-top: 4px;">Сомневался, но прав</div>
+        </div>
+        <div class="metric-card">
+          <div id="metricSpeed" class="metric-val" style="color: var(--accent-secondary);">0.0s</div>
+          <div class="metric-title">Ср. Скорость Реакции</div>
+          <div style="font-size: 11.5px; color: var(--text-dim); margin-top: 4px;">Латентность памяти</div>
+        </div>
+        <div class="metric-card">
+          <div id="metricConfidence" class="metric-val" style="color: var(--accent-amber);">0%</div>
+          <div class="metric-title">Калибровка точности</div>
+          <div style="font-size: 11.5px; color: var(--text-dim); margin-top: 4px;">Самооценка vs Реальность</div>
+        </div>
+      </div>
+
+      <!-- Domain Breakdown -->
+      <div class="breakdown-section">
+        <h3 style="font-size: 17px; color: var(--text-heading); margin-bottom: 20px;">Детализация по языковым доменам:</h3>
+        
+        <div class="breakdown-row">
+          <div class="breakdown-header">
+            <span>1. Сложная грамматика и видо-временные аспекты</span>
+            <span id="scoreGrammar">0%</span>
+          </div>
+          <div class="breakdown-track">
+            <div id="barGrammar" class="breakdown-fill" style="width: 0%; background: var(--accent-primary);"></div>
+          </div>
+        </div>
+
+        <div class="breakdown-row">
+          <div class="breakdown-header">
+            <span>2. L1-Интерференция и Русские Кальки (Fossilization)</span>
+            <span id="scoreL1">0%</span>
+          </div>
+          <div class="breakdown-track">
+            <div id="barL1" class="breakdown-fill" style="width: 0%; background: var(--accent-rose);"></div>
+          </div>
+        </div>
+
+        <div class="breakdown-row">
+          <div class="breakdown-header">
+            <span>3. C1 Лексическая Точность и Коллокации</span>
+            <span id="scoreLexical">0%</span>
+          </div>
+          <div class="breakdown-track">
+            <div id="barLexical" class="breakdown-fill" style="width: 0%; background: var(--accent-secondary);"></div>
+          </div>
+        </div>
+
+        <div class="breakdown-row">
+          <div class="breakdown-header">
+            <span>4. Замечание Ошибок (Schmidt's Noticing Skill)</span>
+            <span id="scoreNoticing">0%</span>
+          </div>
+          <div class="breakdown-track">
+            <div id="barNoticing" class="breakdown-fill" style="width: 0%; background: var(--accent-emerald);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JSON Output Card -->
+      <div class="json-card">
+        <div class="json-card-header">
+          <div>
+            <h4 style="color: #F8FAFC; font-size: 16px;">📦 Диагностический JSON-пакет для составления плана</h4>
+            <p style="color: var(--text-muted); font-size: 13px;">Скопируйте этот блок или скачайте файл и отправьте в наш чат — я мгновенно сформирую пошаговую программу ликвидации ваших пробелов.</p>
+          </div>
+          <div class="json-actions">
+            <button id="btnCopyJson" class="btn btn-secondary" style="font-size: 13.5px; padding: 10px 18px;">
+              📋 Скопировать JSON
+            </button>
+            <button id="btnDownloadJson" class="btn btn-emerald" style="font-size: 13.5px; padding: 10px 18px;">
+              💾 Скачать .json
+            </button>
+          </div>
+        </div>
+        <pre id="jsonPreview" class="json-display"></pre>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button id="btnRestart" class="btn btn-secondary">
+          🔄 Пройти диагностику заново
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">JSON успешно скопирован в буфер обмена!</div>
+
+  <script>
+    // Comprehensive Diagnostic Question Database (25 high-yield items)
+    const questions = [
+      // DOMAIN 1: Advanced Grammar & Aspect Nuances
+      {
+        id: "g1_mixed_conditional",
+        domain: "grammar",
+        category: "Условные предложения (Mixed Conditionals)",
+        title: "Заполните пропуск в условном предложении:",
+        sentence: "If we <span class='blank'>______</span> the requirements earlier, we wouldn't be in this crisis right now.",
+        options: [
+          { text: "clarified", correct: false, trap: "Past Simple не выражает нереальное действие в прошлом, влияющее на настоящее" },
+          { text: "had clarified", correct: true, explanation: "Классический Mixed Conditional (Тип 3 в условии + Тип 2 в следствии): had clarified (прошлое) -> wouldn't be (настоящее)." },
+          { text: "would clarify", correct: false, trap: "Would никогда не ставится в if-clause условия" },
+          { text: "would have clarified", correct: false, trap: "Would have не ставится в if-clause" }
+        ]
+      },
+      {
+        id: "g2_inversion",
+        domain: "grammar",
+        category: "Отрицательная Инверсия (Inversion)",
+        title: "Какое предложение построено грамматически безупречно для уровня C1?",
+        sentence: "<span class='blank'>______</span> did we realize that the entire database had been corrupted.",
+        options: [
+          { text: "Only after running the script", correct: true, explanation: "Ограничительные конструкции с Only after... в начале предложения требуют инверсии (did we realize)." },
+          { text: "Only after we ran the script, we realized", correct: false, trap: "Отсутствует обязательная инверсия вспомогательного глагола" },
+          { text: "Rarely we realized", correct: false, trap: "С Rarely требуется инверсия: Rarely did we..." },
+          { text: "No sooner we realized", correct: false, trap: "С No sooner требуется No sooner had we..." }
+        ]
+      },
+      {
+        id: "g3_gerund_infinitive_meaning",
+        domain: "grammar",
+        category: "Герундий vs Инфинитив со сменой значения",
+        title: "Выберите верный вариант по контексту:",
+        sentence: "We worked for four straight hours, and then we stopped <span class='blank'>______</span> a quick coffee.",
+        options: [
+          { text: "having", correct: false, trap: "Stop doing = прекратить делать действие навсегда или на время. Здесь же остановились ДЛЯ того, чтобы выпить." },
+          { text: "to have", correct: true, explanation: "Stop to do = остановиться с целью сделать что-то другое. Stop having = бросить пить кофе." },
+          { text: "to having", correct: false, trap: "После to в инфинитиве цели не ставится -ing" },
+          { text: "have", correct: false, trap: "Голый инфинитив не используется после stop" }
+        ]
+      },
+      {
+        id: "g4_past_modals",
+        domain: "grammar",
+        category: "Модальные глаголы в прошлом (Past Deductions)",
+        title: "Контекст: Сервер упал, хотя все тесты были зелеными. Выразите уверенное умозаключение в прошлом:",
+        sentence: "He <span class='blank'>______</span> the deployment command manually, because automated CI/CD was disabled.",
+        options: [
+          { text: "must have executed", correct: true, explanation: "Must have + V3 выражает 95% логическую уверенность в том, что действие произошло в прошлом." },
+          { text: "should execute", correct: false, trap: "Относится к настоящему или будущему долгу, а не умозаключению о прошлом" },
+          { text: "could execute", correct: false, trap: "Could do не выражает совершенное умозаключение в прошлом" },
+          { text: "can have executed", correct: false, trap: "Can have не используется в утверждениях для логического вывода (только can't have)" }
+        ]
+      },
+      {
+        id: "g5_subjunctive_time",
+        domain: "grammar",
+        category: "Сослагательные обороты (High Time / Rather)",
+        title: "Выберите правильную глагольную форму:",
+        sentence: "It's high time you <span class='blank'>______</span> spending hours rewriting working code.",
+        options: [
+          { text: "stop", correct: false, trap: "После It's high time требуется Past Subjunctive (сдвиг во времени назад)" },
+          { text: "stopped", correct: true, explanation: "Конструкция It's high time / It's about time требует Past Simple для выражения безотлагательности в настоящем." },
+          { text: "have stopped", correct: false, trap: "Present Perfect не используется в этой конструкции" },
+          { text: "will stop", correct: false, trap: "Будущее время грамматически запрещено" }
+        ]
+      },
+      {
+        id: "g6_participle_clause",
+        domain: "grammar",
+        category: "Причастные обороты (Participle Clauses)",
+        title: "Завершите сложное предложение:",
+        sentence: "<span class='blank'>______</span> all previous pull requests, Alex proceeded to merge the release branch.",
+        options: [
+          { text: "Having reviewed", correct: true, explanation: "Perfect Participle (Having + V3) подчеркивает, что ревью было полностью завершено ДО мерджа." },
+          { text: "Reviewing", correct: false, trap: "Present Participle указывает на одновременность (мерджил и одновременно читал)" },
+          { text: "After reviewed", correct: false, trap: "Некорректная конструкция (нужно After reviewing или After he had reviewed)" },
+          { text: "Had reviewed", correct: false, trap: "Не может быть вводным причастным оборотом без подлежащего" }
+        ]
+      },
+
+      // DOMAIN 2: L1 Russian Interference & Fossilization Traps
+      {
+        id: "l1_reflexive_trap",
+        domain: "l1_interference",
+        category: "Русская калька: Возвратные глаголы",
+        title: "Контекст: Вы хотите сказать «Я чувствую себя отлично после отпуска»:",
+        sentence: "After two weeks off, I <span class='blank'>______</span> completely refreshed.",
+        options: [
+          { text: "feel myself", correct: false, trap: "Грубая калька с русского «чувствую себя». В английском feel myself имеет интимно-физиологический подтекст!" },
+          { text: "feel", correct: true, explanation: "В английском глагол feel связочный: I feel great / I feel tired (без myself)." },
+          { text: "am feeling myself", correct: false, trap: "Двойная ошибка: Continuous + некорректный reflexive" },
+          { text: "sense myself", correct: false, trap: "Неверный глагол и калька" }
+        ]
+      },
+      {
+        id: "l1_preposition_depend",
+        domain: "l1_interference",
+        category: "Предложное управление (Preposition Match)",
+        title: "Контекст: «Это зависит от архитектуры системы»:",
+        sentence: "The final performance largely depends <span class='blank'>______</span> how the cache layer is configured.",
+        options: [
+          { text: "from", correct: false, trap: "Прямой перевод русского предлога «ОТ». В английском depend ВСЕГДА on/upon." },
+          { text: "on", correct: true, explanation: "Depend on — жесткая зафиксированная коллокация. Никаких from или of." },
+          { text: "of", correct: false, trap: "Калька из других романских языков или путаница" },
+          { text: "in", correct: false, trap: "Неверный предлог" }
+        ]
+      },
+      {
+        id: "l1_uncountable_trap",
+        domain: "l1_interference",
+        category: "Неисчисляемые существительные",
+        title: "Какое предложение звучит натурально и без грамматических ошибок?",
+        sentence: "<span class='blank'>______</span>",
+        options: [
+          { text: "He gave me several useful advices on code optimization.", correct: false, trap: "Advice в английском ВСЕГДА неисчисляемое! Не бывает an advice или advices." },
+          { text: "He gave me some useful pieces of advice on code optimization.", correct: true, explanation: "Advice неисчисляемое: счет только через a piece of advice / several pieces of advice." },
+          { text: "He gave me many advices regarding optimization.", correct: false, trap: "Advices не существует в современном английском" },
+          { text: "He gave me an advice regarding optimization.", correct: false, trap: "Артикль an не ставится перед неисчисляемым" }
+        ]
+      },
+      {
+        id: "l1_false_friend_actual",
+        domain: "l1_interference",
+        category: "Ложные друзья переводчика (False Friends)",
+        title: "Вам нужно сказать: «Эта проблема актуальна для нашего проекта сегодня»:",
+        sentence: "This technical problem is <span class='blank'>______</span> for our project today.",
+        options: [
+          { text: "actual", correct: false, trap: "Ложный друг! Actual в английском означает «фактический/реальный» (the actual cost), а не «актуальный/злободневный»." },
+          { text: "relevant", correct: true, explanation: "Актуальный = relevant, pressing, topical. Actual = фактический." },
+          { text: "activity", correct: false, trap: "Существительное вместо прилагательного" },
+          { text: "factual", correct: false, trap: "Factual означает документальный/основанный на фактах" }
+        ]
+      },
+      {
+        id: "l1_make_vs_do",
+        domain: "l1_interference",
+        category: "Коллокации: Make vs Do",
+        title: "Выберите корректную пару глаголов:",
+        sentence: "Before we <span class='blank'>______</span> a final decision, we need to <span class='blank'>______</span> more research.",
+        options: [
+          { text: "make / do", correct: true, explanation: "Make a decision (принимать решение) + Do research (проводить исследование). Устойчивые коллокации." },
+          { text: "do / make", correct: false, trap: "Перевернутые коллокации — грубая речевая ошибка" },
+          { text: "make / make", correct: false, trap: "Make research не существует в нативном английском" },
+          { text: "do / do", correct: false, trap: "Do a decision не говорят" }
+        ]
+      },
+      {
+        id: "l1_comfortable_convenient",
+        domain: "l1_interference",
+        category: "Различие понятий: Comfortable vs Convenient",
+        title: "Контекст: Согласование времени рабочего митинга с коллегой:",
+        sentence: "Would 3:00 PM be <span class='blank'>______</span> for our one-on-one call?",
+        options: [
+          { text: "comfortable", correct: false, trap: "Comfortable относится к физическому удобству тела (кресло, обувь) или душевному покою. Время/расписание — convenient!" },
+          { text: "convenient", correct: true, explanation: "Время, место, логистика и расписание описываются словом convenient." },
+          { text: "comforting", correct: false, trap: "Comforting означает утешительный" },
+          { text: "cozy", correct: false, trap: "Cozy означает уютный (о комнате или пледе)" }
+        ]
+      },
+
+      // DOMAIN 3: C1 Lexical Precision & Pragmatics
+      {
+        id: "c1_hedging_diplomacy",
+        domain: "lexical",
+        category: "C1 Дипломатическая речь (Hedging)",
+        title: "Как на уровне C1 дипломатично оспорить идею коллеги на митинге, не вызывая агрессии?",
+        sentence: "<span class='blank'>______</span> that this architecture might not scale as expected under high load.",
+        options: [
+          { text: "I'm inclined to think", correct: true, explanation: "Эталонный C1 Hedging chunk, смягчающий категоричность суждения." },
+          { text: "You are wrong", correct: false, trap: "Слишком прямолинейно и конфликтно" },
+          { text: "I definitely know", correct: false, trap: "Блокирует дискуссию, звучит высокомерно" },
+          { text: "I must say you fail", correct: false, trap: "Неприемлемо для профессиональной коммуникации" }
+        ]
+      },
+      {
+        id: "c1_economic_economical",
+        domain: "lexical",
+        category: "Прецизионная лексика (Near Synonyms)",
+        title: "Контекст: Наш новый облачный кластер потребляет на 40% меньше ресурсов:",
+        sentence: "Migrating to serverless proved to be a highly <span class='blank'>______</span> solution.",
+        options: [
+          { text: "economic", correct: false, trap: "Economic относится к экономике страны (economic growth, economic policy)." },
+          { text: "economical", correct: true, explanation: "Economical означает экономный, выгодный, сберегающий деньги/ресурсы." },
+          { text: "economist", correct: false, trap: "Существительное (профессия экономист)" },
+          { text: "economize", correct: false, trap: "Глагол (экономить)" }
+        ]
+      },
+      {
+        id: "c1_despite_in_spite",
+        domain: "lexical",
+        category: "Дискурсивные связки (Linking Words)",
+        title: "Заполните пропуск в начале сложного предложения:",
+        sentence: "<span class='blank'>______</span> the strict deadline, the team delivered all features on schedule.",
+        options: [
+          { text: "Despite", correct: true, explanation: "Despite идет сразу с существительным (без of). In spite of идет с of." },
+          { text: "In spite", correct: false, trap: "Пропущен обязательный предлог of (нужно in spite of)" },
+          { text: "Although", correct: false, trap: "Although требует полноценного придаточного предложения (подлежащее + сказуемое), а не просто фразы" },
+          { text: "Even though", correct: false, trap: "Требует предложения с подлежащим и глаголом" }
+        ]
+      },
+      {
+        id: "c1_at_the_expense_of",
+        domain: "lexical",
+        category: "Идиоматические и структурные чанки",
+        title: "Контекст: Мы ускорили релиз, но пострадало качество кода:",
+        sentence: "We shipped the update two weeks earlier, but <span class='blank'>______</span> code maintainability.",
+        options: [
+          { text: "at the expense of", correct: true, explanation: "At the expense of = за счет чего-то / в ущерб чему-то. Нативный C1 оборот." },
+          { text: "on the cost of", correct: false, trap: "Неестественная калька, носители так не говорят" },
+          { text: "by price of", correct: false, trap: "Русифицированная фраза" },
+          { text: "in charge of", correct: false, trap: "In charge of означает «ответственный за что-то»" }
+        ]
+      },
+      {
+        id: "c1_sensitive_sensible",
+        domain: "lexical",
+        category: "Тонкости значений (Sensitive vs Sensible)",
+        title: "Контекст: Тимлид принял разумное, взвешенное и зрелое решение:",
+        sentence: "Under high pressure, she made a very <span class='blank'>______</span> decision to postpone the deployment.",
+        options: [
+          { text: "sensitive", correct: false, trap: "Sensitive означает чувствительный, ранимый или секретный (sensitive data)." },
+          { text: "sensible", correct: true, explanation: "Sensible = благоразумный, здравомыслящий, рациональный." },
+          { text: "sensual", correct: false, trap: "Означает чувственный (в эстетическом/эротическом контексте)" },
+          { text: "sentiment", correct: false, trap: "Существительное" }
+        ]
+      },
+
+      // DOMAIN 4: Active Noticing (Spotting subtle errors)
+      {
+        id: "n1_spot_error_preposition",
+        domain: "noticing",
+        category: "Замечание скрытых ошибок (Spotting the Gap)",
+        title: "Найдите предложение, в котором допущена ГРАММАТИЧЕСКАЯ ИЛИ КОЛЛОКАЦИОННАЯ ОШИБКА:",
+        sentence: "Одно из четырех предложений ниже содержит скрытую ошибку носителя/неносителя:",
+        options: [
+          { text: "We arrived to London at midnight due to heavy flight delays.", correct: true, explanation: "ОШИБКА ЗДЕСЬ! С городами и странами глагол arrive используется ТОЛЬКО с предлогом IN (arrive in London), а с малыми объектами — AT (arrive at the airport). Arrive TO не существует!" },
+          { text: "We arrived at the station just before the train pulled away.", correct: false, trap: "Здесь все правильно: arrive at the station." },
+          { text: "They succeeded in completing the migration without any downtime.", correct: false, trap: "Здесь все правильно: succeed in doing." },
+          { text: "I look forward to hearing your feedback on the architecture.", correct: false, trap: "Здесь все правильно: look forward to + V-ing." }
+        ]
+      },
+      {
+        id: "n2_spot_error_articles",
+        domain: "noticing",
+        category: "Замечание скрытых ошибок (Артикли и Абстрактные понятия)",
+        title: "Найдите предложение, в котором допущена ошибка:",
+        sentence: "Какое из этих утверждений звучит НЕГРАММАТИЧНО?",
+        options: [
+          { text: "I have a great experience in managing distributed engineering teams.", correct: true, explanation: "ОШИБКА ЗДЕСЬ! В значении «жизненный или профессиональный опыт/стаж» experience — неисчисляемое (без артикля a: I have extensive experience in...). Артикль 'an experience' возможен только в значении единичного пережитого события («It was a great experience»)." },
+          { text: "She has ten years of experience in distributed backend development.", correct: false, trap: "Абсолютно верно" },
+          { text: "Traveling alone across Japan was a life-changing experience for him.", correct: false, trap: "Здесь верно, так как речь об отдельном пережитом эпизоде" },
+          { text: "Lack of experience often leads to premature optimization.", correct: false, trap: "Абсолютно верно" }
+        ]
+      },
+      {
+        id: "n3_spot_error_tense_since",
+        domain: "noticing",
+        category: "Замечание ошибок (Согласование с Since)",
+        title: "Найдите предложение с ошибкой во временах:",
+        sentence: "Выберите вариант с нарушением видо-временных связей:",
+        options: [
+          { text: "Since he joined the team last year, he made five major contributions.", correct: true, explanation: "ОШИБКА ЗДЕСЬ! Конструкция 'Since + Past Simple' требует в главном предложении Present Perfect (he has made five major contributions), так как период времени продолжается до настоящего момента." },
+          { text: "Since he joined the company, he has consistently exceeded expectations.", correct: false, trap: "Абсолютно верно: since joined -> has exceeded." },
+          { text: "They haven't refactored this service since it was deployed.", correct: false, trap: "Абсолютно верно" },
+          { text: "Ever since we upgraded the RAM, the memory leaks have stopped.", correct: false, trap: "Абсолютно верно" }
+        ]
+      },
+      {
+        id: "n4_spot_error_congratulate",
+        domain: "noticing",
+        category: "Замечание ошибок (Управление глаголов)",
+        title: "Какое из поздравлений содержит ошибку предлога?",
+        sentence: "Выберите ошибочную фразу:",
+        options: [
+          { text: "I want to congratulate you with your promotion to Tech Lead!", correct: true, explanation: "ОШИБКА ЗДЕСЬ! В русском говорят «поздравляю С...», но в английском ВСЕГДА: congratulate someone ON something (on your promotion)." },
+          { text: "I want to congratulate you on your well-deserved promotion!", correct: false, trap: "Абсолютно верно: congratulate on" },
+          { text: "Congratulations on passing the AWS certified exam!", correct: false, trap: "Абсолютно верно" },
+          { text: "We congratulated the entire squad on delivering the sprint goals.", correct: false, trap: "Абсолютно верно" }
+        ]
+      },
+
+      // DOMAIN 5: Self-Perception & Metacognitive Profiling (Crucial for diagnosing the 16-year feeling)
+      {
+        id: "m1_speaking_barrier",
+        domain: "metacognition",
+        category: "Самодиагностика Речи (Production Bottleneck)",
+        title: "Что происходит в вашей голове, когда нужно спонтанно заговорить на английском (на митинге или с иностранцем)?",
+        sentence: "Выберите описание, наиболее точно отражающее ваше внутреннее состояние:",
+        options: [
+          { text: "Сначала формулирую мысль по-русски, а потом мысленно перевожу каждое слово и сверяю времена.", correct: true, metaType: "l1_translation_bottleneck", scoreWeight: 1 },
+          { text: "Говорю быстро и раскованно, но задним числом понимаю, что наделал(а) кучу мелких грамматических ошибок.", correct: true, metaType: "accuracy_sacrificed", scoreWeight: 1 },
+          { text: "Впадаю в ступор: боюсь показаться некомпетентным, подбираю «идеальное» слово, образуется неловкая пауза.", correct: true, metaType: "hyper_monitoring_freeze", scoreWeight: 1 },
+          { text: "Говорю простыми короткими фразами уровня A2-B1, избегая сложных конструкций, хотя понимаю сложный C1.", correct: true, metaType: "production_avoidance", scoreWeight: 1 }
+        ]
+      },
+      {
+        id: "m2_listening_barrier",
+        domain: "metacognition",
+        category: "Самодиагностика Восприятия (Listening & Processing)",
+        title: "С какой главной трудностью вы сталкиваетесь при восприятии речи на слух?",
+        sentence: "Выберите ваш ключевой барьер восприятия:",
+        options: [
+          { text: "Одиночные видео на YouTube понимаю на 90%, но в групповом созвоне (где говорят наперебой и с акцентами) быстро теряю нить.", correct: true, metaType: "multi_speaker_fatigue", scoreWeight: 1 },
+          { text: "Слышу слова, но мозг устает через 15-20 минут непрерывного английского, наступает сенсорная перегрузка.", correct: true, metaType: "working_memory_overload", scoreWeight: 1 },
+          { text: "Понимаю почти 100% только с английскими субтитрами; без субтитров звуки сливаются в кашу (Connected Speech).", correct: true, metaType: "connected_speech_deficit", scoreWeight: 1 },
+          { text: "Понимаю без проблем почти всё, дискомфорт возникает только при редком сленге или специфическом диалекте.", correct: true, metaType: "high_comprehension", scoreWeight: 1 }
+        ]
+      },
+      {
+        id: "m3_active_exposure",
+        domain: "metacognition",
+        category: "Объем Активной Практики (Actual Output Volume)",
+        title: "Сколько минут в неделю вы РЕАЛЬНО ГОВОРИТЕ вслух на английском (созвоны, монологи, практика)?",
+        sentence: "Оцените ваш реальный объем активного речевого аутпута за последние 6 месяцев:",
+        options: [
+          { text: "Менее 15 минут в неделю (в основном пассивно читаю статьи, смотрю видео или пишу текст в чатах).", correct: true, metaType: "zero_output_trap", scoreWeight: 1 },
+          { text: "Около 30-60 минут в неделю (короткие daily/standup митинги на работе).", correct: true, metaType: "maintenance_only", scoreWeight: 1 },
+          { text: "2-4 часа в неделю (активные созвоны, обсуждение задач или общение с коллегами).", correct: true, metaType: "moderate_output", scoreWeight: 1 },
+          { text: "Более 5 часов в неделю постоянного говорения на английском языке.", correct: true, metaType: "high_output", scoreWeight: 1 }
+        ]
+      },
+      {
+        id: "m4_subjective_feeling",
+        domain: "metacognition",
+        category: "Субъективное Ощущение Пробелов (Metacognitive Gap)",
+        title: "Когда вам кажется, что «у меня дыры в знаниях», что вы под этим подразумеваете?",
+        sentence: "Какое утверждение лучше всего передает ваше глубинное чувство?",
+        options: [
+          { text: "«Мне кажется, я до сих пор путаю банальные вещи, которым учат в школе, и это дико демотивирует».", correct: true, metaType: "impostor_fossilization", scoreWeight: 1 },
+          { text: "«На моем родном языке я звучу остроумно и профессионально, а на английском — как 10-летний ребенок».", correct: true, metaType: "l1_l2_cognitive_gap", scoreWeight: 1 },
+          { text: "«Я знаю все правила, если дать мне тест с ручкой, но во рту они рассыпаются в пыль под давлением времени».", correct: true, metaType: "proceduralization_gap", scoreWeight: 1 },
+          { text: "«У меня катастрофически не хватает словарного запаса для выражения тонких оттенков мысли».", correct: true, metaType: "lexical_threshold_gap", scoreWeight: 1 }
+        ]
+      }
+    ];
+
+    // ==========================================
+    // State Variables & LocalStorage Key
+    // ==========================================
+    const STORAGE_KEY = 'sla_diagnostic_english_v2';
+
+    let currentIdx = 0;
+    let selectedOptionIdx = null;
+    let selectedConfidence = null;
+    let questionStartTime = 0;
+    let testStartTime = 0;
+    let elapsedSeconds = 0;
+    let timerInterval = null;
+    let isTestFinished = false;
+
+    // Log of all responses
+    let responseLog = [];
+
+    // DOM Elements
+    const screenIntro = document.getElementById('screenIntro');
+    const screenQuestion = document.getElementById('screenQuestion');
+    const screenResults = document.getElementById('screenResults');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const questionCounter = document.getElementById('questionCounter');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const saveStatus = document.getElementById('saveStatus');
+
+    const resumeBanner = document.getElementById('resumeBanner');
+    const resumeText = document.getElementById('resumeText');
+    const btnResume = document.getElementById('btnResume');
+    const btnResetIntro = document.getElementById('btnResetIntro');
+
+    const btnStart = document.getElementById('btnStart');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnResetTest = document.getElementById('btnResetTest');
+    const btnRestart = document.getElementById('btnRestart');
+    const btnCopyJson = document.getElementById('btnCopyJson');
+    const btnDownloadJson = document.getElementById('btnDownloadJson');
+    const toast = document.getElementById('toast');
+
+    const qCategory = document.getElementById('qCategory');
+    const qTitle = document.getElementById('qTitle');
+    const qSentence = document.getElementById('qSentence');
+    const optionsList = document.getElementById('optionsList');
+    const confButtons = document.querySelectorAll('.conf-btn');
+
+    // ==========================================
+    // LocalStorage State Management
+    // ==========================================
+    function saveStateToStorage() {
+      try {
+        const state = {
+          version: 2,
+          currentIdx,
+          selectedOptionIdx,
+          selectedConfidence,
+          elapsedSeconds,
+          testStartTime,
+          isTestFinished,
+          responseLog,
+          cachedDiagnosticJson: window.cachedDiagnosticJson || null,
+          savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        flashSaveIndicator();
+      } catch (err) {
+        console.error('LocalStorage save error:', err);
+      }
+    }
+
+    function loadStateFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (err) {
+        console.error('LocalStorage load error:', err);
+        return null;
+      }
+    }
+
+    function clearStateStorage() {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (err) {
+        console.error('LocalStorage clear error:', err);
+      }
+    }
+
+    function flashSaveIndicator() {
+      if (!saveStatus) return;
+      saveStatus.textContent = 'Сохранено ✓';
+      setTimeout(() => {
+        if (saveStatus) saveStatus.textContent = 'Сохранено';
+      }, 1000);
+    }
+
+    function showScreen(screenName) {
+      screenIntro.classList.add('hidden');
+      screenQuestion.classList.add('hidden');
+      screenResults.classList.add('hidden');
+      progressBar.classList.add('hidden');
+
+      if (screenName === 'intro') {
+        screenIntro.classList.remove('hidden');
+      } else if (screenName === 'question') {
+        screenQuestion.classList.remove('hidden');
+        progressBar.classList.remove('hidden');
+      } else if (screenName === 'results') {
+        screenResults.classList.remove('hidden');
+      }
+    }
+
+    // ==========================================
+    // Event Listeners
+    // ==========================================
+    btnStart.addEventListener('click', () => startTest(false));
+    if (btnResume) btnResume.addEventListener('click', () => startTest(true));
+    if (btnResetIntro) btnResetIntro.addEventListener('click', () => resetTest());
+    btnPrev.addEventListener('click', prevQuestion);
+    btnNext.addEventListener('click', nextQuestion);
+    if (btnResetTest) btnResetTest.addEventListener('click', () => resetTest());
+    btnRestart.addEventListener('click', () => resetTest());
+    btnCopyJson.addEventListener('click', copyJsonOutput);
+    btnDownloadJson.addEventListener('click', downloadJsonOutput);
+
+    confButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        confButtons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedConfidence = btn.dataset.confidence;
+        checkNextButtonValidity();
+        saveStateToStorage();
+      });
+    });
+
+    // Keyboard Shortcuts (with preventDefault to stop accidental submits/scrolling)
+    document.addEventListener('keydown', (e) => {
+      if (screenQuestion.classList.contains('hidden')) return;
+
+      const key = e.key;
+      if (['1', '2', '3', '4'].includes(key)) {
+        e.preventDefault();
+        const idx = parseInt(key, 10) - 1;
+        const options = optionsList.querySelectorAll('.option-item');
+        if (options[idx]) {
+          options[idx].click();
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!btnNext.disabled) {
+          nextQuestion();
+        }
+      } else if (e.key === 'ArrowLeft' && !btnPrev.disabled) {
+        e.preventDefault();
+        prevQuestion();
+      }
+    });
+
+    // Prevent accidental page leave / tab close during test
+    window.addEventListener('beforeunload', (e) => {
+      if (!isTestFinished && responseLog.length > 0 && responseLog.length < questions.length) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // ==========================================
+    // Test Navigation & Lifecycle
+    // ==========================================
+    function startTest(resume = false) {
+      const saved = resume ? loadStateFromStorage() : null;
+      if (saved && Array.isArray(saved.responseLog) && saved.responseLog.length > 0) {
+        responseLog = saved.responseLog;
+        currentIdx = (saved.currentIdx !== undefined && saved.currentIdx < questions.length) 
+          ? saved.currentIdx 
+          : Math.min(saved.responseLog.length, questions.length - 1);
+        elapsedSeconds = saved.elapsedSeconds || 0;
+        testStartTime = Date.now() - (elapsedSeconds * 1000);
+      } else {
+        clearStateStorage();
+        responseLog = [];
+        currentIdx = 0;
+        selectedOptionIdx = null;
+        selectedConfidence = null;
+        elapsedSeconds = 0;
+        testStartTime = Date.now();
+      }
+
+      isTestFinished = false;
+      showScreen('question');
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+      updateTimer();
+      renderQuestion(currentIdx);
+      saveStateToStorage();
+    }
+
+    function updateTimer() {
+      elapsedSeconds = Math.floor((Date.now() - testStartTime) / 1000);
+      const mins = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+      const secs = String(elapsedSeconds % 60).padStart(2, '0');
+      timerDisplay.textContent = `${mins}:${secs}`;
+    }
+
+    function renderQuestion(index) {
+      currentIdx = index;
+      const q = questions[index];
+      questionStartTime = Date.now();
+
+      // Check if this question was already answered in responseLog
+      const existing = responseLog[index];
+      if (existing) {
+        selectedOptionIdx = existing.selectedIndex;
+        selectedConfidence = existing.confidence;
+      } else {
+        selectedOptionIdx = null;
+        selectedConfidence = null;
+      }
+
+      // Update progress bar
+      const progressPercent = ((index) / questions.length) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+      questionCounter.textContent = `Вопрос ${index + 1} / ${questions.length}`;
+
+      // Navigation button state
+      btnPrev.disabled = (index === 0);
+
+      // Render content
+      qCategory.textContent = q.category;
+      qTitle.innerHTML = q.title;
+      qSentence.innerHTML = q.sentence;
+
+      // Render options
+      optionsList.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((opt, idx) => {
+        const item = document.createElement('div');
+        item.className = 'option-item' + (selectedOptionIdx === idx ? ' selected' : '');
+        item.innerHTML = `
+          <div class="option-key">${letters[idx] || (idx + 1)}</div>
+          <div class="option-text">${opt.text}</div>
+        `;
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          optionsList.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedOptionIdx = idx;
+          checkNextButtonValidity();
+          saveStateToStorage();
+        });
+        optionsList.appendChild(item);
+      });
+
+      // Metacognitive questions don't require confidence calibration
+      const confSection = document.querySelector('.confidence-section');
+      if (q.domain === 'metacognition') {
+        confSection.style.display = 'none';
+        selectedConfidence = 'high'; // Default for self-perception
+      } else {
+        confSection.style.display = 'block';
+        confButtons.forEach(b => {
+          if (selectedConfidence && b.dataset.confidence === selectedConfidence) {
+            b.classList.add('selected');
+          } else {
+            b.classList.remove('selected');
+          }
+        });
+      }
+
+      checkNextButtonValidity();
+    }
+
+    function checkNextButtonValidity() {
+      if (selectedOptionIdx !== null && selectedConfidence !== null) {
+        btnNext.disabled = false;
+      } else {
+        btnNext.disabled = true;
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion(currentIdx);
+        saveStateToStorage();
+      }
+    }
+
+    function nextQuestion() {
+      const q = questions[currentIdx];
+      const timeSpentMs = Date.now() - questionStartTime;
+      const chosenOption = q.options[selectedOptionIdx];
+
+      const record = {
+        questionId: q.id,
+        domain: q.domain,
+        category: q.category,
+        selectedIndex: selectedOptionIdx,
+        selectedText: chosenOption.text,
+        isCorrect: chosenOption.correct,
+        confidence: selectedConfidence,
+        timeSpentMs: timeSpentMs,
+        explanation: chosenOption.explanation || null,
+        trap: chosenOption.trap || null,
+        metaType: chosenOption.metaType || null
+      };
+
+      // Save into responseLog (update existing or append)
+      if (responseLog[currentIdx]) {
+        responseLog[currentIdx] = record;
+      } else {
+        responseLog.push(record);
+      }
+
+      saveStateToStorage();
+
+      if (currentIdx + 1 < questions.length) {
+        currentIdx++;
+        renderQuestion(currentIdx);
+        saveStateToStorage();
+      } else {
+        finishTest();
+      }
+    }
+
+    function finishTest() {
+      clearInterval(timerInterval);
+      isTestFinished = true;
+      showScreen('results');
+      calculateAndRenderResults(true);
+      saveStateToStorage();
+    }
+
+    function resetTest() {
+      if (confirm('Сбросить весь прогресс и очистить сохраненные ответы?')) {
+        clearStateStorage();
+        clearInterval(timerInterval);
+        responseLog = [];
+        currentIdx = 0;
+        selectedOptionIdx = null;
+        selectedConfidence = null;
+        isTestFinished = false;
+        showScreen('intro');
+        if (resumeBanner) resumeBanner.classList.add('hidden');
+      }
+    }
+
+    // ==========================================
+    // Results Calculation & JSON Export
+    // ==========================================
+    function calculateAndRenderResults(shouldRecalculateJson = true) {
+      const totalTimeMs = elapsedSeconds * 1000;
+
+      // Filter objective questions (domains: grammar, l1_interference, lexical, noticing)
+      const objectiveResponses = responseLog.filter(r => r.domain !== 'metacognition');
+      const metaResponses = responseLog.filter(r => r.domain === 'metacognition');
+
+      const correctCount = objectiveResponses.filter(r => r.isCorrect).length;
+      const totalObjective = objectiveResponses.length || 1;
+      const accuracyPercent = Math.round((correctCount / totalObjective) * 100);
+
+      // Metrics calculation
+      // 1. Fossilized error: Wrong answer with HIGH confidence
+      const fossilizedErrors = objectiveResponses.filter(r => !r.isCorrect && r.confidence === 'high');
+      
+      // 2. Latent knowledge: Correct answer with LOW or MEDIUM confidence
+      const latentKnowledge = objectiveResponses.filter(r => r.isCorrect && (r.confidence === 'low' || r.confidence === 'medium'));
+
+      // 3. Average response time per question
+      const avgTimeSec = objectiveResponses.length > 0
+        ? (objectiveResponses.reduce((acc, r) => acc + (r.timeSpentMs || 5000), 0) / objectiveResponses.length / 1000).toFixed(1)
+        : '0.0';
+
+      // 4. Calibration Score: (% of correct answers among high confidence)
+      const highConfResponses = objectiveResponses.filter(r => r.confidence === 'high');
+      const calibrationPercent = highConfResponses.length > 0 
+        ? Math.round((highConfResponses.filter(r => r.isCorrect).length / highConfResponses.length) * 100)
+        : 0;
+
+      // Domain breakdowns
+      const calcDomain = (dName) => {
+        const items = objectiveResponses.filter(r => r.domain === dName);
+        if (!items.length) return 0;
+        return Math.round((items.filter(r => r.isCorrect).length / items.length) * 100);
+      };
+
+      const grammarScore = calcDomain('grammar');
+      const l1Score = calcDomain('l1_interference');
+      const lexicalScore = calcDomain('lexical');
+      const noticingScore = calcDomain('noticing');
+
+      // Update UI Numbers
+      document.getElementById('finalScore').textContent = `${accuracyPercent}%`;
+      document.getElementById('metricFossilized').textContent = fossilizedErrors.length;
+      document.getElementById('metricLatent').textContent = latentKnowledge.length;
+      document.getElementById('metricSpeed').textContent = `${avgTimeSec}s`;
+      document.getElementById('metricConfidence').textContent = `${calibrationPercent}%`;
+
+      document.getElementById('scoreGrammar').textContent = `${grammarScore}%`;
+      document.getElementById('barGrammar').style.width = `${grammarScore}%`;
+
+      document.getElementById('scoreL1').textContent = `${l1Score}%`;
+      document.getElementById('barL1').style.width = `${l1Score}%`;
+
+      document.getElementById('scoreLexical').textContent = `${lexicalScore}%`;
+      document.getElementById('barLexical').style.width = `${lexicalScore}%`;
+
+      document.getElementById('scoreNoticing').textContent = `${noticingScore}%`;
+      document.getElementById('barNoticing').style.width = `${noticingScore}%`;
+
+      // Determine Clinical SLA Diagnosis
+      let diagBadgeClass = 'gold';
+      let diagBadgeText = 'Синдром Процедурного Разрыва';
+      let headline = 'Знания есть, но отсутствует автоматизм извлечения';
+      let desc = 'Вы хорошо распознаете правила и конструкции, однако высокая скорость реакции и стресс вызывают сброс синтаксиса.';
+
+      if (fossilizedErrors.length >= 3) {
+        diagBadgeClass = 'rose';
+        diagBadgeText = 'Устойчивая Фоссилизация (L1 Russian Interference)';
+        headline = 'Замороженные кальки родного языка блокируют естественность';
+        desc = `Выявлено ${fossilizedErrors.length} паттернов, в которых вы были на 100% уверены, но выбрали русифицированную кальку. Это классический результат 10+ лет обучения без осознанного Noticing the Gap.`;
+      } else if (accuracyPercent >= 80 && parseFloat(avgTimeSec) < 12) {
+        diagBadgeClass = 'cyan';
+        diagBadgeText = 'Синдром Гипер-Мониторинга (Иллюзорные Пробелы)';
+        headline = 'Ваши объективные знания на высоте C1 — проблема в самокритике';
+        desc = 'Ваш объективный балл очень высок. Ощущение «дыр» вызвано перфекционизмом и сопоставлением развитой взрослой мысли на родном языке с иностранной речью.';
+      } else if (accuracyPercent < 60) {
+        diagBadgeClass = 'gold';
+        diagBadgeText = 'Лексико-Синтаксическое Плато (B2 Intermediate Plateau)';
+        headline = 'Необходим переход на чанковое блочное мышление';
+        desc = 'Пробелы распределены системно по сложным временам, неисчисляемым существительным и предлогам. Требуется таргетированный дриллинг.';
+      }
+
+      const badgeEl = document.getElementById('diagnosisBadge');
+      badgeEl.className = `diagnosis-badge ${diagBadgeClass}`;
+      badgeEl.textContent = diagBadgeText;
+      document.getElementById('diagnosisHeadline').textContent = headline;
+      document.getElementById('diagnosisDescription').textContent = desc;
+
+      // Build JSON Export Payload
+      if (shouldRecalculateJson || !window.cachedDiagnosticJson) {
+        const jsonExport = {
+          metadata: {
+            testVersion: "2.2-SLA-AntiReload-Diagnostic",
+            timestamp: new Date().toISOString(),
+            totalDurationSeconds: elapsedSeconds,
+            clientPlatform: navigator.userAgent
+          },
+          executiveSummary: {
+            overallAccuracyPercent: accuracyPercent,
+            totalQuestionsAnswered: responseLog.length,
+            objectiveAccuracy: `${correctCount}/${totalObjective}`,
+            slaDiagnosis: diagBadgeText,
+            headlineSummary: headline,
+            metrics: {
+              fossilizedErrorsCount: fossilizedErrors.length,
+              latentKnowledgeCount: latentKnowledge.length,
+              averageResponseTimeSeconds: parseFloat(avgTimeSec),
+              calibrationConfidencePercent: calibrationPercent
+            },
+            domainScores: {
+              advancedGrammar: `${grammarScore}%`,
+              l1RussianInterference: `${l1Score}%`,
+              c1LexicalPrecision: `${lexicalScore}%`,
+              activeErrorNoticing: `${noticingScore}%`
+            }
+          },
+          metacognitiveProfile: metaResponses.map(m => ({
+            questionId: m.questionId,
+            category: m.category,
+            selectedInsight: m.selectedText,
+            metaType: m.metaType
+          })),
+          detailedItemAudit: objectiveResponses.map(r => ({
+            id: r.questionId,
+            domain: r.domain,
+            category: r.category,
+            isCorrect: r.isCorrect,
+            confidence: r.confidence,
+            timeSpentMs: r.timeSpentMs,
+            userAnswer: r.selectedText,
+            trapTriggered: r.trap,
+            pedagogicalExplanation: r.explanation
+          }))
+        };
+
+        window.cachedDiagnosticJson = JSON.stringify(jsonExport, null, 2);
+      }
+
+      // Display JSON
+      document.getElementById('jsonPreview').textContent = window.cachedDiagnosticJson;
+    }
+
+    function copyJsonOutput() {
+      if (!window.cachedDiagnosticJson) return;
+      navigator.clipboard.writeText(window.cachedDiagnosticJson).then(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      });
+    }
+
+    function downloadJsonOutput() {
+      if (!window.cachedDiagnosticJson) return;
+      const blob = new Blob([window.cachedDiagnosticJson], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `english_diagnostic_gap_audit_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // ==========================================
+    // Initialization & Restoration on Page Load
+    // ==========================================
+    function checkSavedStateOnLoad() {
+      const saved = loadStateFromStorage();
+      if (!saved) return;
+
+      if (saved.isTestFinished && saved.cachedDiagnosticJson) {
+        responseLog = saved.responseLog || [];
+        elapsedSeconds = saved.elapsedSeconds || 0;
+        testStartTime = saved.testStartTime || Date.now();
+        window.cachedDiagnosticJson = saved.cachedDiagnosticJson;
+        isTestFinished = true;
+        showScreen('results');
+        calculateAndRenderResults(false);
+        return;
+      }
+
+      if (Array.isArray(saved.responseLog) && saved.responseLog.length > 0) {
+        if (resumeBanner && resumeText) {
+          resumeBanner.classList.remove('hidden');
+          const answered = saved.responseLog.length;
+          resumeText.textContent = `Вы ответили на ${answered} из ${questions.length} вопросов. Все ответы сохранены в браузере. Вы можете продолжить с вопроса ${Math.min(answered + 1, questions.length)}.`;
+        }
+      }
+    }
+
+    // Run check on DOM load
+    checkSavedStateOnLoad();
+  </script>
+</body>
+</html>

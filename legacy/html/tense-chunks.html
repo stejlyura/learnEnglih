@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Временные Чанки Plug & Play: Как Говорить во Временах без Таблиц и Расчетов</title>
+  <meta name="description" content="Научный разбор базовых временных чанков (Plug & Play Tense Chunks): исследования Joan Bybee, Nick Ellis, почему грамматические таблицы ломают речь и 24 пошаговых шаблона от 1 до 24.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="img/favicon-tense-chunks.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-tense-chunks-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-tense-chunks-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-tense-chunks.png">
+
+  <style>
+    :root {
+      --bg-page: #0B0F17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1A2234;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.3);
+      --text-heading: #F8FAFC;
+      --text-body: #CBD5E1;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --accent-primary: #6366F1;
+      --accent-secondary: #06B6D4;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-reading: 'Lora', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      font-family: var(--font-reading);
+      font-size: 19px;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-emerald));
+      z-index: 1000;
+      transition: width 0.1s ease-out;
+    }
+
+    header.article-header-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 15, 23, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 900;
+      padding: 14px 24px;
+      font-family: var(--font-ui);
+    }
+    .header-content {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-badge {
+      font-size: 0.72rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .header-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 14px;
+      transition: color 0.2s;
+    }
+    .header-links a:hover {
+      color: #FFF;
+    }
+
+    article.longread-container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    .article-meta-top {
+      font-family: var(--font-ui);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-emerald);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1.article-title {
+      font-family: var(--font-ui);
+      font-size: clamp(2.2rem, 4.8vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--text-heading);
+      margin-bottom: 24px;
+    }
+    p.article-lead {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #E2E8F0;
+      font-style: italic;
+      margin-bottom: 36px;
+      border-left: 3px solid var(--accent-emerald);
+      padding-left: 20px;
+    }
+    .article-info-strip {
+      font-family: var(--font-ui);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 48px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .info-item strong {
+      color: var(--text-heading);
+    }
+
+    .toc-box {
+      font-family: var(--font-ui);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .toc-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-heading);
+      margin-bottom: 16px;
+    }
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .toc-list li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      transition: color 0.2s;
+    }
+    .toc-list li a:hover {
+      color: #FFF;
+    }
+    .toc-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-emerald);
+      font-weight: 600;
+    }
+
+    h2.chapter-heading {
+      font-family: var(--font-ui);
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-heading);
+      margin: 64px 0 24px;
+      line-height: 1.25;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    h3.sub-heading {
+      font-family: var(--font-ui);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: #E2E8F0;
+      margin: 36px 0 16px;
+      line-height: 1.35;
+    }
+    p {
+      margin-bottom: 24px;
+      color: var(--text-body);
+    }
+    strong {
+      color: var(--text-heading);
+      font-weight: 700;
+    }
+
+    blockquote.quote-callout {
+      margin: 36px 0;
+      padding: 24px 28px;
+      background: rgba(16, 185, 129, 0.06);
+      border-left: 4px solid var(--accent-emerald);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: #D1FAE5;
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+    blockquote.quote-callout cite {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-style: normal;
+      font-family: var(--font-ui);
+      color: var(--accent-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .method-card {
+      font-family: var(--font-ui);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 26px 28px;
+      margin: 28px 0;
+    }
+    .method-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .block-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+    }
+
+    .chunk-item-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px 0;
+    }
+    .chunk-item-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .chunk-item-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-emerald);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .chunk-item-title {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 4px;
+    }
+    .chunk-item-trans {
+      font-size: 0.92rem;
+      color: #A5B4FC;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .chunk-item-ex {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      font-style: italic;
+      line-height: 1.55;
+    }
+    .chunk-item-ex-ru {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-style: normal;
+      margin-top: 2px;
+    }
+
+    .formula-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #DDD6FE;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    ol.editorial-steps {
+      list-style: none;
+      counter-reset: step-counter;
+      margin: 28px 0;
+    }
+    ol.editorial-steps > li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 28px;
+    }
+    ol.editorial-steps > li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-accent);
+      color: var(--accent-emerald);
+      font-family: var(--font-ui);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    ol.editorial-steps h4 {
+      font-family: var(--font-ui);
+      font-size: 1.15rem;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+
+    footer.article-footer {
+      font-family: var(--font-ui);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 80px;
+      padding-top: 36px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+    footer.article-footer a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="reading-progress"></div>
+
+  <header class="article-header-nav">
+    <div class="header-content">
+      <a href="#top" class="header-title">
+        <span>PLUG & PLAY TENSE CHUNKS</span>
+        <span class="header-badge">24 Patterns</span>
+      </a>
+      <div class="header-links">
+        <a href="methodology.html" style="color: #60A5FA; font-weight: 700;">Методология и Рутина →</a>
+        <a href="learn-chanks.html">База чанков</a>
+        <a href="dense-structure.html">Плотные чанки</a>
+        <a href="chunks.html">Мастерство чанков</a>
+        <a href="longread.html">← Главный лонгрид</a>
+      </div>
+    </div>
+  </header>
+
+  <article class="longread-container" id="top">
+
+    <div class="article-meta-top">
+      <span>Когнитивная грамматика & Теория экземпляров</span>
+      <span>•</span>
+      <span>Время чтения: 15 минут</span>
+    </div>
+
+    <h1 class="article-title">Временные Чанки Plug & Play: Как Говорить во Временах без Расчетов</h1>
+
+    <p class="article-lead">
+      Почему попытка вспоминать школьные формулы времен на созвоне парализует речевой аппарат, как теория экземпляров Joan Bybee объясняет грамматику носителей и 24 пошаговых шаблона от 1 до последнего.
+    </p>
+
+    <div class="article-info-strip">
+      <div class="info-item"><span>Научная база:</span> <strong>Exemplar Theory (Joan Bybee) & Implicit Aspect (Nick Ellis)</strong></div>
+      <div class="info-item"><span>Принцип:</span> <strong>The Head (жесткое время) + The Slot (действие)</strong></div>
+      <div class="info-item"><span>Объем:</span> <strong>24 последовательных шаблона (Блоки 1–7)</strong></div>
+    </div>
+
+    <nav class="toc-box">
+      <div class="toc-title">Содержание руководства</div>
+      <ul class="toc-list">
+        <li><a href="#tense-1"><span class="toc-num">01.</span> Научные исследования: Почему таблицы времен убивают спонтанную речь</a></li>
+        <li><a href="#tense-2"><span class="toc-num">02.</span> Принцип Plug & Play: Жесткая голова и свободный слот</a></li>
+        <li><a href="#tense-3"><span class="toc-num">03.</span> Блок 1 (#1–#4): Present Perfect (Результат к этой минуте)</a></li>
+        <li><a href="#tense-4"><span class="toc-num">04.</span> Блок 2 (#5–#7): Present Perfect Continuous (Длительный процесс)</a></li>
+        <li><a href="#tense-5"><span class="toc-num">05.</span> Блок 3 (#8–#10): Past Continuous (Фон и прерывание)</a></li>
+        <li><a href="#tense-6"><span class="toc-num">06.</span> Блок 4 (#11–#12): Used to (Было раньше vs стало сейчас)</a></li>
+        <li><a href="#tense-7"><span class="toc-num">07.</span> Блок 5 (#13–#15): Планы, таймлайны и обязательства</a></li>
+        <li><a href="#tense-8"><span class="toc-num">08.</span> Блок 6 (#16–#19): Условные предложения и советы без формул</a></li>
+        <li><a href="#tense-9"><span class="toc-num">09.</span> Блок 7 (#20–#24): Разбор полетов, сожаления и ретроспективы</a></li>
+        <li><a href="#tense-10"><span class="toc-num">10.</span> Метод тренировки Speed Swapping</a></li>
+      </ul>
+    </nav>
+
+    <!-- SECTION 1 -->
+    <section id="tense-1">
+      <h2 class="chapter-heading">01. Научные исследования: Почему таблицы времен убивают спонтанную речь</h2>
+
+      <p>
+        Когда человеку на рабочем митинге нужно сказать простую мысль во времени <em>Present Perfect Continuous</em> (например, «я все утро дебажу этот баг»), традиционная грамматическая модель требует выполнить в уме 5 последовательных шагов:
+      </p>
+
+      <ol style="padding-left: 24px; margin-bottom: 24px; line-height: 1.75;">
+        <li>Выбрать подлежащее (*I* или *We*).</li>
+        <li>Выбрать форму вспомогательного глагола (*have* или *has*).</li>
+        <li>Присоединить третью форму глагола to be (*been*).</li>
+        <li>Вспомнить смысловой глагол *debug* и прикрепить суффикс *-ing*.</li>
+        <li>Выбрать предлог времени (*for* или *since*).</li>
+      </ol>
+
+      <p>
+        В условиях реального разговора эта вычислительная цепочка занимает <strong>от 1.5 до 3 секунд</strong>. Человек замирает, отводит взгляд, рот зависает в полуоткрытом состоянии и издает звук <strong>«ээээ»</strong>.
+      </p>
+
+      <blockquote class="quote-callout">
+        «Грамматика естественного языка не хранится в мозге как абстрактная алгебра правил. Она организована как сеть высокочастотных лексических экземпляров (Exemplars). Носители языка говорят грамматически правильно не потому, что быстро считают формулы, а потому, что выстреливают готовые аспектуальные блоки».
+        <cite>Джоан Байби (Joan Bybee), «Language, Usage and Cognition», Cambridge University Press</cite>
+      </blockquote>
+
+      <p>
+        Исследования профессора Ника Эллиса (Nick C. Ellis) по когнитивной обработке глагольных форм подтвердили: взрослые учащиеся терпят крах в 80% случаев, если пытаются сознательно конструировать видовременные формы (*Explicit Computation*) в реальном времени. Но когда они заучивают <strong>готовые аспектуальные рамки (Formulaic Aspectual Frames)</strong>, беглость возрастает мгновенно.
+      </p>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="tense-2">
+      <h2 class="chapter-heading">02. Принцип Plug & Play: Жесткая голова и свободный слот</h2>
+
+      <p>
+        Временной чанк Plug & Play устроен гениально просто:
+      </p>
+
+      <div class="method-card">
+        <h4>1. Жесткая голова (The Head)</h4>
+        <p>Вспомогательные глаголы, предлоги и временные формы уже на 100% согласованы. Ошибиться грамматически невозможно, потому что вы произносите их как одно неделимое слово.</p>
+        <h4>2. Свободный слот (The Slot)</h4>
+        <p style="margin-bottom: 0;">Сюда подставляется только действие текущей секунды: конкретный тикет, баг или фича.</p>
+      </div>
+
+      <p>
+        Ниже представлен полный пошаговый каталог из <strong>24 ключевых временных чанков</strong>, выстроенный строго по порядку от 1 до последнего.
+      </p>
+    </section>
+
+    <!-- SECTION 3: Present Perfect -->
+    <section id="tense-3">
+      <h2 class="chapter-heading">03. Блок 1 (#1–#4): Present Perfect (Результат к этой минуте)</h2>
+      <p>Снимает 60% страха перед временами группы Perfect. Обозначает факт, актуальный прямо сейчас.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 1 • Чанки 1–4</span>
+          <span style="font-weight: 700; color: #FFF;">Present Perfect</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #1</div>
+          <div class="chunk-item-title">I've already [past participle] [X]</div>
+          <div class="chunk-item-trans">«Я уже сделал это (к этой минуте всё готово)»</div>
+          <div class="chunk-item-ex">"I've already patched the vulnerability on staging."</div>
+          <div class="chunk-item-ex-ru">Я уже пропатчил уязвимость на стейджинге.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #2</div>
+          <div class="chunk-item-title">Have you had a chance to [verb] yet?</div>
+          <div class="chunk-item-trans">«У тебя уже была возможность глянуть / сделать?» (самый частый рабочий вопрос)</div>
+          <div class="chunk-item-ex">"Have you had a chance to look over the new API contract yet?"</div>
+          <div class="chunk-item-ex-ru">У тебя получилось уже глянуть новый контракт API?</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #3</div>
+          <div class="chunk-item-title">We've run into an issue with [X]</div>
+          <div class="chunk-item-trans">«Мы столкнулись с проблемой в... (прямо сейчас боремся с ней)»</div>
+          <div class="chunk-item-ex">"We've run into an issue with CORS on the new subdomain."</div>
+          <div class="chunk-item-ex-ru">Мы наткнулись на проблему с CORS на новом поддомене.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #4</div>
+          <div class="chunk-item-title">I haven't seen [X] yet</div>
+          <div class="chunk-item-trans">«Я пока этого не видел / до меня это еще не дошло»</div>
+          <div class="chunk-item-ex">"I haven't seen the updated design mockups yet, could you share the link?"</div>
+          <div class="chunk-item-ex-ru">Я еще не видел обновленные макеты, скинешь ссылку?</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Present Perfect Continuous -->
+    <section id="tense-4">
+      <h2 class="chapter-heading">04. Блок 2 (#5–#7): Present Perfect Continuous (Длительный процесс)</h2>
+      <p>Описывает процесс, который начался в прошлом и без остановки тянется до текущей секунды.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 2 • Чанки 5–7</span>
+          <span style="font-weight: 700; color: #FFF;">Present Perfect Continuous</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #5</div>
+          <div class="chunk-item-title">I've been working on [X] all morning</div>
+          <div class="chunk-item-trans">«Я всё утро пилю / делаю эту задачу»</div>
+          <div class="chunk-item-ex">"I've been working on optimizing SQL queries all morning."</div>
+          <div class="chunk-item-ex-ru">Я все утро оптимизирую SQL-запросы.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #6</div>
+          <div class="chunk-item-title">We've been dealing with [X] since [time]</div>
+          <div class="chunk-item-trans">«Мы воюем с этой проблемой с такого-то времени»</div>
+          <div class="chunk-item-ex">"We've been dealing with these connection drops since yesterday's release."</div>
+          <div class="chunk-item-ex-ru">Мы воюем с этими обрывами соединений со вчерашнего релиза.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #7</div>
+          <div class="chunk-item-title">How long have you been seeing this error?</div>
+          <div class="chunk-item-trans">«Как давно у вас воспроизводится эта ошибка?» (дебаг)</div>
+          <div class="chunk-item-ex">"How long have you been seeing this 504 gateway timeout in production?"</div>
+          <div class="chunk-item-ex-ru">Как давно вы наблюдаете этот 504-й таймаут на проде?</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Past Continuous -->
+    <section id="tense-5">
+      <h2 class="chapter-heading">05. Блок 3 (#8–#10): Past Continuous (Фон и прерывание)</h2>
+      <p>Идеально для объяснения инцидентов: чем именно вы занимались, когда произошел сбой.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 3 • Чанки 8–10</span>
+          <span style="font-weight: 700; color: #FFF;">Past Continuous</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #8</div>
+          <div class="chunk-item-title">I was in the middle of [verb-ing] when [X] happened</div>
+          <div class="chunk-item-trans">«Я был прямо посреди процесса, когда...»</div>
+          <div class="chunk-item-ex">"I was in the middle of running migrations when the database disconnected."</div>
+          <div class="chunk-item-ex-ru">Я был прямо посреди наката миграций, когда отвалилась база данных.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #9</div>
+          <div class="chunk-item-title">I was just about to [verb] when...</div>
+          <div class="chunk-item-trans">«Я как раз собирался сделать это, когда...»</div>
+          <div class="chunk-item-ex">"I was just about to ping you when your message popped up in Slack."</div>
+          <div class="chunk-item-ex-ru">Я как раз собирался написать тебе, когда твое сообщение всплыло в слаке.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #10</div>
+          <div class="chunk-item-title">We were looking into [X], but...</div>
+          <div class="chunk-item-trans">«Мы как раз исследовали этот вопрос, но...»</div>
+          <div class="chunk-item-ex">"We were looking into Kafka partitions, but higher priority bugs came in."</div>
+          <div class="chunk-item-ex-ru">Мы как раз изучали партиции в Кафке, но прилетели более горящие баги.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Used to -->
+    <section id="tense-6">
+      <h2 class="chapter-heading">06. Блок 4 (#11–#12): Used to (Было раньше vs стало сейчас)</h2>
+      <p>Для архитектурных сравнений и демонстрации прогресса проекта.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 4 • Чанки 11–12</span>
+          <span style="font-weight: 700; color: #FFF;">Used to / Habits</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #11</div>
+          <div class="chunk-item-title">We used to [verb], but now we [verb]</div>
+          <div class="chunk-item-trans">«Раньше мы делали так, а теперь делаем иначе»</div>
+          <div class="chunk-item-ex">"We used to deploy manually on Fridays, but now we use automated CI/CD pipelines."</div>
+          <div class="chunk-item-ex-ru">Раньше мы деплоили вручную по пятницам, а теперь используем авто-пайплайны.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #12</div>
+          <div class="chunk-item-title">It used to take [time], but now...</div>
+          <div class="chunk-item-trans">«Раньше на это уходило столько-то времени, а теперь...»</div>
+          <div class="chunk-item-ex">"Builds used to take 25 minutes, but now they complete in under four."</div>
+          <div class="chunk-item-ex-ru">Сборки раньше занимали 25 минут, а теперь проходят быстрее четырех.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Future Plans -->
+    <section id="tense-7">
+      <h2 class="chapter-heading">07. Блок 5 (#13–#15): Планы, таймлайны и обязательства</h2>
+      <p>Профессиональный язык спринтов вместо скучного и однообразного «I will do».</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 5 • Чанки 13–15</span>
+          <span style="font-weight: 700; color: #FFF;">Future & Milestones</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #13</div>
+          <div class="chunk-item-title">We're on track to [verb] by [time]</div>
+          <div class="chunk-item-trans">«Мы идем по графику и успеваем сделать к сроку»</div>
+          <div class="chunk-item-ex">"We're on track to ship the MVP by the end of next week."</div>
+          <div class="chunk-item-ex-ru">Мы идем четко по графику и успеваем выкатить MVP к концу следующей недели.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #14</div>
+          <div class="chunk-item-title">We're planning on [verb-ing]...</div>
+          <div class="chunk-item-trans">«Мы планируем сделать в ближайшее время»</div>
+          <div class="chunk-item-ex">"We're planning on upgrading our Node runtime next sprint."</div>
+          <div class="chunk-item-ex-ru">Мы планируем обновить рантайм Node в следующем спринте.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #15</div>
+          <div class="chunk-item-title">I'll make sure to [verb]...</div>
+          <div class="chunk-item-trans">«Я лично проконтролирую / обязательно сделаю это»</div>
+          <div class="chunk-item-ex">"I'll make sure to add end-to-end tests before merging this branch."</div>
+          <div class="chunk-item-ex-ru">Я обязательно допишу сквозные тесты перед тем, как влить эту ветку.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: Conditionals -->
+    <section id="tense-8">
+      <h2 class="chapter-heading">08. Блок 6 (#16–#19): Условные предложения и советы без формул</h2>
+      <p>Устраняет необходимость вычислять согласование времен в условных конструкциях.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 6 • Чанки 16–19</span>
+          <span style="font-weight: 700; color: #FFF;">Conditionals</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #16</div>
+          <div class="chunk-item-title">It would be great if you could [verb]...</div>
+          <div class="chunk-item-trans">«Было бы здорово, если бы ты мог...» (идеальная просьба)</div>
+          <div class="chunk-item-ex">"It would be great if you could review this ticket before the standup."</div>
+          <div class="chunk-item-ex-ru">Было бы здорово, если бы ты глянул этот тикет до стендапа.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #17</div>
+          <div class="chunk-item-title">If I were you, I would just [verb]...</div>
+          <div class="chunk-item-trans">«На твоем месте я бы просто...» (экспертный совет)</div>
+          <div class="chunk-item-ex">"If I were you, I would just roll back the latest commit and debug locally."</div>
+          <div class="chunk-item-ex-ru">На твоем месте я бы просто откатил последний коммит и дебажил локально.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #18</div>
+          <div class="chunk-item-title">What would happen if we [past-verb]...?</div>
+          <div class="chunk-item-trans">«А что произойдет, если мы...?» (проверка сценария)</div>
+          <div class="chunk-item-ex">"What would happen if we dropped this legacy index right now?"</div>
+          <div class="chunk-item-ex-ru">А что произойдет, если мы дропнем этот старый индекс прямо сейчас?</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #19</div>
+          <div class="chunk-item-title">If we do [X], it will [verb]...</div>
+          <div class="chunk-item-trans">«Если мы сделаем X, это приведет к...» (четкий прогноз)</div>
+          <div class="chunk-item-ex">"If we cache user profiles in Redis, it will cut latency in half."</div>
+          <div class="chunk-item-ex-ru">Если мы закэшируем профили пользователей в Редисе, это срежет задержку вдвое.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: Past Modals & Post-Mortems -->
+    <section id="tense-9">
+      <h2 class="chapter-heading">09. Блок 7 (#20–#24): Разбор полетов, сожаления и ретроспективы</h2>
+      <p>Инструмент сеньор-инженеров при анализе багов, ретроспективах и разборе инцидентов.</p>
+
+      <div class="method-card">
+        <div class="method-card-header">
+          <span class="block-badge">Блок 7 • Чанки 20–24</span>
+          <span style="font-weight: 700; color: #FFF;">Past Modals & Retrospectives</span>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #20</div>
+          <div class="chunk-item-title">We should have [past participle] earlier...</div>
+          <div class="chunk-item-trans">«Нам следовало сделать это раньше... (сожаление о несделанном)»</div>
+          <div class="chunk-item-ex">"We should have enabled database replication before the marketing campaign launched."</div>
+          <div class="chunk-item-ex-ru">Нам следовало включить репликацию базы до старта маркетинговой кампании.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #21</div>
+          <div class="chunk-item-title">We could have [past participle], but...</div>
+          <div class="chunk-item-trans">«Мы могли бы поступить так, но... (рассмотрение альтернативы)»</div>
+          <div class="chunk-item-ex">"We could have patched the script, but rewriting it was cleaner."</div>
+          <div class="chunk-item-ex-ru">Мы могли бы залататать скрипт, но переписать его с нуля было чище.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #22</div>
+          <div class="chunk-item-title">It must have been [noun / adjective]...</div>
+          <div class="chunk-item-trans">«Должно быть, это было... (логический вывод о прошлом)»</div>
+          <div class="chunk-item-ex">"It must have been a memory leak that caused the container restart."</div>
+          <div class="chunk-item-ex-ru">Должно быть, именно утечка памяти вызвала рестарт контейнера.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #23</div>
+          <div class="chunk-item-title">I couldn't have [past participle] without [X]...</div>
+          <div class="chunk-item-trans">«Я бы не справился без... (благодарность коллегам)»</div>
+          <div class="chunk-item-ex">"I couldn't have tracked down this race condition without your help."</div>
+          <div class="chunk-item-ex-ru">Я бы ни за что не отловил эту гонку состояний без твоей помощи.</div>
+        </div>
+
+        <div class="chunk-item-row">
+          <div class="chunk-item-num">ЧАНК #24</div>
+          <div class="chunk-item-title">If we had known about this, we would have [past participle]...</div>
+          <div class="chunk-item-trans">«Если бы мы знали об этом раньше, мы бы сделали...»</div>
+          <div class="chunk-item-ex">"If we had known about the API rate limits, we would have added queue buffering from day one."</div>
+          <div class="chunk-item-ex-ru">Если бы мы знали про лимиты API, мы бы с первого дня добавили буферизацию через очереди.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: Training Method -->
+    <section id="tense-10">
+      <h2 class="chapter-heading">10. Метод тренировки Speed Swapping</h2>
+
+      <p>
+        Чтобы временной каркас перешел из пассивного понимания в автоматический спинномозговой рефлекс:
+      </p>
+
+      <ol class="editorial-steps">
+        <li>
+          <h4>Изолируйте жесткую голову (The Head)</h4>
+          <p>
+            Произнесите каркас <strong>I was in the middle of</strong> слитно, на одном выдохе: <em>«Ай-уоз-ин-зэ-мидл-ов»</em>. Не допускайте пауз между словами.
+          </p>
+        </li>
+
+        <li>
+          <h4>Дрилл замены действия за 20 секунд</h4>
+          <p>
+            Быстро, не задумываясь о временах, подставьте 3 действия из своей работы:
+          </p>
+          <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.7; margin: 12px 0;">
+            1. I was in the middle of refactoring when the alert fired.<br>
+            2. I was in the middle of writing unit tests when my laptop rebooted.<br>
+            3. I was in the middle of testing when the client called.
+          </div>
+        </li>
+
+        <li>
+          <h4>Критерий готовности</h4>
+          <p>
+            Чанк считается внедренным, когда рот начинает произносить временную конструкцию <strong>автоматически за 0.2 секунды</strong>, а голова успевает сформулировать саму суть проблемы.
+          </p>
+        </li>
+      </ol>
+
+      <blockquote class="quote-callout">
+        «Забудьте про таблицы времен на 12 ячеек. В реальном мире никто не рассчитывает грамматику. Освойте эти 24 шаблона — и вы будете говорить во всех нужных временах с легкостью носителя языка».
+      </blockquote>
+    </section>
+
+    <footer class="article-footer">
+      <p>Материал входит в образовательный комплекс <strong>English Learn</strong>. Полная картотека доступна в <a href="learn-chanks.html">learn-chanks.html</a>, плотные сочленения — в <a href="dense-structure.html">dense-structure.html</a>, а теория чанков — в <a href="chunks.html">chunks.html</a>.</p>
+      <p style="margin-top: 8px;">2026 • Plug & Play Tense Chunks Methodology</p>
+    </footer>
+
+  </article>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('reading-progress').style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

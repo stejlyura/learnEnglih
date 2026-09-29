@@ -1,7 +1,13 @@
-const CACHE_NAME = 'fluency-chunks-v2';
+const CACHE_NAME = 'fluency-chunks-v3';
 
-const STATIC_ASSETS = [
+const PRECACHE_URLS = [
   '/',
+  '/chunks',
+  '/dense-structure',
+  '/tense-chunks',
+  '/fluency-guide',
+  '/methodology',
+  '/learn-chunks',
   '/manifest.webmanifest',
   '/manifest.json',
   '/apple-touch-icon.png',
@@ -17,39 +23,20 @@ const STATIC_ASSETS = [
   '/img/apple-touch-icon-tense-chunks.png'
 ];
 
-// Helper to fetch with timeout to prevent Safari mobile from hanging
-function fetchWithTimeout(request, ms = 2500) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      reject(new Error('[SW] Fetch timed out'));
-    }, ms);
-
-    fetch(request)
-      .then((response) => {
-        clearTimeout(timer);
-        resolve(response);
-      })
-      .catch((err) => {
-        clearTimeout(timer);
-        reject(err);
-      });
-  });
-}
-
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // Cache assets individually so failure of one does not break the entire install
-      for (const asset of STATIC_ASSETS) {
-        try {
-          await cache.add(asset);
-        } catch (err) {
-          console.warn('[SW] Could not pre-cache asset:', asset, err);
-        }
-      }
+      // Pre-cache core SSG routes and icons concurrently
+      await Promise.allSettled(
+        PRECACHE_URLS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('[SW] Could not pre-cache:', url, err);
+          })
+        )
+      );
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -62,20 +49,18 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Skip non-GET requests
+  // Only handle GET requests
   if (request.method !== 'GET') {
     return;
   }
 
-  // Parse URL to check origin
   let url;
   try {
     url = new URL(request.url);
@@ -83,52 +68,60 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // CRITICAL: Do NOT intercept cross-origin requests (e.g. Google Fonts, Google CDN, external analytics).
-  // Intercepting cross-origin requests in Safari causes severe hangs when CDN is throttled.
+  // Never intercept cross-origin requests (e.g. fonts, CDN)
   if (url.origin !== self.location.origin) {
     return;
   }
 
-  // Skip internal Next.js HMR or dev endpoints
+  // Skip Next.js dev / HMR endpoints
   if (url.pathname.startsWith('/_next/webpack-hmr') || url.pathname.startsWith('/api/')) {
     return;
   }
 
-  // HTML Navigation requests: Fast Network-first with 2.5s timeout, falling back to cache
+  // Navigation requests (HTML pages): Stale-While-Revalidate
+  // Delivers instant 0ms load if cached, while quietly updating cache from network.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetchWithTimeout(request, 2500)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          }
-          return response;
-        })
-        .catch(async () => {
-          const cachedResponse = await caches.match(request);
-          if (cachedResponse) {
+      caches.match(request).then((cachedResponse) => {
+        const networkFetch = fetch(request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const clone = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+            }
+            return networkResponse;
+          })
+          .catch(async () => {
+            // If offline and request not directly cached, try fallback to cached root
+            if (!cachedResponse) {
+              const fallback = await caches.match('/');
+              if (fallback) return fallback;
+            }
             return cachedResponse;
-          }
-          const rootCached = await caches.match('/');
-          if (rootCached) {
-            return rootCached;
-          }
-          return fetch(request);
-        })
+          });
+
+        // Instant response from cache if available!
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // If not in cache yet, wait for network
+        return networkFetch;
+      })
     );
     return;
   }
 
-  // Static same-origin assets: Cache-first with background revalidation
+  // Static assets (CSS, JS, images, icons, fonts): Cache-first
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Revalidate in background without blocking response
+        // Revalidate in background without blocking
         fetch(request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+              const clone = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
             }
           })
           .catch(() => {});

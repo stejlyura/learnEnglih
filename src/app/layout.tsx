@@ -9,14 +9,18 @@ export const viewport: Viewport = {
   themeColor: "#080C14",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
   viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
   title: "Fluency Architecture: Разговорный Английский через Лексические Чанки (B2 → C1)",
   description: "Как говорить готовыми речевыми блоками без зависаний, преодолеть плато B2, обходить забытые слова и звучать естественно как носитель.",
+  openGraph: {
+    title: "Fluency Architecture: Разговорный Английский через Лексические Чанки (B2 → C1)",
+    description: "Как говорить готовыми речевыми блоками без зависаний, преодолеть плато B2, обходить забытые слова и звучать естественно как носитель.",
+    type: "website",
+  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -48,6 +52,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fluency-chunks-v1';
+const CACHE_NAME = 'fluency-chunks-v2';
 
 const STATIC_ASSETS = [
   '/',
@@ -17,12 +17,36 @@ const STATIC_ASSETS = [
   '/img/apple-touch-icon-tense-chunks.png'
 ];
 
+// Helper to fetch with timeout to prevent Safari mobile from hanging
+function fetchWithTimeout(request, ms = 2500) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error('[SW] Fetch timed out'));
+    }, ms);
+
+    fetch(request)
+      .then((response) => {
+        clearTimeout(timer);
+        resolve(response);
+      })
+      .catch((err) => {
+        clearTimeout(timer);
+        reject(err);
+      });
+  });
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch((err) => {
-        console.warn('[SW] Pre-caching warning:', err);
-      });
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Cache assets individually so failure of one does not break the entire install
+      for (const asset of STATIC_ASSETS) {
+        try {
+          await cache.add(asset);
+        } catch (err) {
+          console.warn('[SW] Could not pre-cache asset:', asset, err);
+        }
+      }
     })
   );
   self.skipWaiting();
@@ -46,15 +70,34 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Skip non-GET requests and chrome-extension / non-http schemes
-  if (request.method !== 'GET' || !request.url.startsWith('http')) {
+  // Skip non-GET requests
+  if (request.method !== 'GET') {
     return;
   }
 
-  // HTML Navigation requests: Network first, fall back to cache
+  // Parse URL to check origin
+  let url;
+  try {
+    url = new URL(request.url);
+  } catch {
+    return;
+  }
+
+  // CRITICAL: Do NOT intercept cross-origin requests (e.g. Google Fonts, Google CDN, external analytics).
+  // Intercepting cross-origin requests in Safari causes severe hangs when CDN is throttled.
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // Skip internal Next.js HMR or dev endpoints
+  if (url.pathname.startsWith('/_next/webpack-hmr') || url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // HTML Navigation requests: Fast Network-first with 2.5s timeout, falling back to cache
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetchWithTimeout(request, 2500)
         .then((response) => {
           if (response && response.status === 200) {
             const clone = response.clone();
@@ -67,17 +110,21 @@ self.addEventListener('fetch', (event) => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          return caches.match('/');
+          const rootCached = await caches.match('/');
+          if (rootCached) {
+            return rootCached;
+          }
+          return fetch(request);
         })
     );
     return;
   }
 
-  // Static assets (fonts, images, stylesheets, scripts): Stale-while-revalidate or Cache first
+  // Static same-origin assets: Cache-first with background revalidation
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Fetch in background to update cache
+        // Revalidate in background without blocking response
         fetch(request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {

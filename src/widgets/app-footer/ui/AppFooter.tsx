@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/shared/config";
+import { openPwaInstallModal } from "@/features/pwa";
 
 export function AppFooter() {
   return (
@@ -17,9 +20,16 @@ export function AppFooter() {
               </div>
               <span className="font-bold text-white tracking-tight">Fluency Architecture</span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm mb-4">
               Интерактивная система беглого разговорного английского без зависаний и зубрежки правил. Переход от уровня B2 к свободному C1 через лексические чанки.
             </p>
+            <button
+              type="button"
+              onClick={openPwaInstallModal}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-cyan-300 border border-cyan-500/30 text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <span>📱 Установить PWA на iPhone / Android</span>
+            </button>
           </div>
 
           <div>
@@ -55,7 +65,7 @@ export function AppFooter() {
 
         <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <span>Разговорный английский для жизни, путешествий и общения.</span>
-          <span>Next.js 15 • React 19 • React Compiler</span>
+          <span>Next.js 16 • React 19 • PWA Offline Ready</span>
         </div>
       </div>
     </footer>

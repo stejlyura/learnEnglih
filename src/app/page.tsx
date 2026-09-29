@@ -18,8 +18,10 @@ export default function HomePage() {
   return (
     <>
       {/* Ambient Glows */}
-      <div className="glow-bg glow-top-left" />
-      <div className="glow-bg glow-bottom-right" />
+      <div className="glow-wrapper" aria-hidden="true">
+        <div className="glow-bg glow-top-left" />
+        <div className="glow-bg glow-bottom-right" />
+      </div>
 
       <div className="main-wrapper">
         {/* Hero Section */}

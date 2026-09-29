@@ -4,17 +4,28 @@ import { useEffect } from "react";
 
 export function PwaRegister() {
   useEffect(() => {
-    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log("[PWA] ServiceWorker registered with scope:", registration.scope);
-          })
-          .catch((error) => {
-            console.warn("[PWA] ServiceWorker registration failed:", error);
-          });
-      });
+    if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
+      return;
+    }
+
+    const registerSW = () => {
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/" })
+        .then((registration) => {
+          // Check for service worker updates periodically
+          registration.update().catch(() => {});
+        })
+        .catch((error) => {
+          console.warn("[PWA] ServiceWorker registration notice:", error);
+        });
+    };
+
+    // Ensure registration runs whether document is already loaded or still loading
+    if (document.readyState === "complete") {
+      registerSW();
+    } else {
+      window.addEventListener("load", registerSW, { once: true });
+      return () => window.removeEventListener("load", registerSW);
     }
   }, []);
 

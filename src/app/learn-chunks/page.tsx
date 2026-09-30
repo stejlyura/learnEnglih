@@ -65,6 +65,34 @@ export default function LearnChunksPage() {
         <p className="text-slate-400 text-sm sm:text-base max-w-3xl leading-relaxed">
           Готовые речевые блоки вместо пословного конструирования. Учите чанки целиком — и речевой аппарат перестанет зависать на митингах и в беседах.
         </p>
+
+        {/* Audit Chunks Banner */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-rose-950/40 via-amber-950/20 to-slate-900 border border-rose-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+          <div className="flex items-start sm:items-center gap-3">
+            <span className="p-2 rounded-xl bg-rose-500/20 text-rose-300 text-lg shrink-0">
+              🔥
+            </span>
+            <div>
+              <div className="text-sm font-bold text-white flex items-center gap-2">
+                <span>Персональные Чанки из Клинического Аудита</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold">
+                  18 антидотов
+                </span>
+              </div>
+              <div className="text-xs text-slate-300 mt-0.5">
+                Выжигание 7 подтвержденных русских калек (feel myself, advices, actual) и скрытых грамматических сбоев.
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/audit-chunks"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all shadow-md shadow-rose-600/20 shrink-0 self-start sm:self-auto cursor-pointer"
+          >
+            <span>Открыть вкладку аудита</span>
+            <span>→</span>
+          </a>
+        </div>
       </div>
 
       {/* Filter and Mode Controls */}

@@ -25,6 +25,13 @@ export const NAV_ITEMS: readonly NavItem[] = [
     readTime: "10 мин",
   },
   {
+    title: "Таблица Времен (Матрица)",
+    href: "/tense-matrix",
+    description: "Вся таблица времен Present, Past, Future в готовых предложениях и рабочих чанках.",
+    badge: "Интерактив",
+    category: "trainer",
+  },
+  {
     title: "Плотные Связки (3 Уровня)",
     href: "/dense-structure",
     description: "От базовых оправданий до тонкой дипломатии и естественных связующих оборотов.",
@@ -37,6 +44,13 @@ export const NAV_ITEMS: readonly NavItem[] = [
     href: "/learn-chunks",
     description: "Интерактивная база из 100+ живых фраз. Поиск, фильтры, карточки для запоминания и озвучка носителя.",
     badge: "Интерактив",
+    category: "trainer",
+  },
+  {
+    title: "Чанки из Аудита",
+    href: "/audit-chunks",
+    description: "Персональные чанки-антидоты: устранение 7 фоссилизированных калек и скрытых грамматических пробелов.",
+    badge: "Аудит 🎯",
     category: "trainer",
   },
   {

@@ -14,7 +14,9 @@ import {
   BookOpen, 
   Smartphone, 
   Home,
-  ChevronRight
+  ChevronRight,
+  Flame,
+  Grid3X3
 } from "lucide-react";
 import { cn } from "@/shared/lib";
 import { openPwaInstallModal } from "@/features/pwa";
@@ -34,6 +36,12 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     icon: <Layers className="w-5 h-5 text-cyan-400" />
   },
   { 
+    title: "Таблица Времен", 
+    href: "/tense-matrix", 
+    desc: "Present, Past, Future в готовых чанках",
+    icon: <Grid3X3 className="w-5 h-5 text-indigo-400" />
+  },
+  { 
     title: "Времена Plug & Play", 
     href: "/tense-chunks", 
     desc: "Готовые шаблоны временных форм",
@@ -44,6 +52,12 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     href: "/dense-structure", 
     desc: "Устранение пауз и связки речи",
     icon: <Link2 className="w-5 h-5 text-violet-400" />
+  },
+  { 
+    title: "Чанки из Аудита", 
+    href: "/audit-chunks", 
+    desc: "Антидоты к 7 фоссилизированным калькам",
+    icon: <Flame className="w-5 h-5 text-rose-400" />
   },
   { 
     title: "Архитектура Беглости", 

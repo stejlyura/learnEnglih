@@ -43,3 +43,52 @@ export interface DenseChunkItem {
   readonly exRu: string;
   readonly description?: string;
 }
+
+export type AuditChunkCategory =
+  | "all"
+  | "fossilized"
+  | "grammar_gaps"
+  | "lexical_c1"
+  | "noticing";
+
+export interface AuditChunkItem {
+  readonly id: string;
+  readonly title: string;
+  readonly target: string;
+  readonly trap: string;
+  readonly triggerRu: string;
+  readonly why: string;
+  readonly context: string;
+  readonly category: Exclude<AuditChunkCategory, "all">;
+  readonly categoryName: string;
+  readonly drillPrompt: string;
+  readonly audioText: string;
+  readonly speedSwaps: readonly string[];
+}
+
+export type TimeHorizon = "present" | "past" | "future" | "spoken";
+export type TenseAspect = "simple" | "continuous" | "perfect" | "perfect_continuous" | "modal";
+
+export interface TenseExampleSentence {
+  readonly en: string;
+  readonly ru: string;
+  readonly context: string;
+}
+
+export interface TenseMatrixItem {
+  readonly id: string;
+  readonly tenseKey: string;
+  readonly nameEn: string;
+  readonly nameRu: string;
+  readonly horizon: TimeHorizon;
+  readonly aspect: TenseAspect;
+  readonly formula: string;
+  readonly formulaNeg: string;
+  readonly formulaQuest: string;
+  readonly coreMeaning: string;
+  readonly timeMarkers: readonly string[];
+  readonly readyChunk: string;
+  readonly chunkRu: string;
+  readonly sentences: readonly TenseExampleSentence[];
+  readonly lifeTip: string;
+}

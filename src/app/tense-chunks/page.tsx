@@ -33,6 +33,27 @@ export default function TenseChunksPage() {
           <div className="info-item"><span>Формат:</span> <strong>24 готовых чанка-разъема под ежедневные задачи</strong></div>
         </div>
 
+        {/* Tense Matrix Banner */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-cyan-950/20 to-slate-900 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg my-6">
+          <div>
+            <div className="text-sm font-bold text-white flex items-center gap-2">
+              <span>📊 Интерактивная Таблица Времен в Готовых Чанках</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold">
+                16 категорий
+              </span>
+            </div>
+            <div className="text-xs text-slate-300 mt-0.5">
+              Сетка Present, Past, Future с готовыми рабочими предложениями под ключ и озвучкой.
+            </div>
+          </div>
+          <Link
+            href="/tense-matrix"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shrink-0 cursor-pointer self-start sm:self-auto"
+          >
+            <span>Открыть матрицу времен →</span>
+          </Link>
+        </div>
+
         <nav className="toc-box">
           <div className="toc-title">Содержание лонгрида</div>
           <ul className="toc-list">

@@ -1,13 +1,19 @@
-const CACHE_NAME = 'fluency-chunks-v3';
+const CACHE_NAME = 'fluency-chunks-v4';
 
 const PRECACHE_URLS = [
   '/',
   '/chunks',
   '/dense-structure',
   '/tense-chunks',
+  '/tense-matrix',
+  '/audit-chunks',
   '/fluency-guide',
   '/methodology',
   '/learn-chunks',
+  '/longreads',
+  '/longreads/native-brain',
+  '/longreads/memory-consolidation',
+  '/longreads/chunk-architecture',
   '/manifest.webmanifest',
   '/manifest.json',
   '/apple-touch-icon.png',
@@ -73,8 +79,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Skip Next.js dev / HMR endpoints
-  if (url.pathname.startsWith('/_next/webpack-hmr') || url.pathname.startsWith('/api/')) {
+  // Skip Next.js internals, dev / HMR endpoints, and API routes
+  if (url.pathname.startsWith('/_next/') || url.pathname.startsWith('/api/')) {
     return;
   }
 

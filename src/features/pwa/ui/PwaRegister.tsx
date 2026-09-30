@@ -8,6 +8,15 @@ export function PwaRegister() {
       return;
     }
 
+    if (process.env.NODE_ENV === "development") {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister();
+        }
+      });
+      return;
+    }
+
     const registerSW = () => {
       navigator.serviceWorker
         .register("/sw.js", { scope: "/" })

@@ -1,753 +1,654 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { 
-  TENSE_MATRIX_DATA, 
-  TimeHorizon, 
-  TenseAspect, 
-  TenseMatrixItem 
-} from "@/entities/chunk";
-import { 
-  Volume2, 
-  Copy, 
-  Check, 
-  Sparkles, 
-  Clock, 
-  Calendar, 
-  Zap, 
-  Layers, 
-  Grid3X3, 
-  ListFilter, 
-  ChevronRight, 
-  CheckCircle2, 
-  HelpCircle, 
-  ArrowRight,
-  RotateCcw,
-  BookOpen
-} from "lucide-react";
-import { cn } from "@/shared/lib";
-
-type ViewMode = "cards" | "matrix" | "quiz";
-
-const HORIZON_TABS: readonly { id: TimeHorizon | "all"; label: string; count: number; color: string }[] = [
-  { id: "all", label: "Все времена (All)", count: 16, color: "text-white" },
-  { id: "present", label: "🟢 Настоящее (Present)", count: 4, color: "text-emerald-400" },
-  { id: "past", label: "🟠 Прошедшее (Past)", count: 4, color: "text-amber-400" },
-  { id: "future", label: "🔵 Будущее (Future)", count: 4, color: "text-cyan-400" },
-  { id: "spoken", label: "🟣 Разговорные эквиваленты", count: 4, color: "text-purple-400" },
-] as const;
+import { EditorialLayout, ChunkItemRow } from "@/shared/ui";
 
 export default function TenseMatrixPage() {
-  const [activeHorizon, setActiveHorizon] = useState<TimeHorizon | "all">("all");
-  const [activeAspect, setActiveAspect] = useState<TenseAspect | "all">("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>("matrix");
-
-  // Audio / Copy state
-  const [copiedText, setCopiedText] = useState<string | null>(null);
-  const [speakingKey, setSpeakingKey] = useState<string | null>(null);
-
-  // Quiz state
-  const [quizQuestionIndex, setQuizQuestionIndex] = useState(0);
-  const [selectedQuizAnswer, setSelectedQuizAnswer] = useState<string | null>(null);
-  const [quizScore, setQuizScore] = useState(0);
-  const [quizAnsweredCount, setQuizAnsweredCount] = useState(0);
-
-  const filteredTenses = useMemo(() => {
-    return TENSE_MATRIX_DATA.filter((item) => {
-      if (activeHorizon !== "all" && item.horizon !== activeHorizon) {
-        return false;
-      }
-      if (activeAspect !== "all" && item.aspect !== activeAspect) {
-        return false;
-      }
-      if (!searchQuery.trim()) {
-        return true;
-      }
-      const q = searchQuery.toLowerCase();
-      const inName = item.nameEn.toLowerCase().includes(q) || item.nameRu.toLowerCase().includes(q);
-      const inFormula = item.formula.toLowerCase().includes(q);
-      const inChunk = item.readyChunk.toLowerCase().includes(q) || item.chunkRu.toLowerCase().includes(q);
-      const inSentences = item.sentences.some(
-        (s) => s.en.toLowerCase().includes(q) || s.ru.toLowerCase().includes(q)
-      );
-      return inName || inFormula || inChunk || inSentences;
-    });
-  }, [activeHorizon, activeAspect, searchQuery]);
-
-  // Audio synthesis helper
-  const handleSpeak = (text: string, key: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-    window.speechSynthesis.cancel();
-    if (speakingKey === key) {
-      setSpeakingKey(null);
-      return;
-    }
-
-    const clean = text.replace(/\[.*?\]/g, "").trim();
-    const utterance = new SpeechSynthesisUtterance(clean);
-    utterance.lang = "en-US";
-    utterance.rate = 0.95;
-
-    utterance.onend = () => setSpeakingKey(null);
-    utterance.onerror = () => setSpeakingKey(null);
-
-    setSpeakingKey(key);
-    window.speechSynthesis.speak(utterance);
-  };
-
-  // Copy helper
-  const handleCopy = (text: string) => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-      setCopiedText(text);
-      setTimeout(() => setCopiedText(null), 2000);
-    }
-  };
-
-  // Matrix lookup map
-  const matrixLookup = useMemo(() => {
-    const map = new Map<string, TenseMatrixItem>();
-    TENSE_MATRIX_DATA.forEach((item) => {
-      map.set(`${item.horizon}_${item.aspect}`, item);
-    });
-    return map;
-  }, []);
-
-  // Quick quiz questions
-  const quizQuestions = useMemo(() => [
-    {
-      promptRu: "«Я все утро дебажу этот баг и пока не нашел первопричину»",
-      correctKey: "present_perfect_continuous",
-      explanation: "Процесс начался утром, непрерывно длился до этой минуты и продолжается — это Present Perfect Continuous (have been V-ing)."
-    },
-    {
-      promptRu: "«Вчера в 15:00 мы проводили стресс-тесты базы данных»",
-      correctKey: "past_continuous",
-      explanation: "Действие длилось в точно зафиксированный момент прошлого (at 3 PM yesterday) — это Past Continuous (were V-ing)."
-    },
-    {
-      promptRu: "«К пятнице мы закроем все критические блокеры»",
-      correctKey: "future_perfect",
-      explanation: "Результат будет готов К определенному дедлайну в будущем (by Friday) — это Future Perfect (will have V3)."
-    },
-    {
-      promptRu: "«К тому моменту как начался созвон, я уже пофиксил баг»",
-      correctKey: "past_perfect",
-      explanation: "Действие произошло ДО другого события в прошлом (by the time the call started) — это Past Perfect (had V3)."
-    },
-    {
-      promptRu: "«Завтра в 11:00 у меня встреча 1-на-1 с директором (встреча в календаре)»",
-      correctKey: "present_continuous_future",
-      explanation: "100% зафиксированная договоренность между людьми в календаре выражается через Present Continuous for Future."
-    },
-    {
-      promptRu: "«Раньше мы сами держали железные сервера, а теперь перешли в облако»",
-      correctKey: "used_to",
-      explanation: "Привычка или состояние в прошлом, которое полностью закончилось — это оборот Used to V1."
-    }
-  ], []);
-
-  const currentQuiz = quizQuestions[quizQuestionIndex % quizQuestions.length];
-
-  const handleAnswerQuiz = (tenseKey: string) => {
-    if (selectedQuizAnswer !== null) return;
-    setSelectedQuizAnswer(tenseKey);
-    setQuizAnsweredCount((prev) => prev + 1);
-    if (tenseKey === currentQuiz.correctKey) {
-      setQuizScore((prev) => prev + 1);
-    }
-  };
-
-  const handleNextQuiz = () => {
-    setSelectedQuizAnswer(null);
-    setQuizQuestionIndex((prev) => (prev + 1) % quizQuestions.length);
-  };
+  const [activeTab, setActiveTab] = useState<"all" | "core" | "secondary">("all");
 
   return (
-    <div className="main-wrapper pb-24">
-      {/* ─── Hero Section ─── */}
-      <div className="mb-10 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-            <span>Интерактивная Таблица Времен • 16 Категорий • 60+ Предложений</span>
+    <EditorialLayout
+      title="Матрица Времен по Принципу Парето: 80% Практики vs 20% Теории"
+      metaCategory="Нейролингвистическая матрица глагольных форм"
+      readTime="Время чтения: 9 минут"
+      badge="Парето 80 / 20"
+      badgeColor="primary"
+      activeRoute="/tense-matrix"
+      lead="Честное разделение всей системы времен английского языка. Сначала — 7 ключевых времен и конструкций со слотами, на которых держится 80% всех рабочих созвонов и переписок. Затем — остальные 20%, нужные только для сложных отчетов и уровня C1."
+      infoItems={[
+        { label: "Закон Парето", value: "80% речи закрывается 7 ключевыми временами" },
+        { label: "Принцип слотов", value: "Каждый чанк по формуле We&apos;ve been dealing with [X] since [time]" },
+        { label: "Формат", value: "Готовые рабочие блоки под ключ с озвучкой" },
+      ]}
+    >
+
+        {/* Quick View Filter Switcher */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-500/30 flex flex-wrap items-center justify-between gap-3 my-6">
+          <div className="text-xs sm:text-sm font-semibold text-slate-200 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span>Фильтр просмотра матрицы:</span>
           </div>
 
-          <Link
-            href="/tense-chunks"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Лонгрид: Теория Plug & Play</span>
-            <ArrowRight className="w-3 h-3" />
-          </Link>
+          <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10">
+            <button
+              type="button"
+              onClick={() => setActiveTab("all")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                activeTab === "all"
+                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Вся матрица (100%)
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("core")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                activeTab === "core"
+                  ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              🔥 Золотые 80% (Ядро)
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("secondary")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                activeTab === "secondary"
+                  ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              📚 Редкие 20% (Теория)
+            </button>
+          </div>
         </div>
 
-        <div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Таблица Времен в Готовых Чанках
-          </h1>
-          <p className="mt-2 text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-            Вся система английских времен (Present, Past, Future) без школьного вычисления формул. Готовые речевые блоки и рабочие предложения под реальные рабочие ситуации созвонов, деплоев и переписки.
+        <nav className="toc-box">
+          <div className="toc-title">Содержание матрицы</div>
+          <ul className="toc-list">
+            <li>
+              <a href="#pareto-concept">
+                <span className="toc-num">01.</span> Лингвистический закон Парето: почему вам не нужны 12 таблиц
+              </a>
+            </li>
+            <li>
+              <a href="#part-1-core">
+                <span className="toc-num">02.</span> ЧАСТЬ 1: Золотые 80% (Ядро ежедневной речи — 7 времен и связок)
+              </a>
+            </li>
+            <li>
+              <a href="#part-2-rare">
+                <span className="toc-num">03.</span> ЧАСТЬ 2: Оставшиеся 20% (Для редких контекстов, отчетов и C1)
+              </a>
+            </li>
+            <li>
+              <a href="#summary-cheat">
+                <span className="toc-num">04.</span> Сводная шпаргалка: Какое время выбрать за 0.2 секунды
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        {/* SECTION 1: PARETO CONCEPT */}
+        <section id="pareto-concept">
+          <h2 className="chapter-heading">01. Лингвистический закон Парето: почему вам не нужны 12 таблиц</h2>
+
+          <p>
+            Главная трагедия школьного и вузовского преподавания английского языка — это <strong>принцип искусственной равнозначности</strong>. В таблицах на 12 ячеек время <em>Present Simple</em> нарисовано абсолютно такого же размера, как и <em>Future Perfect Continuous</em>.
           </p>
-        </div>
 
-        {/* Horizon Quick Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-          <button
-            type="button"
-            onClick={() => setActiveHorizon("present")}
-            className="p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-500/25 hover:border-emerald-500/50 text-left transition-all cursor-pointer"
-          >
-            <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">
-              🟢 Present (4)
-            </div>
-            <div className="text-lg font-bold text-emerald-200">Настоящее</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Simple, Continuous, Perfect, Perf. Cont.</div>
-          </button>
+          <p>
+            В результате у человека возникает когнитивное искажение: ему кажется, что он обязан помнить все 12 формул с одинаковой скоростью. Но в реальной жизни носителей языка:
+          </p>
 
-          <button
-            type="button"
-            onClick={() => setActiveHorizon("past")}
-            className="p-3.5 rounded-2xl bg-amber-950/20 border border-amber-500/25 hover:border-amber-500/50 text-left transition-all cursor-pointer"
-          >
-            <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">
-              🟠 Past (4)
-            </div>
-            <div className="text-lg font-bold text-amber-200">Прошедшее</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Simple, Continuous, Perfect, Perf. Cont.</div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveHorizon("future")}
-            className="p-3.5 rounded-2xl bg-cyan-950/20 border border-cyan-500/25 hover:border-cyan-500/50 text-left transition-all cursor-pointer"
-          >
-            <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-1">
-              🔵 Future (4)
-            </div>
-            <div className="text-lg font-bold text-cyan-200">Будущее</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Simple, Continuous, Perfect, Perf. Cont.</div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveHorizon("spoken")}
-            className="p-3.5 rounded-2xl bg-purple-950/20 border border-purple-500/25 hover:border-purple-500/50 text-left transition-all cursor-pointer"
-          >
-            <div className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">
-              🟣 Spoken (4)
-            </div>
-            <div className="text-lg font-bold text-purple-200">Разговорные</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Be going to, Used to, Was supposed to...</div>
-          </button>
-        </div>
-      </div>
-
-      {/* ─── Filter & Mode Controls ─── */}
-      <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 mb-8 shadow-2xl">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-4">
-          {/* Search */}
-          <div className="relative flex-1 max-w-md">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск по фразе, формуле или переводу..."
-              className="w-full bg-slate-950/70 border border-white/15 focus:border-indigo-400 focus:outline-none rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 transition-all pl-10"
-            />
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">🔍</span>
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white cursor-pointer"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
-          {/* Mode Tabs */}
-          <div className="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/10 self-start md:self-auto">
-            <button
-              type="button"
-              onClick={() => setViewMode("matrix")}
-              className={cn(
-                "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer",
-                viewMode === "matrix"
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-slate-200"
-              )}
-            >
-              <Grid3X3 className="w-3.5 h-3.5" />
-              <span>Таблица 4×3</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setViewMode("cards")}
-              className={cn(
-                "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer",
-                viewMode === "cards"
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-slate-200"
-              )}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span>Карточки ({filteredTenses.length})</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setViewMode("quiz")}
-              className={cn(
-                "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer",
-                viewMode === "quiz"
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-slate-200"
-              )}
-            >
-              <HelpCircle className="w-3.5 h-3.5" />
-              <span>Экспресс-Тест</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Horizon Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {HORIZON_TABS.map((tab) => {
-            const isSelected = activeHorizon === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveHorizon(tab.id)}
-                className={cn(
-                  "shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
-                  isSelected
-                    ? "bg-white/15 text-white border-white/30 shadow-md"
-                    : "bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 hover:text-slate-200"
-                )}
-              >
-                <span className={tab.color}>{tab.label}</span>
-                <span className="px-1.5 py-0.2 rounded-md text-[10px] font-mono bg-white/10 text-slate-300">
-                  {tab.count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ─── View 1: 4x3 Matrix Grid View ─── */}
-      {viewMode === "matrix" && (
-        <div className="space-y-6">
-          <div className="overflow-x-auto rounded-3xl border border-white/10 bg-slate-900/60 shadow-2xl backdrop-blur-md">
-            <table className="w-full text-left border-collapse min-w-[900px]">
-              <thead>
-                <tr className="border-b border-white/10 bg-white/5">
-                  <th className="p-4 text-xs font-bold uppercase tracking-wider text-slate-400 w-36">
-                    Время \ Аспект
-                  </th>
-                  <th className="p-4 text-xs font-bold uppercase tracking-wider text-indigo-300">
-                    Simple (Факт)
-                  </th>
-                  <th className="p-4 text-xs font-bold uppercase tracking-wider text-cyan-300">
-                    Continuous (Процесс)
-                  </th>
-                  <th className="p-4 text-xs font-bold uppercase tracking-wider text-emerald-300">
-                    Perfect (Результат)
-                  </th>
-                  <th className="p-4 text-xs font-bold uppercase tracking-wider text-amber-300">
-                    Perfect Cont. (Длительность)
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {(["present", "past", "future"] as const).map((horizon) => {
-                  const horizonName = horizon === "present" ? "PRESENT (Настоящее)" : horizon === "past" ? "PAST (Прошедшее)" : "FUTURE (Будущее)";
-                  const horizonColor = horizon === "present" ? "text-emerald-400" : horizon === "past" ? "text-amber-400" : "text-cyan-400";
-
-                  return (
-                    <tr key={horizon} className="hover:bg-white/[0.02] transition-colors">
-                      <td className="p-4 align-top font-bold text-xs uppercase tracking-wider border-r border-white/5">
-                        <span className={horizonColor}>{horizonName}</span>
-                      </td>
-
-                      {(["simple", "continuous", "perfect", "perfect_continuous"] as const).map((aspect) => {
-                        const item = matrixLookup.get(`${horizon}_${aspect}`);
-                        if (!item) return <td key={aspect} className="p-4">--</td>;
-
-                        return (
-                          <td key={aspect} className="p-4 align-top border-r border-white/5 last:border-r-0 max-w-xs">
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <span className="font-bold text-sm text-white">{item.tenseKey}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => handleSpeak(item.sentences[0].en, item.id)}
-                                  className={cn(
-                                    "p-1 rounded-md text-slate-400 hover:text-white cursor-pointer transition-all",
-                                    speakingKey === item.id && "text-cyan-300 animate-pulse"
-                                  )}
-                                  title="Прослушать"
-                                >
-                                  <Volume2 className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-
-                              <div className="text-[11px] font-mono text-indigo-300 bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-500/20 inline-block">
-                                {item.formula}
-                              </div>
-
-                              <div className="p-2 rounded-xl bg-white/5 border border-white/5 text-xs">
-                                <div className="font-medium text-slate-200 font-mono text-[11px]">
-                                  {item.sentences[0].en}
-                                </div>
-                                <div className="text-[10px] text-slate-400 mt-1">
-                                  {item.sentences[0].ru}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Spoken Essentials Strip */}
-          <div className="p-6 rounded-3xl bg-gradient-to-r from-purple-950/30 via-slate-900 to-slate-900 border border-purple-500/30">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="p-1.5 rounded-lg bg-purple-500/20 text-purple-300">
-                <Sparkles className="w-4 h-4" />
-              </span>
-              <h3 className="font-bold text-white text-base">
-                Как на самом деле говорят носители: 4 Разговорных Эквивалента
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-              {TENSE_MATRIX_DATA.filter((item) => item.horizon === "spoken").map((item) => (
-                <div key={item.id} className="p-3.5 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/40 transition-all">
-                  <div className="font-bold text-xs text-purple-300 mb-1">{item.nameEn}</div>
-                  <div className="font-mono text-xs text-white font-medium mb-1.5">{item.sentences[0].en}</div>
-                  <div className="text-[11px] text-slate-400">{item.sentences[0].ru}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ─── View 2: Detailed Cards View ─── */}
-      {viewMode === "cards" && (
-        <div className="space-y-6">
-          {filteredTenses.length === 0 ? (
-            <div className="text-center py-16 bg-slate-900/60 rounded-3xl border border-white/10">
-              <p className="text-slate-300 text-base">Ничего не найдено по вашему запросу.</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchQuery("");
-                  setActiveHorizon("all");
-                  setActiveAspect("all");
-                }}
-                className="mt-3 text-cyan-400 hover:underline text-xs font-semibold cursor-pointer"
-              >
-                Сбросить фильтры
-              </button>
-            </div>
-          ) : (
-            filteredTenses.map((item) => {
-              const isPresent = item.horizon === "present";
-              const isPast = item.horizon === "past";
-              const isFuture = item.horizon === "future";
-
-              const borderColor = isPresent 
-                ? "border-emerald-500/30 hover:border-emerald-500/60" 
-                : isPast 
-                ? "border-amber-500/30 hover:border-amber-500/60" 
-                : isFuture 
-                ? "border-cyan-500/30 hover:border-cyan-500/60" 
-                : "border-purple-500/30 hover:border-purple-500/60";
-
-              return (
-                <div
-                  key={item.id}
-                  className={cn(
-                    "p-6 rounded-3xl bg-slate-900/80 backdrop-blur-md border transition-all shadow-xl space-y-5",
-                    borderColor
-                  )}
-                >
-                  {/* Card Header */}
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={cn(
-                            "px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider",
-                            isPresent
-                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                              : isPast
-                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                              : isFuture
-                              ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
-                              : "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                          )}
-                        >
-                          {item.horizon.toUpperCase()}
-                        </span>
-                        <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                          {item.nameEn}
-                        </h2>
-                      </div>
-                      <div className="text-xs text-slate-300 mt-1">{item.nameRu}</div>
-                    </div>
-
-                    {/* Formula Pill */}
-                    <div className="bg-black/50 border border-white/10 px-3.5 py-1.5 rounded-xl font-mono text-xs text-cyan-300">
-                      {item.formula}
-                    </div>
-                  </div>
-
-                  {/* Core Meaning & Markers */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                        Когда употребляется:
-                      </div>
-                      <p className="text-slate-200 leading-relaxed">{item.coreMeaning}</p>
-                    </div>
-
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                        Маркеры времени:
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mt-1">
-                        {item.timeMarkers.map((marker) => (
-                          <span
-                            key={marker}
-                            className="px-2 py-0.5 rounded-md bg-white/10 text-slate-300 font-mono text-[11px]"
-                          >
-                            {marker}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Ready Chunk Banner */}
-                  <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900 border border-indigo-500/30">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-indigo-300 mb-1">
-                      ⚡️ Готовый речевой чанк со слотом:
-                    </div>
-                    <div className="text-base sm:text-lg font-bold text-white font-mono">
-                      {item.readyChunk}
-                    </div>
-                    <div className="text-xs text-indigo-200/80 mt-1 italic">
-                      {item.chunkRu}
-                    </div>
-                  </div>
-
-                  {/* 4 Practical Sentences Grid */}
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
-                      Рабочие предложения под ключ:
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {item.sentences.map((sent, idx) => (
-                        <div
-                          key={idx}
-                          className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group"
-                        >
-                          <div>
-                            <div className="flex items-center justify-between gap-2 mb-1.5">
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                                {sent.context}
-                              </span>
-                              <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                                <button
-                                  type="button"
-                                  onClick={() => handleSpeak(sent.en, `${item.id}-${idx}`)}
-                                  className="p-1 rounded text-slate-400 hover:text-white cursor-pointer"
-                                  title="Прослушать"
-                                >
-                                  <Volume2 className="w-3.5 h-3.5" />
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => handleCopy(sent.en)}
-                                  className="p-1 rounded text-slate-400 hover:text-white cursor-pointer"
-                                  title="Копировать"
-                                >
-                                  {copiedText === sent.en ? (
-                                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                                  ) : (
-                                    <Copy className="w-3.5 h-3.5" />
-                                  )}
-                                </button>
-                              </div>
-                            </div>
-                            <div className="font-mono text-xs sm:text-sm font-semibold text-slate-100">
-                              {sent.en}
-                            </div>
-                          </div>
-                          <div className="text-xs text-slate-400 mt-2 pt-2 border-t border-white/5">
-                            {sent.ru}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Life Tip */}
-                  <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200">
-                    <strong>💡 Лайфхак носителя: </strong>
-                    {item.lifeTip}
-                  </div>
-                </div>
-              );
-            })
-          )}
-        </div>
-      )}
-
-      {/* ─── View 3: Express Quiz View ─── */}
-      {viewMode === "quiz" && (
-        <div className="max-w-xl mx-auto space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-indigo-500/30 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-300 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30">
-                Вопрос {(quizQuestionIndex % quizQuestions.length) + 1} из {quizQuestions.length}
-              </span>
-              <span className="text-xs text-slate-400 font-mono">
-                Правильно: <strong className="text-emerald-400">{quizScore}</strong> / {quizAnsweredCount}
-              </span>
-            </div>
-
-            <div className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-2">
-              Какое время или конструкцию нужно использовать?
-            </div>
-
-            <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-6">
-              {currentQuiz.promptRu}
-            </h2>
-
-            {/* Answer Options */}
-            <div className="space-y-3">
-              {[
-                { key: "present_perfect_continuous", label: "Present Perfect Continuous (have been V-ing)" },
-                { key: "past_continuous", label: "Past Continuous (was / were V-ing)" },
-                { key: "future_perfect", label: "Future Perfect (will have V3 by Friday)" },
-                { key: "past_perfect", label: "Past Perfect (had V3 before...)" },
-                { key: "present_continuous_future", label: "Present Continuous for Calendar Future" },
-                { key: "used_to", label: "Used To (Прошлые привычки)" }
-              ].map((opt) => {
-                const isSelected = selectedQuizAnswer === opt.key;
-                const isCorrect = opt.key === currentQuiz.correctKey;
-                const showFeedback = selectedQuizAnswer !== null;
-
-                return (
-                  <button
-                    key={opt.key}
-                    type="button"
-                    disabled={showFeedback}
-                    onClick={() => handleAnswerQuiz(opt.key)}
-                    className={cn(
-                      "w-full text-left p-4 rounded-2xl border font-mono text-xs sm:text-sm font-semibold transition-all cursor-pointer",
-                      !showFeedback && "bg-white/5 border-white/10 hover:bg-white/10 hover:border-indigo-400/50 text-slate-200",
-                      showFeedback && isCorrect && "bg-emerald-500/20 border-emerald-500/60 text-emerald-200 shadow-md",
-                      showFeedback && isSelected && !isCorrect && "bg-rose-500/20 border-rose-500/60 text-rose-200"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{opt.label}</span>
-                      {showFeedback && isCorrect && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Explanation box after answer */}
-            {selectedQuizAnswer !== null && (
-              <div className="mt-6 p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 text-xs sm:text-sm text-slate-200 animate-in fade-in duration-200">
-                <div className="font-bold text-indigo-300 mb-1">
-                  {selectedQuizAnswer === currentQuiz.correctKey ? "✅ Верно!" : "❌ Ошибка в выборе"}
-                </div>
-                <p>{currentQuiz.explanation}</p>
-                <button
-                  type="button"
-                  onClick={handleNextQuiz}
-                  className="mt-4 w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg transition-all cursor-pointer"
-                >
-                  Следующий вопрос →
-                </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+            <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/30">
+              <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">
+                🔥 Золотые 80% (7 конструкций)
               </div>
-            )}
+              <div className="text-base font-bold text-white mb-2">Ядро профессиональной речи</div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Present Simple, Past Simple, Present Continuous, Present Perfect, Present Perfect Continuous, Past Continuous + взятие ответственности и сорвавшиеся планы. В них происходит <strong>9 из 10 диалогов</strong> на дейликах и созвонах.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-purple-950/20 border border-purple-500/30">
+              <div className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">
+                📚 Оставшиеся 20% (5 времен)
+              </div>
+              <div className="text-base font-bold text-white mb-2">Периферия и сложные отчеты</div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Past Perfect, Past Perfect Continuous, Future Continuous, Future Perfect, Future Perfect Continuous. Нужны только при разборе длинных хронологий инцидентов (Post-Mortem) или в формальных C1-докладах.
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        </section>
 
-      {/* ─── Footer Cross-Navigation ─── */}
-      <div className="mt-16 p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-white/10">
-        <h3 className="text-lg font-bold text-white tracking-tight mb-2">
-          Связанные материалы по временам и беглости речи
-        </h3>
-        <p className="text-xs sm:text-sm text-slate-400 mb-6 max-w-2xl leading-relaxed">
-          Закрепляйте времена методом Speed-Swapping и тренируйте персональные чанки-антидоты:
-        </p>
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {/* SECTION 2: PART 1 - GOLDEN 80% */}
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {(activeTab === "all" || activeTab === "core") && (
+          <section id="part-1-core" className="pt-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                ЧАСТЬ 1 • ЗОЛОТЫЕ 80%
+              </span>
+            </div>
+            <h2 className="chapter-heading">02. Ядро Ежедневной Речи: 7 Времен и Связок со Слотами</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Link
-            href="/tense-chunks"
-            className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-indigo-500/40 hover:bg-white/10 transition-all group"
-          >
-            <div className="text-xs text-indigo-400 font-bold mb-1">Теоретический Лонгрид</div>
-            <div className="text-sm font-bold text-white group-hover:text-indigo-200">
-              Времена Plug & Play →
-            </div>
-            <div className="text-[11px] text-slate-400 mt-1">
-              Исследования Joan Bybee и Nick Ellis по блочной грамматике
-            </div>
-          </Link>
+            <p>
+              Каждый чанк ниже построен по принципу <strong>жесткая голова + свободный слот в скобках [X]</strong>. Заучивайте их целиком — мозг сам подставит в слот текущую рабочую задачу.
+            </p>
 
-          <Link
-            href="/audit-chunks"
-            className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-rose-500/40 hover:bg-white/10 transition-all group"
-          >
-            <div className="text-xs text-rose-400 font-bold mb-1">Персональные Чанки</div>
-            <div className="text-sm font-bold text-white group-hover:text-rose-200">
-              Чанки из Аудита →
-            </div>
-            <div className="text-[11px] text-slate-400 mt-1">
-              Антидоты к 7 фоссилизированным ошибкам L1
-            </div>
-          </Link>
+            {/* 1. Present Simple */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #1 • Present Simple
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Регулярные факты, процессы и архитектура</span>
+              </div>
 
-          <Link
-            href="/learn-chunks"
-            className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-cyan-500/40 hover:bg-white/10 transition-all group"
-          >
-            <div className="text-xs text-cyan-400 font-bold mb-1">База 100+ Чанков</div>
-            <div className="text-sm font-bold text-white group-hover:text-cyan-200">
-              Интерактивный тренажер →
+              <ChunkItemRow
+                num="1.1"
+                title="I usually handle [X], while [someone] takes care of [Y]"
+                trans="«Обычно я отвечаю за [X], в то время как [имя] занимается [Y]»"
+                exEn="I usually handle backend deployments, while Alex takes care of the UI."
+                exRu="Обычно я отвечаю за бэкенд-деплой, пока Алекс занимается интерфейсом."
+                tip="Формула: Subject + V1. Описывает ваши постоянные обязанности."
+              />
+
+              <ChunkItemRow
+                num="1.2"
+                title="Our team runs [event] every [day/week] at [time]"
+                trans="«Наша команда проводит [событие] каждый [день] в [время]»"
+                exEn="Our team runs daily standups every morning at 10 AM."
+                exRu="Наша команда проводит дейлики каждое утро в 10:00."
+              />
+
+              <ChunkItemRow
+                num="1.3"
+                title="It doesn't make sense to [verb]..."
+                trans="«Нет никакого смысла [делать что-то]»"
+                exEn="It doesn't make sense to refactor this legacy module right before the release."
+                exRu="Нет никакого смысла рефакторить этот легаси-модуль прямо перед релизом."
+              />
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">
-              Флешкарты и спид-дрилл под реальные созвоны
+
+            {/* 2. Past Simple */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #2 • Past Simple
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Завершенные факты с точной привязкой ко времени</span>
+              </div>
+
+              <ChunkItemRow
+                num="2.1"
+                title="We decided to [verb] yesterday because [reason]"
+                trans="«Вчера мы решили [сделать X], потому что [причина]»"
+                exEn="We decided to postpone the release yesterday because QA found a blocker."
+                exRu="Вчера мы решили отложить релиз, потому что тестировщики нашли блокер."
+                tip="Формула: Subject + V2 / didn't + V1. Главный маркер — yesterday, last week, ago."
+              />
+
+              <ChunkItemRow
+                num="2.2"
+                title="We released [X] yesterday afternoon without [problem]"
+                trans="«Мы зарелизили [X] вчера во второй половине дня без [проблем]»"
+                exEn="We released version 2.4 yesterday afternoon without any downtime."
+                exRu="Мы зарелизили версию 2.4 вчера днем без единого сбоя."
+              />
+
+              <ChunkItemRow
+                num="2.3"
+                title="Did you get a chance to discuss [X] with [someone] yesterday?"
+                trans="«Удалось ли тебе вчера обсудить [X] с [человеком]?»"
+                exEn="Did you get a chance to discuss the schema changes with Dmitry yesterday?"
+                exRu="Удалось вчера обсудить изменения в схеме с Дмитрием?"
+              />
             </div>
-          </Link>
-        </div>
-      </div>
-    </div>
+
+            {/* 3. Present Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #3 • Present Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Процесс прямо сейчас / Временная задача этой недели</span>
+              </div>
+
+              <ChunkItemRow
+                num="3.1"
+                title="I&apos;m currently working on [X] and looking into [Y]"
+                trans="«Я сейчас как раз пилю [X] и параллельно разбираюсь с [Y]»"
+                exEn="I'm currently working on auth middleware and looking into token expiration."
+                exRu="Я сейчас как раз пилю мидлвар авторизации и разбираюсь с истечением токенов."
+                tip="Формула: am/is/are + V-ing. Главный ответ на вопрос «чем ты сейчас занят?»."
+              />
+
+              <ChunkItemRow
+                num="3.2"
+                title="We're looking into why [component] is [failing/timing out]"
+                trans="«Мы прямо сейчас выясняем, почему [компонент] падает / отваливается»"
+                exEn="We're looking into why the payment webhook is timing out under heavy load."
+                exRu="Мы выясняем, почему платежный вебхук отваливается под высокой нагрузкой."
+              />
+
+              <ChunkItemRow
+                num="3.3"
+                title="Are you still debugging that [X]?"
+                trans="«Ты все еще отлаживаешь этот [баг]?»"
+                exEn="Are you still debugging that memory leak in the billing worker?"
+                exRu="Ты все еще отлаживаешь ту утечку памяти в биллинге?"
+              />
+            </div>
+
+            {/* 4. Present Perfect */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #4 • Present Perfect
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Свежий результат к этой минуте / Отсутствие даты</span>
+              </div>
+
+              <ChunkItemRow
+                num="4.1"
+                title="I've already [past participle] [X], so we can [next step]"
+                trans="«Я уже сделал [X], так что мы можем переходить к [Y]»"
+                exEn="I've already deployed the patch to staging, so we can verify it now."
+                exRu="Я уже выкатил патч на стейджинг, так что мы можем сразу его проверить."
+                tip="Формула: have/has + V3. Результат важен прямо сейчас, время не имеет значения."
+              />
+
+              <ChunkItemRow
+                num="4.2"
+                title="Have you had a chance to [verb] yet?"
+                trans="«У тебя уже была возможность [сделать X]?»"
+                exEn="Have you had a chance to review my pull request yet?"
+                exRu="У тебя уже получилось глянуть мой пулл-реквест?"
+              />
+
+              <ChunkItemRow
+                num="4.3"
+                title="We haven't received [X] from [someone] yet"
+                trans="«Мы пока еще не получили [X] от [кого-то]»"
+                exEn="We haven't received the updated API credentials from the client yet."
+                exRu="Мы пока еще не получили обновленные ключи API от клиента."
+              />
+            </div>
+
+            {/* 5. Present Perfect Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #5 • Present Perfect Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Тянущийся процесс со времени в прошлом</span>
+              </div>
+
+              <ChunkItemRow
+                num="5.1"
+                title="We've been dealing with [X] since [time]"
+                trans="«Мы воюем с [этой проблемой] еще с [такого-то времени]»"
+                exEn="We've been dealing with intermittent 504 timeouts since yesterday's migration."
+                exRu="Мы воюем с периодическими 504-ми таймаутами со вчерашней миграции."
+                tip="Формула: have/has been + V-ing. Подчеркивает продолжительность и накопившуюся усталость."
+              />
+
+              <ChunkItemRow
+                num="5.2"
+                title="I've been working on [X] all morning without [result]"
+                trans="«Я все утро сижу над [X] и пока без [результата]»"
+                exEn="I've been working on this race condition all morning without finding the root cause."
+                exRu="Я все утро сижу над этой гонкой состояний и пока не нашел первопричину."
+              />
+
+              <ChunkItemRow
+                num="5.3"
+                title="How long have you been seeing [error/issue]?"
+                trans="«Как давно у вас воспроизводится [эта ошибка]?»"
+                exEn="How long have you been seeing this database connection spike?"
+                exRu="Как давно вы наблюдаете этот скачок соединений к базе данных?"
+              />
+            </div>
+
+            {/* 6. Past Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #6 • Past Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Прерванное действие / Что происходило в момент сбоя</span>
+              </div>
+
+              <ChunkItemRow
+                num="6.1"
+                title="I was in the middle of [verb-ing] when [event happened]"
+                trans="«Я был прямо посреди процесса [X], когда произошло [Y]»"
+                exEn="I was in the middle of deploying when my team lead pinged me to take another task."
+                exRu="Я был прямо посреди деплоя, когда тимлид написал мне с просьбой взять другую задачу."
+                tip="Формула: was/were + V-ing. Идеально объясняет прерывание вашей работы."
+              />
+
+              <ChunkItemRow
+                num="6.2"
+                title="I was just about to [verb] when [event happened]"
+                trans="«Я как раз собирался [сделать X], когда [произошло Y]»"
+                exEn="I was just about to message you when your pull request alert arrived."
+                exRu="Я как раз собирался написать тебе, когда прилетел алерт о твоем PR."
+              />
+
+              <ChunkItemRow
+                num="6.3"
+                title="We were looking into [X], but [blocker/priority]"
+                trans="«Мы как раз изучали [X], но [вмешался блокер или приоритет]»"
+                exEn="We were looking into migrating to GraphQL, but security priorities took over."
+                exRu="Мы как раз присматривались к GraphQL, но приоритеты безопасности перевесили."
+              />
+            </div>
+
+            {/* 7. Future & Spoken Leftover */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(16, 185, 129, 0.2)", borderColor: "rgba(16, 185, 129, 0.4)", color: "#6EE7B7" }}>
+                  80% #7 • Обязательства и срывы планов
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Только то, что реально звучит на митингах</span>
+              </div>
+
+              <ChunkItemRow
+                num="7.1"
+                title="I&apos;ll make sure to [verb] right after [event]"
+                trans="«Я обязательно проконтролирую / сделаю [X] сразу после [события]»"
+                exEn="I&apos;ll make sure to check the logs right after this standup call."
+                exRu="Я обязательно проверю логи сразу после этого дейлика."
+                tip="Взятие личной ответственности на митинге без лишней воды."
+              />
+
+              <ChunkItemRow
+                num="7.2"
+                title="I was supposed to [verb], but [blocker happened]"
+                trans="«Я должен был [сделать X], но [возник блокер]»"
+                exEn="I was supposed to finish this yesterday, but the staging API was completely down."
+                exRu="Я должен был закончить это вчера, но стейджинг API лежал."
+                tip="Дипломатичное объяснение сорвавшегося плана без чувства вины."
+              />
+
+              <ChunkItemRow
+                num="7.3"
+                title="I'm meeting with [person] tomorrow to [verb]"
+                trans="«Я встречаюсь с [человеком] завтра, чтобы [обсудить задачу] (встреча в календаре)»"
+                exEn="I'm meeting with the tech lead tomorrow morning to finalize the architecture."
+                exRu="Я встречаюсь с техлидом завтра утром, чтобы утвердить архитектуру."
+              />
+            </div>
+          </section>
+        )}
+
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {/* SECTION 3: PART 2 - SECONDARY 20% */}
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {(activeTab === "all" || activeTab === "secondary") && (
+          <section id="part-2-rare" className="pt-8">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                ЧАСТЬ 2 • ОСТАВШИЕСЯ 20%
+              </span>
+            </div>
+            <h2 className="chapter-heading">03. Периферия и Сложные Контексты (Теория, Post-Mortem и C1)</h2>
+
+            <p>
+              Эти конструкции <strong>не нужны для ежедневного общения</strong>. Не заучивайте их наизусть, если еще не автоматизировали ЧАСТЬ 1. Обращайтесь к ним только при написании инцидент-репортов, формальных технических документов или при подготовке к C1-интервью.
+            </p>
+
+            {/* 8. Past Perfect */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #1 • Past Perfect (Had + V3)
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Предпрошедшее: действие случилось ДО другого момента в прошлом</span>
+              </div>
+
+              <ChunkItemRow
+                num="8.1"
+                title="By the time [event happened], we had already [past participle] [X]"
+                trans="«К тому моменту как [произошло X], мы уже успели [сделать Y]»"
+                exEn="By the time the client joined the incident call, we had already resolved the outage."
+                exRu="К тому моменту как клиент подключился к созвону, мы уже устранили аварию."
+                tip="Используется только для фиксации хронологии: сначала Had Done, потом Did."
+              />
+
+              <ChunkItemRow
+                num="8.2"
+                title="We hadn't noticed [X] until [event happened]"
+                trans="«Мы не замечали [X] до тех пор, пока не произошло [Y]»"
+                exEn="We hadn't noticed the regression until several enterprise customers complained."
+                exRu="Мы не замечали регрессию, пока несколько крупных клиентов не пожаловались."
+              />
+            </div>
+
+            {/* 9. Past Perfect Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #2 • Past Perfect Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Длительность до точки в прошлом (причина аварии)</span>
+              </div>
+
+              <ChunkItemRow
+                num="9.1"
+                title="We had been [verb-ing] for [duration] before we [event happened]"
+                trans="«Мы занимались [этим] на протяжении [стольких месяцев], прежде чем [запустились]»"
+                exEn="We had been working on the migration for four months before we finally shipped it."
+                exRu="Мы работали над миграцией 4 месяца, прежде чем наконец зарелизили её."
+                tip="Формула: had been + V-ing. Классика технических постмортемов."
+              />
+
+              <ChunkItemRow
+                num="9.2"
+                title="The server crashed because it had been [verb-ing] for [time]"
+                trans="«Сервер упал, потому что он непрерывно [находился в состоянии X] в течение [дней]»"
+                exEn="The container crashed because it had been leaking memory for several days straight."
+                exRu="Контейнер упал, потому что из него несколько дней подряд текла память."
+              />
+            </div>
+
+            {/* 10. Future Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #3 • Future Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Процесс в конкретный временной интервал будущего</span>
+              </div>
+
+              <ChunkItemRow
+                num="10.1"
+                title="I'll be [verb-ing] between [time] and [time]"
+                trans="«Я буду плотно заниматься [X] в интервале с [такого-то] до [такого-то часа]»"
+                exEn="I'll be monitoring the production logs between 2 PM and 4 PM during the cutover."
+                exRu="Я буду мониторить логи прода с 14:00 до 16:00 во время переключения."
+                tip="Формула: will be + V-ing. Предупреждение о недоступности."
+              />
+
+              <ChunkItemRow
+                num="10.2"
+                title="Will you be [verb-ing] later today?"
+                trans="«Ты будешь [делать X] сегодня по своему графику?» (ультра-вежливый вопрос)"
+                exEn="Will you be attending the architecture committee sync later today?"
+                exRu="Ты будешь на встрече архитектурного комитета сегодня?"
+              />
+            </div>
+
+            {/* 11. Future Perfect */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #4 • Future Perfect (Will have + V3)
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Результат будет готов строго К дедлайну</span>
+              </div>
+
+              <ChunkItemRow
+                num="11.1"
+                title="We will have [past participle] [X] by [deadline]"
+                trans="«Мы полностью завершим [X] к [такому-то сроку]»"
+                exEn="We will have closed all critical blockers by Friday afternoon."
+                exRu="Мы закроем все критические блокеры к вечеру пятницы."
+                tip="Главный маркер — предлог BY (к определенному моменту)."
+              />
+
+              <ChunkItemRow
+                num="11.2"
+                title="By the time [event happens], we will have [past participle] [X]"
+                trans="«К тому моменту как [произойдет событие], мы уже успеем [сделать X]»"
+                exEn="By the time clients log in tomorrow, the database migration will have finished."
+                exRu="К моменту как клиенты завтра зайдут, миграция базы уже завершится."
+              />
+            </div>
+
+            {/* 12. Future Perfect Continuous */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #5 • Future Perfect Continuous
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Подсчет стажа / непрерывной длительности к будущей дате</span>
+              </div>
+
+              <ChunkItemRow
+                num="12.1"
+                title="By [date], I will have been [verb-ing] for [duration]"
+                trans="«К [дате] исполнится ровно [столько-то лет], как я [работаю здесь]»"
+                exEn="By next November, I will have been working at this company for exactly five years."
+                exRu="В следующем ноябре исполнится ровно пять лет, как я работаю в этой компании."
+                tip="Редкая форма. Используется для юбилеев и годовщин проектов."
+              />
+            </div>
+
+            {/* 13. Used To & Mixed Conditionals */}
+            <div className="method-card">
+              <div className="method-card-header">
+                <span className="block-badge" style={{ background: "rgba(168, 85, 247, 0.2)", borderColor: "rgba(168, 85, 247, 0.4)", color: "#D8B4FE" }}>
+                  20% #6 • Привычки прошлого и Смешанные условия
+                </span>
+                <span style={{ fontWeight: 700, color: "#FFF" }}>Архитектурные сопоставления и сослагательность</span>
+              </div>
+
+              <ChunkItemRow
+                num="13.1"
+                title="We used to [verb], but now we [verb]"
+                trans="«Раньше мы обычно [делали так], а теперь [делаем иначе]»"
+                exEn="We used to manage our own bare-metal servers, but now we run everything on AWS."
+                exRu="Раньше мы сами обслуживали железные сервера, а теперь крутим всё в AWS."
+                tip="Used to — только то, что полностью закончилось и больше не происходит."
+              />
+
+              <ChunkItemRow
+                num="13.2"
+                title="If we had [past participle] [X], we wouldn't [verb] now"
+                trans="«Если бы мы [сделали X в прошлом], сейчас мы бы не [мучились с Y]»"
+                exEn="If we had run end-to-end tests earlier, we wouldn't be troubleshooting in production now."
+                exRu="Если бы мы прогнали сквозные тесты раньше, сейчас мы бы не дебажили на проде."
+                tip="Запрет WOULD в If-части! Условие в прошлом = had + V3."
+              />
+            </div>
+          </section>
+        )}
+
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        {/* SECTION 4: SUMMARY CHEAT SHEET */}
+        {/* ═══════════════════════════════════════════════════════════════ */}
+        <section id="summary-cheat" className="pt-8">
+          <h2 className="chapter-heading">04. Сводная Шпаргалка: Как Выбрать Время за 0.2 Секунды</h2>
+
+          <p>
+            Вместо того чтобы держать в голове всю таблицу, задайте себе <strong>один вопрос</strong>:
+          </p>
+
+          <div className="space-y-2.5 my-6">
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">01.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Действие происходит регулярно или это свойство системы?</strong> ➔ <span className="text-emerald-300 font-bold">Present Simple</span> (<code>I usually handle [X]</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">02.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Действие происходит прямо сейчас в эту секунду?</strong> ➔ <span className="text-emerald-300 font-bold">Present Continuous</span> (<code>I&apos;m currently working on [X]</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">03.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Результат готов к этой минуте (без точной даты)?</strong> ➔ <span className="text-emerald-300 font-bold">Present Perfect</span> (<code>I&apos;ve already [V3] [X]</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">04.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Процесс тянется с утра/со вчера и вы устали?</strong> ➔ <span className="text-emerald-300 font-bold">Present Perfect Continuous</span> (<code>We&apos;ve been dealing with [X] since [time]</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">05.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Действие завершилось в зафиксированный момент прошлого?</strong> ➔ <span className="text-emerald-300 font-bold">Past Simple</span> (<code>We decided to [verb] yesterday</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">06.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Вас прервали посреди процесса?</strong> ➔ <span className="text-emerald-300 font-bold">Past Continuous</span> (<code>I was in the middle of [verb-ing] when...</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">07.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>Берете обязательство на себя?</strong> ➔ <span className="text-emerald-300 font-bold">I&apos;ll make sure to</span> (<code>I&apos;ll make sure to [verb]...</code>)
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
+              <span className="text-emerald-400 font-bold font-mono text-sm shrink-0">08.</span>
+              <div className="text-xs sm:text-sm text-slate-200">
+                <strong>План сорвался по внешним причинам?</strong> ➔ <span className="text-emerald-300 font-bold">I was supposed to</span> (<code>I was supposed to [verb], but [blocker]</code>)
+              </div>
+            </div>
+          </div>
+
+          <blockquote className="quote-callout">
+            «Сконцентрируйтесь только на ЧАСТИ 1. Автоматизируйте 7 золотых конструкций до автоматизма — и ваш английский на созвонах станет звучать чище, чем у 80% коллег».
+            <cite>Принцип Парето в SLA-методологии</cite>
+          </blockquote>
+        </section>
+
+        {/* Footer Navigation */}
+        <footer className="article-footer">
+          <p>
+            Материал входит в образовательный комплекс <strong>English Learn</strong>. Ознакомьтесь с базовой теорией в{" "}
+            <Link href="/tense-chunks" className="text-cyan-400 font-bold hover:underline">tense-chunks</Link>, картотекой фраз в{" "}
+            <Link href="/learn-chunks" className="text-emerald-400 font-bold hover:underline">learn-chunks</Link>, и персональными антидотами в{" "}
+            <Link href="/audit-chunks" className="text-rose-400 font-bold hover:underline">audit-chunks</Link>.
+          </p>
+          <p style={{ marginTop: "12px", color: "var(--text-dim)" }}>2026 • Pareto 80/20 Tense Matrix</p>
+        </footer>
+    </EditorialLayout>
   );
 }

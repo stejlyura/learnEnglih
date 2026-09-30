@@ -66,10 +66,16 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     icon: <Brain className="w-5 h-5 text-emerald-400" />
   },
   { 
+    title: "Все Лонгриды", 
+    href: "/longreads", 
+    desc: "Каталог 9 исследований и руководств",
+    icon: <BookOpen className="w-5 h-5 text-cyan-300" />
+  },
+  { 
     title: "Методология", 
     href: "/methodology", 
     desc: "Научная система повторений",
-    icon: <BookOpen className="w-5 h-5 text-amber-400" />
+    icon: <Sparkles className="w-5 h-5 text-amber-400" />
   },
 ] as const;
 

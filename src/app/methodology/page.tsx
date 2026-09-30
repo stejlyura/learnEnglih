@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ReadingProgress, ArticleHeaderNav, QuoteCallout, MethodCard } from "@/shared/ui";
 import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
+import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
 const TOC_ITEMS: readonly ToCItem[] = [
   { id: "part-1", title: "01. Аудит вашей текущей рутины: Сильные стороны и слепые зоны" },
@@ -22,6 +23,16 @@ export default function MethodologyPage() {
       />
 
       <article className="longread-container" id="top">
+        {/* Top Switcher Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <span>Библиотека лонгридов</span>
+            <span>•</span>
+            <span className="text-amber-400 font-semibold">Всего 9 материалов</span>
+          </div>
+          <LongreadSelectorDropdown currentSlug="methodology" />
+        </div>
+
         <div className="article-meta-top">
           <span>Прикладная лингвистика & Когнитивная наука SLA</span>
           <span>•</span>

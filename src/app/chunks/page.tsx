@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ReadingProgress, ArticleHeaderNav, ChunkItemRow } from "@/shared/ui";
+import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
 export default function ChunksPage() {
   return (
@@ -13,6 +14,16 @@ export default function ChunksPage() {
       />
 
       <article className="longread-container" id="top">
+        {/* Top Switcher Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <span>Библиотека лонгридов</span>
+            <span>•</span>
+            <span className="text-cyan-400 font-semibold">Всего 9 материалов</span>
+          </div>
+          <LongreadSelectorDropdown currentSlug="chunks" />
+        </div>
+
         <div className="article-meta-top">
           <span>Прикладная когнитивная лингвистика</span>
           <span>•</span>

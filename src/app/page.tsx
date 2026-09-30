@@ -47,7 +47,7 @@ export default function HomePage() {
         <section className="my-16">
           <div className="text-center max-w-xl mx-auto mb-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
-              Карта обучения: 6 практических модулей
+              Карта обучения & Исследования ({NAV_ITEMS.length} разделов)
             </h2>
             <p className="text-sm text-slate-400">
               Пошаговый переход от грамматических затыков к чистой, естественной беглости носителя.

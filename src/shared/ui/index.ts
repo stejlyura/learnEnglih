@@ -6,3 +6,6 @@ export * from "./ArticleHeaderNav";
 export * from "./ChunkItemRow";
 export * from "./QuoteCallout";
 export * from "./MethodCard";
+export * from "./EditorialLayout";
+export * from "./MetricStatCard";
+export * from "./AuditChunkRow";

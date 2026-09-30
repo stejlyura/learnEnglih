@@ -1,45 +1,39 @@
 import React from "react";
 import Link from "next/link";
-import { ReadingProgress, ArticleHeaderNav, ChunkItemRow } from "@/shared/ui";
+import { EditorialLayout, ChunkItemRow } from "@/shared/ui";
+import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
 export default function TenseChunksPage() {
   return (
-    <>
-      <ReadingProgress />
-      <ArticleHeaderNav
-        title="TENSE CHUNKS"
-        badge="Plug & Play"
-        badgeColor="emerald"
-      />
-
-      <article className="longread-container" id="top">
-        <div className="article-meta-top">
-          <span>Нейробиология видовременных форм</span>
-          <span>•</span>
-          <span>Время чтения: 11 минут</span>
-        </div>
-
-        <h1 className="article-title">
-          Временные Чанки Plug & Play: Как Говорить во Временах без Таблиц и Расчетов
-        </h1>
-
-        <p className="article-lead">
-          Почему математическое вычисление 12 временных форм в голове гарантирует затыки, как исследования Joan Bybee и Nick Ellis доказывают блочную природу грамматики и 24 готовых разъема от 1 до последнего.
-        </p>
-
-        <div className="article-info-strip">
-          <div className="info-item"><span>Научная база:</span> <strong>Exemplar-Based Linguistics (Joan Bybee, Nick Ellis)</strong></div>
-          <div className="info-item"><span>Ключевой навык:</span> <strong>Zero-Latency Tense Switching (переключение времен за 0.2 сек)</strong></div>
-          <div className="info-item"><span>Формат:</span> <strong>24 готовых чанка-разъема под ежедневные задачи</strong></div>
-        </div>
-
-        {/* Tense Matrix Banner */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-cyan-950/20 to-slate-900 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg my-6">
+    <EditorialLayout
+      title="Временные Чанки Plug & Play: Как Говорить во Временах без Таблиц и Расчетов"
+      metaCategory="Нейробиология видовременных форм"
+      readTime="Время чтения: 7 минут"
+      badge="Plug & Play"
+      badgeColor="emerald"
+      activeRoute="/tense-chunks"
+      lead="Почему математическое вычисление 12 временных форм в голове гарантирует затыки, как исследования Joan Bybee и Nick Ellis доказывают блочную природу грамматики и 12 практических разъемов, закрывающих 90% реальной речи."
+      infoItems={[
+        { label: "Научная база", value: "Exemplar-Based Linguistics (Joan Bybee, Nick Ellis)" },
+        { label: "Ключевой навык", value: "Zero-Latency Tense Switching (переключение времен за 0.2 сек)" },
+        { label: "Формат", value: "12 отобранных чанков-разъемов под реальные задачи" },
+      ]}
+      topBanner={
+        <>
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-4 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека лонгридов</span>
+              <span>•</span>
+              <span className="text-emerald-400 font-semibold">Всего 9 материалов</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="tense-chunks" />
+          </div>
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-cyan-950/20 to-slate-900 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg my-6">
           <div>
             <div className="text-sm font-bold text-white flex items-center gap-2">
-              <span>📊 Интерактивная Таблица Времен в Готовых Чанках</span>
+              <span>📊 Интерактивная Таблица Времен в Готовых Чанках (Парето 80/20)</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold">
-                16 категорий
+                80% vs 20%
               </span>
             </div>
             <div className="text-xs text-slate-300 mt-0.5">
@@ -53,6 +47,9 @@ export default function TenseChunksPage() {
             <span>Открыть матрицу времен →</span>
           </Link>
         </div>
+        </>
+      }
+    >
 
         <nav className="toc-box">
           <div className="toc-title">Содержание лонгрида</div>
@@ -62,11 +59,8 @@ export default function TenseChunksPage() {
             <li><a href="#tense-3"><span className="toc-num">03.</span> Блок 1 (#1–#4): Present Perfect (Результат к этой минуте)</a></li>
             <li><a href="#tense-4"><span className="toc-num">04.</span> Блок 2 (#5–#7): Present Perfect Continuous (Длительный процесс)</a></li>
             <li><a href="#tense-5"><span className="toc-num">05.</span> Блок 3 (#8–#10): Past Continuous (Фон и прерывание)</a></li>
-            <li><a href="#tense-6"><span className="toc-num">06.</span> Блок 4 (#11–#12): Used to (Было раньше vs стало сейчас)</a></li>
-            <li><a href="#tense-7"><span className="toc-num">07.</span> Блок 5 (#13–#15): Планы, таймлайны и обязательства</a></li>
-            <li><a href="#tense-8"><span className="toc-num">08.</span> Блок 6 (#16–#19): Условные предложения и советы без формул</a></li>
-            <li><a href="#tense-9"><span className="toc-num">09.</span> Блок 7 (#20–#24): Разбор полетов, сожаления и ретроспективы</a></li>
-            <li><a href="#tense-10"><span className="toc-num">10.</span> Метод тренировки Speed Swapping</a></li>
+            <li><a href="#tense-6"><span className="toc-num">06.</span> Блок 4 (#11–#12): Обязательства и срывы планов (Практический остаток)</a></li>
+            <li><a href="#tense-7"><span className="toc-num">07.</span> Метод тренировки Speed Swapping</a></li>
           </ul>
         </nav>
 
@@ -116,7 +110,7 @@ export default function TenseChunksPage() {
           </div>
 
           <p>
-            Ниже представлен полный пошаговый каталог из <strong>24 ключевых временных чанков</strong>, выстроенный строго по порядку от 1 до последнего.
+            Ниже представлен выверенный каталог из <strong>12 практических временных чанков</strong>. Все искусственные и редкие академические нагромождения отброшены — оставлено только то, что звучит на реальных митингах.
           </p>
         </section>
 
@@ -239,173 +233,40 @@ export default function TenseChunksPage() {
           </div>
         </section>
 
-        {/* SECTION 6: Used to */}
+        {/* SECTION 6: Essential Spoken Leftover */}
         <section id="tense-6">
-          <h2 className="chapter-heading">06. Блок 4 (#11–#12): Used to (Было раньше vs стало сейчас)</h2>
-          <p>Для архитектурных сравнений и демонстрации прогресса проекта.</p>
+          <h2 className="chapter-heading">06. Блок 4 (#11–#12): Обязательства и срывы планов (Практический остаток)</h2>
+          <p>Все абстрактные условные формулы отброшены. Из остальных блоков в реальной работе инженера нужны ровно две вещи: взятие ответственности и объяснение сорвавшегося плана.</p>
 
           <div className="method-card">
             <div className="method-card-header">
               <span className="block-badge">Блок 4 • Чанки 11–12</span>
-              <span style={{ fontWeight: 700, color: "#FFF" }}>Used to / Habits</span>
+              <span style={{ fontWeight: 700, color: "#FFF" }}>Responsibility & Broken Plans</span>
             </div>
 
             <ChunkItemRow
               num="11"
-              title="We used to [verb], but now we [verb]"
-              trans="«Раньше мы делали так, а теперь делаем иначе»"
-              exEn="We used to deploy manually on Fridays, but now we use automated CI/CD pipelines."
-              exRu="Раньше мы деплоили вручную по пятницам, а теперь используем авто-пайплайны."
+              title="I'll make sure to [verb]..."
+              trans="«Я лично проконтролирую / обязательно сделаю это»"
+              exEn="I'll make sure to check the logs right after the call."
+              exRu="Я обязательно проверю логи сразу после созвона."
+              tip="Взятие личной ответственности на митинге без лишней воды."
             />
 
             <ChunkItemRow
               num="12"
-              title="It used to take [time], but now..."
-              trans="«Раньше на это уходило столько-то времени, а теперь...»"
-              exEn="Builds used to take 25 minutes, but now they complete in under four."
-              exRu="Сборки раньше занимали 25 минут, а теперь проходят быстрее четырех."
+              title="I was supposed to [verb], but [blocker]..."
+              trans="«Я должен был [сделать X], но [возник блокер]...»"
+              exEn="I was supposed to finish this yesterday, but the API was down."
+              exRu="Я должен был закончить это вчера, но лежал API."
+              tip="Дипломатичное объяснение задержки без самобичевания."
             />
           </div>
         </section>
 
-        {/* SECTION 7: Future Plans */}
+        {/* SECTION 7 */}
         <section id="tense-7">
-          <h2 className="chapter-heading">07. Блок 5 (#13–#15): Планы, таймлайны и обязательства</h2>
-          <p>Профессиональный язык спринтов вместо скучного и однообразного «I will do».</p>
-
-          <div className="method-card">
-            <div className="method-card-header">
-              <span className="block-badge">Блок 5 • Чанки 13–15</span>
-              <span style={{ fontWeight: 700, color: "#FFF" }}>Future & Milestones</span>
-            </div>
-
-            <ChunkItemRow
-              num="13"
-              title="We're on track to [verb] by [time]"
-              trans="«Мы идем по графику и успеваем сделать к сроку»"
-              exEn="We're on track to ship the MVP by the end of next week."
-              exRu="Мы идем четко по графику и успеваем выкатить MVP к концу следующей недели."
-            />
-
-            <ChunkItemRow
-              num="14"
-              title="We're planning on [verb-ing]..."
-              trans="«Мы планируем сделать в ближайшее время»"
-              exEn="We're planning on upgrading our Node runtime next sprint."
-              exRu="Мы планируем обновить рантайм Node в следующем спринте."
-            />
-
-            <ChunkItemRow
-              num="15"
-              title="I'll make sure to [verb]..."
-              trans="«Я лично проконтролирую / обязательно сделаю это»"
-              exEn="I'll make sure to add end-to-end tests before merging this branch."
-              exRu="Я обязательно допишу сквозные тесты перед тем, как влить эту ветку."
-            />
-          </div>
-        </section>
-
-        {/* SECTION 8: Conditionals */}
-        <section id="tense-8">
-          <h2 className="chapter-heading">08. Блок 6 (#16–#19): Условные предложения и советы без формул</h2>
-          <p>Устраняет необходимость вычислять согласование времен в условных конструкциях.</p>
-
-          <div className="method-card">
-            <div className="method-card-header">
-              <span className="block-badge">Блок 6 • Чанки 16–19</span>
-              <span style={{ fontWeight: 700, color: "#FFF" }}>Conditionals</span>
-            </div>
-
-            <ChunkItemRow
-              num="16"
-              title="It would be great if you could [verb]..."
-              trans="«Было бы здорово, если бы ты мог...» (идеальная просьба)"
-              exEn="It would be great if you could review this ticket before the standup."
-              exRu="Было бы здорово, если бы ты глянул этот тикет до стендапа."
-            />
-
-            <ChunkItemRow
-              num="17"
-              title="If I were you, I would just [verb]..."
-              trans="«На твоем месте я бы просто...» (экспертный совет)"
-              exEn="If I were you, I would just roll back the latest commit and debug locally."
-              exRu="На твоем месте я бы просто откатил последний коммит и дебажил локально."
-            />
-
-            <ChunkItemRow
-              num="18"
-              title="What would happen if we [past-verb]...?"
-              trans="«А что произойдет, если мы...?» (проверка сценария)"
-              exEn="What would happen if we dropped this legacy index right now?"
-              exRu="А что произойдет, если мы дропнем этот старый индекс прямо сейчас?"
-            />
-
-            <ChunkItemRow
-              num="19"
-              title="If we do [X], it will [verb]..."
-              trans="«Если мы сделаем X, это приведет к...» (четкий прогноз)"
-              exEn="If we cache user profiles in Redis, it will cut latency in half."
-              exRu="Если мы закэшируем профили пользователей в Редисе, это срежет задержку вдвое."
-            />
-          </div>
-        </section>
-
-        {/* SECTION 9: Past Modals */}
-        <section id="tense-9">
-          <h2 className="chapter-heading">09. Блок 7 (#20–#24): Разбор полетов, сожаления и ретроспективы</h2>
-          <p>Инструмент сеньор-инженеров при анализе багов, ретроспективах и разборе инцидентов.</p>
-
-          <div className="method-card">
-            <div className="method-card-header">
-              <span className="block-badge">Блок 7 • Чанки 20–24</span>
-              <span style={{ fontWeight: 700, color: "#FFF" }}>Past Modals & Retrospectives</span>
-            </div>
-
-            <ChunkItemRow
-              num="20"
-              title="We should have [past participle] earlier..."
-              trans="«Нам следовало сделать это раньше... (сожаление о несделанном)»"
-              exEn="We should have enabled database replication before the marketing campaign launched."
-              exRu="Нам следовало включить репликацию базы до старта маркетинговой кампании."
-            />
-
-            <ChunkItemRow
-              num="21"
-              title="We could have [past participle], but..."
-              trans="«Мы могли бы поступить так, но... (рассмотрение альтернативы)»"
-              exEn="We could have patched the script, but rewriting it was cleaner."
-              exRu="Мы могли бы залататать скрипт, но переписать его с нуля было чище."
-            />
-
-            <ChunkItemRow
-              num="22"
-              title="It must have been [noun / adjective]..."
-              trans="«Должно быть, это было... (логический вывод о прошлом)»"
-              exEn="It must have been a memory leak that caused the container restart."
-              exRu="Должно быть, именно утечка памяти вызвала рестарт контейнера."
-            />
-
-            <ChunkItemRow
-              num="23"
-              title="I couldn't have [past participle] without [X]..."
-              trans="«Я бы не справился без... (благодарность коллегам)»"
-              exEn="I couldn't have tracked down this race condition without your help."
-              exRu="Я бы ни за что не отловил эту гонку состояний без твоей помощи."
-            />
-
-            <ChunkItemRow
-              num="24"
-              title="If we had known about this, we would have [past participle]..."
-              trans="«Если бы мы знали об этом раньше, мы бы сделали...»"
-              exEn="If we had known about the API rate limits, we would have added queue buffering from day one."
-              exRu="Если бы мы знали про лимиты API, мы бы с первого дня добавили буферизацию через очереди."
-            />
-          </div>
-        </section>
-
-        {/* SECTION 10 */}
-        <section id="tense-10">
-          <h2 className="chapter-heading">10. Метод тренировки Speed Swapping</h2>
+          <h2 className="chapter-heading">07. Метод тренировки Speed Swapping</h2>
 
           <p>
             Чтобы временной каркас перешел из пассивного понимания в автоматический спинномозговой рефлекс:
@@ -440,21 +301,20 @@ export default function TenseChunksPage() {
           </ol>
 
           <blockquote className="quote-callout">
-            «Забудьте про таблицы времен на 12 ячеек. В реальном мире никто не рассчитывает грамматику. Освойте эти 24 шаблона — и вы будете говорить во всех нужных временах с легкостью носителя языка».
+            «Забудьте про раздутые таблицы времен. В реальном мире никто не рассчитывает грамматику. Освойте эти 12 шаблонов — и вы закроете 90% рабочих ситуаций на созвонах».
             <cite>Методология Tense Chunks</cite>
           </blockquote>
         </section>
 
         <footer className="article-footer">
           <p>
-            Материал входит в образовательный комплекс <strong>English Learn</strong>. Полная картотека доступна в{" "}
-            <Link href="/learn-chunks" className="text-cyan-400 font-bold hover:underline">learn-chunks</Link>, плотные сочленения — в{" "}
-            <Link href="/dense-structure" className="text-indigo-400 font-bold hover:underline">dense-structure</Link>, а теория чанков — в{" "}
-            <Link href="/chunks" className="text-emerald-400 font-bold hover:underline">chunks</Link>.
+            Материал входит в образовательный комплекс <strong>English Learn</strong>. Полная матрица времен по Парето доступна в{" "}
+            <Link href="/tense-matrix" className="text-cyan-400 font-bold hover:underline">tense-matrix</Link>, база фраз — в{" "}
+            <Link href="/learn-chunks" className="text-emerald-400 font-bold hover:underline">learn-chunks</Link>, а плотные сочленения — в{" "}
+            <Link href="/dense-structure" className="text-indigo-400 font-bold hover:underline">dense-structure</Link>.
           </p>
           <p style={{ marginTop: "12px", color: "var(--text-dim)" }}>2026 • Plug & Play Tense Chunks Methodology</p>
         </footer>
-      </article>
-    </>
+    </EditorialLayout>
   );
 }

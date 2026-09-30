@@ -69,4 +69,12 @@ export const NAV_ITEMS: readonly NavItem[] = [
     category: "methodology",
     readTime: "8 мин",
   },
+  {
+    title: "Библиотека Лонгридов",
+    href: "/longreads",
+    description: "Единое меню всех 9 исследований: мозг носителя, память и сон, чанкинг, беглость C1 и аудит калек.",
+    badge: "Каталог 📚",
+    category: "methodology",
+    readTime: "Каталог",
+  },
 ] as const;

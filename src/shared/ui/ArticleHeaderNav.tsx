@@ -47,6 +47,18 @@ export function ArticleHeaderNav({
             Времена
           </Link>
           <Link
+            href="/tense-matrix"
+            className={pathname === "/tense-matrix" ? "text-cyan-300 font-bold" : ""}
+          >
+            Матрица
+          </Link>
+          <Link
+            href="/audit-chunks"
+            className={pathname === "/audit-chunks" ? "text-rose-400 font-bold" : ""}
+          >
+            Аудит 🎯
+          </Link>
+          <Link
             href="/dense-structure"
             className={pathname === "/dense-structure" ? "text-indigo-400 font-bold" : ""}
           >
@@ -69,6 +81,12 @@ export function ArticleHeaderNav({
             className={pathname === "/fluency-guide" ? "text-white font-bold" : ""}
           >
             Архитектура речи
+          </Link>
+          <Link
+            href="/longreads"
+            className={pathname.startsWith("/longread") ? "text-cyan-300 font-bold" : "text-cyan-400"}
+          >
+            Все лонгриды 📚
           </Link>
         </div>
       </div>

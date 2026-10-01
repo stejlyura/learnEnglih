@@ -23,7 +23,7 @@ export default function NativeBrainPage() {
         activeRoute="/longreads/native-brain"
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {/* Top Switcher Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -176,38 +176,64 @@ export default function NativeBrainPage() {
             Профессор Майкл Ульман (Michael Ullman, Georgetown University) разработал модель DP (Declarative/Procedural Model of Language), за которую получил признание мирового нейролингвистического сообщества:
           </p>
 
-          <div className="overflow-x-auto my-6">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b border-white/20 bg-white/5">
-                  <th className="p-3 text-cyan-300">Критерий</th>
-                  <th className="p-3 text-indigo-300">Декларативная память (B2)</th>
-                  <th className="p-3 text-emerald-300">Процедурная память (C1 / Native)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10 text-slate-300">
-                <tr>
-                  <td className="p-3 font-semibold text-white">Анатомия</td>
-                  <td className="p-3">Гиппокамп, медиальная височная кора</td>
-                  <td className="p-3">Базальные ганглии, мозжечок, SMA</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Что хранит</td>
-                  <td className="p-3">Изолированные слова, формулы из учебников</td>
-                  <td className="p-3">Автоматизированные моторные чанки</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Скорость доступа</td>
-                  <td className="p-3">Медленная (400–1200 мс)</td>
-                  <td className="p-3">Мгновенная (&lt;150 мс)</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-semibold text-white">Расход энергии</td>
-                  <td className="p-3">Огромный (быстрое утомление)</td>
-                  <td className="p-3">Минимальный (как ходьба или езда)</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+            <div className="p-5 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-indigo-500/20">
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
+                  Декларативная память (B2)
+                </span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  Слова и правила
+                </span>
+              </div>
+              <div className="space-y-3 text-xs sm:text-sm text-slate-300">
+                <div>
+                  <span className="text-slate-400 block text-xs">Анатомическая зона:</span>
+                  <span className="font-semibold text-white">Гиппокамп, медиальная височная кора</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Что хранит:</span>
+                  <span className="font-semibold text-white">Изолированные слова, формулы из учебников</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Скорость доступа:</span>
+                  <span className="font-semibold text-rose-300">Медленная (400–1200 мс)</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Расход энергии:</span>
+                  <span className="font-semibold text-rose-300">Огромный (быстрое утомление и затыки)</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                  Процедурная память (C1 / Native)
+                </span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Автоматизм
+                </span>
+              </div>
+              <div className="space-y-3 text-xs sm:text-sm text-slate-300">
+                <div>
+                  <span className="text-slate-400 block text-xs">Анатомическая зона:</span>
+                  <span className="font-semibold text-white">Базальные ганглии, мозжечок, SMA</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Что хранит:</span>
+                  <span className="font-semibold text-white">Автоматизированные моторные чанки</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Скорость доступа:</span>
+                  <span className="font-semibold text-emerald-300">Мгновенная (&lt;150 мс)</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-xs">Расход энергии:</span>
+                  <span className="font-semibold text-emerald-300">Минимальный (как ходьба или езда)</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <p>

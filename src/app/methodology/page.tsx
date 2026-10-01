@@ -21,7 +21,7 @@ export default function MethodologyPage() {
         activeRoute="/methodology"
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {/* Top Switcher Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -90,50 +90,70 @@ export default function MethodologyPage() {
             Чтобы устная речь стала свободной, методика должна опираться на доказательную прикладную лингвистику, а не на советы из блогов.
           </p>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "28%" }}>Теория & Автор</th>
-                  <th style={{ width: "36%" }}>Суть открытия</th>
-                  <th style={{ width: "36%" }}>Применение в вашей практике</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>The Four Strands</strong><br />
-                    <span className="badge-tag tag-blue">Пол Нэйшн (Paul Nation)</span>
-                  </td>
-                  <td>Сбалансированная система требует строго равного времени: 25% Input, 25% Output, 25% Language Study, 25% Fluency.</td>
-                  <td>У вас перекос в сторону Input и Study. Нужно добавить <strong>25% самостоятельного Output</strong> и <strong>25% Fluency</strong> (скорость на знакомом).</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Output Hypothesis</strong><br />
-                    <span className="badge-tag tag-green">Меррилл Суэйн (Merrill Swain)</span>
-                  </td>
-                  <td>Одного слушания недостаточно. Только порождая речь, мозг замечает «дыру» (Noticing the Gap) между замыслом и возможностями.</td>
-                  <td>Каждый день обязательно говорить <strong>свои собственные мысли</strong> без подсказок диктора (голосовые заметки, монологи).</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>The Noticing Hypothesis</strong><br />
-                    <span className="badge-tag tag-amber">Ричард Шмидт (Richard Schmidt)</span>
-                  </td>
-                  <td>Пассивное слушание фоном не дает эффекта у взрослых. Усваивается только то, на что направлено сфокусированное осознанное внимание.</td>
-                  <td>Короткие сессии по 15–20 минут с полным погружением дают в 5 раз больше, чем часовое фоновое радио.</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Deliberate Practice</strong><br />
-                    <span className="badge-tag tag-rose">Андерс Эрикссон (K. Anders Ericsson)</span>
-                  </td>
-                  <td>Повторение без локальной микро-цели не развивает беглость. Нужен режим легкого когнитивного дискомфорта и быстрая обратная связь.</td>
-                  <td>Тренировать не «весь английский», а конкретный микро-навык: например, подстановка 4 глаголов в чанк за 30 секунд.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-8">
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-white mb-0">The Four Strands</h3>
+                  <span className="badge-tag tag-blue">Пол Нэйшн (Paul Nation)</span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                  Сбалансированная система требует строго равного времени: 25% Input, 25% Output, 25% Language Study, 25% Fluency.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 text-xs text-slate-200">
+                <strong className="text-cyan-300 block mb-1">Применение в вашей практике:</strong>
+                У вас перекос в сторону Input и Study. Нужно добавить <strong>25% самостоятельного Output</strong> и <strong>25% Fluency</strong> (скорость на знакомом).
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-white mb-0">Output Hypothesis</h3>
+                  <span className="badge-tag tag-green">Меррилл Суэйн (Merrill Swain)</span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                  Одного слушания недостаточно. Только порождая речь, мозг замечает «дыру» (Noticing the Gap) между замыслом и возможностями.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 text-xs text-slate-200">
+                <strong className="text-emerald-300 block mb-1">Применение в вашей практике:</strong>
+                Каждый день обязательно говорить <strong>свои собственные мысли</strong> без подсказок диктора (голосовые заметки, монологи).
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-white mb-0">The Noticing Hypothesis</h3>
+                  <span className="badge-tag tag-amber">Ричард Шмидт (Richard Schmidt)</span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                  Пассивное слушание фоном не дает эффекта у взрослых. Усваивается только то, на что направлено сфокусированное осознанное внимание.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 text-xs text-slate-200">
+                <strong className="text-amber-300 block mb-1">Применение в вашей практике:</strong>
+                Короткие сессии по 15–20 минут с полным погружением дают в 5 раз больше, чем часовое фоновое радио.
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-white mb-0">Deliberate Practice</h3>
+                  <span className="badge-tag tag-rose">Андерс Эрикссон (K. Anders Ericsson)</span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                  Повторение без локальной микро-цели не развивает беглость. Нужен режим легкого когнитивного дискомфорта и быстрая обратная связь.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 text-xs text-slate-200">
+                <strong className="text-rose-300 block mb-1">Применение в вашей практике:</strong>
+                Тренировать не «весь английский», а конкретный микро-навык: например, подстановка 4 глаголов в чанк за 30 секунд.
+              </div>
+            </div>
           </div>
 
           <QuoteCallout cite="Меррилл Суэйн, профессор прикладной лингвистики, University of Toronto">
@@ -211,61 +231,96 @@ export default function MethodologyPage() {
             Выбирайте сценарий в зависимости от плотности рабочего дня. Главное правило нейропластичности — <strong>ежедневная непрерывность</strong>, даже если у вас есть всего 20 минут.
           </p>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "20%" }}>Сценарий</th>
-                  <th style={{ width: "15%" }}>Время</th>
-                  <th style={{ width: "40%" }}>Пошаговая структура тренировки</th>
-                  <th style={{ width: "25%" }}>Фокус дня</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>Sprint</strong><br />
-                    <span className="badge-tag tag-amber">Дни высокой загрузки</span>
-                  </td>
-                  <td><strong>20 мин</strong></td>
-                  <td>
-                    • <strong>6 мин:</strong> 3-ступенчатый шэдоуинг 45-сек аудио<br />
-                    • <strong>6 мин:</strong> 2 чанка через дрилл Speed Swapping (вслух)<br />
-                    • <strong>8 мин:</strong> Сжатый монолог 3/2 мин на диктофон
-                  </td>
-                  <td>Поддержание моторного тонуса и закрытие речевого затыка.</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Standard</strong><br />
-                    <span className="badge-tag tag-blue">Золотой стандарт B2→C1</span>
-                  </td>
-                  <td><strong>35 мин</strong></td>
-                  <td>
-                    • <strong>10 мин:</strong> Delayed Shadowing (слушаю чанк → пауза → повтор)<br />
-                    • <strong>8 мин:</strong> 3–4 новых чанка (Tense Chunks или Dense Chunks)<br />
-                    • <strong>8 мин:</strong> Техника 4/3/2 на рабочую тему дня<br />
-                    • <strong>9 мин:</strong> AI Voice Sparring с Claude / ChatGPT Voice
-                  </td>
-                  <td>Баланс 4 потоков (Input, Output, Chunks, Fluency).</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Immersion</strong><br />
-                    <span className="badge-tag tag-green">Выходной / Подготовка к офферу</span>
-                  </td>
-                  <td><strong>50 мин</strong></td>
-                  <td>
-                    • <strong>5 мин:</strong> Микро-транскрибирование 20 сек быстрой речи<br />
-                    • <strong>10 мин:</strong> Delayed Shadowing с акцентом на просодию<br />
-                    • <strong>10 мин:</strong> База карточек (<Link href="/learn-chunks" className="text-cyan-400 underline">learn-chunks</Link>) + Speed Swapping<br />
-                    • <strong>15 мин:</strong> Спарринг с AI по вопросам поведенческого интервью (STAR)<br />
-                    • <strong>10 мин:</strong> Voice Journaling и анализ пауз
-                  </td>
-                  <td>Максимальный прорыв в спонтанной речи и словарном поиске.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 my-8">
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-lg font-bold text-white mb-0">Sprint</h3>
+                  <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono font-bold border border-amber-500/30">
+                    20 мин
+                  </span>
+                </div>
+                <span className="badge-tag tag-amber inline-block mb-3">Дни высокой загрузки</span>
+                <div className="space-y-2 text-xs sm:text-sm text-slate-300">
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">6 мин:</strong> 3-ступенчатый шэдоуинг 45-сек аудио
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">6 мин:</strong> 2 чанка через дрилл Speed Swapping (вслух)
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">8 мин:</strong> Сжатый монолог 3/2 мин на диктофон
+                  </div>
+                </div>
+              </div>
+              <div className="pt-3 border-t border-white/10 text-xs text-slate-400">
+                <strong className="text-amber-300 block mb-0.5">Фокус дня:</strong>
+                Поддержание моторного тонуса и закрытие речевого затыка.
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-indigo-500/30 shadow-card flex flex-col justify-between space-y-4 ring-1 ring-indigo-500/20">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-lg font-bold text-white mb-0">Standard</h3>
+                  <span className="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono font-bold border border-cyan-500/30">
+                    35 мин
+                  </span>
+                </div>
+                <span className="badge-tag tag-blue inline-block mb-3">Золотой стандарт B2→C1</span>
+                <div className="space-y-2 text-xs sm:text-sm text-slate-300">
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">10 мин:</strong> Delayed Shadowing (слушаю чанк → пауза → повтор)
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">8 мин:</strong> 3–4 новых чанка (Tense Chunks или Dense Chunks)
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">8 мин:</strong> Техника 4/3/2 на рабочую тему дня
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">9 мин:</strong> AI Voice Sparring с Claude / ChatGPT Voice
+                  </div>
+                </div>
+              </div>
+              <div className="pt-3 border-t border-white/10 text-xs text-slate-400">
+                <strong className="text-cyan-300 block mb-0.5">Фокус дня:</strong>
+                Баланс 4 потоков (Input, Output, Chunks, Fluency).
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-lg font-bold text-white mb-0">Immersion</h3>
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono font-bold border border-emerald-500/30">
+                    50 мин
+                  </span>
+                </div>
+                <span className="badge-tag tag-green inline-block mb-3">Выходной / Подготовка к офферу</span>
+                <div className="space-y-2 text-xs sm:text-sm text-slate-300">
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">5 мин:</strong> Микро-транскрибирование 20 сек быстрой речи
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">10 мин:</strong> Delayed Shadowing с акцентом на просодию
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">10 мин:</strong> База карточек (<Link href="/learn-chunks" className="text-cyan-400 underline">learn-chunks</Link>) + Speed Swapping
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">15 мин:</strong> Спарринг с AI по вопросам поведенческого интервью (STAR)
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <strong className="text-white">10 мин:</strong> Voice Journaling и анализ пауз
+                  </div>
+                </div>
+              </div>
+              <div className="pt-3 border-t border-white/10 text-xs text-slate-400">
+                <strong className="text-emerald-300 block mb-0.5">Фокус дня:</strong>
+                Максимальный прорыв в спонтанной речи и словарном поиске.
+              </div>
+            </div>
           </div>
         </section>
 

@@ -820,19 +820,21 @@ span.arrow {
   line-height: 1.88;
 }
 
+h2.chapter-heading,
 .prose-editorial h2.chapter-heading {
   font-family: var(--font-ui);
-  font-size: clamp(1.9rem, 4vw, 2.35rem);
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--text-heading);
-  margin: 68px 0 28px;
+  margin: 64px 0 28px;
   padding-top: 36px;
   border-top: 1px solid var(--border-subtle);
   line-height: 1.25;
   scroll-margin-top: 90px;
 }
 
+h3.sub-heading,
 .prose-editorial h3.sub-heading {
   font-family: var(--font-ui);
   font-size: 1.45rem;

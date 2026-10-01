@@ -45,7 +45,7 @@ export function EditorialLayout({
         activeRoute={activeRoute}
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {(metaCategory || readTime) && (
           <div className="article-meta-top">
             {metaCategory && <span>{metaCategory}</span>}

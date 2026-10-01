@@ -23,7 +23,7 @@ export default function ChunkArchitecturePage() {
         activeRoute="/longreads/chunk-architecture"
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {/* Top Switcher Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -176,38 +176,66 @@ export default function ChunkArchitecturePage() {
             Профессор Элисон Рэй (Alison Wray, <em>Formulaic Language and the Lexicon</em>, Cambridge University Press) доказала: речь носителей на 70% состоит из **полуфиксированных рамок (Formulaic Frames)**:
           </p>
 
-          <div className="overflow-x-auto my-6">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b border-white/20 bg-white/5">
-                  <th className="p-3 text-cyan-300">Жесткий каркас (Frame)</th>
-                  <th className="p-3 text-emerald-300">Вариативный слот (Variable Slot)</th>
-                  <th className="p-3 text-slate-400">Когнитивная функция</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10 text-slate-300">
-                <tr>
-                  <td className="p-3 font-mono text-cyan-300">It goes without saying that...</td>
-                  <td className="p-3 font-mono text-emerald-300">...we need to test this thoroughly.</td>
-                  <td className="p-3 text-xs">Ввод очевидной предпосылки</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-mono text-cyan-300">I was under the impression that...</td>
-                  <td className="p-3 font-mono text-emerald-300">...the release was postponed.</td>
-                  <td className="p-3 text-xs">Мягкое указание на расхождение</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-mono text-cyan-300">What bothers me the most is...</td>
-                  <td className="p-3 font-mono text-emerald-300">...the lack of clear specs.</td>
-                  <td className="p-3 text-xs">Фокусировка на узком месте</td>
-                </tr>
-                <tr>
-                  <td className="p-3 font-mono text-cyan-300">It&apos;s only a matter of time before...</td>
-                  <td className="p-3 font-mono text-emerald-300">...our servers hit capacity limits.</td>
-                  <td className="p-3 text-xs">Прогнозирование рисков</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="space-y-3.5 my-6">
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-xs text-slate-400">Ввод очевидной предпосылки</div>
+                <div className="font-mono text-cyan-300 font-bold text-sm sm:text-base">
+                  It goes without saying that...
+                </div>
+                <div className="font-mono text-emerald-300 text-xs sm:text-sm">
+                  ...we need to test this thoroughly.
+                </div>
+              </div>
+              <span className="self-start md:self-auto text-[11px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                Frame + Slot
+              </span>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-xs text-slate-400">Мягкое указание на расхождение</div>
+                <div className="font-mono text-cyan-300 font-bold text-sm sm:text-base">
+                  I was under the impression that...
+                </div>
+                <div className="font-mono text-emerald-300 text-xs sm:text-sm">
+                  ...the release was postponed.
+                </div>
+              </div>
+              <span className="self-start md:self-auto text-[11px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                Frame + Slot
+              </span>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-xs text-slate-400">Фокусировка на узком месте</div>
+                <div className="font-mono text-cyan-300 font-bold text-sm sm:text-base">
+                  What bothers me the most is...
+                </div>
+                <div className="font-mono text-emerald-300 text-xs sm:text-sm">
+                  ...the lack of clear specs.
+                </div>
+              </div>
+              <span className="self-start md:self-auto text-[11px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                Frame + Slot
+              </span>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-xs text-slate-400">Прогнозирование рисков</div>
+                <div className="font-mono text-cyan-300 font-bold text-sm sm:text-base">
+                  It&apos;s only a matter of time before...
+                </div>
+                <div className="font-mono text-emerald-300 text-xs sm:text-sm">
+                  ...our servers hit capacity limits.
+                </div>
+              </div>
+              <span className="self-start md:self-auto text-[11px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                Frame + Slot
+              </span>
+            </div>
           </div>
 
           <p>

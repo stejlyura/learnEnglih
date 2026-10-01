@@ -22,7 +22,7 @@ export default function FluencyGuidePage() {
         activeRoute="/fluency-guide"
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {/* Top Switcher Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -153,38 +153,66 @@ export default function FluencyGuidePage() {
 
           <h3 className="sub-heading">Примеры из реальной работы: Как звучит серкумлокуция</h3>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "25%" }}>Забытое слово</th>
-                  <th style={{ width: "35%" }}>Ступор на уровне B2</th>
-                  <th style={{ width: "40%" }}>Элегантный C1 обход (Circumlocution)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Bottleneck</strong><br /><small style={{ color: "var(--text-dim)" }}>Узкое место системы</small></td>
-                  <td className="col-bad">ээээ... our system is slow here... wait, how to say узкое место...</td>
-                  <td className="col-good">&ldquo;The exact term escapes me, but it&apos;s basically the single stage in our pipeline where throughput drops and delays everything downstream.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Trade-off</strong><br /><small style={{ color: "var(--text-dim)" }}>Компромисс</small></td>
-                  <td className="col-bad">ммм... we win in speed but lose in money... it&apos;s a... uhhh...</td>
-                  <td className="col-good">&ldquo;It&apos;s a classic situation where gaining fast delivery forces us to sacrifice some test coverage.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Redundancy</strong><br /><small style={{ color: "var(--text-dim)" }}>Отказоустойчивое дублирование</small></td>
-                  <td className="col-bad">эээ... we have two servers if one dies... how is it... double?</td>
-                  <td className="col-good">&ldquo;An architectural fail-safe where a parallel replica mirrors state to guarantee zero downtime if the master node crashes.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Deprecate</strong><br /><small style={{ color: "var(--text-dim)" }}>Выводить из эксплуатации</small></td>
-                  <td className="col-bad">we will delete this API later... not delete, but... ммм...</td>
-                  <td className="col-good">&ldquo;Phasing out this legacy endpoint gradually and advising all clients to migrate to v2.&rdquo;</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="space-y-4 my-8">
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="md:w-1/4">
+                <strong className="text-white text-base block">Bottleneck</strong>
+                <span className="text-xs text-slate-400">Узкое место системы</span>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Ступор на B2:</span>
+                <div className="text-xs sm:text-sm text-rose-200">ээээ... our system is slow here... wait, how to say узкое место...</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Элегантный C1 обход:</span>
+                <div className="text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;The exact term escapes me, but it&apos;s basically the single stage in our pipeline where throughput drops and delays everything downstream.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="md:w-1/4">
+                <strong className="text-white text-base block">Trade-off</strong>
+                <span className="text-xs text-slate-400">Компромисс</span>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Ступор на B2:</span>
+                <div className="text-xs sm:text-sm text-rose-200">ммм... we win in speed but lose in money... it&apos;s a... uhhh...</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Элегантный C1 обход:</span>
+                <div className="text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;It&apos;s a classic situation where gaining fast delivery forces us to sacrifice some test coverage.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="md:w-1/4">
+                <strong className="text-white text-base block">Redundancy</strong>
+                <span className="text-xs text-slate-400">Отказоустойчивое дублирование</span>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Ступор на B2:</span>
+                <div className="text-xs sm:text-sm text-rose-200">эээ... we have two servers if one dies... how is it... double?</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Элегантный C1 обход:</span>
+                <div className="text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;An architectural fail-safe where a parallel replica mirrors state to guarantee zero downtime if the master node crashes.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="md:w-1/4">
+                <strong className="text-white text-base block">Deprecate</strong>
+                <span className="text-xs text-slate-400">Выводить из эксплуатации</span>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Ступор на B2:</span>
+                <div className="text-xs sm:text-sm text-rose-200">we will delete this API later... not delete, but... ммм...</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Элегантный C1 обход:</span>
+                <div className="text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;Phasing out this legacy endpoint gradually and advising all clients to migrate to v2.&rdquo;</div>
+              </div>
+            </div>
           </div>
 
           <h3 className="sub-heading">Фразы-спасатели: Как легально признаться, что слово вылетело</h3>
@@ -221,21 +249,24 @@ export default function FluencyGuidePage() {
             В англоязычной деловой культуре (особенно в США, Великобритании и международных технологических компаниях) восприятие прямо противоположное:
           </p>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "50%" }}>Постоянное «Ээээ/Мммм»</th>
-                  <th style={{ width: "50%" }}>Чистая немая пауза (1.5–2 секунды)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Воспринимается слушателями как <strong>неуверенность, слабая подготовка, хаос в мыслях</strong> или некомпетентность в обсуждаемом вопросе.</td>
-                  <td>Воспринимается как <strong>взвешенность, авторитет, аналитическая глубина</strong> и признак зрелого лидера (Executive Presence).</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-8">
+            <div className="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/30 shadow-card space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-rose-400 block">
+                ❌ Постоянное «Ээээ / Мммм»
+              </span>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-0">
+                Воспринимается слушателями как <strong>неуверенность, слабая подготовка, хаос в мыслях</strong> или некомпетентность в обсуждаемом вопросе.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 shadow-card space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block">
+                ✓ Чистая немая пауза (1.5–2 сек)
+              </span>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-0">
+                Воспринимается как <strong>взвешенность, авторитет, аналитическая глубина</strong> и признак зрелого лидера (Executive Presence).
+              </p>
+            </div>
           </div>
 
           <h3 className="sub-heading">Физиологический прием: «Дыхательный замок» (The Breath Lock)</h3>
@@ -315,38 +346,54 @@ export default function FluencyGuidePage() {
             PREP — это универсальная матрица спонтанного ответа, используемая в международном консалтинге и технологических гигантах. Она укладывается в 4 шага:
           </p>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "15%" }}>Элемент</th>
-                  <th style={{ width: "25%" }}>Назначение</th>
-                  <th style={{ width: "60%" }}>Реальный пример на созвоне</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong style={{ color: "var(--accent-emerald)" }}>P (Point)</strong></td>
-                  <td>Главный тезис сразу в лоб (1 предложение). Без вступлений.</td>
-                  <td><em>&ldquo;I strongly believe we should defer the database migration until Q3.&rdquo;</em></td>
-                </tr>
-                <tr>
-                  <td><strong style={{ color: "var(--accent-primary)" }}>R (Reason)</strong></td>
-                  <td>Логическое обоснование: почему именно так.</td>
-                  <td><em>&ldquo;Because attempting it during the peak sales quarter introduces an unacceptable risk of revenue-impacting downtime.&rdquo;</em></td>
-                </tr>
-                <tr>
-                  <td><strong style={{ color: "var(--accent-amber)" }}>E (Example)</strong></td>
-                  <td>Конкретный факт, метрика или прецедент из прошлого.</td>
-                  <td><em>&ldquo;For instance, during last year&apos;s Black Friday, our existing replica setup already ran at 85% capacity without any schema alterations.&rdquo;</em></td>
-                </tr>
-                <tr>
-                  <td><strong style={{ color: "var(--accent-secondary)" }}>P (Point)</strong></td>
-                  <td>Вывод и следующий конкретный шаг.</td>
-                  <td><em>&ldquo;So focusing on load testing right now is much safer than touching the database core.&rdquo;</em></td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="space-y-3.5 my-8">
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-emerald-500/30 shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-3">
+              <div className="md:w-1/4">
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono font-bold text-xs border border-emerald-500/30">
+                  P • Point
+                </span>
+                <div className="text-xs text-slate-400 mt-2">Главный тезис в лоб (1 фраза)</div>
+              </div>
+              <div className="md:w-3/4 p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs sm:text-sm text-emerald-200">
+                &ldquo;I strongly believe we should defer the database migration until Q3.&rdquo;
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-indigo-500/30 shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-3">
+              <div className="md:w-1/4">
+                <span className="px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-300 font-mono font-bold text-xs border border-indigo-500/30">
+                  R • Reason
+                </span>
+                <div className="text-xs text-slate-400 mt-2">Логическое обоснование: почему</div>
+              </div>
+              <div className="md:w-3/4 p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs sm:text-sm text-indigo-200">
+                &ldquo;Because attempting it during the peak sales quarter introduces an unacceptable risk of revenue-impacting downtime.&rdquo;
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-amber-500/30 shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-3">
+              <div className="md:w-1/4">
+                <span className="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 font-mono font-bold text-xs border border-amber-500/30">
+                  E • Example
+                </span>
+                <div className="text-xs text-slate-400 mt-2">Конкретная метрика или факт</div>
+              </div>
+              <div className="md:w-3/4 p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs sm:text-sm text-amber-200">
+                &ldquo;For instance, during last year&apos;s Black Friday, our existing replica setup already ran at 85% capacity without any schema alterations.&rdquo;
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/30 shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-3">
+              <div className="md:w-1/4">
+                <span className="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono font-bold text-xs border border-cyan-500/30">
+                  P • Point
+                </span>
+                <div className="text-xs text-slate-400 mt-2">Вывод и следующий шаг</div>
+              </div>
+              <div className="md:w-3/4 p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs sm:text-sm text-cyan-200">
+                &ldquo;So focusing on load testing right now is much safer than touching the database core.&rdquo;
+              </div>
+            </div>
           </div>
 
           <h3 className="sub-heading">Дипломатичный язык (C1 Hedging): Как критиковать и возражать без грубости</h3>
@@ -501,38 +548,58 @@ Ask me the first tough question now.`}</pre>
 
           <h3 className="sub-heading">Пошаговый 30-дневный маршрут перехода с B2 на C1</h3>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "20%" }}>Период</th>
-                  <th style={{ width: "35%" }}>Основная задача недели</th>
-                  <th style={{ width: "45%" }}>Конкретное действие</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Неделя 1</strong><br /><small style={{ color: "var(--text-dim)" }}>Дни 1–7</small></td>
-                  <td>Полная ликвидация звука «эээ» через физический замок губ</td>
-                  <td>Каждый раз, когда зависаете на слове — плотно сжимайте губы и делайте вдох носом. Ни одного вокализованного звука. Измерьте количество «эээ» на первом и седьмом дне.</td>
-                </tr>
-                <tr>
-                  <td><strong>Неделя 2</strong><br /><small style={{ color: "var(--text-dim)" }}>Дни 8–14</small></td>
-                  <td>Внедрение 4D-серкумлокуции</td>
-                  <td>Ежедневно объясняйте по 5 случайных рабочих понятий голосовому AI по промпту №1. Запретите себе заглядывать в словарь во время речи.</td>
-                </tr>
-                <tr>
-                  <td><strong>Неделя 3</strong><br /><small style={{ color: "var(--text-dim)" }}>Дни 15–21</small></td>
-                  <td>Автоматизация ответов по схеме PREP</td>
-                  <td>Все реплики на реальных рабочих созвонах и в тренировках стройте строго: Тезис → Обоснование → Пример → Вывод.</td>
-                </tr>
-                <tr>
-                  <td><strong>Неделя 4</strong><br /><small style={{ color: "var(--text-dim)" }}>Дни 22–30</small></td>
-                  <td>Разгон темпа речи и плотности (Метод 4/3/2)</td>
-                  <td>Три раза в неделю проводите сессии сжатия 4/3/2 на рабочие темы. Замерьте темп речи: цель — стабильные 140–160 слов в минуту без заиканий.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-8">
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-white mb-0">Неделя 1</h4>
+                  <span className="text-[11px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Дни 1–7</span>
+                </div>
+                <div className="text-xs font-semibold text-slate-200 mb-2">Ликвидация «эээ» через замок губ</div>
+                <p className="text-xs text-slate-400 leading-relaxed mb-0">
+                  Каждый раз, когда зависаете на слове — плотно сжимайте губы и делайте вдох носом. Ни одного вокализованного звука. Измерьте количество «эээ» на первом и седьмом дне.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-white mb-0">Неделя 2</h4>
+                  <span className="text-[11px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Дни 8–14</span>
+                </div>
+                <div className="text-xs font-semibold text-slate-200 mb-2">Внедрение 4D-серкумлокуции</div>
+                <p className="text-xs text-slate-400 leading-relaxed mb-0">
+                  Ежедневно объясняйте по 5 случайных рабочих понятий голосовому AI по промпту №1. Запретите себе заглядывать в словарь во время речи.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-white mb-0">Неделя 3</h4>
+                  <span className="text-[11px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Дни 15–21</span>
+                </div>
+                <div className="text-xs font-semibold text-slate-200 mb-2">Автоматизация ответов по схеме PREP</div>
+                <p className="text-xs text-slate-400 leading-relaxed mb-0">
+                  Все реплики на реальных рабочих созвонах и в тренировках стройте строго: Тезис → Обоснование → Пример → Вывод.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-card flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-white mb-0">Неделя 4</h4>
+                  <span className="text-[11px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Дни 22–30</span>
+                </div>
+                <div className="text-xs font-semibold text-slate-200 mb-2">Разгон темпа речи и плотности (4/3/2)</div>
+                <p className="text-xs text-slate-400 leading-relaxed mb-0">
+                  Три раза в неделю проводите сессии сжатия 4/3/2 на рабочие темы. Замерьте темп речи: цель — стабильные 140–160 слов в минуту без заиканий.
+                </p>
+              </div>
+            </div>
           </div>
 
           <QuoteCallout>

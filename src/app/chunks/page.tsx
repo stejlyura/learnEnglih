@@ -1,7 +1,19 @@
 import React from "react";
 import Link from "next/link";
-import { ArticleHeaderNav, ChunkItemRow } from "@/shared/ui";
+import { ArticleHeaderNav, ChunkItemRow, QuoteCallout } from "@/shared/ui";
+import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
+
+const TOC_ITEMS: readonly ToCItem[] = [
+  { id: "chunk-1", title: "01. Что такое лексический чанк и главный парадокс беглости" },
+  { id: "chunk-2", title: "02. Нейробиология: Закон рабочей памяти Миллера и Кована" },
+  { id: "chunk-3", title: "03. 4 вида чанков: От коллокаций до полуфиксированных рамок" },
+  { id: "chunk-4", title: "04. Книжный английский против Живой речи на созвонах" },
+  { id: "chunk-5", title: "05. Пошаговая методика: Как находить, учить и внедрять чанки" },
+  { id: "chunk-6", title: "06. База 30 самых нужных рабочих чанков (без духоты)" },
+  { id: "chunk-7", title: "07. Плотные структурные чанки (Dense Chunks): 3 уровня очередности" },
+  { id: "chunk-8", title: "08. Временные чанки Plug & Play: 24 шаблона от 1 до последнего" },
+] as const;
 
 export default function ChunksPage() {
   return (
@@ -12,7 +24,7 @@ export default function ChunksPage() {
         badgeColor="secondary"
       />
 
-      <article className="longread-container" id="top">
+      <article className="longread-container prose-editorial" id="top">
         {/* Top Switcher Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
           <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -43,19 +55,7 @@ export default function ChunksPage() {
           <div className="info-item"><span>Фокус:</span> <strong>Живая речь на созвонах vs тяжелый книжный язык</strong></div>
         </div>
 
-        <nav className="toc-box">
-          <div className="toc-title">Содержание лонгрида</div>
-          <ul className="toc-list">
-            <li><a href="#chunk-1"><span className="toc-num">01.</span> Что такое лексический чанк и главный парадокс беглости</a></li>
-            <li><a href="#chunk-2"><span className="toc-num">02.</span> Нейробиология: Закон рабочей памяти Миллера и Кована</a></li>
-            <li><a href="#chunk-3"><span className="toc-num">03.</span> 4 вида чанков: От коллокаций до полуфиксированных рамок</a></li>
-            <li><a href="#chunk-4"><span className="toc-num">04.</span> Книжный английский против Живой речи на созвонах</a></li>
-            <li><a href="#chunk-5"><span className="toc-num">05.</span> Пошаговая методика: Как находить, учить и внедрять чанки</a></li>
-            <li><a href="#chunk-6"><span className="toc-num">06.</span> База 30 самых нужных рабочих чанков (без духоты)</a></li>
-            <li><a href="#chunk-7"><span className="toc-num">07.</span> Плотные структурные чанки (Dense Chunks): 3 уровня очередности</a></li>
-            <li><a href="#chunk-8"><span className="toc-num">08.</span> Временные чанки Plug & Play: 24 шаблона от 1 до последнего</a></li>
-          </ul>
-        </nav>
+        <TableOfContents items={TOC_ITEMS} />
 
         {/* SECTION 1 */}
         <section id="chunk-1">
@@ -69,10 +69,9 @@ export default function ChunksPage() {
             В 1983 году лингвисты Эндрю Поли и Джордж Сайдер (Andrew Pawley & Frances Syder) опубликовали фундаментальную работу: <em>«Две загадки для лингвистической теории: Нативный выбор и Нативная беглость»</em>. Они поставили простой эксперимент:
           </p>
 
-          <blockquote className="quote-callout">
+          <QuoteCallout cite="Pawley & Syder, 1983">
             «Если бы носитель языка собирал предложения по законам традиционной грамматики (согласовывая времена, подбирая окончания, артикли и предлоги для каждого слова), то из-за ограниченной пропускной способности коры головного мозга человек не мог бы говорить со скоростью выше 40–50 слов в минуту. Но в реальности носители говорят со скоростью 140–180 слов в минуту без малейшего умственного напряжения. Как это возможно?»
-            <cite>Pawley & Syder, 1983</cite>
-          </blockquote>
+          </QuoteCallout>
 
           <p>
             Ответ перевернул всю современную методику преподавания языков: носители <strong>не собирают предложения с нуля</strong>. От 70% до 80% живой английской речи состоит из сотен тысяч заранее готовых полуфабрикатов — <em>чанков</em>.
@@ -208,53 +207,101 @@ export default function ChunksPage() {
             Фразы вроде <em>«It&apos;s a classic situation where gaining fast delivery forces us to sacrifice some test coverage»</em> выглядят солидно на бумаге. Но в реальном живом разговоре на созвоне <strong>носители так НЕ говорят</strong>. В разговорном английском действует закон: <strong>короткие клаузы, простые активные глаголы и минимум отглагольных существительных</strong>.
           </p>
 
-          <div className="editorial-table-wrap">
-            <table className="editorial-table">
-              <thead>
-                <tr>
-                  <th style={{ width: "25%" }}>Смысл мысли</th>
-                  <th style={{ width: "35%" }}>Тяжелый книжный стиль (Затыки)</th>
-                  <th style={{ width: "40%" }}>Живой разговорный чанк (Как говорят на созвонах)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Компромисс по качеству</strong></td>
-                  <td className="col-bad">Gaining speed forces us to sacrifice test coverage</td>
-                  <td className="col-good">&ldquo;If we rush it out, testing will take a hit.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Оптимизация</strong></td>
-                  <td className="col-bad">We should perform an optimization procedure on queries</td>
-                  <td className="col-good">&ldquo;We need to clean up these queries.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Застрял на задаче</strong></td>
-                  <td className="col-bad">I am experiencing insurmountable difficulties with auth</td>
-                  <td className="col-good">&ldquo;I&apos;m totally stuck on auth.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Отложить вопрос</strong></td>
-                  <td className="col-bad">Let us postpone this discussion until our next sync</td>
-                  <td className="col-good">&ldquo;Let&apos;s table this for now.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Приблизительная оценка</strong></td>
-                  <td className="col-bad">In accordance with my preliminary mental calculations</td>
-                  <td className="col-good">&ldquo;Off the top of my head, around three days.&rdquo;</td>
-                </tr>
-                <tr>
-                  <td><strong>Рискованное решение</strong></td>
-                  <td className="col-bad">This choice carries considerable risks for our architecture</td>
-                  <td className="col-good">&ldquo;It&apos;s a bit of a slippery slope.&rdquo;</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="space-y-4 my-8">
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Компромисс по качеству</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">Gaining speed forces us to sacrifice test coverage</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;If we rush it out, testing will take a hit.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Оптимизация</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">We should perform an optimization procedure on queries</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;We need to clean up these queries.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Застрял на задаче</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">I am experiencing insurmountable difficulties with auth</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;I&apos;m totally stuck on auth.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Отложить вопрос</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">Let us postpone this discussion until our next sync</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;Let&apos;s table this for now.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Приблизительная оценка</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">In accordance with my preliminary mental calculations</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;Off the top of my head, around three days.&rdquo;</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1 md:w-1/4">
+                <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold block">Ситуация</span>
+                <strong className="text-white text-sm sm:text-base">Рискованное решение</strong>
+              </div>
+              <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 md:w-5/12">
+                <span className="text-[11px] font-bold text-rose-400 block mb-0.5">Книжный стиль (Затыки):</span>
+                <div className="font-mono text-xs sm:text-sm text-rose-200">This choice carries considerable risks for our architecture</div>
+              </div>
+              <div className="p-3 rounded-xl bg-emerald-950/25 border border-emerald-500/30 md:w-5/12">
+                <span className="text-[11px] font-bold text-emerald-400 block mb-0.5">Живой чанк на созвоне:</span>
+                <div className="font-mono text-xs sm:text-sm text-emerald-200 font-semibold">&ldquo;It&apos;s a bit of a slippery slope.&rdquo;</div>
+              </div>
+            </div>
           </div>
 
-          <blockquote className="quote-callout">
+          <QuoteCallout>
             «Хороший разговорный C1 звучит просто и легко, а не тяжело и вычурно. Сила беглости — в скорости и точности коротких глагольных связок».
-          </blockquote>
+          </QuoteCallout>
         </section>
 
         {/* SECTION 5 */}
@@ -364,9 +411,9 @@ export default function ChunksPage() {
             </ul>
           </div>
 
-          <blockquote className="quote-callout">
+          <QuoteCallout>
             «Забудьте про сборку предложений из отдельных кирпичей. Говорите блоками. Когда вы доверяете языку и выстреливаете готовые чанки, речевой затык исчезает сам собой».
-          </blockquote>
+          </QuoteCallout>
         </section>
 
         {/* SECTION 7 */}

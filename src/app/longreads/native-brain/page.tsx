@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ReadingProgress, ArticleHeaderNav, QuoteCallout, MethodCard } from "@/shared/ui";
+import { ArticleHeaderNav, QuoteCallout, MethodCard } from "@/shared/ui";
 import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
 import { LONGREADS } from "@/entities/longread";
@@ -17,7 +17,6 @@ const TOC_ITEMS: readonly ToCItem[] = [
 export default function NativeBrainPage() {
   return (
     <>
-      <ReadingProgress />
       <ArticleHeaderNav
         title="NATIVE BRAIN & C1 NEUROBIOLOGY"
         badge="Neuroscience"

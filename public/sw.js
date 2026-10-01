@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fluency-chunks-v4';
+const CACHE_NAME = 'fluency-chunks-v5';
 
 const PRECACHE_URLS = [
   '/',
@@ -14,6 +14,8 @@ const PRECACHE_URLS = [
   '/longreads/native-brain',
   '/longreads/memory-consolidation',
   '/longreads/chunk-architecture',
+  '/tests/diagnostic_audit_report.html',
+  '/tests/diagnostic_test.html',
   '/manifest.webmanifest',
   '/manifest.json',
   '/apple-touch-icon.png',

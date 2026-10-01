@@ -3,15 +3,18 @@
 import React, { useEffect, useState } from "react";
 
 export function ReadingProgress() {
-  const [width, setWidth] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (scrollHeight > 0) {
-        setWidth(Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)));
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollTotal <= 0) {
+        setProgress(0);
+        return;
       }
+      const currentScroll = window.scrollY || document.documentElement.scrollTop;
+      const pct = Math.min(100, Math.max(0, (currentScroll / scrollTotal) * 100));
+      setProgress(pct);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -23,14 +26,19 @@ export function ReadingProgress() {
   return (
     <div
       id="reading-progress"
+      role="progressbar"
+      aria-label="Прогресс чтения страницы"
+      aria-valuenow={Math.round(progress)}
+      aria-valuemin={0}
+      aria-valuemax={100}
       style={{
-        width: `${width}%`,
+        width: `${progress}%`,
         position: "fixed",
         top: 0,
         left: 0,
         height: "3px",
-        background: "linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-emerald))",
-        zIndex: 1000,
+        background: "linear-gradient(90deg, #6366F1, #06B6D4, #10B981)",
+        zIndex: 9999,
         transition: "width 0.1s ease-out",
         pointerEvents: "none",
       }}

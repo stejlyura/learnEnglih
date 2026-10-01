@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { ReadingProgress } from "./ReadingProgress";
 import { ArticleHeaderNav } from "./ArticleHeaderNav";
 
 export interface InfoItem {
@@ -39,7 +38,6 @@ export function EditorialLayout({
 
   return (
     <>
-      <ReadingProgress />
       <ArticleHeaderNav
         title={title}
         badge={badge}

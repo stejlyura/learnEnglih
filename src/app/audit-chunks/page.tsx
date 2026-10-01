@@ -122,39 +122,41 @@ export default function AuditChunksPage() {
       }
     >
       {/* Clinical Highlights Metric Cards */}
-      <MetricStatGrid>
-        <MetricStatCard
-          label="Кальки L1"
-          value="7 узлов"
-          description="feel myself, advices, actual..."
-          icon={<Flame className="w-4 h-4" />}
-          variant="rose"
-        />
-        <MetricStatCard
-          label="Синтаксис"
-          value="5 пробелов"
-          description="mixed cond, high time, at expense..."
-          icon={<AlertTriangle className="w-4 h-4" />}
-          variant="amber"
-        />
-        <MetricStatCard
-          label="C1 Связки"
-          value="4 чанка"
-          description="inclined to think, inversion..."
-          icon={<Sparkles className="w-4 h-4" />}
-          variant="cyan"
-        />
-        <MetricStatCard
-          label="Точность"
-          value="2 узла"
-          description="noticing & accuracy"
-          icon={<CheckCircle2 className="w-4 h-4" />}
-          variant="emerald"
-        />
-      </MetricStatGrid>
+      <section id="audit-overview">
+        <MetricStatGrid>
+          <MetricStatCard
+            label="Кальки L1"
+            value="7 узлов"
+            description="feel myself, advices, actual..."
+            icon={<Flame className="w-4 h-4" />}
+            variant="rose"
+          />
+          <MetricStatCard
+            label="Синтаксис"
+            value="5 пробелов"
+            description="mixed cond, high time, at expense..."
+            icon={<AlertTriangle className="w-4 h-4" />}
+            variant="amber"
+          />
+          <MetricStatCard
+            label="C1 Связки"
+            value="4 чанка"
+            description="inclined to think, inversion..."
+            icon={<Sparkles className="w-4 h-4" />}
+            variant="cyan"
+          />
+          <MetricStatCard
+            label="Точность"
+            value="2 узла"
+            description="noticing & accuracy"
+            icon={<CheckCircle2 className="w-4 h-4" />}
+            variant="emerald"
+          />
+        </MetricStatGrid>
+      </section>
 
       {/* View Mode Switcher */}
-      <div className="flex items-center justify-between gap-3 p-1.5 rounded-2xl bg-white/5 border border-white/10 my-6">
+      <div id="audit-modes" className="flex items-center justify-between gap-3 p-1.5 rounded-2xl bg-white/5 border border-white/10 my-6">
         <button
           type="button"
           onClick={() => setViewMode("list")}
@@ -199,7 +201,7 @@ export default function AuditChunksPage() {
       </div>
 
       {/* Category Filter Pills & Search */}
-      <div className="controls-box">
+      <div id="audit-categories" className="controls-box">
         <div className="search-input-wrap">
           <Search className="search-icon w-4 h-4" />
           <input
@@ -229,41 +231,43 @@ export default function AuditChunksPage() {
         </div>
       </div>
 
-      {/* Mode 1: List View with tense-chunks aesthetic */}
-      {viewMode === "list" && (
-        <div className="method-card">
-          <div className="method-card-header">
-            <span className="block-badge">Каталог антидотов</span>
-            <span className="text-xs text-slate-400">
-              Показано: {filteredChunks.length} из {AUDIT_CHUNKS_DATA.length}
-            </span>
-          </div>
-
-          {filteredChunks.length === 0 ? (
-            <div className="text-center py-12 text-slate-400">
-              Ничего не найдено по запросу «{searchQuery}».
+      <div id="audit-content">
+        {/* Mode 1: List View with tense-chunks aesthetic */}
+        {viewMode === "list" && (
+          <div className="method-card">
+            <div className="method-card-header">
+              <span className="block-badge">Каталог антидотов</span>
+              <span className="text-xs text-slate-400">
+                Показано: {filteredChunks.length} из {AUDIT_CHUNKS_DATA.length}
+              </span>
             </div>
-          ) : (
-            filteredChunks.map((chunk, idx) => (
-              <AuditChunkRow key={chunk.id} chunk={chunk} index={idx} />
-            ))
-          )}
-        </div>
-      )}
 
-      {/* Mode 2: Flashcards View */}
-      {viewMode === "flashcards" && (
-        <AuditFlashcards
-          deck={filteredChunks.length > 0 ? filteredChunks : AUDIT_CHUNKS_DATA}
-        />
-      )}
+            {filteredChunks.length === 0 ? (
+              <div className="text-center py-12 text-slate-400">
+                Ничего не найдено по запросу «{searchQuery}».
+              </div>
+            ) : (
+              filteredChunks.map((chunk, idx) => (
+                <AuditChunkRow key={chunk.id} chunk={chunk} index={idx} />
+              ))
+            )}
+          </div>
+        )}
 
-      {/* Mode 3: Speed-Swap View */}
-      {viewMode === "speed-swap" && (
-        <AuditSpeedSwap
-          items={filteredChunks.length > 0 ? filteredChunks : AUDIT_CHUNKS_DATA}
-        />
-      )}
+        {/* Mode 2: Flashcards View */}
+        {viewMode === "flashcards" && (
+          <AuditFlashcards
+            deck={filteredChunks.length > 0 ? filteredChunks : AUDIT_CHUNKS_DATA}
+          />
+        )}
+
+        {/* Mode 3: Speed-Swap View */}
+        {viewMode === "speed-swap" && (
+          <AuditSpeedSwap
+            items={filteredChunks.length > 0 ? filteredChunks : AUDIT_CHUNKS_DATA}
+          />
+        )}
+      </div>
     </EditorialLayout>
   );
 }

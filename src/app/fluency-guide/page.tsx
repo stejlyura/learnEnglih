@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ReadingProgress, ArticleHeaderNav, QuoteCallout, MethodCard } from "@/shared/ui";
+import { ArticleHeaderNav, QuoteCallout, MethodCard } from "@/shared/ui";
 import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
@@ -16,7 +16,6 @@ const TOC_ITEMS: readonly ToCItem[] = [
 export default function FluencyGuidePage() {
   return (
     <>
-      <ReadingProgress />
       <ArticleHeaderNav
         title="ARCHITECTING FLUENCY"
         badge="B2 → C1"

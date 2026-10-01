@@ -1,12 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { ReadingProgress, ArticleHeaderNav, ChunkItemRow } from "@/shared/ui";
+import { ArticleHeaderNav, ChunkItemRow } from "@/shared/ui";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
 export default function ChunksPage() {
   return (
     <>
-      <ReadingProgress />
       <ArticleHeaderNav
         title="LEXICAL CHUNKS"
         badge="The Fluency Key"

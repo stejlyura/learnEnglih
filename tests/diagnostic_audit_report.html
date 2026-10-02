@@ -876,6 +876,43 @@
       font-size: 13px;
       color: var(--text-dim);
     }
+
+    /* Scroll To Top */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px);
+      transition: all 0.3s ease-out;
+      z-index: 999;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .scroll-to-top.visible {
+      opacity: 0.4;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .scroll-to-top:hover {
+      opacity: 1;
+      color: #06B6D4;
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+      transform: scale(1.06);
+    }
   </style>
 </head>
 <body>
@@ -1703,7 +1740,29 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderCard();
       renderAudit('all');
+
+      // Scroll to top listener
+      const scrollBtn = document.getElementById('scrollToTopBtn');
+      if (scrollBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 350) {
+            scrollBtn.classList.add('visible');
+          } else {
+            scrollBtn.classList.remove('visible');
+          }
+        }, { passive: true });
+
+        scrollBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
     });
   </script>
+
+  <button id="scrollToTopBtn" aria-label="Подняться наверх" title="Подняться наверх" class="scroll-to-top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </body>
 </html>

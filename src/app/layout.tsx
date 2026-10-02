@@ -3,6 +3,7 @@ import "./globals.css";
 import { AppHeader } from "@/widgets/app-header";
 import { AppFooter } from "@/widgets/app-footer";
 import { ReadingProgress } from "@/widgets/reading-progress";
+import { ScrollToTop } from "@/shared/ui";
 import { PwaRegister, IosInstallBanner } from "@/features/pwa";
 
 export const viewport: Viewport = {
@@ -58,6 +59,7 @@ export default function RootLayout({
         <AppHeader />
         <main className="flex-1 w-full">{children}</main>
         <AppFooter />
+        <ScrollToTop />
         <IosInstallBanner />
       </body>
     </html>

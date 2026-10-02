@@ -9,3 +9,4 @@ export * from "./MethodCard";
 export * from "./EditorialLayout";
 export * from "./MetricStatCard";
 export * from "./AuditChunkRow";
+export * from "./ScrollToTop";

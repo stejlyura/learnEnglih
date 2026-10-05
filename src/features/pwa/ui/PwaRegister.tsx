@@ -14,6 +14,13 @@ export function PwaRegister() {
           registration.unregister();
         }
       });
+      if ("caches" in window) {
+        window.caches.keys().then((keys) => {
+          for (const key of keys) {
+            window.caches.delete(key);
+          }
+        });
+      }
       return;
     }
 

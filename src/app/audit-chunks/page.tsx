@@ -9,7 +9,9 @@ import {
   EditorialLayout, 
   MetricStatGrid, 
   MetricStatCard, 
-  AuditChunkRow 
+  AuditChunkRow,
+  ChunkResponsiveSelector,
+  ChunkSelectorItem
 } from "@/shared/ui";
 import { AuditFlashcards, AuditSpeedSwap } from "@/features/audit-trainer";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
@@ -29,12 +31,12 @@ import { cn } from "@/shared/lib";
 
 type ViewMode = "list" | "flashcards" | "speed-swap";
 
-const CATEGORY_TABS: readonly { id: AuditChunkCategory; label: string; count: number }[] = [
-  { id: "all", label: "Все чанки", count: 18 },
-  { id: "fossilized", label: "🔥 Фоссилизированные кальки", count: 7 },
-  { id: "grammar_gaps", label: "🧩 Грамматические пробелы", count: 5 },
-  { id: "lexical_c1", label: "💎 C1 Дипломатия & Связки", count: 4 },
-  { id: "noticing", label: "🎯 Точность & Noticing", count: 2 },
+const AUDIT_CATEGORY_ITEMS: readonly ChunkSelectorItem[] = [
+  { id: "all", label: "Все чанки", icon: "📚", count: 18 },
+  { id: "fossilized", label: "Фоссилизированные кальки", icon: "🔥", count: 7 },
+  { id: "grammar_gaps", label: "Грамматические пробелы", icon: "🧩", count: 5 },
+  { id: "lexical_c1", label: "C1 Дипломатия & Связки", icon: "💎", count: 4 },
+  { id: "noticing", label: "Точность & Noticing", icon: "🎯", count: 2 },
 ] as const;
 
 export default function AuditChunksPage() {
@@ -212,24 +214,15 @@ export default function AuditChunksPage() {
             className="search-input"
           />
         </div>
-
-        <div className="filter-pills-row">
-          {CATEGORY_TABS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveCategory(tab.id)}
-              className={cn(
-                "filter-pill-btn",
-                activeCategory === tab.id && "active"
-              )}
-            >
-              <span>{tab.label}</span>
-              <span className="ml-1.5 opacity-70 text-xs">({tab.count})</span>
-            </button>
-          ))}
-        </div>
       </div>
+
+      {/* Responsive Category Selector: Desktop Horizontal Scroll Rail + Mobile Tactile Icon Dock */}
+      <ChunkResponsiveSelector
+        items={AUDIT_CATEGORY_ITEMS}
+        activeId={activeCategory}
+        onSelect={(id) => setActiveCategory(id as AuditChunkCategory)}
+        title="Категории калек & пробелов"
+      />
 
       <div id="audit-content">
         {/* Mode 1: List View with tense-chunks aesthetic */}

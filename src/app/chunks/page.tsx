@@ -15,25 +15,28 @@ const TOC_ITEMS: readonly ToCItem[] = [
   { id: "chunk-8", title: "08. Временные чанки Plug & Play: 24 шаблона от 1 до последнего" },
 ] as const;
 
-export default function ChunksPage() {
+export default function ChunksPage({ isUnified = false }: { readonly isUnified?: boolean } = {}) {
   return (
     <>
-      <ArticleHeaderNav
-        title="LEXICAL CHUNKS"
-        badge="The Fluency Key"
-        badgeColor="secondary"
-      />
+      {!isUnified && (
+        <ArticleHeaderNav
+          title="LEXICAL CHUNKS"
+          badge="The Fluency Key"
+          badgeColor="secondary"
+        />
+      )}
 
       <article className="longread-container prose-editorial" id="top">
-        {/* Top Switcher Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Библиотека лонгридов</span>
-            <span>•</span>
-            <span className="text-cyan-400 font-semibold">Всего 9 материалов</span>
+        {!isUnified && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека лонгридов</span>
+              <span>•</span>
+              <span className="text-cyan-400 font-semibold">Всего 9 материалов</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="chunks" />
           </div>
-          <LongreadSelectorDropdown currentSlug="chunks" />
-        </div>
+        )}
 
         <div className="article-meta-top">
           <span>Прикладная когнитивная лингвистика</span>

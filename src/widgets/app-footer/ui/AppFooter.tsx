@@ -8,8 +8,8 @@ import { openPwaInstallModal } from "@/features/pwa";
 export function AppFooter() {
   return (
     <footer
-      className="w-full mt-auto border-t border-white/10 bg-slate-950/80 backdrop-blur-md pt-12 pb-12"
-      style={{ paddingBottom: "max(48px, calc(48px + env(safe-area-inset-bottom, 0px)))" }}
+      className="w-full mt-auto border-t border-white/10 bg-slate-950/80 backdrop-blur-md pt-12 pb-16"
+      style={{ paddingBottom: "max(64px, calc(64px + env(safe-area-inset-bottom, 0px)))" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">

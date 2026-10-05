@@ -13,25 +13,28 @@ const TOC_ITEMS: readonly ToCItem[] = [
   { id: "chapter-6", title: "06. Промпты для AI-спарринга и 30-дневный пошаговый план" },
 ] as const;
 
-export default function FluencyGuidePage() {
+export default function FluencyGuidePage({ isUnified = false }: { readonly isUnified?: boolean } = {}) {
   return (
     <>
-      <ArticleHeaderNav
-        title="ARCHITECTING FLUENCY"
-        badge="B2 → C1"
-        activeRoute="/fluency-guide"
-      />
+      {!isUnified && (
+        <ArticleHeaderNav
+          title="ARCHITECTING FLUENCY"
+          badge="B2 → C1"
+          activeRoute="/fluency-guide"
+        />
+      )}
 
       <article className="longread-container prose-editorial" id="top">
-        {/* Top Switcher Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Библиотека лонгридов</span>
-            <span>•</span>
-            <span className="text-cyan-400 font-semibold">Всего 9 материалов</span>
+        {!isUnified && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека лонгридов</span>
+              <span>•</span>
+              <span className="text-cyan-400 font-semibold">Всего 9 материалов</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="fluency-guide" />
           </div>
-          <LongreadSelectorDropdown currentSlug="fluency-guide" />
-        </div>
+        )}
 
         <div className="article-meta-top">
           <span>Прикладная когнитивная лингвистика</span>

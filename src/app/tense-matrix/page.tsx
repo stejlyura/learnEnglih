@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { EditorialLayout, ChunkItemRow, MethodCard, QuoteCallout } from "@/shared/ui";
+import { EditorialLayout, ChunkItemRow, MethodCard, QuoteCallout, ChunkResponsiveSelector, ChunkSelectorItem } from "@/shared/ui";
 import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
 
@@ -62,6 +62,12 @@ const CHEAT_ITEMS: readonly CheatItem[] = [
   },
 ] as const;
 
+const MATRIX_VIEW_ITEMS: readonly ChunkSelectorItem[] = [
+  { id: "all", label: "Вся матрица (100%)", icon: "🌐", description: "Все 12 временных форм" },
+  { id: "core", label: "Золотые 80% (Ядро)", icon: "🔥", count: 7, description: "Ядро спонтанной речи" },
+  { id: "secondary", label: "Редкие 20% (Теория)", icon: "📚", count: 5, description: "Сложные отчеты и C1" },
+] as const;
+
 export default function TenseMatrixPage() {
   const [activeTab, setActiveTab] = useState<"all" | "core" | "secondary">("all");
 
@@ -112,57 +118,19 @@ export default function TenseMatrixPage() {
         </>
       }
     >
-      {/* Quick View Filter Switcher (Spacious & Modern) */}
-      <div className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 my-8 shadow-card">
-        <div className="flex items-center gap-2.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
-            Режим отображения матрицы:
-          </span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2 bg-black/50 p-1.5 rounded-xl border border-white/10">
-          <button
-            type="button"
-            onClick={() => setActiveTab("all")}
-            className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-              activeTab === "all"
-                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            Вся матрица (100%)
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("core")}
-            className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-              activeTab === "core"
-                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            🔥 Золотые 80% (Ядро)
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("secondary")}
-            className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-              activeTab === "secondary"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            📚 Редкие 20% (Теория)
-          </button>
-        </div>
-      </div>
+      {/* Responsive Matrix Mode Selector: Desktop Horizontal Scroll Rail + Mobile Tactile Icon Dock */}
+      <ChunkResponsiveSelector
+        items={MATRIX_VIEW_ITEMS}
+        activeId={activeTab}
+        onSelect={(id) => setActiveTab(id as "all" | "core" | "secondary")}
+        title="Режим отображения матрицы"
+      />
 
       {/* Reusable Table of Contents */}
       <TableOfContents items={TOC_ITEMS} />
 
       {/* SECTION 1: PARETO CONCEPT */}
-      <section id="pareto-concept">
+      <section id="pareto-concept" className="mb-20">
         <h2 className="chapter-heading">01. Лингвистический закон Парето: почему вам не нужны 12 таблиц</h2>
 
         <p>
@@ -173,25 +141,35 @@ export default function TenseMatrixPage() {
           В результате у человека возникает когнитивное искажение: ему кажется, что он обязан помнить все 12 формул с одинаковой скоростью. Но в реальной жизни носителей языка:
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-          <div className="p-6 rounded-2xl bg-emerald-950/25 border border-emerald-500/30 hover:border-emerald-500/50 transition-all shadow-md">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              🔥 Золотые 80% (7 конструкций)
-            </span>
-            <h3 className="text-lg font-bold text-white mt-4 mb-2">Ядро профессиональной речи</h3>
-            <p className="text-sm text-slate-300 leading-relaxed mb-0">
-              Present Simple, Past Simple, Present Continuous, Present Perfect, Present Perfect Continuous, Past Continuous + взятие ответственности и сорвавшиеся планы. В них происходит <strong>9 из 10 диалогов</strong> на дейликах и созвонах.
-            </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+          <div className="p-6 rounded-2xl bg-emerald-950/25 border border-emerald-500/30 hover:border-emerald-500/50 transition-all shadow-md flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                🔥 Золотые 80% (7 конструкций)
+              </span>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Ядро профессиональной речи</h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Present Simple, Past Simple, Present Continuous, Present Perfect, Present Perfect Continuous, Past Continuous + взятие ответственности и сорвавшиеся планы.
+              </p>
+            </div>
+            <div className="text-xs text-emerald-300 font-semibold pt-3 mt-4 border-t border-emerald-500/20">
+              Результат: 9 из 10 рабочих диалогов на дейликах, созвонах и код-ревью.
+            </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-purple-950/25 border border-purple-500/30 hover:border-purple-500/50 transition-all shadow-md">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/30">
-              📚 Оставшиеся 20% (5 времен)
-            </span>
-            <h3 className="text-lg font-bold text-white mt-4 mb-2">Периферия и сложные отчеты</h3>
-            <p className="text-sm text-slate-300 leading-relaxed mb-0">
-              Past Perfect, Past Perfect Continuous, Future Continuous, Future Perfect, Future Perfect Continuous. Нужны только при разборе длинных хронологий инцидентов (Post-Mortem) или в формальных C1-докладах.
-            </p>
+          <div className="p-6 rounded-2xl bg-purple-950/25 border border-purple-500/30 hover:border-purple-500/50 transition-all shadow-md flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                📚 Оставшиеся 20% (5 времен)
+              </span>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Периферия и сложные отчеты</h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Past Perfect, Past Perfect Continuous, Future Continuous, Future Perfect, Future Perfect Continuous.
+              </p>
+            </div>
+            <div className="text-xs text-purple-300 font-semibold pt-3 mt-4 border-t border-purple-500/20">
+              Результат: нужны только при разборе хронологий инцидентов (Post-Mortem) или в формальных C1-докладах.
+            </div>
           </div>
         </div>
       </section>
@@ -200,8 +178,8 @@ export default function TenseMatrixPage() {
       {/* SECTION 2: PART 1 - GOLDEN 80% */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       {(activeTab === "all" || activeTab === "core") && (
-        <section id="part-1-core" className="mt-14 pt-8">
-          <div className="flex items-center gap-2 mb-3">
+        <section id="part-1-core" className="mt-16 pt-10 border-t border-white/5">
+          <div className="flex items-center gap-2 mb-4">
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
               ЧАСТЬ 1 • ЗОЛОТЫЕ 80%
             </span>

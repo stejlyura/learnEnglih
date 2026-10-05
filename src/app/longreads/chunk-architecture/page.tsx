@@ -14,25 +14,28 @@ const TOC_ITEMS: readonly ToCItem[] = [
   { id: "sec-6", title: "06. 4-шаговый алгоритм создания несгораемых речевых чанков" },
 ] as const;
 
-export default function ChunkArchitecturePage() {
+export default function ChunkArchitecturePage({ isUnified = false }: { readonly isUnified?: boolean } = {}) {
   return (
     <>
-      <ArticleHeaderNav
-        title="CHUNKING MEMORY ARCHITECTURE"
-        badge="Cognitive Science"
-        activeRoute="/longreads/chunk-architecture"
-      />
+      {!isUnified && (
+        <ArticleHeaderNav
+          title="CHUNKING MEMORY ARCHITECTURE"
+          badge="Cognitive Science"
+          activeRoute="/longreads/chunk-architecture"
+        />
+      )}
 
       <article className="longread-container prose-editorial" id="top">
-        {/* Top Switcher Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Библиотека исследований SLA</span>
-            <span>•</span>
-            <span className="text-indigo-400 font-semibold">Статья 03 из {LONGREADS.length}</span>
+        {!isUnified && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека исследований SLA</span>
+              <span>•</span>
+              <span className="text-indigo-400 font-semibold">Статья 03 из {LONGREADS.length}</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="chunk-architecture" />
           </div>
-          <LongreadSelectorDropdown currentSlug="chunk-architecture" />
-        </div>
+        )}
 
         <div className="article-meta-top">
           <span>Когнитивная психология & Нейроархитектура памяти</span>

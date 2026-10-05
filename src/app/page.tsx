@@ -82,26 +82,30 @@ export default function HomePage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/30 space-y-3">
-              <div className="text-rose-400 font-bold text-xs uppercase tracking-wider">
-                ❌ Пословная сборка (Ступор B2)
+            <div className="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/30 flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                <div className="text-rose-400 font-bold text-xs uppercase tracking-wider">
+                  ❌ Пословная сборка (Ступор B2)
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Вы формулируете русскую мысль, переводите каждое слово по словарю, вспоминаете правила согласования времен и падежей.
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Вы формулируете русскую мысль, переводите каждое слово по словарю, вспоминаете правила согласования времен и падежей.
-              </p>
-              <div className="text-xs text-rose-300 font-semibold pt-2 border-t border-rose-500/20">
+              <div className="text-xs text-rose-300 font-semibold pt-3 border-t border-rose-500/20">
                 Результат: пауза 5–10 секунд, мучительное «эээ...» и потеря нити живого разговора.
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-3">
-              <div className="text-emerald-400 font-bold text-xs uppercase tracking-wider">
-                ⚡ Блочное мышление (Уровень C1)
+            <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                <div className="text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                  ⚡ Блочное мышление (Уровень C1)
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Мозг извлекает готовые полуфабрикаты речи (например, <em>«What I&apos;m trying to get at is...»</em>) как единые неделимые блоки.
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Мозг извлекает готовые полуфабрикаты речи (например, <em>«What I&apos;m trying to get at is...»</em>) как единые неделимые блоки.
-              </p>
-              <div className="text-xs text-emerald-300 font-semibold pt-2 border-t border-emerald-500/20">
+              <div className="text-xs text-emerald-300 font-semibold pt-3 border-t border-emerald-500/20">
                 Результат: свободная оперативная память, плавная и расслабленная речь без запинок.
               </div>
             </div>

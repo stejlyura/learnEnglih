@@ -12,25 +12,28 @@ const TOC_ITEMS: readonly ToCItem[] = [
   { id: "part-5", title: "05. Ежедневный чек-лист эффективности и объективные метрики прогресса" },
 ] as const;
 
-export default function MethodologyPage() {
+export default function MethodologyPage({ isUnified = false }: { readonly isUnified?: boolean } = {}) {
   return (
     <>
-      <ArticleHeaderNav
-        title="SLA LEARNING METHODOLOGY"
-        badge="Daily Protocol"
-        activeRoute="/methodology"
-      />
+      {!isUnified && (
+        <ArticleHeaderNav
+          title="SLA LEARNING METHODOLOGY"
+          badge="Daily Protocol"
+          activeRoute="/methodology"
+        />
+      )}
 
       <article className="longread-container prose-editorial" id="top">
-        {/* Top Switcher Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Библиотека лонгридов</span>
-            <span>•</span>
-            <span className="text-amber-400 font-semibold">Всего 9 материалов</span>
+        {!isUnified && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека лонгридов</span>
+              <span>•</span>
+              <span className="text-amber-400 font-semibold">Всего 9 материалов</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="methodology" />
           </div>
-          <LongreadSelectorDropdown currentSlug="methodology" />
-        </div>
+        )}
 
         <div className="article-meta-top">
           <span>Прикладная лингвистика & Когнитивная наука SLA</span>

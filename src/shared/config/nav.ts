@@ -10,7 +10,7 @@ export interface NavItem {
 export const NAV_ITEMS: readonly NavItem[] = [
   {
     title: "Лексические Чанки",
-    href: "/chunks",
+    href: "/longreads?article=chunks",
     description: "Когнитивная механика блочной речи. Почему носители говорят готовыми блоками, а не отдельными словами.",
     badge: "Фундамент",
     category: "core",
@@ -55,7 +55,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   },
   {
     title: "Архитектура Беглости B2 → C1",
-    href: "/fluency-guide",
+    href: "/longreads?article=fluency-guide",
     description: "Преодоление речевого затыка, серкумлокуция (обход забытых слов) и искоренение мычания «эээ/ммм».",
     badge: "Беглость",
     category: "core",
@@ -63,7 +63,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   },
   {
     title: "Методология & Рутина",
-    href: "/methodology",
+    href: "/longreads?article=methodology",
     description: "Аудит техники шэдоуинга, модель 4 потоков Пола Нейшна и готовый 25-минутный ежедневный протокол.",
     badge: "Система",
     category: "methodology",
@@ -72,9 +72,9 @@ export const NAV_ITEMS: readonly NavItem[] = [
   {
     title: "Библиотека Лонгридов",
     href: "/longreads",
-    description: "Единое меню всех 9 исследований: мозг носителя, память и сон, чанкинг, беглость C1 и аудит калек.",
-    badge: "Каталог 📚",
+    description: "Единый хаб с нативным свитчером: 6 фундаментальных исследований для уровней B2 → C1.",
+    badge: "Лонгриды 📚",
     category: "methodology",
-    readTime: "Каталог",
+    readTime: "6 статей",
   },
 ] as const;

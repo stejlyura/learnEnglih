@@ -7,10 +7,8 @@ import {
   Menu, 
   X, 
   Sparkles, 
-  Layers, 
   Clock, 
   Link2, 
-  Brain, 
   BookOpen, 
   Smartphone, 
   Home,
@@ -30,12 +28,6 @@ interface HeaderNavItem {
 
 const HEADER_LINKS: readonly HeaderNavItem[] = [
   { 
-    title: "Лексические Чанки", 
-    href: "/chunks", 
-    desc: "18 золотых фраз уровня C1",
-    icon: <Layers className="w-5 h-5 text-cyan-400" />
-  },
-  { 
     title: "Таблица Времен", 
     href: "/tense-matrix", 
     desc: "Present, Past, Future в готовых чанках",
@@ -44,7 +36,7 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
   { 
     title: "Времена Plug & Play", 
     href: "/tense-chunks", 
-    desc: "Готовые шаблоны временных форм",
+    desc: "Готовые шаблоны видовременных форм",
     icon: <Clock className="w-5 h-5 text-indigo-400" />
   },
   { 
@@ -60,28 +52,28 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     icon: <Flame className="w-5 h-5 text-rose-400" />
   },
   { 
-    title: "Архитектура Беглости", 
-    href: "/fluency-guide", 
-    desc: "Нейробиология речи и обход ступора",
-    icon: <Brain className="w-5 h-5 text-emerald-400" />
-  },
-  { 
-    title: "Все Лонгриды", 
+    title: "Лонгриды", 
     href: "/longreads", 
-    desc: "Каталог 9 исследований и руководств",
+    desc: "6 исследований: Мозг C1, Беглость, Чанки, Методология",
     icon: <BookOpen className="w-5 h-5 text-cyan-300" />
-  },
-  { 
-    title: "Методология", 
-    href: "/methodology", 
-    desc: "Научная система повторений",
-    icon: <Sparkles className="w-5 h-5 text-amber-400" />
   },
 ] as const;
 
 export function AppHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const isItemActive = (href: string) => {
+    if (href === "/longreads") {
+      return (
+        pathname.startsWith("/longreads") ||
+        pathname === "/chunks" ||
+        pathname === "/fluency-guide" ||
+        pathname === "/methodology"
+      );
+    }
+    return pathname === href;
+  };
 
   // Lock body scroll and handle escape key when menu is open
   useEffect(() => {
@@ -120,7 +112,7 @@ export function AppHeader() {
           {/* Desktop Nav (screens >= 1024px) */}
           <nav className="header-nav hidden lg:flex">
             {HEADER_LINKS.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = isItemActive(item.href);
               return (
                 <Link
                   key={item.href}
@@ -263,7 +255,7 @@ export function AppHeader() {
                 </Link>
 
                 {HEADER_LINKS.map((item) => {
-                  const isActive = pathname === item.href;
+                  const isActive = isItemActive(item.href);
                   return (
                     <Link
                       key={item.href}

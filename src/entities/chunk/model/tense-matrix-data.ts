@@ -8,153 +8,153 @@ export const TENSE_MATRIX_DATA: readonly TenseMatrixItem[] = [
     id: "present_simple",
     tenseKey: "Present Simple",
     nameEn: "Present Simple",
-    nameRu: "Простое настоящее (Факты, рутина, законы работы)",
+    nameRu: "Простое настоящее (Факты, рутина, регламенты продаж)",
     horizon: "present",
     aspect: "simple",
     formula: "Subject + V1 (he/she/it + V-s)",
     formulaNeg: "Subject + don't / doesn't + V1",
     formulaQuest: "Do / Does + Subject + V1?",
-    coreMeaning: "Постоянное состояние, регулярное расписание, факты, не привязанные к сиюминутному моменту.",
+    coreMeaning: "Регулярный процесс продаж, стандарты квалификации лидов, должностные обязанности и общие истины ведения переговоров.",
     timeMarkers: ["usually", "always", "every day", "on Mondays", "rarely", "as a rule"],
-    readyChunk: "I usually handle [X], while [someone] takes care of [Y]",
-    chunkRu: "«Обычно я отвечаю за [X], в то время как [имя] занимается [Y]»",
+    readyChunk: "I usually handle [enterprise accounts], while [Sarah] takes care of [inbound qualification]",
+    chunkRu: "«Обычно я веду [корпоративные сделки], в то время как [имя] отвечает за [квалификацию входящих лидов]»",
     sentences: [
       {
-        en: "Our team runs daily standups every morning at 10 AM.",
-        ru: "Наша команда проводит дейлики каждое утро в 10:00.",
-        context: "Расписание и командная рутина"
+        en: "Our sales team runs weekly pipeline reviews every Monday at 10 AM.",
+        ru: "Наш отдел продаж проводит ревью воронки каждый понедельник в 10:00.",
+        context: "Расписание и командная рутина сейлзов"
       },
       {
-        en: "It doesn't make sense to rewrite the whole module from scratch.",
-        ru: "Нет никакого смысла переписывать весь модуль с нуля.",
-        context: "Архитектурная оценка факта"
+        en: "It doesn't make sense to pitch advanced features before qualifying the prospect's budget.",
+        ru: "Нет никакого смысла презентовать сложные фичи до квалификации бюджета клиента.",
+        context: "Коммерческий закон квалификации (BANT/MEDDIC)"
       },
       {
-        en: "How often do you deploy new microservices to production?",
-        ru: "Как часто вы выкатываете новые микросервисы на прод?",
-        context: "Вопрос о регулярности процесса"
+        en: "How often do your account executives follow up with stalled enterprise leads?",
+        ru: "Как часто ваши аккаунт-менеджеры делают фоллоу-ап по зависшим корпоративным сделкам?",
+        context: "Вопрос о регулярности работы с пайплайном"
       },
       {
-        en: "This endpoint returns a 401 status when the token expires.",
-        ru: "Этот эндпоинт возвращает статус 401, когда токен истекает.",
-        context: "Технический закон работы системы"
+        en: "Our CRM triggers an automated notification when a prospect opens the proposal.",
+        ru: "Наша CRM отправляет автоматическое уведомление, когда потенциальный клиент открывает коммерческое предложение.",
+        context: "Стандарт работы коммерческих инструментов"
       }
     ],
-    lifeTip: "Используйте для выражения должностных обязанностей и общих истин. Если действие происходит прямо перед глазами — переключайтесь на Continuous."
+    lifeTip: "Используйте для описания должностных обязанностей, условий тарифных планов и регулярных шагов ведения сделок."
   },
   {
     id: "present_continuous",
     tenseKey: "Present Continuous",
     nameEn: "Present Continuous",
-    nameRu: "Настоящее длительное (Прямо сейчас, временный процесс, тренд)",
+    nameRu: "Настоящее длительное (Прямо сейчас, активные переговоры, тренд)",
     horizon: "present",
     aspect: "continuous",
     formula: "Subject + am / is / are + V-ing",
     formulaNeg: "Subject + am / is / are + not + V-ing",
     formulaQuest: "Am / Is / Are + Subject + V-ing?",
-    coreMeaning: "Действие в процессе развертывания прямо сейчас или временный проект, занимающий эти недели.",
+    coreMeaning: "Переговорный процесс, разворачивающийся прямо сейчас, или активная сделка, над которой вы работаете на этой неделе.",
     timeMarkers: ["right now", "currently", "at the moment", "this week", "these days"],
-    readyChunk: "I'm currently working on [X] and looking into [Y]",
-    chunkRu: "«Я сейчас как раз пилю [X] и параллельно разбираюсь с [Y]»",
+    readyChunk: "I'm currently negotiating [contract terms] and addressing [pricing objections]",
+    chunkRu: "«Я прямо сейчас согласую [условия контракта] и параллельно отрабатываю [ценовые возражения]»",
     sentences: [
       {
-        en: "I'm currently looking into why the payment webhook is timing out.",
-        ru: "Я прямо сейчас выясняю, почему отваливается по таймауту платежный вебхук.",
-        context: "Ответ на дейлике: чем занят сейчас"
+        en: "I'm currently reviewing the customer's redlines on our Master Services Agreement.",
+        ru: "Я прямо сейчас разбираю правки клиента в нашем рамочном договоре.",
+        context: "Ответ на летучке: над чем идет работа сейчас"
       },
       {
-        en: "We're not accepting new feature requests until we fix performance.",
-        ru: "Мы временно не принимаем запросы на новые фичи, пока не починим производительность.",
-        context: "Временная политика команды"
+        en: "We're not offering additional discounts until the client commits to an annual contract.",
+        ru: "Мы не предоставляем дополнительных скидок, пока клиент не согласится на годовой контракт.",
+        context: "Временная коммерческая позиция на переговорах"
       },
       {
-        en: "Are you still debugging that memory leak in the billing service?",
-        ru: "Ты все еще отлаживаешь ту утечку памяти в биллинге?",
-        context: "Уточнение текущего статуса"
+        en: "Are you still working with that fintech prospect on customized payment terms?",
+        ru: "Ты все еще ведешь переговоры с тем финтех-клиентом по индивидуальным условиям оплаты?",
+        context: "Уточнение текущего статуса сделки"
       },
       {
-        en: "Our user base is growing much faster than we originally anticipated.",
-        ru: "Наша пользовательская база растет гораздо быстрее, чем мы ожидали.",
-        context: "Динамический тренд в реальном времени"
+        en: "Our outbound pipeline conversion is growing much faster since we revamped the pitch deck.",
+        ru: "Конверсия нашей исходящей воронки растет значительно быстрее после обновления презентации.",
+        context: "Позитивный тренд продаж в реальном времени"
       }
     ],
-    lifeTip: "Самый частый ответ на вопрос «What are you up to?». Не используйте со статичными глаголами восприятия (know, believe, understand)."
+    lifeTip: "Самый частый ответ на вопрос руководителя «What deals are you actively working on?». Не используйте со статичными глаголами (agree, cost, understand)."
   },
   {
     id: "present_perfect",
     tenseKey: "Present Perfect",
     nameEn: "Present Perfect",
-    nameRu: "Настоящее совершенное (Результат к этой минуте, жизненный опыт)",
+    nameRu: "Настоящее совершенное (Результат к этой минуте, опыт в продажах)",
     horizon: "present",
     aspect: "perfect",
     formula: "Subject + have / has + V3",
     formulaNeg: "Subject + haven't / hasn't + V3",
     formulaQuest: "Have / Has + Subject + V3?",
-    coreMeaning: "Связь прошлого с настоящим: действие завершилось (когда — не важно), но его результат определяет текущий момент.",
+    coreMeaning: "Связь прошлого с настоящим: этап сделки завершен (когда — не важно), но результат определяет текущий шаг переговоров.",
     timeMarkers: ["already", "yet", "just", "recently", "so far", "ever / never"],
-    readyChunk: "Have you had a chance to [verb] yet? I've already [V3]...",
-    chunkRu: "«У тебя уже была возможность [сделать X]? Я уже [сделал Y]...»",
+    readyChunk: "Have you had a chance to [review the quote] yet? I've already [sent it]...",
+    chunkRu: "«У вас уже была возможность [ознакомиться с КП]? Я уже [отправил его]...»",
     sentences: [
       {
-        en: "I've already deployed the security patch to staging; please verify it.",
-        ru: "Я уже выкатил патч безопасности на стейдж; пожалуйста, проверьте.",
+        en: "I've already sent over the customized pricing proposal; please let me know your thoughts.",
+        ru: "Я уже отправил индивидуальное ценовое предложение; пожалуйста, поделитесь вашими мыслями.",
         context: "Свежий результат к этой минуте"
       },
       {
-        en: "We haven't received the client's approval on the new design yet.",
-        ru: "Мы пока еще не получили одобрение клиента по новому дизайну.",
-        context: "Отсутствие ожидаемого результата"
+        en: "We haven't received the countersigned agreement from their legal department yet.",
+        ru: "Мы пока еще не получили подписанный договор от их юридического отдела.",
+        context: "Отсутствие ожидаемого документа"
       },
       {
-        en: "We've run into an unexpected issue with the third-party OAuth provider.",
-        ru: "Мы столкнулись с неожиданной проблемой со стороны внешнего OAuth-провайдера.",
-        context: "Спокойное сообщение о баге"
+        en: "We've run into an unexpected objection regarding their annual procurement review.",
+        ru: "Мы столкнулись с неожиданным возражением по поводу их годового цикла закупок.",
+        context: "Спокойное сообщение руководству о заминке в сделке"
       },
       {
-        en: "Have you ever dealt with high-load database sharding before?",
-        ru: "Тебе когда-нибудь раньше доводилось сталкиваться с шардингом БД под высокой нагрузкой?",
-        context: "Вопрос об опыте в целом"
+        en: "Have you ever closed a multi-million-dollar deal with a Fortune 500 enterprise?",
+        ru: "Тебе когда-нибудь доводилось закрывать многомиллионные сделки с корпорациями из Fortune 500?",
+        context: "Вопрос об опыте в продажах в целом"
       }
     ],
-    lifeTip: "Если в предложении есть точная дата или время (yesterday, in 2024, at 3 PM) — Present Perfect ЗАПРЕЩЕН, используйте Past Simple!"
+    lifeTip: "Если в предложении есть конкретная дата звонка (yesterday, on Monday, last call) — используйте строго Past Simple!"
   },
   {
     id: "present_perfect_continuous",
     tenseKey: "Present Perfect Continuous",
     nameEn: "Present Perfect Continuous",
-    nameRu: "Длительное настоящее совершенное (Длительность от прошлого до сейчас)",
+    nameRu: "Длительное настоящее совершенное (Переговоры тянутся до сейчас)",
     horizon: "present",
     aspect: "perfect_continuous",
     formula: "Subject + have / has + been + V-ing",
     formulaNeg: "Subject + haven't / hasn't + been + V-ing",
     formulaQuest: "How long + have / has + Subject + been + V-ing?",
-    coreMeaning: "Действие началось в прошлом, непрерывно длилось и либо все еще продолжается, либо его следы/усталость налицо прямо сейчас.",
-    timeMarkers: ["for [hours/days]", "since [morning/Monday]", "all day", "lately"],
-    readyChunk: "I've been working on [X] since [time] / for [duration]",
-    chunkRu: "«Я вожусь с [X] еще со [времени] / на протяжении [стольких часов]»",
+    coreMeaning: "Переговоры или работа с аккаунтом начались в прошлом, непрерывно длились и все еще продолжаются прямо сейчас.",
+    timeMarkers: ["for [hours/days]", "since [morning/Monday]", "all quarter", "lately"],
+    readyChunk: "I've been negotiating with [client] since [time] / for [duration]",
+    chunkRu: "«Я веду переговоры с [клиентом] еще со [времени] / уже на протяжении [стольких месяцев]»",
     sentences: [
       {
-        en: "I've been troubleshooting this memory leak since 9 AM and haven't found the root cause.",
-        ru: "Я ковыряю эту утечку памяти с 9 утра и до сих пор не нашел первопричину.",
-        context: "Объяснение усталости и долгой работы"
+        en: "I've been negotiating with their procurement lead since 9 AM trying to preserve our margin.",
+        ru: "Я веду переговоры с их главой закупок с 9 утра, пытаясь защитить нашу маржу.",
+        context: "Объяснение напряженной работы над крупной сделкой"
       },
       {
-        en: "We've been dealing with intermittent database timeouts all week.",
-        ru: "Мы всю неделю воюем с периодическими таймаутами базы данных.",
-        context: "Тянущаяся изматывающая проблема"
+        en: "We've been dealing with budget freeze pushback on this account all quarter.",
+        ru: "Мы весь квартал боремся с возражением о заморозке бюджетов по этой сделке.",
+        context: "Тянущееся сложное согласование"
       },
       {
-        en: "How long have you been waiting for the CI pipeline to complete?",
-        ru: "Как давно ты уже ждешь, пока завершится этот пайплайн?",
-        context: "Вопрос о времени ожидания"
+        en: "How long have you been prospecting into this target strategic account?",
+        ru: "Как долго ты уже разрабатываешь этот целевой стратегический аккаунт?",
+        context: "Вопрос о длительности прогрева лида"
       },
       {
-        en: "She has been leading the frontend refactoring project for over six months.",
-        ru: "Она руководит проектом рефакторинга фронтенда уже больше полугода.",
-        context: "Продолжительный профессиональный трек"
+        en: "She has been managing our top enterprise software accounts for over seven years.",
+        ru: "Она ведет наши крупнейшие корпоративные софтверные контракты уже более семи лет.",
+        context: "Длительный успешный профессиональный трек"
       }
     ],
-    lifeTip: "Фокусирует внимание не на результате (сделал/не сделал), а на затраченном времени и непрерывности процесса."
+    lifeTip: "Подчеркивает приложенные усилия и упорство сейлза в доведении сложного клиента до сделки."
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -164,153 +164,153 @@ export const TENSE_MATRIX_DATA: readonly TenseMatrixItem[] = [
     id: "past_simple",
     tenseKey: "Past Simple",
     nameEn: "Past Simple",
-    nameRu: "Простое прошедшее (Факт в конкретный момент прошлого)",
+    nameRu: "Простое прошедшее (Факт в конкретный момент переговоров)",
     horizon: "past",
     aspect: "simple",
     formula: "Subject + V2 / Ved",
     formulaNeg: "Subject + didn't + V1",
     formulaQuest: "Did + Subject + V1?",
-    coreMeaning: "Завершенное историческое действие в зафиксированный отрезок прошлого, не имеющее прямой связи с настоящим.",
-    timeMarkers: ["yesterday", "last week", "in 2023", "two days ago", "when I was..."],
-    readyChunk: "We decided to [verb] yesterday because [X]",
-    chunkRu: "«Вчера мы приняли решение [сделать X], потому что [причина]»",
+    coreMeaning: "Завершенный факт встречи, звонка или закрытия сделки в зафиксированный отрезок прошлого.",
+    timeMarkers: ["yesterday", "last week", "in Q3", "two days ago", "during the demo"],
+    readyChunk: "We decided to [offer a pilot] yesterday because [the buyer hesitated]",
+    chunkRu: "«Вчера мы решили [предложить пилот], потому что [клиент сомневался]»",
     sentences: [
       {
-        en: "We released version 2.4 yesterday afternoon without any downtime.",
-        ru: "Мы зарелизили версию 2.4 вчера во второй половине дня без единого сбоя.",
-        context: "Конкретный отчет о прошлом"
+        en: "We closed the enterprise contract yesterday afternoon right before the fiscal deadline.",
+        ru: "Мы закрыли корпоративный контракт вчера днем прямо перед закрытием финансового периода.",
+        context: "Конкретный отчет о триумфальной сделке"
       },
       {
-        en: "Did you get a chance to discuss the architecture proposal with Alex yesterday?",
-        ru: "Удалось ли тебе вчера обсудить архитектурное предложение с Алексом?",
-        context: "Вопрос о факте в прошлом"
+        en: "Did you get a chance to discuss the pilot scope with their VP of Sales yesterday?",
+        ru: "Удалось ли тебе вчера обсудить масштабы пилота с их вице-президентом по продажам?",
+        context: "Вопрос о результатах вчерашнего созвона"
       },
       {
-        en: "The script didn't execute properly because an environment variable was missing.",
-        ru: "Скрипт не выполнился нормально, потому что отсутствовала переменная окружения.",
-        context: "Разбор вчерашнего инцидента"
+        en: "The prospect didn't attend the demo because their executive committee ran over time.",
+        ru: "Потенциальный клиент не пришел на демо, потому что их совет директоров затянулся.",
+        context: "Разбор сорвавшейся встречи"
       },
       {
-        en: "I noticed that error when I ran the integration tests last night.",
-        ru: "Я заметил эту ошибку, когда прогонял интеграционные тесты прошлым вечером.",
-        context: "Точный момент обнаружения"
+        en: "I noticed their hesitation when we brought up the upfront annual billing model.",
+        ru: "Я заметил их сомнения, когда мы заговорили про годовую предоплату.",
+        context: "Наблюдение за реакцией клиента на переговорах"
       }
     ],
-    lifeTip: "Рабочая лошадка любого рассказа о прошлом. Главный триггер — привязка к конкретному времени (yesterday, ago, last...)."
+    lifeTip: "Рабочая лошадка любого коммерческого отчета по созвонам. Обязательна точная временная привязка."
   },
   {
     id: "past_continuous",
     tenseKey: "Past Continuous",
     nameEn: "Past Continuous",
-    nameRu: "Прошедшее длительное (Фон, процесс в момент времени, прерывание)",
+    nameRu: "Прошедшее длительное (Фон переговоров, процесс в момент времени)",
     horizon: "past",
     aspect: "continuous",
     formula: "Subject + was / were + V-ing",
     formulaNeg: "Subject + wasn't / weren't + V-ing",
     formulaQuest: "Were / Was + Subject + V-ing?",
-    coreMeaning: "Действие длилось в определенный момент в прошлом или служило фоном, на котором произошло короткое событие (Past Simple).",
-    timeMarkers: ["at 5 PM yesterday", "while", "when [short action]", "all evening"],
-    readyChunk: "I was in the middle of [V-ing] when [event happened]",
-    chunkRu: "«Я был как раз в процессе [действия], когда внезапно [произошло событие]»",
+    coreMeaning: "Переговоры или демонстрация длились в конкретный момент в прошлом, когда произошло ключевое событие.",
+    timeMarkers: ["at 3 PM yesterday", "while", "when [short action]", "during the pitch"],
+    readyChunk: "I was in the middle of [presenting ROI] when [the CFO asked about pricing]",
+    chunkRu: "«Я был как раз в процессе [презентации окупаемости], когда [финдиректор задал вопрос о цене]»",
     sentences: [
       {
-        en: "I was in the middle of deploying the hotfix when the power went out.",
-        ru: "Я был в самом разгаре деплоя хотфикса, когда внезапно отключилось питание.",
-        context: "Прерванное фоновое действие"
+        en: "I was in the middle of walking through the pricing tiers when their CFO joined the call.",
+        ru: "Я был в самом разгаре разбора тарифов, когда к созвону подключился их финдиректор.",
+        context: "Прерванное фоновое выступление"
       },
       {
-        en: "I was just about to message you when your PR notification popped up.",
-        ru: "Я как раз собирался тебе написать, когда всплыло уведомление о твоем PR.",
-        context: "Совпадение / шаг до действия"
+        en: "I was just about to send the follow-up email when the buyer called back to confirm.",
+        ru: "Я как раз собирался отправить фоллоу-ап, когда клиент сам перезвонил с подтверждением.",
+        context: "Опережающее закрытие сделки"
       },
       {
-        en: "We were looking into migrating to GraphQL, but the overhead seemed too high.",
-        ru: "Мы как раз присматривались к переходу на GraphQL, но накладные расходы показались слишком большими.",
-        context: "Фоновое исследование идеи"
+        en: "We were looking into offering quarterly billing, but the client opted for an annual prepayment.",
+        ru: "Мы как раз рассматривали поквартальную оплату, но клиент сам выбрал годовую предоплату со скидкой.",
+        context: "Фоновое обсуждение коммерческих вариантов"
       },
       {
-        en: "What were you working on at 3 PM when the database alert fired?",
-        ru: "Над чем ты работал вчера в 15:00, когда сработал алерт базы данных?",
-        context: "Уточнение процесса в точный момент"
+        en: "What were you presenting at 2 PM when the prospect raised the security objection?",
+        ru: "Что именно ты показывал на демо в 14:00, когда клиент высказал возражение по безопасности?",
+        context: "Анализ хода демо-встречи"
       }
     ],
-    lifeTip: "Идеально подходит для объяснений: «Почему ты не ответил?» — «I was interviewing a candidate»."
+    lifeTip: "Идеально подходит для объяснений: «I was demoing our analytics dashboard when they asked for an NDA»."
   },
   {
     id: "past_perfect",
     tenseKey: "Past Perfect",
     nameEn: "Past Perfect",
-    nameRu: "Предпрошедшее (Действие случилось ДО другого момента в прошлом)",
+    nameRu: "Предпрошедшее (Подготовка завершилась ДО начала встречи)",
     horizon: "past",
     aspect: "perfect",
     formula: "Subject + had + V3",
     formulaNeg: "Subject + hadn't + V3",
     formulaQuest: "Had + Subject + V3?",
-    coreMeaning: "Указывает на действие, которое завершилось ДО другого действия или момента в прошлом. Настоящая машина времени назад.",
+    coreMeaning: "Действие подготовки или квалификации завершилось ДО другого события в прошлом (до встречи, до звонка, до возражения).",
     timeMarkers: ["by the time", "before", "already", "until then", "never before"],
-    readyChunk: "By the time [event happened], we had already [V3]...",
-    chunkRu: "«К тому моменту как [произошло X], мы уже успели [сделать Y]»",
+    readyChunk: "By the time [the call started], we had already [tailored the proposal]...",
+    chunkRu: "«К тому моменту как [начался созвон], мы уже успели [подготовить кастомное КП]»",
     sentences: [
       {
-        en: "By the time the sync started, I had already fixed the critical bug.",
-        ru: "К тому моменту как начался созвон, я уже пофиксил критический баг.",
-        context: "Опережение графика / готовность"
+        en: "By the time the pitch call started, I had already researched all five buying committee members.",
+        ru: "К моменту начала презентационного звонка я уже изучил всех пятерых членов закупочного комитета.",
+        context: "Глубокая предварительная подготовка сейлза"
       },
       {
-        en: "We hadn't noticed the regression until several enterprise clients complained.",
-        ru: "Мы не замечали регрессию до тех пор, пока несколько крупных клиентов не пожаловались.",
-        context: "Предшествующее неведение"
+        en: "We hadn't realized their budget had frozen until the procurement lead stepped in.",
+        ru: "Мы не осознавали, что их бюджет был заморожен, пока в диалог не вмешался руководитель закупок.",
+        context: "Предшествующее неведение о блокерах сделки"
       },
       {
-        en: "They had already merged the branch before I had a chance to post my review.",
-        ru: "Они уже влили ветку до того, как у меня появилась возможность оставить ревью.",
-        context: "Конфликт последовательности событий"
+        en: "They had already tested two competitor solutions before they agreed to a demo with us.",
+        ru: "Они уже успели протестировать два конкурирующих решения до того, как согласились на наше демо.",
+        context: "Контекст конкурентной среды"
       },
       {
-        en: "Had you tested that edge case before deploying the service to production?",
-        ru: "Ты протестировал этот крайний случай до того, как выкатил сервис на прод?",
-        context: "Проверка предварительных действий"
+        en: "Had you verified their decision-making timeline before sending over the formal contract?",
+        ru: "Ты уточнил их сроки принятия решений до того, как отправил официальный договор?",
+        context: "Проверка соблюдения регламента продаж"
       }
     ],
-    lifeTip: "Используется ТОЛЬКО тогда, когда нужно подчеркнуть очередность: сначала случилось Had Done, а потом Did."
+    lifeTip: "Используйте для демонстрации качественной подготовки к переговорам (Account Research)."
   },
   {
     id: "past_perfect_continuous",
     tenseKey: "Past Perfect Continuous",
     nameEn: "Past Perfect Continuous",
-    nameRu: "Длительное предпрошедшее (Длительность до момента в прошлом)",
+    nameRu: "Длительное предпрошедшее (Долгая разработка сделки до финала)",
     horizon: "past",
     aspect: "perfect_continuous",
     formula: "Subject + had been + V-ing",
     formulaNeg: "Subject + hadn't been + V-ing",
     formulaQuest: "Had + Subject + been + V-ing?",
-    coreMeaning: "Действие длилось на протяжении какого-то времени ДО определенной точки в прошлом и привело к тогдашнему результату.",
-    timeMarkers: ["for months before", "had been doing since", "until finally"],
-    readyChunk: "We had been working on [X] for [months] before we finally [shipped it]",
-    chunkRu: "«Мы работали над [X] на протяжении [месяцев], прежде чем наконец [зарелизили это]»",
+    coreMeaning: "Длительный процесс прогрева клиента или переговоров, который шел ДО определенной точки в прошлом.",
+    timeMarkers: ["for months before", "had been nurturing since", "until finally"],
+    readyChunk: "We had been nurturing [this account] for [months] before we finally [closed the deal]",
+    chunkRu: "«Мы вели [этого клиента] на протяжении [месяцев], прежде чем наконец [закрыли сделку]»",
     sentences: [
       {
-        en: "We had been working on that architectural migration for four months before we finally went live.",
-        ru: "Мы работали над той архитектурной миграцией четыре месяца, прежде чем наконец запустились.",
-        context: "Длительный ретроспективный путь"
+        en: "We had been nurturing that enterprise prospect for nine months before they finally issued an RFP.",
+        ru: "Мы вели этого корпоративного клиента девять месяцев, прежде чем они наконец объявили тендер.",
+        context: "Длительный стратегический цикл продаж"
       },
       {
-        en: "The container crashed because it had been leaking memory for several days straight.",
-        ru: "Контейнер упал, потому что из него несколько дней подряд непрерывно утекала память.",
-        context: "Объяснение прошлой аварии"
+        en: "The deal stalled because they had been restructuring their executive leadership for several months.",
+        ru: "Сделка встала на паузу, потому что они несколько месяцев подряд реструктурировали руководство.",
+        context: "Объяснение задержки сделки внешними факторами"
       },
       {
-        en: "He was completely exhausted because he had been debugging the kernel driver all night.",
-        ru: "Он был полностью без сил, потому что всю ночь напролет отлаживал драйвер ядра.",
-        context: "Причина прошлого состояния"
+        en: "Our top rep was exhausted because he had been negotiating with tough procurement buyers all week.",
+        ru: "Наш ведущий менеджер был без сил, потому что всю неделю без перерыва вел переговоры с жесткими закупщиками.",
+        context: "Причина состояния после тяжелых переговоров"
       },
       {
-        en: "How long had they been debating the tech stack before management stepped in?",
-        ru: "Как долго они спорили о технологическом стеке до того, как вмешалось руководство?",
-        context: "Длительность конфликта в прошлом"
+        en: "How long had you been chasing that enterprise account before the CEO agreed to an executive briefing?",
+        ru: "Как долго вы добивались этого крупного клиента до того, как их CEO согласился на стратегическую сессию?",
+        context: "Оценка упорства сейлз-команды"
       }
     ],
-    lifeTip: "В живой речи используется редко, но незаменим в серьезных технических отчетах (Post-Mortem reports)."
+    lifeTip: "Незаменимая конструкция на годовых ретроспективах и коммерческих отчетах по крупным победам."
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -320,283 +320,283 @@ export const TENSE_MATRIX_DATA: readonly TenseMatrixItem[] = [
     id: "future_simple",
     tenseKey: "Future Simple",
     nameEn: "Future Simple",
-    nameRu: "Простое будущее (Спонтанное решение, обещание, прогноз)",
+    nameRu: "Простое будущее (Обещание клиенту, спонтанный шаг, прогноз)",
     horizon: "future",
     aspect: "simple",
     formula: "Subject + will + V1",
     formulaNeg: "Subject + won't (will not) + V1",
     formulaQuest: "Will + Subject + V1?",
-    coreMeaning: "Решение, принятое прямо в секунду речи, обещание помочь, твердая готовность или личное предположение о будущем.",
-    timeMarkers: ["tomorrow", "next week", "in a minute", "I promise", "I think"],
-    readyChunk: "I'll take care of [X] right after this call",
-    chunkRu: "«Я возьму на себя [X] сразу после этого созвона»",
+    coreMeaning: "Быстрое решение прямо на звонке, профессиональное обещание клиенту или уверенный прогноз закрытия.",
+    timeMarkers: ["tomorrow", "next week", "in a minute", "I promise", "I'm confident"],
+    readyChunk: "I'll follow up with [the prospect] right after this call",
+    chunkRu: "«Я свяжусь с [клиентом] и пришлю материалы сразу после этого созвона»",
     sentences: [
       {
-        en: "I'll take care of this ticket right after our standup ends.",
-        ru: "Я займусь этим тикетом сразу после окончания дейлика.",
-        context: "Спонтанное взятие задачи на митинге"
+        en: "I'll send over the updated price breakdown and customer references right after this call.",
+        ru: "Я отправлю обновленный расчет стоимости и кейсы клиентов сразу после этого звонка.",
+        context: "Спонтанное обязательство сейлза перед клиентом"
       },
       {
-        en: "Don't worry, I'll make sure to double-check the database migration before executing it.",
-        ru: "Не переживай, я обязательно перепроверю миграцию базы перед запуском.",
-        context: "Обещание и гарантия ответственности"
+        en: "Don't worry, I'll make sure to get the custom discount approved by our VP before tomorrow.",
+        ru: "Не переживайте, я обязательно согласую специальную скидку с вице-президентом до завтра.",
+        context: "Обещание и гарантия клиенту на переговорах"
       },
       {
-        en: "I think this optimization will significantly decrease API latency.",
-        ru: "Думаю, эта оптимизация существенно снизит задержку API.",
-        context: "Профессиональный прогноз"
+        en: "I'm confident this customized ROI demonstration will win over their skeptical CFO.",
+        ru: "Я уверен, что эта персональная демонстрация окупаемости убедит их скептичного финдиректора.",
+        context: "Профессиональный прогноз победы"
       },
       {
-        en: "Won't this change break backward compatibility for mobile clients?",
-        ru: "Разве это изменение не сломает обратную совместимость для мобилок?",
-        context: "Предостерегающий вопрос о будущем"
+        en: "Won't this revised implementation schedule cause concern for your steering committee?",
+        ru: "Разве этот обновленный график внедрения не вызовет беспокойства у вашего руководящего комитета?",
+        context: "Предостерегающий вопрос клиенту для выявления скрытых рисков"
       }
     ],
-    lifeTip: "Не используйте 'will' для заранее распланированных дел. Если план уже в календаре — говорите 'I am meeting' или 'I am going to'."
+    lifeTip: "Главная формула клиентоориентированности: «I'll send», «I'll double-check», «I'll confirm»."
   },
   {
     id: "future_continuous",
     tenseKey: "Future Continuous",
     nameEn: "Future Continuous",
-    nameRu: "Будущее длительное (Процесс в конкретный момент будущего)",
+    nameRu: "Будущее длительное (Демонстрации и переговоры в процессе)",
     horizon: "future",
     aspect: "continuous",
     formula: "Subject + will be + V-ing",
     formulaNeg: "Subject + won't be + V-ing",
     formulaQuest: "Will + Subject + be + V-ing?",
-    coreMeaning: "Действие, которое будет находиться в процессе развертывания в точно указанное время в будущем, либо вежливый вопрос о планах.",
-    timeMarkers: ["at 3 PM tomorrow", "this time next week", "all day tomorrow"],
-    readyChunk: "I'll be working on [X] between [time] and [time]",
-    chunkRu: "«Я буду плотно сидеть над [X] в промежутке с [такого-то] до [такого-то времени]»",
+    coreMeaning: "Проведение демо или коммерческих созвонов в точно указанный отрезок времени, либо вежливый вопрос о планах клиента.",
+    timeMarkers: ["at 3 PM tomorrow", "this time next week", "all afternoon tomorrow"],
+    readyChunk: "I'll be running [client demos] between [time] and [time]",
+    chunkRu: "«Я буду проводить [демо для клиентов] в промежутке с [такого-то] до [такого-то времени]»",
     sentences: [
       {
-        en: "I'll be monitoring the production logs between 2 PM and 4 PM during the cutover.",
-        ru: "Я буду следить за логами прода с 14:00 до 16:00 во время переключения серверов.",
-        context: "Плановое дежурство / интервал"
+        en: "I'll be running discovery calls between 1 PM and 4 PM tomorrow afternoon.",
+        ru: "Завтра с 13:00 до 16:00 я буду непрерывно проводить квалификационные звонки с лидами.",
+        context: "План рабочего времени менеджера по продажам"
       },
       {
-        en: "Don't schedule any meetings for Thursday afternoon; the team will be running stress tests.",
-        ru: "Не ставь встречи на вторую половину четверга: команда будет гонять стресс-тесты.",
-        context: "Предупреждение о занятости"
+        en: "Don't schedule internal syncs for Thursday; our account executives will be pitching to major accounts.",
+        ru: "Не ставьте внутренние митинги на четверг: наши сейлзы будут питчить ключевым клиентам.",
+        context: "Предупреждение команды о фокусе на продажах"
       },
       {
-        en: "Will you be attending the architecture committee later today?",
-        ru: "Ты будешь присутствовать сегодня на архитектурном комитете?",
-        context: "Вежливый вопрос о планах коллеги"
+        en: "Will you be attending the negotiation with the enterprise procurement team later today?",
+        ru: "Вы будете присутствовать сегодня на переговорах с отделом закупок заказчика?",
+        context: "Вежливый вопрос коллеге или техническому специалисту"
       },
       {
-        en: "This time next week, I'll be relaxing on vacation without my laptop.",
-        ru: "В это же время на следующей неделе я буду отдыхать в отпуске без ноутбука.",
-        context: "Приятное предвкушение процесса"
+        en: "This time next week, our sales floor will be celebrating hitting 120% of our quarterly quota.",
+        ru: "В это же время на следующей неделе наш отдел продаж будет праздновать выполнение плана на 120%.",
+        context: "Мотивирующее предвкушение победы"
       }
     ],
-    lifeTip: "Служит самым вежливым способом спросить: «Будешь ли ты делать X по своему обычному графику?» (Will you be going to the office?)."
+    lifeTip: "Вежливейший способ спросить клиента о планах: «Will you be reviewing our proposal with your team this week?»"
   },
   {
     id: "future_perfect",
     tenseKey: "Future Perfect",
     nameEn: "Future Perfect",
-    nameRu: "Будущее совершенное (Результат будет готов К дедлайну)",
+    nameRu: "Будущее совершенное (Сделка будет закрыта К дедлайну)",
     horizon: "future",
     aspect: "perfect",
     formula: "Subject + will have + V3",
     formulaNeg: "Subject + won't have + V3",
     formulaQuest: "Will + Subject + have + V3 + by [time]?",
-    coreMeaning: "Действие завершится и даст конкретный осязаемый результат К определенной временной отсечке в будущем.",
-    timeMarkers: ["by Friday", "by the end of the sprint", "by the time you join", "by next year"],
-    readyChunk: "We will have finished [X] by [deadline]",
-    chunkRu: "«Мы полностью закончим [X] к [такому-то сроку]»",
+    coreMeaning: "Контракт будет подписан или цель по выручке будет достигнута К определенной временной отсечке в будущем.",
+    timeMarkers: ["by Friday", "by the end of the quarter", "by the time we meet", "by year-end"],
+    readyChunk: "We will have closed [the deal] by [the end of the quarter]",
+    chunkRu: "«Мы полностью закроем [эту сделку] к [концу квартала]»",
     sentences: [
       {
-        en: "We will have closed all blockers by the end of the sprint on Friday.",
-        ru: "Мы закроем все блокеры к концу спринта в пятницу.",
-        context: "Железное обещание дедлайна"
+        en: "We will have closed all five enterprise opportunities by the end of Q3.",
+        ru: "Мы закроем все пять корпоративных сделок к концу третьего квартала.",
+        context: "Железный прогноз выручки перед директором"
       },
       {
-        en: "By the time the clients log in tomorrow, the data migration will have finished.",
-        ru: "К тому моменту как клиенты завтра зайдут в систему, миграция данных уже завершится.",
-        context: "Готовность к приходу пользователей"
+        en: "By the time the new fiscal year starts, the client will have completed their pilot onboarding.",
+        ru: "К моменту начала нового финансового года клиент уже полностью завершит пилотный онбординг.",
+        context: "Уверенность в успешном старте заказчика"
       },
       {
-        en: "I will have completed the code review before our 2 PM sync.",
-        ru: "Я полностью завершу код-ревью еще до нашего созвона в 14:00.",
-        context: "Обязательство перед встречей"
+        en: "I will have finalized the customized proposal before our 2 PM call with the executive sponsor.",
+        ru: "Я полностью подготовлю кастомное предложение еще до нашего звонка в 14:00 с ключевым спонсором сделки.",
+        context: "Обязательство по срокам перед клиентом"
       },
       {
-        en: "Will you have finished the draft proposal by tomorrow morning?",
-        ru: "Успеешь ли ты подготовить черновик предложения к завтрашнему утру?",
-        context: "Вопрос о соблюдении дедлайна"
+        en: "Will you have received the signed order form by Friday afternoon?",
+        ru: "Ты успеешь получить подписанный бланк заказа к вечеру пятницы?",
+        context: "Контроль соблюдения дедлайна закрытия"
       }
     ],
-    lifeTip: "Главный маркер — предлог BY (к такому-то моменту). Звучит максимально солидно в общении с менеджерами и стейкхолдерами."
+    lifeTip: "Обязателен маркер BY (by Friday, by month-end). Звучит авторитетно в диалоге с коммерческим директором и CFO."
   },
   {
     id: "future_perfect_continuous",
     tenseKey: "Future Perfect Continuous",
     nameEn: "Future Perfect Continuous",
-    nameRu: "Длительное будущее совершенное (Стаж / продолжительность к моменту)",
+    nameRu: "Длительное будущее совершенное (Стаж в продажах / срок партнерства)",
     horizon: "future",
     aspect: "perfect_continuous",
     formula: "Subject + will have been + V-ing",
     formulaNeg: "Subject + won't have been + V-ing",
     formulaQuest: "How long + will + you + have been + V-ing + by [time]?",
-    coreMeaning: "Подсчет длительности или стажа, который накопится к определенной точке в будущем.",
+    coreMeaning: "Подсчет длительности партнерских отношений с клиентом или стажа работы в продажах к будущей дате.",
     timeMarkers: ["by next month ... for [duration]", "by 2027 ... for 5 years"],
-    readyChunk: "By [date], I will have been working here for [duration]",
-    chunkRu: "«К [дате] исполнится ровно [срок], как я работаю здесь»",
+    readyChunk: "By [date], I will have been managing [sales accounts] for [duration]",
+    chunkRu: "«К [дате] исполнится ровно [срок], как я веду [клиентские сделки]»",
     sentences: [
       {
-        en: "By next November, I will have been working at this company for exactly five years.",
-        ru: "В следующем ноябре исполнится ровно пять лет, как я работаю в этой компании.",
-        context: "Подсчет профессионального стажа"
+        en: "By next November, I will have been managing enterprise software accounts for exactly five years.",
+        ru: "В следующем ноябре исполнится ровно пять лет, как я веду корпоративные софтверные контракты.",
+        context: "Подсчет профессионального опыта в B2B"
       },
       {
-        en: "By midnight, the stress test will have been running continuously for 48 hours.",
-        ru: "К полуночи стресс-тест будет непрерывно крутиться уже ровно 48 часов.",
-        context: "Фиксация длительности теста"
+        en: "By midnight on the 31st, our sales squad will have been pushing for quota attainment for three intense weeks.",
+        ru: "К полуночи 31-го числа наша команда сейлзов будет непрерывно штурмовать план уже три напряженные недели.",
+        context: "Фиксация финального спринта закрытия месяца"
       },
       {
-        en: "By the time we launch, we will have been developing this product for over a year.",
-        ru: "К моменту запуска исполнится больше года, как мы разрабатываем этот продукт.",
-        context: "Ретроспективная оценка проекта"
+        en: "By the time this contract renews, we will have been partnering with this client for over three years.",
+        ru: "К моменту пролонгации договора исполнится больше трех лет, как мы сотрудничаем с этим клиентом.",
+        context: "Оценка долгосрочных партнерских отношений"
       }
     ],
-    lifeTip: "Редкая, но очень впечатляющая конструкция для ретроспектив и празднования профессиональных юбилеев."
+    lifeTip: "Используется на ежегодных бизнес-ревью и переговорах о пролонгации для подчеркивания лояльности клиента."
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 4. SPOKEN ESSENTIALS (КАК НА САМОМ ДЕЛЕ ГОВОРЯТ НОСИТЕЛИ)
+  // 4. SPOKEN ESSENTIALS (РАЗГОВОРНЫЙ СЕЙЛЗ-АНГЛИЙСКИЙ)
   // ═══════════════════════════════════════════════════════════════════════════
   {
     id: "be_going_to",
     tenseKey: "Be Going To",
     nameEn: "Be Going To (Intention)",
-    nameRu: "Намерение и план (Запланировано заранее)",
+    nameRu: "Намерение и коммерческий план (Запланировано заранее)",
     horizon: "spoken",
     aspect: "modal",
     formula: "Subject + am/is/are + going to + V1",
     formulaNeg: "Subject + am/is/are + not + going to + V1",
     formulaQuest: "Are / Is + Subject + going to + V1?",
-    coreMeaning: "Заранее принятое решение, намерение или очевидный исход на основе текущих признаков.",
-    timeMarkers: ["tonight", "this weekend", "soon", "next sprint"],
-    readyChunk: "We're going to [verb] in the upcoming sprint",
-    chunkRu: "«Мы планируем / намерены [сделать X] в следующем спринте»",
+    coreMeaning: "Заранее намеченная стратегия продаж или очевидный исход сделки на основе сигналов от клиента.",
+    timeMarkers: ["tonight", "this weekend", "soon", "next quarter"],
+    readyChunk: "We're going to [target mid-market accounts] in the upcoming quarter",
+    chunkRu: "«Мы планируем / намерены [атаковать сегмент средних компаний] в следующем квартале»",
     sentences: [
       {
-        en: "We're going to refactor the payment gateway during the upcoming sprint.",
-        ru: "Мы собираемся отрефакторить платежный шлюз в следующем спринте.",
-        context: "Командный план на спринт"
+        en: "We're going to launch a targeted outbound campaign to healthcare leaders next month.",
+        ru: "В следующем месяце мы собираемся запустить таргетированную исходящую кампанию по лидерам медтеха.",
+        context: "Коммерческий план развития пайплайна"
       },
       {
-        en: "Look at those error spikes; the server is going to crash if we don't scale it.",
-        ru: "Посмотри на эти всплески ошибок: сервер вот-вот упадет, если мы его не масштабируем.",
-        context: "Очевидный прогноз по признакам"
+        en: "Look at their engagement metrics; this prospect is going to sign before the month ends.",
+        ru: "Посмотри на их активность: этот клиент явно подпишет договор до конца месяца.",
+        context: "Уверенный прогноз по сигналам о готовности к покупке"
       },
       {
-        en: "Are you going to bring this up during the retrospective?",
-        ru: "Ты собираешься поднять этот вопрос на ретроспективе?",
-        context: "Вопрос о намерении"
+        en: "Are you going to present the multi-year discount during the closing call?",
+        ru: "Ты собираешься предложить скидку на трехлетний контракт во время финального звонка?",
+        context: "Вопрос о коммерческой тактике"
       }
     ],
-    lifeTip: "В беглой разговорной речи 'going to' почти всегда звучит как 'gonna' (/ˈɡənə/)."
+    lifeTip: "В живой беглой речи 'going to' звучит как 'gonna'. Идеально для демонстрации инициативы перед руководством."
   },
   {
     id: "present_continuous_future",
     tenseKey: "Present Continuous (Calendar Future)",
     nameEn: "Present Continuous for Future",
-    nameRu: "Календарное будущее (100% зафиксированная договоренность)",
+    nameRu: "Календарное будущее (100% зафиксированная встреча в календаре)",
     horizon: "spoken",
     aspect: "modal",
     formula: "Subject + am/is/are + V-ing + (time/place)",
     formulaNeg: "Subject + am/is/are not + V-ing",
     formulaQuest: "Are / Is + Subject + V-ing tomorrow?",
-    coreMeaning: "Договоренность с другим человеком или бронь в календаре/билетах. Отменить почти невозможно.",
+    coreMeaning: "Подтвержденная встреча в календаре (Calendar Invite) с лицом, принимающим решения. Отменить практически невозможно.",
     timeMarkers: ["tomorrow morning", "at 3 PM", "next Tuesday", "tonight"],
-    readyChunk: "I'm meeting with [person] tomorrow to [verb]",
-    chunkRu: "«Я встречаюсь с [человеком] завтра, чтобы [сделать X] (встреча в календаре)»",
+    readyChunk: "I'm meeting with [the prospect's VP] tomorrow to [negotiate terms]",
+    chunkRu: "«Я встречаюсь с [вице-президентом клиента] завтра, чтобы [согласовать условия] (встреча в календаре)»",
     sentences: [
       {
-        en: "I'm having a 1-on-1 with our engineering director tomorrow at 11 AM.",
-        ru: "У меня встреча 1-на-1 с техническим директором завтра в 11:00.",
-        context: "Зафиксированная встреча в календаре"
+        en: "I'm meeting with their Chief Revenue Officer tomorrow at 11 AM to finalize contract terms.",
+        ru: "У меня встреча с их директором по выручке завтра в 11:00 для финального согласования условий.",
+        context: "Зафиксированная встреча в Google Calendar"
       },
       {
-        en: "We're launching the public beta next Tuesday morning.",
-        ru: "Мы запускаем публичную бету в следующий вторник утром.",
-        context: "Официально утвержденный релиз"
+        en: "We're hosting a private VIP breakfast for enterprise clients next Tuesday.",
+        ru: "В следующий вторник мы проводим закрытый бизнес-завтрак для корпоративных заказчиков.",
+        context: "Утвержденное клиентское мероприятие"
       },
       {
-        en: "I'm flying to Berlin for the conference on Friday.",
-        ru: "В пятницу я улетаю в Берлин на конференцию (билеты на руках).",
-        context: "Поездка по билетам"
+        en: "I'm flying to Chicago for the National B2B Sales Expo on Thursday.",
+        ru: "В четверг я улетаю в Чикаго на национальную выставку B2B-продаж (билеты на руках).",
+        context: "Командировка на переговоры"
       }
     ],
-    lifeTip: "Носители предпочитают эту форму вместо 'will', когда речь идет о человеческих планах и встречах."
+    lifeTip: "Носители языка всегда используют именно эту форму, когда делятся планами по подтвержденным звонкам с клиентами."
   },
   {
     id: "used_to",
     tenseKey: "Used To (Past Habits)",
     nameEn: "Used To / Would",
-    nameRu: "Прошлые привычки (Было раньше, но больше нет)",
+    nameRu: "Прошлые привычки (Как продавали раньше vs как продаем сейчас)",
     horizon: "spoken",
     aspect: "modal",
     formula: "Subject + used to + V1 (отрицание: didn't use to)",
     formulaNeg: "Subject + didn't use to + V1",
     formulaQuest: "Did + Subject + use to + V1?",
-    coreMeaning: "Привычное регулярное действие или состояние в прошлом, которое полностью прекратилось в настоящем.",
-    timeMarkers: ["in the past", "before", "when I worked at..."],
-    readyChunk: "We used to [do X], but now we [do Y]",
-    chunkRu: "«Раньше мы обычно [делали X], а теперь [делаем Y]»",
+    coreMeaning: "Прежняя тактика продаж или привычка, от которой команда отказалась в пользу современных методологий.",
+    timeMarkers: ["in the past", "before", "when I started in sales..."],
+    readyChunk: "We used to [pitch feature lists], but now we [focus on business ROI]",
+    chunkRu: "«Раньше мы обычно [перечисляли фичи продукта], а теперь [фокусируемся на окупаемости и ROI]»",
     sentences: [
       {
-        en: "We used to manage our own bare-metal servers, but now we run everything on AWS.",
-        ru: "Раньше мы сами обслуживали железные сервера, а теперь крутим всё в AWS.",
-        context: "Эволюция технологического процесса"
+        en: "We used to rely on cold phone blitzes, but now we run multi-channel consultative outreach.",
+        ru: "Раньше мы полагались на холодные звонки в лоб, а теперь ведем омниканальные экспертные продажи.",
+        context: "Эволюция методологии продаж"
       },
       {
-        en: "I didn't use to write unit tests, but now I can't imagine coding without them.",
-        ru: "Раньше я не писал юнит-тесты, а теперь не представляю кодинг без них.",
-        context: "Изменение профессиональной привычки"
+        en: "I didn't use to qualify budget early on, but now I follow strict MEDDIC discovery.",
+        ru: "Раньше я не квалифицировал бюджет на первых этапах, а теперь строго следую фреймворку MEDDIC.",
+        context: "Профессиональный рост сейлз-менеджера"
       },
       {
-        en: "Did you use to work with monoliths before adopting microservices?",
-        ru: "Ты раньше работал с монолитами до перехода на микросервисы?",
-        context: "Вопрос о прошлом бэкграунде"
+        en: "Did you use to work in transactional sales before moving into complex B2B enterprise deals?",
+        ru: "Ты раньше работал в транзакционных быстрых продажах до перехода в сложные корпоративные B2B-сделки?",
+        context: "Вопрос о прошлом коммерческом бэкграунде"
       }
     ],
-    lifeTip: "Не путайте с 'be used to doing' (быть привыкшим к чему-то в настоящем). 'Used to do' — это ТОЛЬКО то, что закончилось."
+    lifeTip: "Не путайте с 'be used to doing' (привыкать к чему-то). 'Used to do' — это только то, что навсегда осталось в прошлом."
   },
   {
     id: "was_supposed_to",
     tenseKey: "Was Supposed To",
     nameEn: "Was Supposed To (Broken Plan)",
-    nameRu: "Сорвавшийся план (Должно было быть, но сорвалось)",
+    nameRu: "Сорвавшийся план (Сделка должна была закрыться, но возник блокер)",
     horizon: "spoken",
     aspect: "modal",
     formula: "Subject + was / were + supposed to + V1",
     formulaNeg: "Subject + wasn't / weren't + supposed to + V1",
     formulaQuest: "Were / Was + Subject + supposed to + V1?",
-    coreMeaning: "Действие, которое планировалось, ожидалось или входило в договоренности, но не состоялось по обстоятельствам.",
+    coreMeaning: "Планировалось подписание или звонок, но возник непредвиденный барьер со стороны заказчика.",
     timeMarkers: ["originally", "yesterday", "earlier today"],
-    readyChunk: "I was supposed to [verb], but [unexpected blocker]",
-    chunkRu: "«Я должен был [сделать X], но [возник непредвиденный блокер]»",
+    readyChunk: "I was supposed to [close the deal today], but [the CFO requested an audit]",
+    chunkRu: "«Я должен был [закрыть сделку сегодня], но [финдиректор запросил дополнительный аудит]»",
     sentences: [
       {
-        en: "I was supposed to present the quarterly roadmap today, but the meeting got rescheduled.",
-        ru: "Я должен был презентовать квартальный роадмап сегодня, но встречу перенесли.",
-        context: "Оправдание сорвавшегося плана"
+        en: "I was supposed to close this account today, but the customer requested an additional security review.",
+        ru: "Я должен был закрыть этого клиента сегодня, но заказчик запросил дополнительный аудит безопасности.",
+        context: "Дипломатичное объяснение переноса даты закрытия"
       },
       {
-        en: "The release was supposed to happen last night, but we caught a critical regression.",
-        ru: "Релиз должен был состояться прошлым вечером, но мы поймали критическую регрессию.",
-        context: "Объяснение задержки деплоя"
+        en: "The contract was supposed to be signed yesterday, but their legal team raised an indemnity concern.",
+        ru: "Договор должен был быть подписан вчера, но юристы клиента выставили замечание по пункту об ответственности.",
+        context: "Объяснение задержки на юридическом этапе"
       },
       {
-        en: "Were we supposed to invite the security team to this sync?",
-        ru: "Разве мы не должны были позвать команду безопасности на этот синк?",
-        context: "Уточнение забытой договоренности"
+        en: "Were we supposed to include customized implementation support in this proposal package?",
+        ru: "Разве мы не должны были включить выделенную поддержку внедрения в этот пакет предложения?",
+        context: "Уточнение коммерческого скоупа перед отправкой"
       }
     ],
-    lifeTip: "Один из самых частых дипломатичных чанков на созвонах для объяснения, почему что-то пошло не по плану без самобичевания."
+    lifeTip: "Главный спасительный чанк любого сейлза на пайплайн-ревью: объясняет задержку объективными блокерами клиента без самобичевания."
   }
 ] as const;

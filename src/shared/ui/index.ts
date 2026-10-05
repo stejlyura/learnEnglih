@@ -10,3 +10,4 @@ export * from "./EditorialLayout";
 export * from "./MetricStatCard";
 export * from "./AuditChunkRow";
 export * from "./ScrollToTop";
+export * from "./ChunkResponsiveSelector";

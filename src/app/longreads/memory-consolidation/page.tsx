@@ -14,25 +14,28 @@ const TOC_ITEMS: readonly ToCItem[] = [
   { id: "part-6", title: "06. Математика забывания: От Эббингауза к современному FSRS" },
 ] as const;
 
-export default function MemoryConsolidationPage() {
+export default function MemoryConsolidationPage({ isUnified = false }: { readonly isUnified?: boolean } = {}) {
   return (
     <>
-      <ArticleHeaderNav
-        title="MEMORY CONSOLIDATION & OPTIMAL LEARNING"
-        badge="Neurobiology"
-        activeRoute="/longreads/memory-consolidation"
-      />
+      {!isUnified && (
+        <ArticleHeaderNav
+          title="MEMORY CONSOLIDATION & OPTIMAL LEARNING"
+          badge="Neurobiology"
+          activeRoute="/longreads/memory-consolidation"
+        />
+      )}
 
       <article className="longread-container" id="top">
-        {/* Top Switcher Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Библиотека исследований SLA</span>
-            <span>•</span>
-            <span className="text-emerald-400 font-semibold">Статья 02 из {LONGREADS.length}</span>
+        {!isUnified && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-6 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span>Библиотека исследований SLA</span>
+              <span>•</span>
+              <span className="text-emerald-400 font-semibold">Статья 02 из {LONGREADS.length}</span>
+            </div>
+            <LongreadSelectorDropdown currentSlug="memory-consolidation" />
           </div>
-          <LongreadSelectorDropdown currentSlug="memory-consolidation" />
-        </div>
+        )}
 
         <div className="article-meta-top">
           <span>Молекулярная нейробиология & Когнитивная психология памяти</span>

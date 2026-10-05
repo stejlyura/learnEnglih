@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ChunkCategory } from "@/entities/chunk";
+import { ChunkResponsiveSelector, ChunkSelectorItem } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 
 export type TrainerMode = "list" | "flashcards" | "quiz";
@@ -16,14 +17,14 @@ interface TrainerFilterBarProps {
   readonly totalCount: number;
 }
 
-const CATEGORIES: readonly { id: ChunkCategory | "all"; label: string }[] = [
-  { id: "all", label: "Все (All)" },
-  { id: "frames", label: "Рамки со слотами [X]" },
-  { id: "work", label: "Работа & Созвоны" },
-  { id: "time-buyers", label: "Покупка времени (Анти-эээ)" },
-  { id: "hedging", label: "Дипломатия & Вежливость" },
-  { id: "social", label: "Живые реакции" },
-  { id: "verbs", label: "Глагольные связки" },
+const CATEGORY_ITEMS: readonly ChunkSelectorItem[] = [
+  { id: "all", label: "Все категории", icon: "✨" },
+  { id: "frames", label: "Рамки [X]", icon: "🧩" },
+  { id: "work", label: "Работа & Созвоны", icon: "💼" },
+  { id: "time-buyers", label: "Покупка времени", icon: "⏱️" },
+  { id: "hedging", label: "Дипломатия", icon: "🛡️" },
+  { id: "social", label: "Живые реакции", icon: "💬" },
+  { id: "verbs", label: "Глагольные связки", icon: "⚡" },
 ] as const;
 
 export function TrainerFilterBar({
@@ -101,22 +102,13 @@ export function TrainerFilterBar({
         </div>
       </div>
 
-      {/* Category Pills */}
-      <div className="filter-pills-row">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            onClick={() => onSelectCategory(cat.id)}
-            className={cn(
-              "filter-pill-btn",
-              currentCategory === cat.id && "active"
-            )}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+      {/* Responsive Category Selector: Desktop Horizontal Scroll Rail + Mobile Tactile Icon Dock */}
+      <ChunkResponsiveSelector
+        items={CATEGORY_ITEMS}
+        activeId={currentCategory}
+        onSelect={(id) => onSelectCategory(id as ChunkCategory | "all")}
+        title="Категории чанков"
+      />
     </div>
   );
 }

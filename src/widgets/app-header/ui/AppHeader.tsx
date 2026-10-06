@@ -52,9 +52,15 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     icon: <Flame className="w-5 h-5 text-rose-400" />
   },
   { 
+    title: "Вопросы & Условия", 
+    href: "/question-conditional-chunks", 
+    desc: "What–How + 4 Conditionals под Support и Sales",
+    icon: <Sparkles className="w-5 h-5 text-emerald-400" />
+  },
+  { 
     title: "Лонгриды", 
     href: "/longreads", 
-    desc: "6 исследований: Мозг C1, Беглость, Чанки, Методология",
+    desc: "Исследования SLA: Мозг C1, Беглость, Чанки, Support & Sales",
     icon: <BookOpen className="w-5 h-5 text-cyan-300" />
   },
 ] as const;

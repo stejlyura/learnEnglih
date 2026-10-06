@@ -102,6 +102,13 @@
    - Нейробиология подавления L1: модель ингибиторного контроля Дэвида Грина (ACC + DLPFC) и перенос в базальные ганглии.
    - Клинический 4-фазный протокол деинсталляции субвокального переводчика (Concept Anchoring, Anticipatory Shadowing, Speeded Swapping <300 мс, Emergency Bridges).
 
+17. **[17. Психолингвистика Речевой Беглости в Customer Support и B2B Sales](file:///Users/dev/projects/English%20learn/library/17-customer-support-sales-fluency-and-cognitive-framing.md)**
+   - Хронометрия стресса в клиентских коммуникациях: когнитивный тупик и амигдалярный перехват (Amygdala Hijack).
+   - Тактическая эмпатия Криса Восса (FBI Behavioral Change Stairway Model) и фреймворк деэскалации L.A.S.T.
+   - Вопрошание SPIN (Neil Rackham) и выход на Economic Buyer (MEDDIC) без речевой робости и калек.
+   - Психологический фрейминг: неприятие потерь Канемана-Тверски (Loss Aversion) и трехступенчатая защита цены (Defense of Margin).
+   - Протокол деинсталляции субвокализации для саппорта и продажников (Pressure Simulation, Slot-Swapping <300 мс).
+
 ---
 
 ## 🚀 Интерактивные и Учебные Лонгриды & Тесты

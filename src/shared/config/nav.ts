@@ -70,11 +70,19 @@ export const NAV_ITEMS: readonly NavItem[] = [
     readTime: "8 мин",
   },
   {
+    title: "Вопросы & Условия (Wh + If)",
+    href: "/question-conditional-chunks",
+    description: "9 Wh-вопросов (What, Which, Where...) и 4 вида Conditionals (Zero, 1st, 2nd, 3rd) для Support и Sales.",
+    badge: "Переговоры 🎯",
+    category: "core",
+    readTime: "12 мин",
+  },
+  {
     title: "Библиотека Лонгридов",
     href: "/longreads",
-    description: "Единый хаб с нативным свитчером: 6 фундаментальных исследований для уровней B2 → C1.",
+    description: "Единый хаб с нативным свитчером: фундаментальные исследования SLA для уровней B2 → C1.",
     badge: "Лонгриды 📚",
     category: "methodology",
-    readTime: "6 статей",
+    readTime: "9 материалов",
   },
 ] as const;

@@ -4,3 +4,4 @@ export * from "./model/tense-data";
 export * from "./model/dense-data";
 export * from "./model/audit-chunks-data";
 export * from "./model/tense-matrix-data";
+export * from "./model/question-conditional-data";

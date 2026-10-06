@@ -105,6 +105,17 @@ export const LONGREAD_TABS: readonly LongreadTabItem[] = [
     badge: "Чанки C1",
     badgeColor: "emerald",
   },
+  {
+    id: "support-sales-fluency",
+    slug: "support-sales-fluency",
+    title: "Support & Sales Fluency: Психолингвистика Речи и Прямого Мышления",
+    shortTitle: "Support & Sales 🎯",
+    categoryLabel: "Support & Sales",
+    icon: "🤝",
+    readTime: "16 мин",
+    badge: "Практика 🤝",
+    badgeColor: "emerald",
+  },
 ] as const;
 
 interface LongreadNativeSwitchProps {

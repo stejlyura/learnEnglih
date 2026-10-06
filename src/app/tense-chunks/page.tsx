@@ -5,6 +5,7 @@ import Link from "next/link";
 import { EditorialLayout, ChunkItemRow, MethodCard, QuoteCallout, ChunkResponsiveSelector, ChunkSelectorItem } from "@/shared/ui";
 import { TableOfContents, ToCItem } from "@/widgets/table-of-contents";
 import { LongreadSelectorDropdown } from "@/features/longread-selector";
+import { TENSE_CHUNKS_DATA } from "@/entities/chunk";
 
 const TOC_ITEMS: readonly ToCItem[] = [
   { id: "tense-1", title: "01. Научные исследования: Почему таблицы времен убивают спонтанную речь" },
@@ -28,6 +29,11 @@ const TENSE_BLOCK_ITEMS: readonly ChunkSelectorItem[] = [
 export default function TenseChunksPage() {
   const [activeBlock, setActiveBlock] = useState<string>("all");
 
+  const block1Chunks = TENSE_CHUNKS_DATA.slice(0, 4);
+  const block2Chunks = TENSE_CHUNKS_DATA.slice(4, 7);
+  const block3Chunks = TENSE_CHUNKS_DATA.slice(7, 10);
+  const block4Chunks = TENSE_CHUNKS_DATA.slice(10, 12);
+
   return (
     <EditorialLayout
       title="Временные Чанки Plug & Play: Как Говорить во Временах без Таблиц и Расчетов"
@@ -36,11 +42,11 @@ export default function TenseChunksPage() {
       badge="Plug & Play"
       badgeColor="emerald"
       activeRoute="/tense-chunks"
-      lead="Почему математическое вычисление 12 временных форм в голове гарантирует затыки, как исследования Joan Bybee и Nick Ellis доказывают блочную природу грамматики и 12 практических разъемов, закрывающих 90% реальной речи."
+      lead="Почему математическое вычисление 12 временных форм в голове гарантирует затыки на переговорах, как исследования Joan Bybee и Nick Ellis доказывают блочную природу грамматики и 12 практических разъемов для уверенных B2B-продаж."
       infoItems={[
         { label: "Научная база", value: "Exemplar-Based Linguistics (Joan Bybee, Nick Ellis)" },
         { label: "Ключевой навык", value: "Zero-Latency Tense Switching (переключение времен за 0.2 сек)" },
-        { label: "Формат", value: "12 отобранных чанков-разъемов под реальные задачи" },
+        { label: "Формат", value: "12 отобранных чанков-разъемов под реальные переговоры" },
       ]}
       topBanner={
         <>
@@ -92,19 +98,19 @@ export default function TenseChunksPage() {
             <h2 className="chapter-heading">01. Научные исследования: Почему таблицы времен убивают спонтанную речь</h2>
 
             <p>
-              Когда человеку на рабочем митинге нужно сказать простую мысль во времени <em>Present Perfect Continuous</em> (например, «я все утро дебажу этот баг»), традиционная грамматическая модель требует выполнить в уме 5 последовательных шагов:
+              Когда менеджеру по продажам на переговорах или планёрке нужно сказать простую мысль во времени <em>Present Perfect Continuous</em> (например, «я всё утро согласую это коммерческое предложение»), традиционная грамматическая модель требует выполнить в уме 5 последовательных шагов:
             </p>
 
             <ol style={{ paddingLeft: "24px", marginBottom: "24px", lineHeight: "1.8" }}>
               <li>Выбрать подлежащее (<em>I</em> или <em>We</em>).</li>
               <li>Выбрать форму вспомогательного глагола (<em>have</em> или <em>has</em>).</li>
               <li>Присоединить третью форму глагола to be (<em>been</em>).</li>
-              <li>Вспомнить смысловой глагол <em>debug</em> и прикрепить суффикс <em>-ing</em>.</li>
+              <li>Вспомнить смысловой глагол <em>negotiate</em> и прикрепить суффикс <em>-ing</em>.</li>
               <li>Выбрать предлог времени (<em>for</em> или <em>since</em>).</li>
             </ol>
 
             <p>
-              В условиях реального разговора эта вычислительная цепочка занимает <strong>от 1.5 до 3 секунд</strong>. Человек замирает, отводит взгляд, рот зависает в полуоткрытом состоянии и издает звук <strong>«ээээ»</strong>.
+              В условиях реального разговора эта вычислительная цепочка занимает <strong>от 1.5 до 3 секунд</strong>. Человек замирает, отводит взгляд, рот зависает в полуоткрытом состоянии и издает звук <strong>«ээээ»</strong>. Клиент считывает это как неуверенность и потерю контроля над сделкой.
             </p>
 
             <QuoteCallout cite="Джоан Байби (Joan Bybee), «Language, Usage and Cognition», Cambridge University Press">
@@ -139,14 +145,14 @@ export default function TenseChunksPage() {
                 <div>
                   <h4 className="text-white font-bold text-base mb-1">2. Свободный слот (The Slot)</h4>
                   <p className="text-sm text-slate-300 leading-relaxed mb-0">
-                    Сюда подставляется только действие текущей секунды: конкретный тикет, баг или фича.
+                    Сюда подставляется только действие текущей секунды: отправка КП, согласование договора или звонок ключевому клиенту.
                   </p>
                 </div>
               </div>
             </MethodCard>
 
             <p>
-              Ниже представлен выверенный каталог из <strong>12 практических временных чанков</strong>. Все искусственные и редкие академические нагромождения отброшены — оставлено только то, что звучит на реальных митингах.
+              Ниже представлен выверенный каталог из <strong>12 практических временных чанков</strong>. Все искусственные и редкие академические нагромождения отброшены — оставлено только то, что звучит на реальных переговорах и пайплайн-ревью.
             </p>
           </section>
         </>
@@ -156,44 +162,24 @@ export default function TenseChunksPage() {
       {(activeBlock === "all" || activeBlock === "block-1") && (
         <section id="tense-3" className="mt-14 pt-8">
           <h2 className="chapter-heading">03. Блок 1 (#1–#4): Present Perfect (Результат к этой минуте)</h2>
-          <p>Снимает 60% страха перед временами группы Perfect. Обозначает факт, актуальный прямо сейчас.</p>
+          <p>Снимает 60% страха перед временами группы Perfect. Обозначает факт, актуальный прямо сейчас в сделке.</p>
 
           <MethodCard
             badge="Блок 1 • Чанки 1–4"
             badgeClass="tier-1"
             subtitle="Present Perfect"
           >
-            <ChunkItemRow
-              num="1"
-              title="I've already [past participle] [X]"
-              trans="«Я уже сделал это (к этой минуте всё готово)»"
-              exEn="I've already patched the vulnerability on staging."
-              exRu="Я уже пропатчил уязвимость на стейджинге."
-            />
-
-            <ChunkItemRow
-              num="2"
-              title="Have you had a chance to [verb] yet?"
-              trans="«У тебя уже была возможность глянуть / сделать?» (самый частый рабочий вопрос)"
-              exEn="Have you had a chance to look over the new API contract yet?"
-              exRu="У тебя получилось уже глянуть новый контракт API?"
-            />
-
-            <ChunkItemRow
-              num="3"
-              title="We've run into an issue with [X]"
-              trans="«Мы столкнулись с проблемой в... (прямо сейчас боремся с ней)»"
-              exEn="We've run into an issue with CORS on the new subdomain."
-              exRu="Мы наткнулись на проблему с CORS на новом поддомене."
-            />
-
-            <ChunkItemRow
-              num="4"
-              title="I haven't seen [X] yet"
-              trans="«Я пока этого не видел / до меня это еще не дошло»"
-              exEn="I haven't seen the updated design mockups yet, could you share the link?"
-              exRu="Я еще не видел обновленные макеты, скинешь ссылку?"
-            />
+            {block1Chunks.map((chunk, idx) => (
+              <ChunkItemRow
+                key={chunk.id}
+                num={idx + 1}
+                title={chunk.title}
+                trans={chunk.trans}
+                exEn={chunk.exEn}
+                exRu={chunk.exRu}
+                tip={chunk.tip}
+              />
+            ))}
           </MethodCard>
         </section>
       )}
@@ -202,36 +188,24 @@ export default function TenseChunksPage() {
       {(activeBlock === "all" || activeBlock === "block-2") && (
         <section id="tense-4" className="mt-14 pt-8">
           <h2 className="chapter-heading">04. Блок 2 (#5–#7): Present Perfect Continuous (Длительный процесс)</h2>
-          <p>Описывает процесс, который начался в прошлом и без остановки тянется до текущей секунды.</p>
+          <p>Описывает процесс переговоров или работу с возражением, которые тянутся без остановки до текущей секунды.</p>
 
           <MethodCard
             badge="Блок 2 • Чанки 5–7"
             badgeClass="tier-1"
             subtitle="Present Perfect Continuous"
           >
-            <ChunkItemRow
-              num="5"
-              title="I've been working on [X] all morning"
-              trans="«Я всё утро пилю / делаю эту задачу»"
-              exEn="I've been working on optimizing SQL queries all morning."
-              exRu="Я все утро оптимизирую SQL-запросы."
-            />
-
-            <ChunkItemRow
-              num="6"
-              title="We've been dealing with [X] since [time]"
-              trans="«Мы воюем с этой проблемой с такого-то времени»"
-              exEn="We've been dealing with these connection drops since yesterday's release."
-              exRu="Мы воюем с этими обрывами соединений со вчерашнего релиза."
-            />
-
-            <ChunkItemRow
-              num="7"
-              title="How long have you been seeing this error?"
-              trans="«Как давно у вас воспроизводится эта ошибка?» (дебаг)"
-              exEn="How long have you been seeing this 504 gateway timeout in production?"
-              exRu="Как давно вы наблюдаете этот 504-й таймаут на проде?"
-            />
+            {block2Chunks.map((chunk, idx) => (
+              <ChunkItemRow
+                key={chunk.id}
+                num={idx + 5}
+                title={chunk.title}
+                trans={chunk.trans}
+                exEn={chunk.exEn}
+                exRu={chunk.exRu}
+                tip={chunk.tip}
+              />
+            ))}
           </MethodCard>
         </section>
       )}
@@ -240,36 +214,24 @@ export default function TenseChunksPage() {
       {(activeBlock === "all" || activeBlock === "block-3") && (
         <section id="tense-5" className="mt-14 pt-8">
           <h2 className="chapter-heading">05. Блок 3 (#8–#10): Past Continuous (Фон и прерывание)</h2>
-          <p>Идеально для объяснения инцидентов: чем именно вы занимались, когда произошел сбой.</p>
+          <p>Идеально для объяснения хода переговоров: что происходило на созвоне, когда подключился ЛПР или клиент озвучил возражение.</p>
 
           <MethodCard
             badge="Блок 3 • Чанки 8–10"
             badgeClass="tier-1"
             subtitle="Past Continuous"
           >
-            <ChunkItemRow
-              num="8"
-              title="I was in the middle of [verb-ing] when [X] happened"
-              trans="«Я был прямо посреди процесса, когда...»"
-              exEn="I was in the middle of running migrations when the database disconnected."
-              exRu="Я был прямо посреди наката миграций, когда отвалилась база данных."
-            />
-
-            <ChunkItemRow
-              num="9"
-              title="I was just about to [verb] when..."
-              trans="«Я как раз собирался сделать это, когда...»"
-              exEn="I was just about to ping you when your message popped up in Slack."
-              exRu="Я как раз собирался написать тебе, когда твое сообщение всплыло в слаке."
-            />
-
-            <ChunkItemRow
-              num="10"
-              title="We were looking into [X], but..."
-              trans="«Мы как раз исследовали этот вопрос, но...»"
-              exEn="We were looking into Kafka partitions, but higher priority bugs came in."
-              exRu="Мы как раз изучали партиции в Кафке, но прилетели более горящие баги."
-            />
+            {block3Chunks.map((chunk, idx) => (
+              <ChunkItemRow
+                key={chunk.id}
+                num={idx + 8}
+                title={chunk.title}
+                trans={chunk.trans}
+                exEn={chunk.exEn}
+                exRu={chunk.exRu}
+                tip={chunk.tip}
+              />
+            ))}
           </MethodCard>
         </section>
       )}
@@ -278,30 +240,24 @@ export default function TenseChunksPage() {
       {(activeBlock === "all" || activeBlock === "block-4") && (
         <section id="tense-6" className="mt-14 pt-8">
           <h2 className="chapter-heading">06. Блок 4 (#11–#12): Обязательства и срывы планов (Практический остаток)</h2>
-          <p>Все абстрактные условные формулы отброшены. Из остальных блоков в реальной работе инженера нужны ровно две вещи: взятие ответственности и объяснение сорвавшегося плана.</p>
+          <p>Все абстрактные условные формулы отброшены. В реальной работе сейлз-менеджера нужны ровно две вещи: взятие ответственности перед клиентом и дипломатичное объяснение сдвига сроков сделки.</p>
 
           <MethodCard
             badge="Блок 4 • Чанки 11–12"
             badgeClass="tier-1"
             subtitle="Responsibility & Broken Plans"
           >
-            <ChunkItemRow
-              num="11"
-              title="I'll make sure to [verb]..."
-              trans="«Я лично проконтролирую / обязательно сделаю это»"
-              exEn="I'll make sure to check the logs right after the call."
-              exRu="Я обязательно проверю логи сразу после созвона."
-              tip="Взятие личной ответственности на митинге без лишней воды."
-            />
-
-            <ChunkItemRow
-              num="12"
-              title="I was supposed to [verb], but [blocker]..."
-              trans="«Я должен был [сделать X], но [возник блокер]...»"
-              exEn="I was supposed to finish this yesterday, but the API was down."
-              exRu="Я должен был закончить это вчера, но лежал API."
-              tip="Дипломатичное объяснение задержки без самобичевания."
-            />
+            {block4Chunks.map((chunk, idx) => (
+              <ChunkItemRow
+                key={chunk.id}
+                num={idx + 11}
+                title={chunk.title}
+                trans={chunk.trans}
+                exEn={chunk.exEn}
+                exRu={chunk.exRu}
+                tip={chunk.tip}
+              />
+            ))}
           </MethodCard>
         </section>
       )}
@@ -326,25 +282,25 @@ export default function TenseChunksPage() {
             <li>
               <h4>Дрилл замены действия за 20 секунд</h4>
               <p>
-                Быстро, не задумываясь о временах, подставьте 3 действия из своей работы:
+                Быстро, не задумываясь о временах, подставьте 3 действия из своей работы с клиентами:
               </p>
               <div style={{ background: "rgba(0,0,0,0.35)", padding: "18px 22px", borderRadius: "14px", fontFamily: "var(--font-mono)", fontSize: "0.95rem", lineHeight: "1.75", margin: "16px 0", border: "1px solid rgba(255,255,255,0.06)" }}>
-                1. I was in the middle of refactoring when the alert fired.<br />
-                2. I was in the middle of writing unit tests when my laptop rebooted.<br />
-                3. I was in the middle of testing when the client called.
+                1. I was in the middle of closing the deal when the prospect requested a revised quote.<br />
+                2. I was in the middle of presenting the demo when their VP joined the call.<br />
+                3. I was in the middle of pipeline review when the enterprise contract was signed.
               </div>
             </li>
 
             <li>
               <h4>Критерий готовности</h4>
               <p>
-                Чанк считается внедренным, когда рот начинает произносить временную конструкцию <strong>автоматически за 0.2 секунды</strong>, а голова успевает сформулировать саму суть проблемы.
+                Чанк считается внедренным, когда рот начинает произносить временную конструкцию <strong>автоматически за 0.2 секунды</strong>, а голова успевает сформулировать суть коммерческого предложения.
               </p>
             </li>
           </ol>
 
-          <QuoteCallout cite="Методология Tense Chunks">
-            «Забудьте про раздутые таблицы времен. В реальном мире никто не рассчитывает грамматику. Освойте эти 12 шаблонов — и вы закроете 90% рабочих ситуаций на созвонах».
+          <QuoteCallout cite="Методология Tense Chunks для Sales">
+            «Забудьте про раздутые таблицы времен. В реальных переговорах никто не рассчитывает грамматику. Освойте эти 12 шаблонов — и вы закроете 90% рабочих ситуаций на встречах и созвонах с клиентами».
           </QuoteCallout>
         </section>
       )}

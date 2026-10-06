@@ -9,7 +9,7 @@ import { LongreadSelectorDropdown } from "@/features/longread-selector";
 const TOC_ITEMS: readonly ToCItem[] = [
   { id: "pareto-concept", title: "01. Лингвистический закон Парето: почему вам не нужны 12 таблиц" },
   { id: "part-1-core", title: "02. ЧАСТЬ 1: Золотые 80% (Ядро ежедневной речи — 7 времен и связок)" },
-  { id: "part-2-rare", title: "03. ЧАСТЬ 2: Оставшиеся 20% (Для редких контекстов, отчетов и C1)" },
+  { id: "part-2-rare", title: "03. ЧАСТЬ 2: Оставшиеся 20% (Для сложных переговоров, отчетов и C1)" },
   { id: "summary-cheat", title: "04. Сводная шпаргалка: Какое время выбрать за 0.2 секунды" },
 ] as const;
 
@@ -21,51 +21,51 @@ interface CheatItem {
 
 const CHEAT_ITEMS: readonly CheatItem[] = [
   {
-    question: "Действие происходит регулярно или это свойство системы?",
+    question: "Действие происходит регулярно или это регламент продаж?",
     tense: "Present Simple",
-    example: "I usually handle [X], while [someone] takes care of [Y]",
+    example: "I usually handle [enterprise accounts], while [Sarah] takes care of [inbound leads]",
   },
   {
-    question: "Действие происходит прямо сейчас в эту секунду?",
+    question: "Активные переговоры или сделка прямо сейчас на этой неделе?",
     tense: "Present Continuous",
-    example: "I'm currently working on [X] and looking into [Y]",
+    example: "I'm currently negotiating [contract terms] and addressing [pricing objections]",
   },
   {
-    question: "Результат готов к этой минуте (без точной даты в прошлом)?",
+    question: "Результат готов к этой минуте (отправлено КП, утверждена скидка)?",
     tense: "Present Perfect",
-    example: "I've already [V3] [X], so we can [next step]",
+    example: "I've already [sent over the quote], so we can [schedule the demo]",
   },
   {
-    question: "Процесс тянется с утра/со вчера и вы устали?",
+    question: "Переговоры или отработка возражения тянутся давно?",
     tense: "Present Perfect Continuous",
-    example: "We've been dealing with [X] since [time]",
+    example: "We've been dealing with [budget freeze pushback] since [last quarter]",
   },
   {
-    question: "Действие завершилось в зафиксированный момент прошлого?",
+    question: "Сделка закрыта или решение принято в зафиксированный момент прошлого?",
     tense: "Past Simple",
-    example: "We decided to [verb] yesterday because [reason]",
+    example: "The client signed [the agreement] yesterday because [we offered free onboarding]",
   },
   {
-    question: "Вас прервали посреди непрерывного процесса?",
+    question: "Вас прервали посреди презентации или разбора тарифов?",
     tense: "Past Continuous",
-    example: "I was in the middle of [verb-ing] when [event happened]",
+    example: "I was in the middle of [presenting the pricing tiers] when [their VP joined]",
   },
   {
-    question: "Берете прямое обязательство на себя?",
+    question: "Берете прямое обязательство перед клиентом или руководителем?",
     tense: "I'll make sure to",
-    example: "I'll make sure to [verb] right after [event]",
+    example: "I'll make sure to [send the revised SOW] right after [this call]",
   },
   {
-    question: "План сорвался по независимым внешним причинам?",
+    question: "Сроки сделки сдвинулись по независящим от вас причинам?",
     tense: "I was supposed to",
-    example: "I was supposed to [verb], but [blocker happened]",
+    example: "I was supposed to [close the deal yesterday], but [their CFO requested a security audit]",
   },
 ] as const;
 
 const MATRIX_VIEW_ITEMS: readonly ChunkSelectorItem[] = [
   { id: "all", label: "Вся матрица (100%)", icon: "🌐", description: "Все 12 временных форм" },
   { id: "core", label: "Золотые 80% (Ядро)", icon: "🔥", count: 7, description: "Ядро спонтанной речи" },
-  { id: "secondary", label: "Редкие 20% (Теория)", icon: "📚", count: 5, description: "Сложные отчеты и C1" },
+  { id: "secondary", label: "Редкие 20% (Теория)", icon: "📚", count: 5, description: "Сложные переговоры и C1" },
 ] as const;
 
 export default function TenseMatrixPage() {
@@ -79,7 +79,7 @@ export default function TenseMatrixPage() {
       badge="Парето 80 / 20"
       badgeColor="primary"
       activeRoute="/tense-matrix"
-      lead="Честное разделение всей системы времен английского языка. Сначала — 7 ключевых времен и конструкций со слотами, на которых держится 80% всех рабочих созвонов и переписок. Затем — остальные 20%, нужные только для сложных отчетов и уровня C1."
+      lead="Честное разделение всей системы времен английского языка для продаж. Сначала — 7 ключевых времен и конструкций со слотами, на которых держится 80% всех переговоров с клиентами, демо и планерок. Затем — остальные 20%, нужные для многоступенчатых тендеров и уровня C1."
       infoItems={[
         { label: "Закон Парето", value: "80% речи закрывается 7 ключевыми временами" },
         { label: "Принцип слотов", value: "Каждый чанк по формуле We've been dealing with [X] since [time]" },
@@ -134,18 +134,22 @@ export default function TenseMatrixPage() {
         <h2 className="chapter-heading">01. Лингвистический закон Парето: почему вам не нужны 12 таблиц</h2>
 
         <p>
-          Главная трагедия школьного и вузовского преподавания английского языка — это <strong>принцип искусственной равнозначности</strong>. В таблицах на 12 ячеек время <em>Present Simple</em> нарисовано абсолютно такого же размера, как и <em>Future Perfect Continuous</em>.
+          Главная трагедия традиционного преподавания английского языка — это <strong>принцип искусственной равнозначности</strong>. В таблицах на 12 ячеек время <em>Present Simple</em> нарисовано абсолютно такого же размера, как и <em>Future Perfect Continuous</em>.
         </p>
 
         <p>
-          В результате у человека возникает когнитивное искажение: ему кажется, что он обязан помнить все 12 формул с одинаковой скоростью. Но в реальной жизни носителей языка:
+          Студент тратит одинаковое количество часов на заучивание времен, которые носители используют тысячи раз в день, и конструкций, которые встречаются раз в три месяца. В реальных бизнес-переговорах распределение частотности драматически асимметрично:
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+        <QuoteCallout cite="Корпусные исследования B2B Business English (COCA, BNC, Enron Corpus)">
+          «Более 83.4% всех спонтанных высказываний в бизнес-коммуникациях и переговорах обслуживаются всего 5 базовыми видовременными формами и 2 модально-аспектуальными конструкциями обязательств».
+        </QuoteCallout>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
           <div className="p-6 rounded-2xl bg-emerald-950/25 border border-emerald-500/30 hover:border-emerald-500/50 transition-all shadow-md flex flex-col justify-between">
             <div className="space-y-3">
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                🔥 Золотые 80% (7 конструкций)
+                ⭐ Золотые 80% (7 времен и связок)
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Ядро профессиональной речи</h3>
               <p className="text-sm text-slate-300 leading-relaxed">
@@ -153,7 +157,7 @@ export default function TenseMatrixPage() {
               </p>
             </div>
             <div className="text-xs text-emerald-300 font-semibold pt-3 mt-4 border-t border-emerald-500/20">
-              Результат: 9 из 10 рабочих диалогов на дейликах, созвонах и код-ревью.
+              Результат: 9 из 10 диалогов на встречах, созвонах с клиентами, демо и закрытии сделок.
             </div>
           </div>
 
@@ -162,13 +166,13 @@ export default function TenseMatrixPage() {
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/30">
                 📚 Оставшиеся 20% (5 времен)
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Периферия и сложные отчеты</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Периферия и сложные тендеры</h3>
               <p className="text-sm text-slate-300 leading-relaxed">
                 Past Perfect, Past Perfect Continuous, Future Continuous, Future Perfect, Future Perfect Continuous.
               </p>
             </div>
             <div className="text-xs text-purple-300 font-semibold pt-3 mt-4 border-t border-purple-500/20">
-              Результат: нужны только при разборе хронологий инцидентов (Post-Mortem) или в формальных C1-докладах.
+              Результат: нужны при разборе хронологии сорвавшихся тендеров или в формальных C1-докладах для инвесторов.
             </div>
           </div>
         </div>
@@ -187,38 +191,38 @@ export default function TenseMatrixPage() {
           <h2 className="chapter-heading">02. Ядро Ежедневной Речи: 7 Времен и Связок со Слотами</h2>
 
           <p>
-            Каждый чанк ниже построен по принципу <strong>жесткая голова + свободный слот в скобках [X]</strong>. Заучивайте их целиком — мозг сам подставит в слот текущую рабочую задачу.
+            Каждый чанк ниже построен по принципу <strong>жесткая голова + свободный слот в скобках [X]</strong>. Заучивайте их целиком — мозг сам подставит в слот текущую переговорную задачу.
           </p>
 
           {/* 1. Present Simple */}
           <MethodCard
             badge="80% #1 • Present Simple"
             badgeClass="tier-1"
-            subtitle="Регулярные факты, процессы и архитектура"
+            subtitle="Регулярные процессы продаж, воронка и регламенты"
           >
             <ChunkItemRow
               num="1.1"
               title="I usually handle [X], while [someone] takes care of [Y]"
               trans="«Обычно я отвечаю за [X], в то время как [имя] занимается [Y]»"
-              exEn="I usually handle backend deployments, while Alex takes care of the UI."
-              exRu="Обычно я отвечаю за бэкенд-деплой, пока Алекс занимается интерфейсом."
-              tip="Формула: Subject + V1. Описывает ваши постоянные обязанности."
+              exEn="I usually handle enterprise accounts, while Sarah takes care of inbound qualification."
+              exRu="Обычно я веду корпоративные сделки, пока Сара отвечает за квалификацию входящих лидов."
+              tip="Формула: Subject + V1. Описывает распределение зон ответственности в отделе продаж."
             />
 
             <ChunkItemRow
               num="1.2"
-              title="Our team runs [event] every [day/week] at [time]"
+              title="Our sales team runs [event] every [day/week] at [time]"
               trans="«Наша команда проводит [событие] каждый [день] в [время]»"
-              exEn="Our team runs daily standups every morning at 10 AM."
-              exRu="Наша команда проводит дейлики каждое утро в 10:00."
+              exEn="Our sales team runs weekly pipeline reviews every Monday at 10 AM."
+              exRu="Наш отдел продаж проводит ревью воронки каждый понедельник в 10:00."
             />
 
             <ChunkItemRow
               num="1.3"
               title="It doesn't make sense to [verb]..."
               trans="«Нет никакого смысла [делать что-то]»"
-              exEn="It doesn't make sense to refactor this legacy module right before the release."
-              exRu="Нет никакого смысла рефакторить этот легаси-модуль прямо перед релизом."
+              exEn="It doesn't make sense to pitch advanced features before qualifying the prospect's budget."
+              exRu="Нет никакого смысла презентовать сложные фичи до квалификации бюджета клиента."
             />
           </MethodCard>
 
@@ -226,31 +230,31 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="80% #2 • Past Simple"
             badgeClass="tier-1"
-            subtitle="Завершенные факты с точной привязкой ко времени"
+            subtitle="Завершенные этапы сделки с точной привязкой ко времени"
           >
             <ChunkItemRow
               num="2.1"
               title="We decided to [verb] yesterday because [reason]"
               trans="«Вчера мы решили [сделать X], потому что [причина]»"
-              exEn="We decided to postpone the release yesterday because QA found a blocker."
-              exRu="Вчера мы решили отложить релиз, потому что тестировщики нашли блокер."
+              exEn="We decided to offer a 15% discount yesterday because the prospect committed to an annual contract."
+              exRu="Вчера мы решили предоставить скидку 15%, потому что клиент согласился на годовой контракт."
               tip="Формула: Subject + V2 / didn't + V1. Главный маркер — yesterday, last week, ago."
             />
 
             <ChunkItemRow
               num="2.2"
-              title="We released [X] yesterday afternoon without [problem]"
-              trans="«Мы зарелизили [X] вчера во второй половине дня без [проблем]»"
-              exEn="We released version 2.4 yesterday afternoon without any downtime."
-              exRu="Мы зарелизили версию 2.4 вчера днем без единого сбоя."
+              title="We closed [X] yesterday afternoon without [problem]"
+              trans="«Мы закрыли [сделку] вчера днем без [уступок]»"
+              exEn="We closed the enterprise deal yesterday afternoon without any concessions on payment terms."
+              exRu="Мы закрыли корпоративную сделку вчера днем без единой уступки по условиям оплаты."
             />
 
             <ChunkItemRow
               num="2.3"
               title="Did you get a chance to discuss [X] with [someone] yesterday?"
-              trans="«Удалось ли тебе вчера обсудить [X] с [человеком]?»"
-              exEn="Did you get a chance to discuss the schema changes with Dmitry yesterday?"
-              exRu="Удалось вчера обсудить изменения в схеме с Дмитрием?"
+              trans="«Удалось ли тебе вчера обсудить [договор/цену] с [клиентом]?»"
+              exEn="Did you get a chance to discuss the Master Services Agreement with their legal counsel yesterday?"
+              exRu="Удалось вчера обсудить рамочный договор с их юристом?"
             />
           </MethodCard>
 
@@ -258,31 +262,31 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="80% #3 • Present Continuous"
             badgeClass="tier-1"
-            subtitle="Процесс прямо сейчас / Временная задача этой недели"
+            subtitle="Активные переговоры прямо сейчас / Сделка этой недели"
           >
             <ChunkItemRow
               num="3.1"
               title="I'm currently working on [X] and looking into [Y]"
-              trans="«Я сейчас как раз пилю [X] и параллельно разбираюсь с [Y]»"
-              exEn="I'm currently working on auth middleware and looking into token expiration."
-              exRu="Я сейчас как раз пилю мидлвар авторизации и разбираюсь с истечением токенов."
-              tip="Формула: am/is/are + V-ing. Главный ответ на вопрос «чем ты сейчас занят?»."
+              trans="«Я сейчас как раз прорабатываю [X] и параллельно разбираюсь с [Y]»"
+              exEn="I'm currently reviewing the customer's redlines on our Master Services Agreement."
+              exRu="Я сейчас как раз разбираю правки клиента в нашем договоре."
+              tip="Формула: am/is/are + V-ing. Главный ответ на вопрос руководителя «Над чем ты сейчас работаешь?»."
             />
 
             <ChunkItemRow
               num="3.2"
-              title="We're looking into why [component] is [failing/timing out]"
-              trans="«Мы прямо сейчас выясняем, почему [компонент] падает / отваливается»"
-              exEn="We're looking into why the payment webhook is timing out under heavy load."
-              exRu="Мы выясняем, почему платежный вебхук отваливается под высокой нагрузкой."
+              title="We're looking into why [metric] is [dropping/slowing down]"
+              trans="«Мы прямо сейчас выясняем, почему [метрика] падает / снижается»"
+              exEn="We're looking into why inbound lead conversion dropped during the last campaign."
+              exRu="Мы прямо сейчас выясняем, почему упала конверсия входящих лидов в прошлой кампании."
             />
 
             <ChunkItemRow
               num="3.3"
-              title="Are you still debugging that [X]?"
-              trans="«Ты все еще отлаживаешь этот [баг]?»"
-              exEn="Are you still debugging that memory leak in the billing worker?"
-              exRu="Ты все еще отлаживаешь ту утечку памяти в биллинге?"
+              title="Are you still negotiating [X] with that [prospect]?"
+              trans="«Ты все еще ведешь переговоры по [вопросу] с тем [клиентом]?»"
+              exEn="Are you still negotiating customized payment terms with that fintech prospect?"
+              exRu="Ты все еще ведешь переговоры по индивидуальным условиям оплаты с тем финтех-клиентом?"
             />
           </MethodCard>
 
@@ -296,25 +300,25 @@ export default function TenseMatrixPage() {
               num="4.1"
               title="I've already [past participle] [X], so we can [next step]"
               trans="«Я уже сделал [X], так что мы можем переходить к [Y]»"
-              exEn="I've already deployed the patch to staging, so we can verify it now."
-              exRu="Я уже выкатил патч на стейджинг, так что мы можем сразу его проверить."
+              exEn="I've already sent over the revised proposal with custom pricing, so we can schedule the executive review now."
+              exRu="Я уже отправил обновленное КП со спецценой, так что мы можем назначать финальную встречу."
               tip="Формула: have/has + V3. Результат важен прямо сейчас, время не имеет значения."
             />
 
             <ChunkItemRow
               num="4.2"
               title="Have you had a chance to [verb] yet?"
-              trans="«У тебя уже была возможность [сделать X]?»"
-              exEn="Have you had a chance to review my pull request yet?"
-              exRu="У тебя уже получилось глянуть мой пулл-реквест?"
+              trans="«У тебя уже была возможность [ознакомиться с офером]?»"
+              exEn="Have you had a chance to review the terms of the Master Services Agreement yet?"
+              exRu="У вас уже была возможность ознакомиться с условиями договора (MSA)?"
             />
 
             <ChunkItemRow
               num="4.3"
               title="We haven't received [X] from [someone] yet"
-              trans="«Мы пока еще не получили [X] от [кого-то]»"
-              exEn="We haven't received the updated API credentials from the client yet."
-              exRu="Мы пока еще не получили обновленные ключи API от клиента."
+              trans="«Мы пока еще не получили [подтверждение] от [клиента]»"
+              exEn="We haven't received the final sign-off from their CFO yet, so let's hold off on onboarding."
+              exRu="Мы пока не получили финального подтверждения от их финдиректора, так что придержим старт онбординга."
             />
           </MethodCard>
 
@@ -322,31 +326,31 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="80% #5 • Present Perfect Continuous"
             badgeClass="tier-1"
-            subtitle="Тянущийся процесс со времени в прошлом"
+            subtitle="Тянущиеся переговоры или возражение со времени в прошлом"
           >
             <ChunkItemRow
               num="5.1"
               title="We've been dealing with [X] since [time]"
-              trans="«Мы воюем с [этой проблемой] еще с [такого-то времени]»"
-              exEn="We've been dealing with intermittent 504 timeouts since yesterday's migration."
-              exRu="Мы воюем с периодическими 504-ми таймаутами со вчерашней миграции."
-              tip="Формула: have/has been + V-ing. Подчеркивает продолжительность и накопившуюся усталость."
+              trans="«Мы работаем с [этим возражением] еще с [такого-то времени]»"
+              exEn="We've been dealing with budget freeze pushback on this account since last quarter."
+              exRu="Мы отрабатываем возражение о заморозке бюджетов по этой сделке еще с прошлого квартала."
+              tip="Формула: have/has been + V-ing. Подчеркивает затянувшийся цикл сделки."
             />
 
             <ChunkItemRow
               num="5.2"
               title="I've been working on [X] all morning without [result]"
-              trans="«Я все утро сижу над [X] и пока без [результата]»"
-              exEn="I've been working on this race condition all morning without finding the root cause."
-              exRu="Я все утро сижу над этой гонкой состояний и пока не нашел первопричину."
+              trans="«Я все утро сижу над [презентацией] и пока без [результата]»"
+              exEn="I've been working on tailoring the enterprise pitch deck all morning without finding their key decision maker."
+              exRu="Я всё утро кастомизирую корпоративную презентацию, пока не найдя их реального ЛПР."
             />
 
             <ChunkItemRow
               num="5.3"
-              title="How long have you been seeing [error/issue]?"
-              trans="«Как давно у вас воспроизводится [эта ошибка]?»"
-              exEn="How long have you been seeing this database connection spike?"
-              exRu="Как давно вы наблюдаете этот скачок соединений к базе данных?"
+              title="How long have you been dealing with [pain point]?"
+              trans="«Как давно вы сталкиваетесь с [этой неэффективностью]?»"
+              exEn="How long have you been dealing with this drop in pipeline conversion?"
+              exRu="Как давно вы наблюдаете этот спад конверсии в вашей воронке продаж?"
             />
           </MethodCard>
 
@@ -354,31 +358,31 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="80% #6 • Past Continuous"
             badgeClass="tier-1"
-            subtitle="Прерванное действие / Что происходило в момент сбоя"
+            subtitle="Прерванное действие / Что происходило в момент подключения ЛПР"
           >
             <ChunkItemRow
               num="6.1"
               title="I was in the middle of [verb-ing] when [event happened]"
               trans="«Я был прямо посреди процесса [X], когда произошло [Y]»"
-              exEn="I was in the middle of deploying when my team lead pinged me to take another task."
-              exRu="Я был прямо посреди деплоя, когда тимлид написал мне с просьбой взять другую задачу."
-              tip="Формула: was/were + V-ing. Идеально объясняет прерывание вашей работы."
+              exEn="I was in the middle of presenting the pricing tiers when their VP of Operations joined the call."
+              exRu="Я был прямо посреди разбора тарифных планов, когда к созвону подключился их вице-президент по операциям."
+              tip="Формула: was/were + V-ing. Идеально объясняет прерывание вашей мысли на созвоне."
             />
 
             <ChunkItemRow
               num="6.2"
               title="I was just about to [verb] when [event happened]"
               trans="«Я как раз собирался [сделать X], когда [произошло Y]»"
-              exEn="I was just about to message you when your pull request alert arrived."
-              exRu="Я как раз собирался написать тебе, когда прилетел алерт о твоем PR."
+              exEn="I was just about to follow up with the lead when their procurement officer sent the signed contract."
+              exRu="Я как раз собирался написать лиду, когда их специалист по закупкам прислал подписанный договор."
             />
 
             <ChunkItemRow
               num="6.3"
               title="We were looking into [X], but [blocker/priority]"
-              trans="«Мы как раз изучали [X], но [вмешался блокер или приоритет]»"
-              exEn="We were looking into migrating to GraphQL, but security priorities took over."
-              exRu="Мы как раз присматривались к GraphQL, но приоритеты безопасности перевесили."
+              trans="«Мы как раз изучали [условия], но [клиент утвердил стандартный вариант]»"
+              exEn="We were looking into custom SLA terms, but their legal counsel approved our standard Master Services Agreement."
+              exRu="Мы как раз прорабатывали индивидуальный SLA, но их юрист утвердил наш типовой договор."
             />
           </MethodCard>
 
@@ -386,32 +390,32 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="80% #7 • Обязательства и срывы планов"
             badgeClass="tier-1"
-            subtitle="Только то, что реально звучит на митингах"
+            subtitle="Только то, что реально звучит на переговорах"
           >
             <ChunkItemRow
               num="7.1"
               title="I'll make sure to [verb] right after [event]"
-              trans="«Я обязательно проконтролирую / сделаю [X] сразу после [события]»"
-              exEn="I'll make sure to check the logs right after this standup call."
-              exRu="Я обязательно проверю логи сразу после этого дейлика."
-              tip="Взятие личной ответственности на митинге без лишней воды."
+              trans="«Я обязательно проконтролирую / отправлю [документы] сразу после [события]»"
+              exEn="I'll make sure to email the revised quote and onboarding timeline right after this call."
+              exRu="Я обязательно отправлю обновленный расчет цен и график внедрения сразу после созвона."
+              tip="Взятие личной ответственности на переговорах без лишней воды."
             />
 
             <ChunkItemRow
               num="7.2"
               title="I was supposed to [verb], but [blocker happened]"
-              trans="«Я должен был [сделать X], но [возник блокер]»"
-              exEn="I was supposed to finish this yesterday, but the staging API was completely down."
-              exRu="Я должен был закончить это вчера, но стейджинг API лежал."
-              tip="Дипломатичное объяснение сорвавшегося плана без чувства вины."
+              trans="«Я должен был [закрыть сделку вчера], но [возник блокер]»"
+              exEn="I was supposed to close this enterprise account yesterday, but their CFO requested an additional security audit."
+              exRu="Я должен был закрыть этого корпоративного клиента вчера, но их финдиректор запросил дополнительный аудит безопасности."
+              tip="Дипломатичное объяснение сдвига сроков закрытия без чувства вины."
             />
 
             <ChunkItemRow
               num="7.3"
               title="I'm meeting with [person] tomorrow to [verb]"
-              trans="«Я встречаюсь с [человеком] завтра, чтобы [обсудить задачу] (встреча в календаре)»"
-              exEn="I'm meeting with the tech lead tomorrow morning to finalize the architecture."
-              exRu="Я встречаюсь с техлидом завтра утром, чтобы утвердить архитектуру."
+              trans="«Я встречаюсь с [клиентом] завтра, чтобы [зафиксировать условия]»"
+              exEn="I'm meeting with their economic buyer tomorrow morning to finalize contract pricing."
+              exRu="Я встречаюсь с их лицом, распоряжающимся бюджетом, завтра утром, чтобы зафиксировать стоимость контракта."
             />
           </MethodCard>
         </section>
@@ -427,33 +431,33 @@ export default function TenseMatrixPage() {
               ЧАСТЬ 2 • ОСТАВШИЕСЯ 20%
             </span>
           </div>
-          <h2 className="chapter-heading">03. Периферия и Сложные Контексты (Теория, Post-Mortem и C1)</h2>
+          <h2 className="chapter-heading">03. Периферия и Сложные Контексты (Тендеры, Анализ Потерь и C1)</h2>
 
           <p>
-            Эти конструкции <strong>не нужны для ежедневного общения</strong>. Не заучивайте их наизусть, если еще не автоматизировали ЧАСТЬ 1. Обращайтесь к ним только при написании инцидент-репортов, формальных технических документов или при подготовке к C1-интервью.
+            Эти конструкции <strong>не нужны для ежедневного общения</strong>. Не заучивайте их наизусть, если еще не автоматизировали ЧАСТЬ 1. Обращайтесь к ним только при разборе проигранных тендеров (Deal Loss Analysis), подготовке официальных коммерческих предложений для совета директоров или на C1-собеседованиях.
           </p>
 
           {/* 8. Past Perfect */}
           <MethodCard
             badge="20% #1 • Past Perfect (Had + V3)"
             badgeClass="tier-3"
-            subtitle="Предпрошедшее: действие случилось ДО другого момента в прошлом"
+            subtitle="Предпрошедшее: действие случилось ДО другого момента в переговорах"
           >
             <ChunkItemRow
               num="8.1"
               title="By the time [event happened], we had already [past participle] [X]"
-              trans="«К тому моменту как [произошло X], мы уже успели [сделать Y]»"
-              exEn="By the time the client joined the incident call, we had already resolved the outage."
-              exRu="К тому моменту как клиент подключился к созвону, мы уже устранили аварию."
+              trans="«К тому моменту как [произошло X], мы уже успели [доказать ROI]»"
+              exEn="By the time their procurement team requested a price breakdown, we had already demonstrated clear ROI to their executive board."
+              exRu="К тому моменту как отдел закупок запросил детализацию цены, мы уже доказали окупаемость совету директоров."
               tip="Используется только для фиксации хронологии: сначала Had Done, потом Did."
             />
 
             <ChunkItemRow
               num="8.2"
               title="We hadn't noticed [X] until [event happened]"
-              trans="«Мы не замечали [X] до тех пор, пока не произошло [Y]»"
-              exEn="We hadn't noticed the regression until several enterprise customers complained."
-              exRu="Мы не замечали регрессию, пока несколько крупных клиентов не пожаловались."
+              trans="«Мы не знали, что [конкурент повторил КП], пока не [произошло событие]»"
+              exEn="We hadn't realized that the competitor had matched our quote until their procurement officer called us."
+              exRu="Мы не знали, что конкурент повторил наше ценовое предложение, пока нам не позвонил их специалист по закупкам."
             />
           </MethodCard>
 
@@ -461,23 +465,23 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="20% #2 • Past Perfect Continuous"
             badgeClass="tier-3"
-            subtitle="Длительность до точки в прошлом (причина аварии)"
+            subtitle="Длительность до точки в прошлом (причина затягивания сделки)"
           >
             <ChunkItemRow
               num="9.1"
               title="We had been [verb-ing] for [duration] before we [event happened]"
-              trans="«Мы занимались [этим] на протяжении [стольких месяцев], прежде чем [запустились]»"
-              exEn="We had been working on the migration for four months before we finally shipped it."
-              exRu="Мы работали над миграцией 4 месяца, прежде чем наконец зарелизили её."
-              tip="Формула: had been + V-ing. Классика технических постмортемов."
+              trans="«Мы вели [клиента] на протяжении [стольких месяцев], прежде чем [вышли на тендер]»"
+              exEn="We had been nurturing that prospective account for eight months before they finally issued the RFP."
+              exRu="Мы прогревали этого потенциального клиента восемь месяцев, прежде чем они наконец объявили тендер."
+              tip="Формула: had been + V-ing. Классика ретроспективы сложных корпоративных продаж."
             />
 
             <ChunkItemRow
               num="9.2"
-              title="The server crashed because it had been [verb-ing] for [time]"
-              trans="«Сервер упал, потому что он непрерывно [находился в состоянии X] в течение [дней]»"
-              exEn="The container crashed because it had been leaking memory for several days straight."
-              exRu="Контейнер упал, потому что из него несколько дней подряд текла память."
+              title="The deal stalled because [competitor] had been [verb-ing] for [time]"
+              trans="«Сделка зависла, потому что [конкурент демпинговал цены] в течение [недель]»"
+              exEn="The deal stalled because our competitor had been offering aggressive price dumping for several weeks."
+              exRu="Сделка зависла, потому что конкурент несколько недель подряд агрессивно демпинговал цены."
             />
           </MethodCard>
 
@@ -490,18 +494,18 @@ export default function TenseMatrixPage() {
             <ChunkItemRow
               num="10.1"
               title="I'll be [verb-ing] between [time] and [time]"
-              trans="«Я буду плотно заниматься [X] в интервале с [такого-то] до [такого-то часа]»"
-              exEn="I'll be monitoring the production logs between 2 PM and 4 PM during the cutover."
-              exRu="Я буду мониторить логи прода с 14:00 до 16:00 во время переключения."
-              tip="Формула: will be + V-ing. Предупреждение о недоступности."
+              trans="«Я буду проводить [демо] в интервале с [такого-то] до [такого-то часа]»"
+              exEn="I'll be conducting product demonstrations between 2 PM and 5 PM tomorrow."
+              exRu="Я буду проводить демонстрации продукта завтра с 14:00 до 17:00."
+              tip="Формула: will be + V-ing. Предупреждение о занятости на клиентских встречах."
             />
 
             <ChunkItemRow
               num="10.2"
               title="Will you be [verb-ing] later today?"
-              trans="«Ты будешь [делать X] сегодня по своему графику?» (ультра-вежливый вопрос)"
-              exEn="Will you be attending the architecture committee sync later today?"
-              exRu="Ты будешь на встрече архитектурного комитета сегодня?"
+              trans="«Вы будете [презентовать кейс] сегодня по графику?» (ультра-вежливый вопрос клиенту)"
+              exEn="Will you be presenting our business case to the buying committee later today?"
+              exRu="Вы будете сегодня презентовать наше бизнес-обоснование закупочному комитету?"
             />
           </MethodCard>
 
@@ -509,23 +513,23 @@ export default function TenseMatrixPage() {
           <MethodCard
             badge="20% #4 • Future Perfect (Will have + V3)"
             badgeClass="tier-3"
-            subtitle="Результат будет готов строго К дедлайну"
+            subtitle="Результат будет готов строго К дедлайну / К концу квартала"
           >
             <ChunkItemRow
               num="11.1"
               title="We will have [past participle] [X] by [deadline]"
-              trans="«Мы полностью завершим [X] к [такому-то сроку]»"
-              exEn="We will have closed all critical blockers by Friday afternoon."
-              exRu="Мы закроем все критические блокеры к вечеру пятницы."
-              tip="Главный маркер — предлог BY (к определенному моменту)."
+              trans="«Мы полностью выполним [план по выручке] к [такому-то сроку]»"
+              exEn="We will have exceeded our quarterly revenue quota by the end of this month."
+              exRu="Мы перевыполним наш квартальный план по выручке к концу этого месяца."
+              tip="Главный маркер — предлог BY (к определенному моменту закрытия периода)."
             />
 
             <ChunkItemRow
               num="11.2"
               title="By the time [event happens], we will have [past participle] [X]"
-              trans="«К тому моменту как [произойдет событие], мы уже успеем [сделать X]»"
-              exEn="By the time clients log in tomorrow, the database migration will have finished."
-              exRu="К моменту как клиенты завтра зайдут, миграция базы уже завершится."
+              trans="«К тому моменту как [начнется новый финансовый год], мы уже успеем [продлить контракт]»"
+              exEn="By the time the new fiscal year begins, we will have closed the contract renewal."
+              exRu="К моменту начала нового финансового года мы уже закроем продление контракта."
             />
           </MethodCard>
 
@@ -538,34 +542,34 @@ export default function TenseMatrixPage() {
             <ChunkItemRow
               num="12.1"
               title="By [date], I will have been [verb-ing] for [duration]"
-              trans="«К [дате] исполнится ровно [столько-то лет], как я [работаю здесь]»"
-              exEn="By next November, I will have been working at this company for exactly five years."
-              exRu="В следующем ноябре исполнится ровно пять лет, как я работаю в этой компании."
-              tip="Редкая форма. Используется для юбилеев и годовщин проектов."
+              trans="«К [дате] исполнится ровно [столько-то лет], как я [веду ключевых клиентов]»"
+              exEn="By next quarter, our account executive will have been managing top enterprise accounts for five straight years."
+              exRu="К следующему кварталу наш ведущий менеджер по продажам будет вести ключевых корпоративных клиентов уже ровно пять лет подряд."
+              tip="Редкая форма. Используется для подчеркивания экспертного стажа сейлза."
             />
           </MethodCard>
 
           {/* 13. Used To & Mixed Conditionals */}
           <MethodCard
-            badge="20% #6 • Привычки прошлого и Смешанные условия"
+            badge="20% #6 • Стратегические сопоставления и Смешанные условия"
             badgeClass="tier-3"
-            subtitle="Архитектурные сопоставления и сослагательность"
+            subtitle="Эволюция подходов к продажам и отработка ошибок"
           >
             <ChunkItemRow
               num="13.1"
               title="We used to [verb], but now we [verb]"
-              trans="«Раньше мы обычно [делали так], а теперь [делаем иначе]»"
-              exEn="We used to manage our own bare-metal servers, but now we run everything on AWS."
-              exRu="Раньше мы сами обслуживали железные сервера, а теперь крутим всё в AWS."
-              tip="Used to — только то, что полностью закончилось и больше не происходит."
+              trans="«Раньше мы обычно [делали холодные рассылки], а теперь [закрываем сделки через Social Selling]»"
+              exEn="We used to rely purely on cold email outreach, but now our sales reps close deals through multi-channel social selling."
+              exRu="Раньше мы полагались исключительно на холодные рассылки, а теперь наши менеджеры закрывают сделки через мультиканальные продажи."
+              tip="Used to — только то, что полностью закончилось в методике продаж."
             />
 
             <ChunkItemRow
               num="13.2"
               title="If we had [past participle] [X], we wouldn't [verb] now"
-              trans="«Если бы мы [сделали X в прошлом], сейчас мы бы не [мучились с Y]»"
-              exEn="If we had run end-to-end tests earlier, we wouldn't be troubleshooting in production now."
-              exRu="Если бы мы прогнали сквозные тесты раньше, сейчас мы бы не дебажили на проде."
+              trans="«Если бы мы [квалифицировали бюджет на первом звонке], сейчас мы бы не [спорили о скидках]»"
+              exEn="If we had qualified their budget during the first discovery call, we wouldn't be renegotiating discounts now."
+              exRu="Если бы мы квалифицировали их бюджет на первом созвоне, сейчас нам бы не пришлось пересогласовывать скидки."
               tip="Запрет WOULD в If-части! Условие в прошлом = had + V3."
             />
           </MethodCard>
@@ -601,30 +605,26 @@ export default function TenseMatrixPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="shrink-0 pl-11 md:pl-0">
-                <span className="inline-flex items-center px-3 py-1.5 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs sm:text-sm font-bold font-mono">
-                  ➔ {item.tense}
-                </span>
+              <div className="text-xs font-mono font-bold px-3 py-1.5 rounded-lg bg-white/10 text-cyan-300 border border-white/10 self-start md:self-auto shrink-0">
+                {item.tense}
               </div>
             </div>
           ))}
         </div>
 
-        <QuoteCallout cite="Принцип Парето в SLA-методологии">
-          «Сконцентрируйтесь только на ЧАСТИ 1. Автоматизируйте 7 золотых конструкций до автоматизма — и ваш английский на созвонах станет звучать чище, чем у 80% коллег».
+        <QuoteCallout cite="Правило Сейлз-Автоматизма">
+          «Не вычисляйте формулы. Свяжите каждую переговорную ситуацию с одним готовым каркасом. Когда клиент задает неожиданный вопрос или просит скидку, нужный глагольный блок должен вылетать за 0.2 секунды на полном автопилоте».
         </QuoteCallout>
       </section>
 
-      {/* Footer Navigation */}
       <footer className="article-footer">
         <p>
-          Материал входит в образовательный комплекс <strong>English Learn</strong>. Ознакомьтесь с базовой теорией в{" "}
-          <Link href="/tense-chunks" className="text-cyan-400 font-bold hover:underline">tense-chunks</Link>, картотекой фраз в{" "}
-          <Link href="/learn-chunks" className="text-emerald-400 font-bold hover:underline">learn-chunks</Link>, и персональными антидотами в{" "}
+          Материал входит в образовательный комплекс <strong>English Learn</strong>. Практика блочного переключения доступна в{" "}
+          <Link href="/tense-chunks" className="text-emerald-400 font-bold hover:underline">tense-chunks</Link>, база 100+ фраз — в{" "}
+          <Link href="/learn-chunks" className="text-cyan-400 font-bold hover:underline">learn-chunks</Link>, а персональные антидоты — в{" "}
           <Link href="/audit-chunks" className="text-rose-400 font-bold hover:underline">audit-chunks</Link>.
         </p>
-        <p style={{ marginTop: "12px", color: "var(--text-dim)" }}>2026 • Pareto 80/20 Tense Matrix</p>
+        <p style={{ marginTop: "12px", color: "var(--text-dim)" }}>2026 • English Learn Tense Matrix Methodology</p>
       </footer>
     </EditorialLayout>
   );

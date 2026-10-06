@@ -673,1030 +673,1107 @@
   <script>
     // Database of all core fundamental chunks
     const chunksData = [
-      // ==========================================
-      // 1. SEMI-FIXED FRAMES [X] (Рамки со слотами)
-      // ==========================================
-      {
-        text: "The thing is, [X]...",
-        clean: "The thing is,",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Дело в том, что [X]...",
-        exEn: "The thing is, we don't have enough test coverage for this module.",
-        exRu: "Дело в том, что у нас недостаточно тестового покрытия для этого модуля.",
-        note: "Идеально для объяснения истинной причины проблемы"
-      },
-      {
-        text: "It's only a matter of time before [X]...",
-        clean: "It's only a matter of time before",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Это лишь вопрос времени, когда [X]...",
-        exEn: "It's only a matter of time before this database crashes under load.",
-        exRu: "Это лишь вопрос времени, когда база упадет под нагрузкой.",
-        note: "Предупреждение о неизбежных рисках"
-      },
-      {
-        text: "What I'm trying to get at is [X]...",
-        clean: "What I'm trying to get at is",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Что я пытаюсь сказать, так это [X]...",
-        exEn: "What I'm trying to get at is that we need a simpler architecture.",
-        exRu: "Что я пытаюсь сказать — нам нужна архитектура попроще.",
-        note: "Фокусировка мысли после длинного рассуждения"
-      },
-      {
-        text: "There's no point in [verb-ing]...",
-        clean: "There's no point in",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Нет никакого смысла делать [X]...",
-        exEn: "There's no point in optimizing this query before we have production metrics.",
-        exRu: "Нет смысла оптимизировать этот запрос, пока нет метрик из прода.",
-        note: "Экономия времени от лишней работы"
-      },
-      {
-        text: "From what I can tell, [X]...",
-        clean: "From what I can tell,",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Насколько я могу судить / по моим наблюдениям, [X]...",
-        exEn: "From what I can tell, the API is behaving normally now.",
-        exRu: "Судя по всему, API сейчас ведет себя нормально.",
-        note: "Оценка ситуации без излишней категоричности"
-      },
-      {
-        text: "As far as I'm concerned, [X]...",
-        clean: "As far as I'm concerned,",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Что касается меня / на мой взгляд, [X]...",
-        exEn: "As far as I'm concerned, this PR is ready to merge.",
-        exRu: "Что касается меня, этот PR готов к мёрджу.",
-        note: "Четкое выражение личной позиции"
-      },
-      {
-        text: "It all comes down to [X]...",
-        clean: "It all comes down to",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Всё сводится к [X]...",
-        exEn: "At the end of the day, it all comes down to developer bandwidth.",
-        exRu: "В конечном счете всё сводится к ресурсу разработчиков.",
-        note: "Выделение фундаментального фактора"
-      },
-      {
-        text: "Chances are, [X]...",
-        clean: "Chances are,",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Весьма вероятно, что [X]...",
-        exEn: "Chances are, the user will never trigger this edge case.",
-        exRu: "Скорее всего, пользователь никогда не вызовет этот редкий кейс.",
-        note: "Естественная замена слову 'probably'"
-      },
-      {
-        text: "Correct me if I'm wrong, but [X]...",
-        clean: "Correct me if I'm wrong, but",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Поправьте меня, если я ошибаюсь, но [X]...",
-        exEn: "Correct me if I'm wrong, but didn't we agree to ship this next week?",
-        exRu: "Поправьте, если я не прав, но разве мы не договаривались выкатить это на следующей неделе?",
-        note: "Вежливое напоминание о договоренностях"
-      },
-      {
-        text: "Would you mind if I [past-verb]...?",
-        clean: "Would you mind if I",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Ты не против, если я [X]...?",
-        exEn: "Would you mind if I took over this ticket today?",
-        exRu: "Ты не против, если я заберу этот таск себе?",
-        note: "Максимально вежливый запрос разрешения"
-      },
-      {
-        text: "The bottom line is that [X]...",
-        clean: "The bottom line is that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Главная суть в том, что [X]...",
-        exEn: "The bottom line is that our current cloud bill is unsustainable.",
-        exRu: "Суть в том, что текущий счет за облако мы не потянем.",
-        note: "Резюме бизнес-реальности"
-      },
-      {
-        text: "It turns out that [X]...",
-        clean: "It turns out that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Оказывается, что [X]...",
-        exEn: "It turns out that the redis cluster was dropping connections.",
-        exRu: "Оказывается, редис-кластер сбрасывал соединения.",
-        note: "Сообщение о вновь выясненных фактах"
-      },
-      {
-        text: "It goes without saying that [X]...",
-        clean: "It goes without saying that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Само собой разумеется, что [X]...",
-        exEn: "It goes without saying that user privacy is our top priority.",
-        exRu: "Само собой, приватность пользователей — наш главный приоритет.",
-        note: "Подтверждение очевидной истины"
-      },
-      {
-        text: "I wouldn't be surprised if [X]...",
-        clean: "I wouldn't be surprised if",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Я не удивлюсь, если [X]...",
-        exEn: "I wouldn't be surprised if the client asks for extra scope.",
-        exRu: "Я не удивлюсь, если клиент попросит дополнительный скоуп.",
-        note: "Прогноз реалистичного развития событий"
-      },
-      {
-        text: "It's worth pointing out that [X]...",
-        clean: "It's worth pointing out that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Стоит обратить внимание на то, что [X]...",
-        exEn: "It's worth pointing out that this library hasn't been updated in two years.",
-        exRu: "Стоит отметить, что эта библиотека не обновлялась два года.",
-        note: "Фокусировка внимания на важной детали"
-      },
-      {
-        text: "Given that [X], we should...",
-        clean: "Given that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Учитывая, что [X], нам стоит...",
-        exEn: "Given that we have a tight deadline, we should stick to an MVP.",
-        exRu: "Учитывая сжатые сроки, нам стоит ограничиться MVP.",
-        note: "Логический вывод на основе вводных данных"
-      },
-      {
-        text: "In light of [X],...",
-        clean: "In light of",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "В свете [событий/фактов X]...",
-        exEn: "In light of recent security reports, we need to rotate all secrets.",
-        exRu: "В свете последних отчетов по безопасности, нам нужно сменить все ключи.",
-        note: "Обоснование срочных действий"
-      },
-      {
-        text: "There's a good chance that [X]...",
-        clean: "There's a good chance that",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Высока вероятность того, что [X]...",
-        exEn: "There's a good chance that the network timeout caused this error.",
-        exRu: "Высока вероятность, что эту ошибку вызвал таймаут сети.",
-        note: "Оценка правдоподобной гипотезы"
-      },
-      {
-        text: "It remains to be seen whether [X]...",
-        clean: "It remains to be seen whether",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "Еще предстоит увидеть, сработает ли [X]...",
-        exEn: "It remains to be seen whether this migration improves latency.",
-        exRu: "Еще предстоит увидеть, улучшит ли эта миграция задержки.",
-        note: "Когда результат пока не ясен"
-      },
-      {
-        text: "For the time being, [X]...",
-        clean: "For the time being,",
-        cat: "frames",
-        catName: "Рамка со слотом",
-        trans: "На данный момент / пока что [X]...",
-        exEn: "For the time being, let's keep the fallback mechanism enabled.",
-        exRu: "Пока что давайте оставим резервный механизм включенным.",
-        note: "Временное рабочее решение"
-      },
-
-      // ==========================================
-      // 2. WORK, TECH & MEETINGS (Работа и созвоны)
-      // ==========================================
-      {
-        text: "take a hit",
-        clean: "take a hit",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Пострадать / просесть / принять удар",
-        exEn: "If we rush this out, testing will definitely <strong>take a hit</strong>.",
-        exRu: "Если мы поторопимся с релизом, тестирование точно пострадает.",
-        note: "Вместо тяжелого 'suffer degradation'"
-      },
-      {
-        text: "cut corners",
-        clean: "cut corners",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Делать тяп-ляп / срезать углы / экономить на качестве",
-        exEn: "We can't afford to <strong>cut corners</strong> on user authentication.",
-        exRu: "Мы не можем позволить себе срезать углы на авторизации пользователей.",
-        note: "Очень часто звучит при обсуждении техдолга"
-      },
-      {
-        text: "move the needle",
-        clean: "move the needle",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Принести ощутимый результат / сдвинуть дело с мертвой точки",
-        exEn: "Will this minor UI change actually <strong>move the needle</strong> for retention?",
-        exRu: "Сдвинет ли это мелкое изменение в UI реальные показатели удержания?",
-        note: "Золотой чанк продуктовых и бизнес-митингов"
-      },
-      {
-        text: "table this for now",
-        clean: "table this for now",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Отложить этот вопрос / перенести на потом",
-        exEn: "Let's <strong>table this for now</strong> and focus on the deployment blocker.",
-        exRu: "Давайте отложим это пока и сфокусируемся на блокерах релиза.",
-        note: "Остановка оффтопа на митинге"
-      },
-      {
-        text: "circle back to [X]",
-        clean: "circle back to",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Вернуться к теме позже",
-        exEn: "Let's <strong>circle back to</strong> caching strategy at the end of the sync.",
-        exRu: "Давайте вернемся к стратегии кэширования в конце созвона.",
-        note: "Мягкий перенос обсуждения"
-      },
-      {
-        text: "keep someone in the loop",
-        clean: "keep me in the loop",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Держать в курсе событий",
-        exEn: "Please <strong>keep me in the loop</strong> once the PR is approved.",
-        exRu: "Держи меня в курсе, когда PR аппрувнут.",
-        note: "Стандартная фраза в Slack/созвонах"
-      },
-      {
-        text: "call the shots",
-        clean: "call the shots",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Принимать решения / руководить процессом",
-        exEn: "The security team <strong>calls the shots</strong> on token expiration.",
-        exRu: "Команда безопасности принимает финальное решение по срокам жизни токенов.",
-        note: "О зонах ответственности"
-      },
-      {
-        text: "iron out the kinks",
-        clean: "iron out the kinks",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Устранить мелкие шероховатости / отладить детали",
-        exEn: "We just need one more day to <strong>iron out the kinks</strong> in staging.",
-        exRu: "Нам нужен еще один день, чтобы устранить шероховатости на стейджинге.",
-        note: "Перед финальным релизом"
-      },
-      {
-        text: "get bogged down in [X]",
-        clean: "get bogged down in",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Увязнуть в рутине / закопаться в мелочах",
-        exEn: "Let's not <strong>get bogged down in</strong> edge cases during the initial MVP.",
-        exRu: "Давайте не закапываться в редкие краевые кейсы на этапе первого MVP.",
-        note: "Защита фокуса команды"
-      },
-      {
-        text: "run into a roadblock",
-        clean: "run into a roadblock",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Натолкнуться на непреодолимое препятствие / застрять",
-        exEn: "We <strong>ran into a roadblock</strong> with the third-party payment gateway.",
-        exRu: "Мы натолкнулись на глухой блокер с платежным шлюзом.",
-        note: "Отчет о блокерах на стендапе"
-      },
-      {
-        text: "be short on bandwidth",
-        clean: "be short on bandwidth",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Не иметь достаточного ресурса / времени / свободных рук",
-        exEn: "The mobile team is <strong>short on bandwidth</strong> this sprint.",
-        exRu: "У мобильной команды в этом спринте не хватает ресурса.",
-        note: "Bandwidth в IT — рабочее время человека"
-      },
-      {
-        text: "a slippery slope",
-        clean: "a slippery slope",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Скользкая дорожка / рискованный компромисс",
-        exEn: "Deploying code without automated tests is <strong>a slippery slope</strong>.",
-        exRu: "Деплоить код без автотестов — скользкая дорожка.",
-        note: "Аргумент против сомнительных решений"
-      },
-      {
-        text: "ballpark estimate",
-        clean: "ballpark estimate",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Приблизительная оценка навскидку",
-        exEn: "Can you give me a rough <strong>ballpark estimate</strong> before we commit?",
-        exRu: "Можешь дать примерную оценку навскидку, прежде чем мы закоммитимся?",
-        note: "Когда не требуют точных часов"
-      },
-      {
-        text: "touch base on [X]",
-        clean: "touch base on",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Кратко созвониться / сверить часы по вопросу",
-        exEn: "Let's <strong>touch base on</strong> this tomorrow morning.",
-        exRu: "Давай кратко созвонимся и сверимся по этому поводу завтра утром.",
-        note: "Быстрый синк на 5 минут"
-      },
-      {
-        text: "bring someone up to speed",
-        clean: "bring you up to speed",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Ввести в курс дела",
-        exEn: "Let me <strong>bring you up to speed</strong> on where we stand with the migration.",
-        exRu: "Давай я быстро введу тебя в курс дела по текущему статусу миграции.",
-        note: "Начало онбординга или апдейта"
-      },
-      {
-        text: "double down on [X]",
-        clean: "double down on",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Удвоить усилия в направлении / сделать ставку на",
-        exEn: "We should <strong>double down on</strong> test automation this quarter.",
-        exRu: "Нам стоит удвоить усилия по автоматизации тестирования в этом квартале.",
-        note: "Стратегический приоритет"
-      },
-      {
-        text: "walk someone through [X]",
-        clean: "walk you through",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Пошагово показать / провести по коду или процессу",
-        exEn: "Let me share my screen and <strong>walk you through</strong> the new PR.",
-        exRu: "Давай я расшарю экран и пошагово проведу тебя по новому PR.",
-        note: "Идеально для код-ревью и демо"
-      },
-      {
-        text: "wrap this up",
-        clean: "wrap this up",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Закругляться / подводить итоги созвона",
-        exEn: "We have two minutes left, so let's <strong>wrap this up</strong>.",
-        exRu: "У нас осталось две минуты, так что давайте закругляться.",
-        note: "Завершение встречи вовремя"
-      },
-      {
-        text: "back to the drawing board",
-        clean: "back to the drawing board",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Начать всё сначала с нуля (после провала идеи)",
-        exEn: "The load test failed completely, so it's <strong>back to the drawing board</strong>.",
-        exRu: "Нагрузочный тест полностью провалился, так что начинаем с нуля.",
-        note: "Когда архитектурная идея не взлетела"
-      },
-      {
-        text: "quick fix / band-aid solution",
-        clean: "band-aid solution",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Временная заплатка / костыль",
-        exEn: "Restarting the container is just a <strong>band-aid solution</strong>, not a real fix.",
-        exRu: "Перезапуск контейнера — это лишь временный костыль, а не решение.",
-        note: "Обозначение техдолга"
-      },
-      {
-        text: "root cause",
-        clean: "root cause",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Первопричина сбоя или бага",
-        exEn: "We patched the symptom, but we still haven't found the <strong>root cause</strong>.",
-        exRu: "Мы убрали симптом, но так и не нашли истинную первопричину.",
-        note: "При разборе инцидентов (post-mortem)"
-      },
-      {
-        text: "rule out [X]",
-        clean: "rule out",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Исключить вариант / гипотезу",
-        exEn: "We can <strong>rule out</strong> database issues — queries are executing in 5ms.",
-        exRu: "Мы можем исключить проблемы с базой — запросы выполняются за 5мс.",
-        note: "В процессе дебага"
-      },
-      {
-        text: "on the same page",
-        clean: "on the same page",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Одинаково понимать задачу / быть синхронизированными",
-        exEn: "Just to make sure we're all <strong>on the same page</strong>, here's the plan.",
-        exRu: "Просто чтобы убедиться, что мы все на одной волне — вот наш план.",
-        note: "Сверка контекста команды"
-      },
-      {
-        text: "buy into [X]",
-        clean: "buy into",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Поверить в идею / поддержать подход",
-        exEn: "The stakeholders completely <strong>bought into</strong> our new roadmap.",
-        exRu: "Стейкхолдеры полностью поддержали наш новый роадмап.",
-        note: "Принятие решения руководством"
-      },
-      {
-        text: "drill down into [X]",
-        clean: "drill down into",
-        cat: "work",
-        catName: "Работа & Созвоны",
-        trans: "Углубиться в конкретные технические детали",
-        exEn: "Let's <strong>drill down into</strong> the network traces to see the delay.",
-        exRu: "Давайте углубимся в сетевые трейсы, чтобы увидеть причину задержки.",
-        note: "Переход к детальному анализу"
-      },
-
-      // ==========================================
-      // 3. TIME-BUYERS & ANTI-EEE (Покупка времени)
-      // ==========================================
-      {
-        text: "That's a valid point to raise...",
-        clean: "That's a valid point to raise,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Это очень справедливый вопрос...",
-        exEn: "That's a valid point to raise, and looking at the system requirements...",
-        exRu: "Это справедливый вопрос, и если посмотреть на системные требования...",
-        note: "Дает 2.5 секунды тишины в начале ответа"
-      },
-      {
-        text: "If we look at the bigger picture...",
-        clean: "If we look at the bigger picture,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Если взглянуть на картину в целом...",
-        exEn: "If we look at the bigger picture, this refactoring pays off in six months.",
-        exRu: "Если взглянуть шире, этот рефакторинг окупится за полгода.",
-        note: "Переход от деталей к стратегии"
-      },
-      {
-        text: "Off the top of my head,...",
-        clean: "Off the top of my head,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Навскидку / первое, что приходит в голову...",
-        exEn: "Off the top of my head, we’re looking at roughly two weeks of work.",
-        exRu: "Навскидку — тут около двух недель работы.",
-        note: "Защита от требования мгновенной точности"
-      },
-      {
-        text: "How can I best put this...",
-        clean: "How can I best put this...",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Как бы лучше это сформулировать...",
-        exEn: "How can I best put this... the architecture itself is solid, but the execution was rushed.",
-        exRu: "Как бы лучше сказать... сама архитектура добротная, но реализована в спешке.",
-        note: "Вместо мычания «ээээ»"
-      },
-      {
-        text: "The technical term escapes me, but...",
-        clean: "The technical term escapes me, but",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Технический термин вылетел из головы, но...",
-        exEn: "The exact term escapes me, but basically it’s a buffer between services.",
-        exRu: "Точный термин вылетел из головы, но по сути это буфер между сервисами.",
-        note: "Вход в серкумлокуцию (описание забытого слова)"
-      },
-      {
-        text: "What this really boils down to is...",
-        clean: "What this really boils down to is",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "То, к чему всё на самом деле сводится...",
-        exEn: "What this really boils down to is whether we prioritize speed or stability.",
-        exRu: "К чему всё реально сводится — выбираем ли мы скорость или стабильность.",
-        note: "Концентрация сути без задержек"
-      },
-      {
-        text: "Scratch that — what I meant was...",
-        clean: "Scratch that, what I meant was",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Забудьте / точнее, я имел в виду...",
-        exEn: "Scratch that — what I meant was the staging environment, not production.",
-        exRu: "Сброс — я имел в виду стейджинг, а не прод.",
-        note: "Быстрое исправление оговорки"
-      },
-      {
-        text: "To put it in perspective,...",
-        clean: "To put it in perspective,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Чтобы было понятно масштабы / для сравнения...",
-        exEn: "To put it in perspective, that outage cost us less than 100 dollars.",
-        exRu: "Чтобы понимать масштаб — тот сбой стоил нам меньше ста долларов.",
-        note: "Сравнение метрик"
-      },
-      {
-        text: "Bear with me for a second,...",
-        clean: "Bear with me for a second,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Подождите одну секунду (пока ищу ссылку/лог)...",
-        exEn: "<strong>Bear with me for a second</strong> while I pull up the error dashboard.",
-        exRu: "Секунду терпения, пока я открою дашборд с ошибками.",
-        note: "Когда нужно кликнуть ссылку без неловкого молчания"
-      },
-      {
-        text: "Let's put it this way,...",
-        clean: "Let's put it this way,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Скажем так / сформулируем это следующим образом...",
-        exEn: "<strong>Let's put it this way</strong>: if this script fails, we have no backup.",
-        exRu: "Скажем так: если этот скрипт упадет, бэкапа у нас нет.",
-        note: "Перед прямым или жестким тезисом"
-      },
-      {
-        text: "If memory serves me right,...",
-        clean: "If memory serves me right,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Если мне не изменяет память...",
-        exEn: "<strong>If memory serves me right</strong>, we hit a similar bug three months ago.",
-        exRu: "Если память мне не изменяет, мы натыкались на похожий баг три месяца назад.",
-        note: "Отсылка к прошлому опыту"
-      },
-      {
-        text: "In other words,...",
-        clean: "In other words,",
-        cat: "time-buyers",
-        catName: "Покупка времени",
-        trans: "Другими словами / иначе говоря...",
-        exEn: "<strong>In other words</strong>, we need to rewrite this from scratch.",
-        exRu: "Другими словами, нам нужно переписать это с нуля.",
-        note: "Упрощение сложного технического вывода"
-      },
-
-      // ==========================================
-      // 4. HEDGING & AGREEMENTS (Дипломатия, сомнения и согласие)
-      // ==========================================
-      {
-        text: "I see where you're coming from, but...",
-        clean: "I see where you're coming from, but",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Я понимаю логику вашей мысли, но...",
-        exEn: "I see where you're coming from, but latency might double under peak load.",
-        exRu: "Я понимаю, почему ты так предлагаешь, но задержка может удвоиться под пиковой нагрузкой.",
-        note: "Самое нативное вежливое несогласие"
-      },
-      {
-        text: "I'm not so sure about that...",
-        clean: "I'm not so sure about that",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Я не особо в этом уверен...",
-        exEn: "I'm not so sure about that — we tried that library last year and it had memory leaks.",
-        exRu: "Я не особо в этом уверен — мы пробовали ту либу в прошлом году, и там текли ресурсы.",
-        note: "Мягкий скепсис"
-      },
-      {
-        text: "It might be a bit of a stretch...",
-        clean: "It might be a bit of a stretch",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Это может быть чересчур амбициозно / на грани возможностей...",
-        exEn: "Delivering both features by Friday might be a bit of a stretch.",
-        exRu: "Сдать обе фичи к пятнице — это, пожалуй, чересчур оптимистично.",
-        note: "Вежливый отказ от нереального дедлайна"
-      },
-      {
-        text: "Don't get me wrong,...",
-        clean: "Don't get me wrong,",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Не поймите меня неправильно...",
-        exEn: "Don't get me wrong, the design is great, but the backend isn't ready for it.",
-        exRu: "Не поймите неправильно, дизайн отличный, но бэкенд под него ещё не готов.",
-        note: "Защита от обиды собеседника"
-      },
-      {
-        text: "It's a tough call...",
-        clean: "It's a tough call",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Это сложный и неоднозначный выбор...",
-        exEn: "Whether to rewrite or patch is a tough call.",
-        exRu: "Переписывать с нуля или латать дальше — сложный выбор.",
-        note: "Когда нет очевидно правильного решения"
-      },
-      {
-        text: "I have mixed feelings about [X]...",
-        clean: "I have mixed feelings about",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "У меня двоякие ощущения насчет [X]...",
-        exEn: "I have mixed feelings about moving our monolith to microservices right now.",
-        exRu: "У меня двоякие ощущения насчет распила монолита на микросервисы прямо сейчас.",
-        note: "Взвешенная осторожность"
-      },
-      {
-        text: "I'm not entirely convinced that...",
-        clean: "I'm not entirely convinced that",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Я не до конца убежден, что...",
-        exEn: "I'm not entirely convinced that this framework will solve our bottlenecks.",
-        exRu: "Я не до конца убежден, что этот фреймворк решит наши узкие места.",
-        note: "Зрелое инженерное сомнение"
-      },
-      {
-        text: "Could you unpack that a bit more?",
-        clean: "Could you unpack that a bit more?",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Можешь раскрыть эту мысль подробнее?",
-        exEn: "Could you unpack that last point about authentication flows a bit more?",
-        exRu: "Можешь чуть подробнее развернуть тот последний пункт про сценарии авторизации?",
-        note: "Вместо резкого 'I don't understand'"
-      },
-      {
-        text: "Spot on!",
-        clean: "Spot on!",
-        cat: "hedging",
-        catName: "Дипломатия & Согласие",
-        trans: "В самую точку! / В яблочко!",
-        exEn: "Your analysis of the deadlock was <strong>spot on</strong>.",
-        exRu: "Твой анализ причин взаимной блокировки попал в самую точку.",
-        note: "Полное и восторженное согласие"
-      },
-      {
-        text: "Couldn't agree more!",
-        clean: "Couldn't agree more!",
-        cat: "hedging",
-        catName: "Дипломатия & Согласие",
-        trans: "Абсолютно согласен! / Не могу не согласиться!",
-        exEn: "I <strong>couldn't agree more</strong> — simplifying the API is our best bet.",
-        exRu: "Абсолютно согласен — упрощение API сейчас наш лучший шаг.",
-        note: "Быстрое подтверждение единодушия"
-      },
-      {
-        text: "Fair enough.",
-        clean: "Fair enough.",
-        cat: "hedging",
-        catName: "Дипломатия & Согласие",
-        trans: "Справедливо. / Принимается. / Логично.",
-        exEn: "You want more tests before merging? <strong>Fair enough</strong>, I'll add them.",
-        exRu: "Хочешь больше тестов перед мёрджем? Справедливо, сейчас допишу.",
-        note: "Спокойное принятие аргумента коллеги"
-      },
-      {
-        text: "Play devil's advocate",
-        clean: "play devil's advocate",
-        cat: "hedging",
-        catName: "Дипломатия & Сомнения",
-        trans: "Побыть адвокатом дьявола (покритиковать для проверки)",
-        exEn: "Just to <strong>play devil's advocate</strong>, what happens if AWS goes down?",
-        exRu: "Просто побуду адвокатом дьявола: а что будет, если ляжет AWS?",
-        note: "Безопасный способ задать неудобный вопрос"
-      },
-
-      // ==========================================
-      // 5. SOCIAL & DAILY CONVERSATION (Живое общение)
-      // ==========================================
-      {
-        text: "At the end of the day,...",
-        clean: "At the end of the day,",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "В конечном счете / в сухом остатке...",
-        exEn: "At the end of the day, users only care if the app is fast and reliable.",
-        exRu: "В конечном счете пользователям важно только то, чтобы приложение работало быстро и стабильно.",
-        note: "Самый частый чанк американского английского"
-      },
-      {
-        text: "Long story short,...",
-        clean: "Long story short,",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Короче говоря / если в двух словах...",
-        exEn: "Long story short, we had to roll back the migration.",
-        exRu: "Короче говоря, нам пришлось откатить миграцию.",
-        note: "Переход сразу к финалу истории"
-      },
-      {
-        text: "Speaking of which,...",
-        clean: "Speaking of which,",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Кстати об этом / к слову говоря...",
-        exEn: "Speaking of which, did you get a chance to check my pull request?",
-        exRu: "Кстати об этом — у тебя получилось посмотреть мой пулреквест?",
-        note: "Плавный переход на смежную тему"
-      },
-      {
-        text: "For what it's worth,...",
-        clean: "For what it's worth,",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Если это имеет значение / к слову...",
-        exEn: "For what it's worth, I think you handled that client escalation really well.",
-        exRu: "К слову сказать, я считаю, ты отлично разрулил ту эскалацию с клиентом.",
-        note: "Мягкая поддержка или дополнение"
-      },
-      {
-        text: "Out of the blue",
-        clean: "out of the blue",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Внезапно / как гром среди ясного неба",
-        exEn: "The server started throwing 500 errors completely out of the blue.",
-        exRu: "Сервер начал сыпать 500-ми ошибками совершенно внезапно.",
-        note: "Неожиданное событие"
-      },
-      {
-        text: "It is what it is",
-        clean: "It is what it is",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Что есть, то есть / ничего уже не поделаешь",
-        exEn: "We missed the sprint goal, but it is what it is. Let's do better next week.",
-        exRu: "Мы упустили цель спринта, но что поделать. Сделаем лучше на следующей неделе.",
-        note: "Философское принятие факта"
-      },
-      {
-        text: "Cross that bridge when we come to it",
-        clean: "cross that bridge when we come to it",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Решать проблемы по мере их поступления",
-        exEn: "We might run out of storage in two years, but we'll cross that bridge when we come to it.",
-        exRu: "Возможно, через два года у нас кончится место, но решим эту проблему, когда дойдем до неё.",
-        note: "Отказ от преждевременной паники"
-      },
-      {
-        text: "Sleep on it",
-        clean: "sleep on it",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Переспать с этой мыслью / принять решение утром",
-        exEn: "Don't accept the offer right away. Sleep on it and let them know tomorrow.",
-        exRu: "Не соглашайся на оффер сразу. Переспи с этой мыслью и ответь им завтра.",
-        note: "Перед важным решением"
-      },
-      {
-        text: "Hit the ground running",
-        clean: "hit the ground running",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Взяться за дело без раскачки / сразу включиться на полную",
-        exEn: "The new senior developer hit the ground running on day one.",
-        exRu: "Новый сеньор включился в работу на полной скорости с первого же дня.",
-        note: "Высокая продуктивность"
-      },
-      {
-        text: "No big deal",
-        clean: "No big deal",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Ничего страшного / ерунда / пустяки",
-        exEn: "Don't worry about the typo in Slack, it's <strong>no big deal</strong>.",
-        exRu: "Не переживай из-за опечатки в слаке, это ерунда.",
-        note: "Успокоение собеседника"
-      },
-      {
-        text: "Fingers crossed",
-        clean: "Fingers crossed",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Держим кулачки / надеемся на удачу",
-        exEn: "We're deploying the hotfix right now. <strong>Fingers crossed</strong>!",
-        exRu: "Мы деплоим хотфикс прямо сейчас. Держим кулачки!",
-        note: "Пожелание успеха перед релизом"
-      },
-      {
-        text: "In a nutshell,...",
-        clean: "In a nutshell,",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "В двух словах / кратко говоря...",
-        exEn: "<strong>In a nutshell</strong>, our new feature lets users export reports to PDF.",
-        exRu: "В двух словах: наша новая фича позволяет пользователям экспортировать отчеты в PDF.",
-        note: "Краткий синопсис"
-      },
-      {
-        text: "Call it a day",
-        clean: "call it a day",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Закончить работу на сегодня",
-        exEn: "We've been debugging for eight hours straight. Let's <strong>call it a day</strong>.",
-        exRu: "Мы дебажим восемь часов подряд. Давайте закругляться на сегодня.",
-        note: "Конец рабочего дня"
-      },
-      {
-        text: "Ring a bell",
-        clean: "ring a bell",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Звучать знакомо / напоминать что-то",
-        exEn: "Does the name of this error class <strong>ring a bell</strong> to anyone?",
-        exRu: "Название этого класса ошибок кому-нибудь о чем-то говорит?",
-        note: "Проверка воспоминаний"
-      },
-      {
-        text: "Bite the bullet",
-        clean: "bite the bullet",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Стиснуть зубы и сделать тяжелую/неприятную работу",
-        exEn: "We just have to <strong>bite the bullet</strong> and rewrite the legacy parser.",
-        exRu: "Нам просто нужно стиснуть зубы и переписать этот легаси-парсер.",
-        note: "Решимость перед рутиной"
-      },
-      {
-        text: "Cut to the chase",
-        clean: "cut to the chase",
-        cat: "social",
-        catName: "Живое общение",
-        trans: "Перейти сразу к сути без лишних предисловий",
-        exEn: "Let's <strong>cut to the chase</strong>: how much will this migration cost?",
-        exRu: "Давайте сразу к делу: во сколько нам обойдется эта миграция?",
-        note: "Экономия времени на встречах"
-      },
-
-      // ==========================================
-      // 6. VERB COLLOCATIONS (Глагольные связки)
-      // ==========================================
-      {
-        text: "make sense",
-        clean: "make sense",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Иметь смысл / звучать логично",
-        exEn: "Does that explanation <strong>make sense</strong>, or should I rephrase?",
-        exRu: "Это объяснение звучит логично, или мне перефразировать?",
-        note: "Никогда не 'have sense'"
-      },
-      {
-        text: "make sure",
-        clean: "make sure",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Убедиться / проконтролировать",
-        exEn: "Please <strong>make sure</strong> all environment variables are populated.",
-        exRu: "Пожалуйста, убедись, что все переменные окружения заполнены.",
-        note: "Базовая фраза в разработке"
-      },
-      {
-        text: "take into account",
-        clean: "take into account",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Принимать во внимание / учитывать",
-        exEn: "We need to <strong>take into account</strong> timezone differences across teams.",
-        exRu: "Нам нужно принять во внимание разницу в часовых поясах между командами.",
-        note: "Обязательный рабочий чанк"
-      },
-      {
-        text: "take advantage of [X]",
-        clean: "take advantage of",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Воспользоваться возможностью / извлечь пользу",
-        exEn: "We should <strong>take advantage of</strong> HTTP/3 to reduce handshake overhead.",
-        exRu: "Нам стоит воспользоваться преимуществами HTTP/3, чтобы снизить оверхед на хэндшейки.",
-        note: "В нейтральном или позитивном ключе"
-      },
-      {
-        text: "take for granted",
-        clean: "take for granted",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Принимать как само собой разумеющееся",
-        exEn: "We shouldn't <strong>take 99.9% uptime for granted</strong> without automated failover.",
-        exRu: "Не стоит принимать аптайм в 99.9% как должное без настроенного авто-фейловера.",
-        note: "Предостережение от самоуспокоенности"
-      },
-      {
-        text: "come in handy",
-        clean: "come in handy",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Пригодиться / оказаться полезным",
-        exEn: "This script will definitely <strong>come in handy</strong> during the database migration.",
-        exRu: "Этот скрипт определенно пригодится во время миграции базы данных.",
-        note: "Удобный инструмент"
-      },
-      {
-        text: "catch someone off guard",
-        clean: "catch off guard",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Застать врасплох",
-        exEn: "The sudden traffic surge <strong>caught our load balancers off guard</strong>.",
-        exRu: "Внезапный всплеск трафика застал наши балансировщики врасплох.",
-        note: "О неожиданных событиях"
-      },
-      {
-        text: "come to terms with [X]",
-        clean: "come to terms with",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Смириться с фактом / принять неизбежное",
-        exEn: "We have to <strong>come to terms with</strong> the fact that legacy code won't disappear overnight.",
-        exRu: "Придется смириться с тем, что легаси-код не исчезнет за одну ночь.",
-        note: "Принятие реальности"
-      },
-      {
-        text: "pay off",
-        clean: "pay off",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Окупиться / принести плоды",
-        exEn: "All the effort we put into end-to-end tests really <strong>paid off</strong>.",
-        exRu: "Все усилия, вложенные в сквозные тесты, действительно окупились с лихвой.",
-        note: "Результат долгой работы"
-      },
-      {
-        text: "have second thoughts",
-        clean: "have second thoughts",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Сомневаться / передумывать / колебаться",
-        exEn: "I'm having <strong>second thoughts</strong> about dropping support for iOS 15.",
-        exRu: "Я начинаю сомневаться насчет прекращения поддержки iOS 15.",
-        note: "Возникновение сомнений"
-      },
-      {
-        text: "keep in mind",
-        clean: "keep in mind",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Иметь в виду / не забывать о",
-        exEn: "Please <strong>keep in mind</strong> that the staging database resets every Sunday.",
-        exRu: "Имей в виду, что база данных на стейджинге сбрасывается каждое воскресенье.",
-        note: "Полезное напоминание"
-      },
-      {
-        text: "run out of [X]",
-        clean: "run out of",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Закончиться (о времени, памяти, бюджете, терпении)",
-        exEn: "The service crashed because it <strong>ran out of memory</strong>.",
-        exRu: "Сервис упал, потому что у него закончилась оперативная память.",
-        note: "Физическое исчерпание ресурса"
-      },
-      {
-        text: "look into [X]",
-        clean: "look into",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Исследовать / разобраться в вопросе",
-        exEn: "I'll <strong>look into</strong> why that webhook failed and update the ticket.",
-        exRu: "Я разберусь, почему упал тот вебхук, и обновлю тикет.",
-        note: "Обещание исследовать проблему"
-      },
-      {
-        text: "stay on top of [X]",
-        clean: "stay on top of",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Контролировать ситуацию / держать руку на пульсе",
-        exEn: "Our alerts help us <strong>stay on top of</strong> error rate spikes.",
-        exRu: "Наши алерты помогают держать под контролем всплески ошибок.",
-        note: "Проактивный мониторинг"
-      },
-      {
-        text: "figure out",
-        clean: "figure out",
-        cat: "verbs",
-        catName: "Глагольные коллокации",
-        trans: "Понять / разобраться / докопаться до сути",
-        exEn: "It took us three hours to <strong>figure out</strong> why the build was failing.",
-        exRu: "У нас ушло три часа, чтобы понять, почему ломалась сборка.",
-        note: "Вместо 'understand'"
-      }
-    ];
+  {
+    "id": "chunk-1",
+    "text": "The thing is, [X]...",
+    "clean": "The thing is,",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Дело в том, что [X]...",
+    "exEn": "The thing is, the prospect's procurement team hasn't approved our payment terms yet.",
+    "exRu": "Дело в том, что отдел закупок клиента еще не утвердил наши условия оплаты.",
+    "note": "Идеально для честного объяснения заминки в сделке или закрытии квартала"
+  },
+  {
+    "id": "chunk-2",
+    "text": "It's only a matter of time before [X]...",
+    "clean": "It's only a matter of time before",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Это лишь вопрос времени, когда [X]...",
+    "exEn": "It's only a matter of time before the prospect signs with our competitor if we don't follow up today.",
+    "exRu": "Это лишь вопрос времени, когда клиент подпишет контракт с конкурентом, если мы не свяжемся сегодня.",
+    "note": "Предупреждение о риске потери лида или затягивания сделки"
+  },
+  {
+    "id": "chunk-3",
+    "text": "What I'm trying to get at is [X]...",
+    "clean": "What I'm trying to get at is",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Что я пытаюсь сказать, так это [X]...",
+    "exEn": "What I'm trying to get at is that our enterprise tier will save your team at least twenty hours a week.",
+    "exRu": "Что я пытаюсь подчеркнуть — наш enterprise-тариф сэкономит вашей команде не менее двадцати часов в неделю.",
+    "note": "Фокусировка на ценностном предложении (Value Proposition) во время презентации"
+  },
+  {
+    "id": "chunk-4",
+    "text": "There's no point in [verb-ing]...",
+    "clean": "There's no point in",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Нет никакого смысла делать [X]...",
+    "exEn": "There's no point in offering a heavy discount before we've identified the economic buyer.",
+    "exRu": "Нет никакого смысла давать большую скидку, пока мы не вышли на лицо, распоряжающееся бюджетом (Economic Buyer).",
+    "note": "Удержание маржинальности и защита цены сделки"
+  },
+  {
+    "id": "chunk-5",
+    "text": "From what I can tell, [X]...",
+    "clean": "From what I can tell,",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Насколько я могу судить / по моим наблюдениям, [X]...",
+    "exEn": "From what I can tell, their VP of Sales is genuinely interested in our CRM integration.",
+    "exRu": "Насколько я могу судить, их вице-президент по продажам искренне заинтересован в нашей CRM-интеграции.",
+    "note": "Оценка готовности клиента к покупке без излишней самоуверенности"
+  },
+  {
+    "id": "chunk-6",
+    "text": "As far as I'm concerned, [X]...",
+    "clean": "As far as I'm concerned,",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Что касается меня / на мой взгляд, [X]...",
+    "exEn": "As far as I'm concerned, this deal is fully qualified and ready for the proposal stage.",
+    "exRu": "Что касается меня, этот лид полностью квалифицирован и готов к отправке коммерческого предложения.",
+    "note": "Четкая фиксация стадии сделки в пайплайне"
+  },
+  {
+    "id": "chunk-7",
+    "text": "It all comes down to [X]...",
+    "clean": "It all comes down to",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Всё сводится к [X]...",
+    "exEn": "At the end of the day, it all comes down to proving clear ROI to their CFO.",
+    "exRu": "В конечном счете всё сводится к доказательству окупаемости инвестиций (ROI) их финдиректору.",
+    "note": "Выделение ключевого триггера закрытия сделки"
+  },
+  {
+    "id": "chunk-8",
+    "text": "Chances are, [X]...",
+    "clean": "Chances are,",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Весьма вероятно, что [X]...",
+    "exEn": "Chances are, the client will push back on our annual prepayment requirement.",
+    "exRu": "Весьма вероятно, что клиент будет возражать против требования годовой предоплаты.",
+    "note": "Прогнозирование возражений клиента на этапе переговоров"
+  },
+  {
+    "id": "chunk-9",
+    "text": "Correct me if I'm wrong, but [X]...",
+    "clean": "Correct me if I'm wrong, but",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Поправьте меня, если я ошибаюсь, но [X]...",
+    "exEn": "Correct me if I'm wrong, but didn't your team commit to making a final vendor decision by Friday?",
+    "exRu": "Поправьте меня, если я ошибаюсь, но разве ваша команда не планировала принять финальное решение по поставщику к пятнице?",
+    "note": "Мягкое напоминание клиенту о зафиксированных договоренностях"
+  },
+  {
+    "id": "chunk-10",
+    "text": "Would you mind if I [past-verb]...?",
+    "clean": "Would you mind if I",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Вы не против, если я [X]...?",
+    "exEn": "Would you mind if I invited our solutions engineer to our next product demo?",
+    "exRu": "Вы не будете против, если я подключу нашего инженера внедрения к следующему демо продукта?",
+    "note": "Деликатное вовлечение технического эксперта на созвон с клиентом"
+  },
+  {
+    "id": "chunk-11",
+    "text": "The bottom line is that [X]...",
+    "clean": "The bottom line is that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Главная суть в том, что [X]...",
+    "exEn": "The bottom line is that closing these two enterprise accounts will get us to 110% of our quarterly quota.",
+    "exRu": "Суть в том, что закрытие этих двух enterprise-клиентов выведет нас на 110% выполнения квартального плана.",
+    "note": "Резюме на пайплайн-ревью с руководителем отдела продаж"
+  },
+  {
+    "id": "chunk-12",
+    "text": "It turns out that [X]...",
+    "clean": "It turns out that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Оказывается, что [X]...",
+    "exEn": "It turns out that their procurement department requires a custom security audit before signing.",
+    "exRu": "Оказывается, их отдел безопасности требует отдельного аудита перед подписанием договора.",
+    "note": "Сообщение о вновь вскрывшихся блокерах сделки"
+  },
+  {
+    "id": "chunk-13",
+    "text": "It goes without saying that [X]...",
+    "clean": "It goes without saying that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Само собой разумеется, что [X]...",
+    "exEn": "It goes without saying that maintaining high gross margins is our primary sales priority.",
+    "exRu": "Само собой разумеется, что сохранение высокой валовой маржи — наш ключевой приоритет в продажах.",
+    "note": "Подтверждение коммерческой дисциплины продажника"
+  },
+  {
+    "id": "chunk-14",
+    "text": "I wouldn't be surprised if [X]...",
+    "clean": "I wouldn't be surprised if",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Я не удивлюсь, если [X]...",
+    "exEn": "I wouldn't be surprised if the client asks for net-60 payment terms instead of net-30.",
+    "exRu": "Я не удивлюсь, если клиент попросит отсрочку платежа на 60 дней вместо 30.",
+    "note": "Ожидание стандартных условий корпоративных закупок"
+  },
+  {
+    "id": "chunk-15",
+    "text": "It's worth pointing out that [X]...",
+    "clean": "It's worth pointing out that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Стоит обратить внимание на то, что [X]...",
+    "exEn": "It's worth pointing out that our onboarding package is included at zero extra cost in this proposal.",
+    "exRu": "Стоит подчеркнуть, что пакет онбординга включен в это предложение абсолютно бесплатно.",
+    "note": "Акцентирование дополнительной ценности в офере"
+  },
+  {
+    "id": "chunk-16",
+    "text": "Given that [X], we should...",
+    "clean": "Given that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Учитывая, что [X], нам стоит...",
+    "exEn": "Given that their fiscal year ends this month, we should offer an incentive to sign before December 31st.",
+    "exRu": "Учитывая, что их финансовый год заканчивается в этом месяце, нам стоит предложить бонус за подписание до 31 декабря.",
+    "note": "Использование тайминга клиента для ускорения закрытия сделки"
+  },
+  {
+    "id": "chunk-17",
+    "text": "In light of [X],...",
+    "clean": "In light of",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "В свете [событий/фактов X]...",
+    "exEn": "In light of their recent budget cuts, we need to restructure our pitch around immediate cost reduction.",
+    "exRu": "В свете недавнего сокращения их бюджета нам нужно перестроить презентацию вокруг мгновенного снижения издержек.",
+    "note": "Адаптация питча под изменение ситуации у клиента"
+  },
+  {
+    "id": "chunk-18",
+    "text": "There's a good chance that [X]...",
+    "clean": "There's a good chance that",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Высока вероятность того, что [X]...",
+    "exEn": "There's a good chance that this inbound lead will expand to their EMEA branch next quarter.",
+    "exRu": "Высока вероятность того, что этот входящий лид расширится на их европейский филиал в следующем квартале.",
+    "note": "Оценка потенциала апселла (Upsell / Account Expansion)"
+  },
+  {
+    "id": "chunk-19",
+    "text": "It remains to be seen whether [X]...",
+    "clean": "It remains to be seen whether",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "Еще предстоит увидеть, сработает ли [X]...",
+    "exEn": "It remains to be seen whether the champion can secure internal buy-in from the board.",
+    "exRu": "Еще предстоит увидеть, сможет ли наш внутренний чемпион получить одобрение совета директоров.",
+    "note": "Оценка шансов на прохождение внутреннего согласования"
+  },
+  {
+    "id": "chunk-20",
+    "text": "For the time being, [X]...",
+    "clean": "For the time being,",
+    "cat": "frames",
+    "catName": "Рамка со слотом",
+    "trans": "На данный момент / пока что [X]...",
+    "exEn": "For the time being, let's grant them a 14-day pilot extension while their legal team reviews the MSA.",
+    "exRu": "Пока что давайте продлим им пилотный доступ на 14 дней, пока их юристы вычитывают договор (MSA).",
+    "note": "Тактическое сохранение вовлеченности клиента во время юридических проверок"
+  },
+  {
+    "id": "chunk-21",
+    "text": "take a hit",
+    "clean": "take a hit",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Пострадать / просесть / принять удар",
+    "exEn": "If we grant a 30% discount, our commission on this deal will definitely <strong>take a hit</strong>.",
+    "exRu": "Если мы дадим скидку 30%, наша комиссия по этой сделке серьезно просядет.",
+    "note": "Обсуждение уступок по марже и бонусам"
+  },
+  {
+    "id": "chunk-22",
+    "text": "cut corners",
+    "clean": "cut corners",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Делать тяп-ляп / срезать углы / экономить на качестве",
+    "exEn": "We can't afford to <strong>cut corners</strong> during the discovery call, or we'll pitch the wrong solution.",
+    "exRu": "Мы не можем позволить себе срезать углы на этапе выявления потребностей (Discovery), иначе презентуем неподходящее решение.",
+    "note": "Строгое соблюдение методологии продаж"
+  },
+  {
+    "id": "chunk-23",
+    "text": "move the needle",
+    "clean": "move the needle",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Принести ощутимый результат / сдвинуть дело с мертвой точки",
+    "exEn": "Closing this Fortune 500 account will really <strong>move the needle</strong> for our annual ARR target.",
+    "exRu": "Закрытие этого клиента из списка Fortune 500 реально сдвинет показатели нашего годового ARR с мертвой точки.",
+    "note": "О сделках, влияющих на ключевые метрики компании"
+  },
+  {
+    "id": "chunk-24",
+    "text": "table this for now",
+    "clean": "table this for now",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Отложить этот вопрос / перенести на потом",
+    "exEn": "Let's <strong>table the pricing discussion for now</strong> and focus on whether our product solves your core operational bottleneck.",
+    "exRu": "Давайте пока отложим обсуждение цены и сосредоточимся на том, решает ли наш продукт вашу главную проблему.",
+    "note": "Увод фокуса от цены к ценности на ранних этапах созвона"
+  },
+  {
+    "id": "chunk-25",
+    "text": "circle back to [X]",
+    "clean": "circle back to",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Вернуться к теме позже",
+    "exEn": "Let's <strong>circle back to</strong> the custom SLA requirements after we align on user seat counts.",
+    "exRu": "Давайте вернемся к требованиям по персональному SLA после того, как согласуем количество рабочих мест.",
+    "note": "Управление повесткой переговоров"
+  },
+  {
+    "id": "chunk-26",
+    "text": "keep someone in the loop",
+    "clean": "keep me in the loop",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Держать в курсе событий",
+    "exEn": "Please <strong>keep me in the loop</strong> as the contract makes its way through your legal department.",
+    "exRu": "Пожалуйста, держите меня в курсе, пока контракт проходит согласование в вашем юридическом отделе.",
+    "note": "Просьба к клиенту или коллеге держать руку на пульсе сделки"
+  },
+  {
+    "id": "chunk-27",
+    "text": "call the shots",
+    "clean": "call the shots",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Принимать решения / руководить процессом",
+    "exEn": "Their Chief Technology Officer ultimately <strong>calls the shots</strong> on vendor security approval.",
+    "exRu": "Их технический директор в конечном счете принимает финальное решение по утверждению безопасности поставщиков.",
+    "note": "Идентификация лица, принимающего решение (ЛПР / Decision Maker)"
+  },
+  {
+    "id": "chunk-28",
+    "text": "iron out the kinks",
+    "clean": "iron out the kinks",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Устранить мелкие шероховатости / отладить детали",
+    "exEn": "Our legal teams just need a couple of days to <strong>iron out the kinks</strong> in the Master Services Agreement.",
+    "exRu": "Нашим юристам нужно буквально пара дней, чтобы согласовать шероховатости в рамочном договоре.",
+    "note": "Финальный этап redlining перед подписанием"
+  },
+  {
+    "id": "chunk-29",
+    "text": "get bogged down in [X]",
+    "clean": "get bogged down in",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Увязнуть в рутине / закопаться в мелочах",
+    "exEn": "Let's not <strong>get bogged down in</strong> contract fine print before we confirm executive interest.",
+    "exRu": "Давайте не увязать в мелких пунктах договора, пока мы не подтвердили интерес руководства.",
+    "note": "Защита фокуса коммерческих переговоров"
+  },
+  {
+    "id": "chunk-30",
+    "text": "run into a roadblock",
+    "clean": "run into a roadblock",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Натолкнуться на непреодолимое препятствие / застрять",
+    "exEn": "We <strong>ran into a roadblock</strong> because the client froze all Q4 software procurement.",
+    "exRu": "Мы натолкнулись на глухой барьер из-за того, что клиент заморозил все закупки софта в 4-м квартале.",
+    "note": "Отчет о блокерах на пайплайн-ревью"
+  },
+  {
+    "id": "chunk-31",
+    "text": "be short on bandwidth",
+    "clean": "be short on bandwidth",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Не иметь достаточного ресурса / времени / свободных рук",
+    "exEn": "Our solutions engineering team is <strong>short on bandwidth</strong>, so we can only support three custom PoCs this month.",
+    "exRu": "У нашей команды пресейл-инженеров сейчас не хватает ресурса, поэтому мы можем провести только три пилота в этом месяце.",
+    "note": "Управление загрузкой технических специалистов в продажах"
+  },
+  {
+    "id": "chunk-32",
+    "text": "a slippery slope",
+    "clean": "a slippery slope",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Скользкая дорожка / рискованный компромисс",
+    "exEn": "Offering ad-hoc discounts without manager approval is <strong>a slippery slope</strong> that ruins deal margins.",
+    "exRu": "Раздавать скидки без согласования с руководителем — скользкая дорожка, убивающая маржинальность сделок.",
+    "note": "Предостережение от бесконтрольного демпинга"
+  },
+  {
+    "id": "chunk-33",
+    "text": "ballpark estimate",
+    "clean": "ballpark estimate",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Приблизительная оценка навскидку",
+    "exEn": "Can you give me a rough <strong>ballpark estimate</strong> of your annual budget for sales automation tools?",
+    "exRu": "Можете назвать ориентировочный порядок вашего годового бюджета на инструменты автоматизации продаж?",
+    "note": "Квалификация бюджета клиента (BANT qualification)"
+  },
+  {
+    "id": "chunk-34",
+    "text": "touch base on [X]",
+    "clean": "touch base on",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Кратко созвониться / сверить часы по вопросу",
+    "exEn": "I wanted to <strong>touch base on</strong> the proposal I sent over last Thursday.",
+    "exRu": "Я хотел кратко связаться и уточнить статус по предложению, которое отправил в прошлый четверг.",
+    "note": "Идеальный ненавязчивый фоллоу-ап клиенту"
+  },
+  {
+    "id": "chunk-35",
+    "text": "bring someone up to speed",
+    "clean": "bring you up to speed",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Ввести в курс дела",
+    "exEn": "Let me <strong>bring you up to speed</strong> on what the client discussed during the executive discovery session.",
+    "exRu": "Давай я быстро введу тебя в курс дела по тому, что клиент озвучил на встрече с топ-менеджментом.",
+    "note": "Передача контекста сделки коллеге или руководителю"
+  },
+  {
+    "id": "chunk-36",
+    "text": "double down on [X]",
+    "clean": "double down on",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Удвоить усилия в направлении / сделать ставку на",
+    "exEn": "We need to <strong>double down on</strong> outbound prospecting in the enterprise healthcare vertical.",
+    "exRu": "Нам нужно удвоить усилия в исходящих продажах в сегменте корпоративной медицины.",
+    "note": "Фокусировка стратегии продаж на перспективном сегменте"
+  },
+  {
+    "id": "chunk-37",
+    "text": "walk someone through [X]",
+    "clean": "walk you through",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Пошагово показать / провести по процессу или продукту",
+    "exEn": "Let me share my screen and <strong>walk you through</strong> our analytics dashboard and reporting module.",
+    "exRu": "Позвольте мне расшарить экран и пошагово провести вас по нашему аналитическому дашборду и модулю отчетности.",
+    "note": "Проведение продуктовой демонстрации (Demo)"
+  },
+  {
+    "id": "chunk-38",
+    "text": "wrap this up",
+    "clean": "wrap this up",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Закругляться / подводить итоги созвона",
+    "exEn": "We have five minutes left, so let's <strong>wrap this up</strong> and agree on concrete next steps before we part.",
+    "exRu": "У нас осталось пять минут, давайте закругляться и зафиксируем конкретные следующие шаги перед завершением.",
+    "note": "Фиксация договоренностей в конце встречи с клиентом"
+  },
+  {
+    "id": "chunk-39",
+    "text": "back to the drawing board",
+    "clean": "back to the drawing board",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Начать всё сначала с нуля (после провала идеи)",
+    "exEn": "The prospect rejected our enterprise pricing structure, so it's <strong>back to the drawing board</strong> on the commercial proposal.",
+    "exRu": "Клиент отклонил нашу структуру корпоративных цен, так что возвращаемся к разработке нового коммерческого предложения.",
+    "note": "Пересмотр пакета предложения после отказа"
+  },
+  {
+    "id": "chunk-40",
+    "text": "quick fix / band-aid solution",
+    "clean": "band-aid solution",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Временная заплатка / костыль",
+    "exEn": "Offering a one-time 50% discount is just a <strong>band-aid solution</strong> that masks poor value discovery.",
+    "exRu": "Разовая скидка 50% — это временный костыль, маскирующий некачественное выявление ценности.",
+    "note": "Критика поспешных уступок в продажах"
+  },
+  {
+    "id": "chunk-41",
+    "text": "root cause",
+    "clean": "root cause",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Первопричина сбоя или проблемы",
+    "exEn": "High customer churn is just a symptom; the <strong>root cause</strong> is misaligned expectations during the sales handoff.",
+    "exRu": "Высокий отток клиентов — лишь симптом, истинная первопричина — завышенные обещания на этапе продаж.",
+    "note": "Анализ причин срыва сделок или оттока (Churn analysis)"
+  },
+  {
+    "id": "chunk-42",
+    "text": "rule out [X]",
+    "clean": "rule out",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Исключить вариант / гипотезу",
+    "exEn": "We can <strong>rule out</strong> budget constraints — their CFO explicitly confirmed funding for this project.",
+    "exRu": "Мы можем исключить проблему с бюджетом: их финдиректор подтвердил выделение средств под проект.",
+    "note": "Отсечение ложных возражений клиента"
+  },
+  {
+    "id": "chunk-43",
+    "text": "on the same page",
+    "clean": "on the same page",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Одинаково понимать задачу / быть синхронизированными",
+    "exEn": "Just to make sure we're completely <strong>on the same page</strong>, here are the key deliverables outlined in the SOW.",
+    "exRu": "Просто чтобы убедиться, что мы абсолютно одинаково понимаем задачи: вот ключевые результаты в техзадании (SOW).",
+    "note": "Синхронизация ожиданий перед подписанием договора"
+  },
+  {
+    "id": "chunk-44",
+    "text": "buy into [X]",
+    "clean": "buy into",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Поверить в идею / поддержать подход",
+    "exEn": "Their VP of Operations completely <strong>bought into</strong> our automated pipeline workflow.",
+    "exRu": "Их операционный вице-президент полностью поверил в наш автоматизированный рабочий процесс.",
+    "note": "Успешное завоевание доверия ключевого стейкхолдера"
+  },
+  {
+    "id": "chunk-45",
+    "text": "drill down into [X]",
+    "clean": "drill down into",
+    "cat": "work",
+    "catName": "Работа & Созвоны",
+    "trans": "Углубиться в конкретные детали проблемы",
+    "exEn": "Let's <strong>drill down into</strong> your current lead qualification bottlenecks to see where deals are dropping out.",
+    "exRu": "Давайте подробно разберем узкие места в вашей квалификации лидов, чтобы увидеть, где отваливаются сделки.",
+    "note": "Глубокое исследование болей клиента на встрече"
+  },
+  {
+    "id": "chunk-46",
+    "text": "That's a valid point to raise...",
+    "clean": "That's a valid point to raise,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Это очень справедливый вопрос...",
+    "exEn": "That's a valid point to raise, and looking at how our enterprise tier structures user seats...",
+    "exRu": "Это абсолютно справедливый вопрос, и если посмотреть, как наш корпоративный тариф распределяет лицензии...",
+    "note": "Дает 2.5 секунды на формулирование ответа на сложное возражение клиента"
+  },
+  {
+    "id": "chunk-47",
+    "text": "If we look at the bigger picture...",
+    "clean": "If we look at the bigger picture,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Если взглянуть на картину в целом...",
+    "exEn": "If we look at the bigger picture, this software investment will generate a three-fold return within nine months.",
+    "exRu": "Если взглянуть шире, эти инвестиции в софт окупятся в трехкратном размере уже за девять месяцев.",
+    "note": "Перевод фокуса с цены лицензии на стратегический ROI"
+  },
+  {
+    "id": "chunk-48",
+    "text": "Off the top of my head,...",
+    "clean": "Off the top of my head,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Навскидку / первое, что приходит в голову...",
+    "exEn": "Off the top of my head, an enterprise deployment for three hundred seats typically takes about three weeks.",
+    "exRu": "Навскидку — внедрение корпоративной версии на триста рабочих мест обычно занимает около трех недель.",
+    "note": "Называние ориентировочных сроков внедрения без жестких юридических обязательств"
+  },
+  {
+    "id": "chunk-49",
+    "text": "How can I best put this...",
+    "clean": "How can I best put this...",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Как бы лучше это сформулировать...",
+    "exEn": "How can I best put this... the pilot was successful, but your team needs higher daily engagement to see full value.",
+    "exRu": "Как бы лучше сформулировать... пилот прошел успешно, но вашей команде нужна более высокая регулярность работы, чтобы ощутить всю ценность.",
+    "note": "Деликатная обратная связь клиенту по результатам тестового периода"
+  },
+  {
+    "id": "chunk-50",
+    "text": "The technical term escapes me, but...",
+    "clean": "The technical term escapes me, but",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Точный термин вылетел из головы, но...",
+    "exEn": "The exact regulatory clause escapes me, but basically our compliance team guarantees full GDPR compliance.",
+    "exRu": "Точный пункт регламента вылетел из головы, но по сути наша служба комплаенса гарантирует полное соответствие GDPR.",
+    "note": "Спокойное объяснение юридических нюансов без запинки"
+  },
+  {
+    "id": "chunk-51",
+    "text": "What this really boils down to is...",
+    "clean": "What this really boils down to is",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "То, к чему всё на самом деле сводится...",
+    "exEn": "What this really boils down to is whether your team wants to automate manual outreach or keep losing inbound leads.",
+    "exRu": "К чему всё реально сводится — хочет ли ваша команда автоматизировать рутину или продолжать терять входящих клиентов.",
+    "note": "Формулирование контраста между покупкой и сохранением статус-кво"
+  },
+  {
+    "id": "chunk-52",
+    "text": "Scratch that — what I meant was...",
+    "clean": "Scratch that, what I meant was",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Забудьте / точнее, я имел в виду...",
+    "exEn": "Scratch that — what I meant was an annual billing cycle, not quarterly billing.",
+    "exRu": "Сброс — я имел в виду годовой расчетный период, а не поквартальный.",
+    "note": "Мгновенное исправление коммерческих параметров без потери уверенности"
+  },
+  {
+    "id": "chunk-53",
+    "text": "To put it in perspective,...",
+    "clean": "To put it in perspective,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Чтобы было понятно масштабы / для сравнения...",
+    "exEn": "To put it in perspective, our annual platform fee is less than the commission on one single deal your team closes.",
+    "exRu": "Чтобы понимать масштаб — годовая подписка на нашу платформу меньше, чем комиссия с одной-единственной сделки вашей команды.",
+    "note": "Фрейминг цены: сопоставление стоимости с выгодой клиента"
+  },
+  {
+    "id": "chunk-54",
+    "text": "Bear with me for a second,...",
+    "clean": "Bear with me for a second,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Подождите одну секунду (пока ищу файл/расчет)...",
+    "exEn": "<strong>Bear with me for a second</strong> while I pull up the custom pricing tier we discussed with your VP.",
+    "exRu": "Секунду терпения, пока я открою персональную сетку цен, которую мы обсуждали с вашим вице-президентом.",
+    "note": "Заполнение паузы при поиске файла коммерческого предложения"
+  },
+  {
+    "id": "chunk-55",
+    "text": "Let's put it this way,...",
+    "clean": "Let's put it this way,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Скажем так / сформулируем это следующим образом...",
+    "exEn": "<strong>Let's put it this way</strong>: without this integration, your sales reps will continue wasting two hours a day on manual data entry.",
+    "exRu": "Скажем так: без этой интеграции ваши сейлзы продолжат тратить по два часа в день на ручной ввод данных.",
+    "note": "Яркая демонстрация цены бездействия (Cost of Inaction)"
+  },
+  {
+    "id": "chunk-56",
+    "text": "If memory serves me right,...",
+    "clean": "If memory serves me right,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Если мне не изменяет память...",
+    "exEn": "<strong>If memory serves me right</strong>, you mentioned on our first call that shortening deal cycles was your top priority.",
+    "exRu": "Если память мне не изменяет, на нашем первом созвоне вы упоминали, что сокращение цикла сделки — ваш главный приоритет.",
+    "note": "Возврат клиента к его же собственным словам и болям"
+  },
+  {
+    "id": "chunk-57",
+    "text": "In other words,...",
+    "clean": "In other words,",
+    "cat": "time-buyers",
+    "catName": "Покупка времени",
+    "trans": "Другими словами / иначе говоря...",
+    "exEn": "<strong>In other words</strong>, onboarding our platform gives your team an extra twenty selling hours per rep every single month.",
+    "exRu": "Другими словами, внедрение нашей платформы дает вашей команде дополнительно двадцать часов прямых продаж на каждого менеджера ежемесячно.",
+    "note": "Резюмирование бизнес-выгоды простым языком"
+  },
+  {
+    "id": "chunk-58",
+    "text": "I see where you're coming from, but...",
+    "clean": "I see where you're coming from, but",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Я понимаю логику вашей мысли, но...",
+    "exEn": "I see where you're coming from, but committing to a multi-year deal locks in a 25% price freeze for your organization.",
+    "exRu": "Я понимаю вашу логику, но подписание многолетнего контракта фиксирует скидку 25% на весь период.",
+    "note": "Вежливая отработка ценового возражения клиента"
+  },
+  {
+    "id": "chunk-59",
+    "text": "I'm not so sure about that...",
+    "clean": "I'm not so sure about that",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Я не вполне уверен в этом...",
+    "exEn": "I'm not so sure about that — our benchmark data shows that cold email response rates decline sharply after the fourth touchpoint.",
+    "exRu": "Я не вполне согласен с этим: наши бенчмарки показывают, что конверсия холодных писем резко падает после четвертого касания.",
+    "note": "Обоснованное экспертное возражение с опорой на данные"
+  },
+  {
+    "id": "chunk-60",
+    "text": "It might be a bit of a stretch...",
+    "clean": "It might be a bit of a stretch",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Это может быть чересчур амбициозно / на грани возможностей...",
+    "exEn": "Promising a complete enterprise rollout before end of month might be a bit of a stretch.",
+    "exRu": "Обещать полный запуск на всю корпорацию до конца месяца — пожалуй, чересчур оптимистично.",
+    "note": "Честное управление ожиданиями клиента по срокам запуска"
+  },
+  {
+    "id": "chunk-61",
+    "text": "Don't get me wrong,...",
+    "clean": "Don't get me wrong,",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Не поймите меня неправильно...",
+    "exEn": "Don't get me wrong, our Starter plan is great, but your team has outgrown its user seat limits.",
+    "exRu": "Не поймите меня неправильно, наш базовый тариф хорош, но ваша команда уже переросла его лимиты.",
+    "note": "Мягкий переход к предложению более старшего тарифа (Upsell)"
+  },
+  {
+    "id": "chunk-62",
+    "text": "It's a tough call...",
+    "clean": "It's a tough call",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Это сложный и неоднозначный выбор...",
+    "exEn": "Whether to sign on an annual contract or start with a quarterly commitment is a tough call, but annual saves you 20%.",
+    "exRu": "Выбрать годовой контракт или начать с поквартальной оплаты — сложный выбор, но годовой экономит вам 20%.",
+    "note": "Помощь клиенту в выборе условий сотрудничества"
+  },
+  {
+    "id": "chunk-63",
+    "text": "I have mixed feelings about [X]...",
+    "clean": "I have mixed feelings about",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "У меня двоякие ощущения насчет [X]...",
+    "exEn": "I have mixed feelings about offering concessions before their decision maker has attended a full demo.",
+    "exRu": "У меня двоякие ощущения насчет уступок до того, как их ЛПР посетит полноценное демо.",
+    "note": "Тактическая осторожность в предоставлении скидок"
+  },
+  {
+    "id": "chunk-64",
+    "text": "I'm not entirely convinced that...",
+    "clean": "I'm not entirely convinced that",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Я не до конца убежден, что...",
+    "exEn": "I'm not entirely convinced that switching to a cheaper alternative will provide the enterprise SLA your board requires.",
+    "exRu": "Я не до конца уверен, что переход на дешевый аналог обеспечит тот корпоративный SLA, который требует ваш совет директоров.",
+    "note": "Защита премиального позиционирования продукта перед дешевыми конкурентами"
+  },
+  {
+    "id": "chunk-65",
+    "text": "Could you unpack that a bit more?",
+    "clean": "Could you unpack that a bit more?",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Можете раскрыть эту мысль подробнее?",
+    "exEn": "Could you unpack that last point about your current sales compensation structure a bit more?",
+    "exRu": "Не могли бы вы подробнее раскрыть тот пункт про текущую структуру мотивации ваших сейлзов?",
+    "note": "Углубление в скрытые боли клиента на этапе Discovery"
+  },
+  {
+    "id": "chunk-66",
+    "text": "Spot on!",
+    "clean": "Spot on!",
+    "cat": "hedging",
+    "catName": "Дипломатия & Согласие",
+    "trans": "В самую точку! / В яблочко!",
+    "exEn": "Your assessment of the market trend was <strong>spot on</strong> — that's exactly why leading sales teams are switching to our CRM.",
+    "exRu": "Ваша оценка рыночного тренда попала в самую точку: именно поэтому передовые команды продаж переходят на нашу CRM.",
+    "note": "Укрепление доверия через согласие с экспертностью клиента"
+  },
+  {
+    "id": "chunk-67",
+    "text": "Couldn't agree more!",
+    "clean": "Couldn't agree more!",
+    "cat": "hedging",
+    "catName": "Дипломатия & Согласие",
+    "trans": "Абсолютно согласен! / Не могу не согласиться!",
+    "exEn": "I <strong>couldn't agree more</strong> — reducing sales rep ramp time is crucial for hitting aggressive Q4 targets.",
+    "exRu": "Абсолютно согласен: сокращение времени выхода сейлзов на плановую мощность критично для выполнения амбициозных целей на 4-й квартал.",
+    "note": "Демонстрация полного единомыслия с бизнес-приоритетами клиента"
+  },
+  {
+    "id": "chunk-68",
+    "text": "Fair enough.",
+    "clean": "Fair enough.",
+    "cat": "hedging",
+    "catName": "Дипломатия & Согласие",
+    "trans": "Справедливо. / Принимается. / Логично.",
+    "exEn": "You want your legal team to redline the agreement first? <strong>Fair enough</strong>, we will send over the editable DOCX right away.",
+    "exRu": "Вы хотите, чтобы юристы сначала внесли правки в договор? Справедливо, мы сразу же пришлем документ в редактируемом формате.",
+    "note": "Спокойное и профессиональное принятие процесса согласования на стороне клиента"
+  },
+  {
+    "id": "chunk-69",
+    "text": "Play devil's advocate",
+    "clean": "play devil's advocate",
+    "cat": "hedging",
+    "catName": "Дипломатия & Сомнения",
+    "trans": "Побыть адвокатом дьявола (покритиковать для проверки)",
+    "exEn": "Just to <strong>play devil's advocate</strong>, what happens to your revenue forecast if this key account doesn't renew in December?",
+    "exRu": "Просто побуду адвокатом дьявола: что произойдет с вашим прогнозом выручки, если этот ключевой клиент не продлит контракт в декабре?",
+    "note": "Вскрытие скрытых бизнес-рисков клиента (Pain discovery)"
+  },
+  {
+    "id": "chunk-70",
+    "text": "At the end of the day,...",
+    "clean": "At the end of the day,",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "В конечном счете / в сухом остатке...",
+    "exEn": "At the end of the day, buyers care most about measurable ROI and seamless onboarding.",
+    "exRu": "В конечном счете клиентам важнее всего измеримая окупаемость инвестиций (ROI) и бесшовный онбординг.",
+    "note": "Главный ориентир в продажах"
+  },
+  {
+    "id": "chunk-71",
+    "text": "Long story short,...",
+    "clean": "Long story short,",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Короче говоря / если в двух словах...",
+    "exEn": "Long story short, they signed an annual enterprise contract on Friday afternoon.",
+    "exRu": "Короче говоря, в пятницу во второй половине дня они подписали годовой корпоративный контракт.",
+    "note": "Краткий победный отчет на командном стендапе"
+  },
+  {
+    "id": "chunk-72",
+    "text": "Speaking of which,...",
+    "clean": "Speaking of which,",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Кстати об этом / к слову говоря...",
+    "exEn": "Speaking of which, did you get a chance to review the revised pricing sheet I sent over?",
+    "exRu": "Кстати об этом: у вас получилось взглянуть на обновленный расчет цен, который я прислал?",
+    "note": "Элегантный переход к обсуждению офера"
+  },
+  {
+    "id": "chunk-73",
+    "text": "For what it's worth,...",
+    "clean": "For what it's worth,",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Если это имеет значение / к слову...",
+    "exEn": "For what it's worth, three other companies in your industry faced that exact pipeline challenge and solved it with our platform.",
+    "exRu": "К слову сказать, три другие компании из вашей индустрии столкнулись ровно с такой же проблемой в пайплайне и решили ее с помощью нашей платформы.",
+    "note": "Социальное доказательство (Social Proof) в диалоге с клиентом"
+  },
+  {
+    "id": "chunk-74",
+    "text": "Out of the blue",
+    "clean": "out of the blue",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Внезапно / как гром среди ясного неба",
+    "exEn": "The prospect went dark for six weeks and then accepted our proposal completely <strong>out of the blue</strong>.",
+    "exRu": "Клиент молчал шесть недель, а потом внезапно принял наше предложение как гром среди ясного неба.",
+    "note": "Неожиданное возобновление уснувшей сделки"
+  },
+  {
+    "id": "chunk-75",
+    "text": "It is what it is",
+    "clean": "It is what it is",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Что есть, то есть / ничего уже не поделаешь",
+    "exEn": "We lost that account to an internal build, but <strong>it is what it is</strong>. Let's focus on the remaining pipeline.",
+    "exRu": "Мы упустили того клиента из-за их решения делать всё своими силами, но что поделать. Сфокусируемся на оставшемся пайплайне.",
+    "note": "Здоровое отношение к неизбежным потерям в продажах"
+  },
+  {
+    "id": "chunk-76",
+    "text": "Cross that bridge when we come to it",
+    "clean": "cross that bridge when we come to it",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Решать проблемы по мере их поступления",
+    "exEn": "They might request customized integrations next year, but we'll <strong>cross that bridge when we come to it</strong>.",
+    "exRu": "Возможно, в следующем году им понадобятся кастомные интеграции, но мы решим этот вопрос, когда дойдем до него.",
+    "note": "Предотвращение затягивания сделки гипотетическими будущими требованиями"
+  },
+  {
+    "id": "chunk-77",
+    "text": "Sleep on it",
+    "clean": "sleep on it",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Переспать с этой мыслью / принять решение утром",
+    "exEn": "Take your time to <strong>sleep on it</strong>, and we can reconvene on Thursday to discuss your feedback.",
+    "exRu": "Не спешите с решением, переспите с этой мыслью, и мы созвонимся в четверг, чтобы обсудить ваши впечатления.",
+    "note": "Снятие давления с клиента при закрытии"
+  },
+  {
+    "id": "chunk-78",
+    "text": "Hit the ground running",
+    "clean": "hit the ground running",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Взяться за дело без раскачки / сразу включиться на полную",
+    "exEn": "Our dedicated account manager will help your sales reps <strong>hit the ground running</strong> from day one.",
+    "exRu": "Наш персональный аккаунт-менеджер поможет вашим сейлзам включиться в работу на полную мощность с первого же дня.",
+    "note": "Обещание мгновенной отдачи от внедрения софта"
+  },
+  {
+    "id": "chunk-79",
+    "text": "No big deal",
+    "clean": "No big deal",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Ничего страшного / ерунда / пустяки",
+    "exEn": "If your legal department needs standard redlines on the NDA, that's <strong>no big deal</strong>.",
+    "exRu": "Если вашему юридическому отделу нужны типовые правки в соглашение о неразглашении (NDA), в этом нет ничего страшного.",
+    "note": "Снижение трения при согласовании документов"
+  },
+  {
+    "id": "chunk-80",
+    "text": "Fingers crossed",
+    "clean": "Fingers crossed",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Держим кулачки / надеемся на удачу",
+    "exEn": "The CFO is presenting our business case to the investment committee today. <strong>Fingers crossed</strong>!",
+    "exRu": "Финдиректор сегодня презентует наше бизнес-обоснование инвесткомитету. Держим кулачки!",
+    "note": "Ожидание финального вердикта по крупной сделке"
+  },
+  {
+    "id": "chunk-81",
+    "text": "In a nutshell,...",
+    "clean": "In a nutshell,",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "В двух словах / кратко говоря...",
+    "exEn": "<strong>In a nutshell</strong>, our solution helps enterprise sales teams shorten their sales cycle by 35%.",
+    "exRu": "В двух словах: наше решение помогает корпоративным командам продаж сократить цикл сделки на 35%.",
+    "note": "Элеваторный питч (Elevator Pitch) за 10 секунд"
+  },
+  {
+    "id": "chunk-82",
+    "text": "Call it a day",
+    "clean": "call it a day",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Закончить работу на сегодня",
+    "exEn": "We've made over sixty outbound dials and hit our meeting quota. Let's <strong>call it a day</strong>.",
+    "exRu": "Мы сделали больше шестидесяти холодных звонков и выполнили норму по назначенным встречам. Давайте закругляться на сегодня.",
+    "note": "Завершение успешной смены телефонных продаж (Cold Calling)"
+  },
+  {
+    "id": "chunk-83",
+    "text": "Ring a bell",
+    "clean": "ring a bell",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Звучать знакомо / напоминать что-то",
+    "exEn": "Does that operational pain point with manual CRM logging <strong>ring a bell</strong> in your current workflow?",
+    "exRu": "Откликается ли в вашей текущей работе эта проблема с ручным заполнением CRM?",
+    "note": "Проверка релевантности проблемы клиенту на созвоне"
+  },
+  {
+    "id": "chunk-84",
+    "text": "Bite the bullet",
+    "clean": "bite the bullet",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Стиснуть зубы и сделать тяжелую работу",
+    "exEn": "We just have to <strong>bite the bullet</strong> and disqualify this lead — they simply don't have the budget.",
+    "exRu": "Нам просто нужно стиснуть зубы и дисквалифицировать этот лид: у них попросту нет бюджета.",
+    "note": "Экономия времени сейлза на бесперспективных сделках (Ruthless qualification)"
+  },
+  {
+    "id": "chunk-85",
+    "text": "Cut to the chase",
+    "clean": "cut to the chase",
+    "cat": "social",
+    "catName": "Живое общение",
+    "trans": "Перейти сразу к сути без лишних предисловий",
+    "exEn": "Let's <strong>cut to the chase</strong>: what is the single biggest blocker keeping your team from signing today?",
+    "exRu": "Давайте сразу к делу: какой главный блокер мешает вашей команде подписать договор сегодня?",
+    "note": "Прямой вопрос для вскрытия скрытого возражения перед закрытием"
+  },
+  {
+    "id": "chunk-86",
+    "text": "make sense",
+    "clean": "make sense",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Иметь смысл / звучать логично",
+    "exEn": "Does that pricing model <strong>make sense</strong> for your team's projected headcount growth?",
+    "exRu": "Имеет ли такая модель ценообразования смысл с учетом планируемого роста штата вашей команды?",
+    "note": "Проверка соответствия предложения планам клиента"
+  },
+  {
+    "id": "chunk-87",
+    "text": "make sure",
+    "clean": "make sure",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Убедиться / проконтролировать",
+    "exEn": "Please <strong>make sure</strong> all executive stakeholders are invited to our solution presentation.",
+    "exRu": "Пожалуйста, убедитесь, что все ключевые руководители приглашены на нашу презентацию решения.",
+    "note": "Обеспечение присутствия лиц, принимающих решения"
+  },
+  {
+    "id": "chunk-88",
+    "text": "take into account",
+    "clean": "take into account",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Принимать во внимание / учитывать",
+    "exEn": "We need to <strong>take into account</strong> their procurement approval cycle before forecasting this deal for Q3.",
+    "exRu": "Нам нужно принять во внимание длительность цикла закупок у клиента, прежде чем вносить сделку в прогноз на 3-й квартал.",
+    "note": "Точное прогнозирование продаж (Sales Forecasting)"
+  },
+  {
+    "id": "chunk-89",
+    "text": "take advantage of [X]",
+    "clean": "take advantage of",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Воспользоваться возможностью / извлечь пользу",
+    "exEn": "You can <strong>take advantage of</strong> our end-of-quarter promotion to lock in free onboarding.",
+    "exRu": "Вы можете воспользоваться нашей специальной акцией конца квартала, чтобы зафиксировать бесплатный онбординг.",
+    "note": "Создание срочности (Urgency) для закрытия сделки"
+  },
+  {
+    "id": "chunk-90",
+    "text": "take for granted",
+    "clean": "take for granted",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Принимать как само собой разумеющееся",
+    "exEn": "We shouldn't <strong>take prospect renewals for granted</strong> without continuous quarterly business reviews.",
+    "exRu": "Не стоит принимать продление контрактов клиентами как должное без регулярных бизнес-ревью.",
+    "note": "Предотвращение оттока в клиентском сервисе (Retention)"
+  },
+  {
+    "id": "chunk-91",
+    "text": "come in handy",
+    "clean": "come in handy",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Пригодиться / оказаться полезным",
+    "exEn": "This customer case study will definitely <strong>come in handy</strong> when pitching their CFO.",
+    "exRu": "Этот кейс аналогичного клиента определенно пригодится при защите бюджета перед их финдиректором.",
+    "note": "Использование продающих материалов и кейсов"
+  },
+  {
+    "id": "chunk-92",
+    "text": "catch someone off guard",
+    "clean": "catch off guard",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Застать врасплох",
+    "exEn": "Their tough objection regarding our data retention policy <strong>caught our junior rep off guard</strong>.",
+    "exRu": "Их жесткое возражение по поводу политики хранения данных застало нашего начинающего менеджера врасплох.",
+    "note": "Отработка сложных возражений на переговорах"
+  },
+  {
+    "id": "chunk-93",
+    "text": "come to terms with [X]",
+    "clean": "come to terms with",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Смириться с фактом / принять неизбежное",
+    "exEn": "We have to <strong>come to terms with</strong> the fact that enterprise deals take at least four months to close.",
+    "exRu": "Придется смириться с тем, что корпоративные сделки закрываются минимум четыре месяца.",
+    "note": "Реалистичные ожидания по циклу B2B-продаж"
+  },
+  {
+    "id": "chunk-94",
+    "text": "pay off",
+    "clean": "pay off",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Окупиться / принести плоды",
+    "exEn": "All the relentless follow-ups and stakeholder mapping really <strong>paid off</strong> when they signed the MSA.",
+    "exRu": "Все настойчивые фоллоу-апы и карта стейкхолдеров действительно окупились с лихвой, когда они подписали генеральный договор.",
+    "note": "Заслуженная победа после долгого цикла сделки"
+  },
+  {
+    "id": "chunk-95",
+    "text": "have second thoughts",
+    "clean": "have second thoughts",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Сомневаться / передумывать / колебаться",
+    "exEn": "The buyer seems to be having <strong>second thoughts</strong> after speaking with our competitor.",
+    "exRu": "Похоже, клиент начал сомневаться и колебаться после разговора с нашими конкурентами.",
+    "note": "Сигнал опасности в сделке (Competitive deal at risk)"
+  },
+  {
+    "id": "chunk-96",
+    "text": "keep in mind",
+    "clean": "keep in mind",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Иметь в виду / не забывать о",
+    "exEn": "Please <strong>keep in mind</strong> that this custom promotional pricing expires at the end of the month.",
+    "exRu": "Имейте в виду, что эта специальная промо-цена действует только до конца текущего месяца.",
+    "note": "Мягкое напоминание о сроках действия коммерческого предложения"
+  },
+  {
+    "id": "chunk-97",
+    "text": "run out of [X]",
+    "clean": "run out of",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Закончиться (о времени, бюджете, терпении)",
+    "exEn": "We're about to <strong>run out of</strong> time in this quarter, so we must prioritize high-probability deals.",
+    "exRu": "У нас почти закончилось время в этом квартале, поэтому мы обязаны сфокусироваться на сделках с наивысшей вероятностью закрытия.",
+    "note": "Расстановка приоритетов в конце отчетного периода"
+  },
+  {
+    "id": "chunk-98",
+    "text": "look into [X]",
+    "clean": "look into",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Исследовать / разобраться в вопросе",
+    "exEn": "I'll <strong>look into</strong> whether our finance team can accommodate quarterly billing for your account.",
+    "exRu": "Я уточню у нашего финансового отдела, сможем ли мы предоставить поквартальную оплату для вашей компании.",
+    "note": "Обещание клиенту уточнить возможность коммерческих уступок"
+  },
+  {
+    "id": "chunk-99",
+    "text": "stay on top of [X]",
+    "clean": "stay on top of",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Контролировать ситуацию / держать руку на пульсе",
+    "exEn": "Our CRM tasks help us <strong>stay on top of</strong> follow-ups across all active accounts.",
+    "exRu": "Задачи в CRM помогают нам держать под контролем регулярные контакты со всеми активными клиентами.",
+    "note": "Дисциплина ведения пайплайна и CRM-гигиена"
+  },
+  {
+    "id": "chunk-100",
+    "text": "figure out",
+    "clean": "figure out",
+    "cat": "verbs",
+    "catName": "Глагольные коллокации",
+    "trans": "Понять / разобраться / докопаться до сути",
+    "exEn": "It took three discovery calls to <strong>figure out</strong> who the true economic buyer was.",
+    "exRu": "У нас ушло три ознакомительных созвона, чтобы докопаться до сути и понять, кто в реальности распоряжается бюджетом.",
+    "note": "Квалификация реального лица, принимающего финансовые решения"
+  }
+];
 
     let currentCategory = 'all';
 

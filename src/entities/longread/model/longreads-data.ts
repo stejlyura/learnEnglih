@@ -320,6 +320,37 @@ export const LONGREADS: readonly LongreadItem[] = [
     ],
     featured: true,
   },
+  {
+    id: "support-sales-fluency",
+    slug: "support-sales-fluency",
+    href: "/longreads/support-sales-fluency",
+    title: "Психолингвистика Речевой Беглости и Прямого Мышления в Customer Support и B2B Sales",
+    shortTitle: "Support & Sales Fluency 🎯",
+    subtitle: "Как говорить без пауз и перевода при острой эскалации недовольного клиента или защите цены перед CFO. Тактическая эмпатия, SPIN-вопросы и деинсталляция ступора.",
+    description: "Когнитивная хронометрия стресса (Amygdala Hijack), модель Криса Восса (FBI Tactical Empathy), SPIN-квалификация Нила Рэкхема и неприятие потерь (Loss Aversion) Канемана.",
+    category: "chunks",
+    categoryLabel: "Support & Sales",
+    readTime: "16 мин",
+    badge: "Практика 🤝",
+    badgeColor: "emerald",
+    targetLevel: "B2 → C1",
+    scientificPillars: [
+      "Chris Voss (FBI Tactical Empathy)",
+      "Neil Rackham (SPIN Questioning Architecture)",
+      "Daniel Kahneman (Prospect Theory & Loss Aversion)",
+      "Judith Kroll (Revised Hierarchical Model)",
+      "David Green (Inhibitory Control Model)",
+    ],
+    toc: [
+      { id: "sec-1", title: "01. Стресс и амигдалярный перехват: Почему мозг зависает на звонках" },
+      { id: "sec-2", title: "02. Тактическая эмпатия Криса Восса и фреймворк деэскалации L.A.S.T." },
+      { id: "sec-3", title: "03. Архитектура вопросов в B2B Sales: SPIN и квалификация Economic Buyer" },
+      { id: "sec-4", title: "04. Искоренение внутреннего перевода (L1) в боевых переговорах" },
+      { id: "sec-5", title: "05. Психологический фрейминг: Неприятие потерь и защита маржи" },
+      { id: "sec-6", title: "06. Протокол автоматизации речевых блоков для Support и Sales" },
+    ],
+    featured: true,
+  },
 ] as const;
 
 export function getLongreadBySlug(slug: string): LongreadItem | undefined {

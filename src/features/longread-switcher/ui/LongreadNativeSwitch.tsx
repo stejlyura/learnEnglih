@@ -116,6 +116,17 @@ export const LONGREAD_TABS: readonly LongreadTabItem[] = [
     badge: "Практика 🤝",
     badgeColor: "emerald",
   },
+  {
+    id: "discourse-architecture",
+    slug: "discourse-architecture",
+    title: "Дискурсивная Архитектура Спонтанной Речи и Каталог Каркасов C1",
+    shortTitle: "Дискурс C1 (63 каркаса)",
+    categoryLabel: "Дебаты & Речь",
+    icon: "💎",
+    readTime: "18 мин",
+    badge: "Дискурс 💎",
+    badgeColor: "cyan",
+  },
 ] as const;
 
 interface LongreadNativeSwitchProps {

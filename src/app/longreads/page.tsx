@@ -9,6 +9,7 @@ import ChunkArchitecturePage from "./chunk-architecture/page";
 import NeuralWeightsPage from "./neural-weights/page";
 import DirectThinkingPage from "./direct-thinking/page";
 import SupportSalesFluencyPage from "./support-sales-fluency/page";
+import DiscourseArchitecturePage from "./discourse-architecture/page";
 import FluencyGuidePage from "@/app/fluency-guide/page";
 import ChunksPage from "@/app/chunks/page";
 import MethodologyPage from "@/app/methodology/page";
@@ -53,6 +54,8 @@ function LongreadsContent() {
         return <DirectThinkingPage isUnified />;
       case "support-sales-fluency":
         return <SupportSalesFluencyPage isUnified />;
+      case "discourse-architecture":
+        return <DiscourseArchitecturePage isUnified />;
       default:
         return <NativeBrainPage isUnified />;
     }

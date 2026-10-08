@@ -59,7 +59,7 @@ export default function HomePage() {
               <Link key={item.href} href={item.href} className="module-card">
                 <div>
                   <div className="module-top-row">
-                    <span className="module-num">0{idx + 1}</span>
+                    <span className="module-num">{String(idx + 1).padStart(2, "0")}</span>
                     {item.badge && <span className="module-badge">{item.badge}</span>}
                   </div>
                   <h3 className="module-title">{item.title}</h3>

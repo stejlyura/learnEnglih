@@ -13,8 +13,9 @@ import {
   Smartphone, 
   Home,
   ChevronRight,
-  Flame,
-  Grid3X3
+  Flame, 
+  Grid3X3,
+  MessageSquare,
 } from "lucide-react";
 import { cn } from "@/shared/lib";
 import { openPwaInstallModal } from "@/features/pwa";
@@ -58,9 +59,15 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     icon: <Sparkles className="w-5 h-5 text-emerald-400" />
   },
   { 
+    title: "Дискурс & Дебаты", 
+    href: "/discourse-chunks", 
+    desc: "63 каркаса C1: ввод позиции, уступка и синтез",
+    icon: <MessageSquare className="w-5 h-5 text-cyan-400" />
+  },
+  { 
     title: "Лонгриды", 
     href: "/longreads", 
-    desc: "Исследования SLA: Мозг C1, Беглость, Чанки, Support & Sales",
+    desc: "Исследования SLA: Мозг C1, Беглость, Чанки, Дискурс",
     icon: <BookOpen className="w-5 h-5 text-cyan-300" />
   },
 ] as const;

@@ -78,11 +78,19 @@ export const NAV_ITEMS: readonly NavItem[] = [
     readTime: "12 мин",
   },
   {
+    title: "Дискурсивные Каркасы (63 Чанка)",
+    href: "/discourse-chunks",
+    description: "63 полуфиксированных каркаса аргументации B2–C1: ввод позиции, когезия, смягченное несогласие, уступка и синтез.",
+    badge: "Дискурс 💎",
+    category: "trainer",
+    readTime: "18 мин",
+  },
+  {
     title: "Библиотека Лонгридов",
     href: "/longreads",
     description: "Единый хаб с нативным свитчером: фундаментальные исследования SLA для уровней B2 → C1.",
     badge: "Лонгриды 📚",
     category: "methodology",
-    readTime: "9 материалов",
+    readTime: "10 материалов",
   },
 ] as const;

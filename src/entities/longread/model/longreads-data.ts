@@ -351,6 +351,37 @@ export const LONGREADS: readonly LongreadItem[] = [
     ],
     featured: true,
   },
+  {
+    id: "discourse-architecture",
+    slug: "discourse-architecture",
+    href: "/longreads/discourse-architecture",
+    title: "Дискурсивная Архитектура Спонтанной Речи: Когнитивные Механизмы и Функциональный Каталог Каркасов B2–C1",
+    shortTitle: "Дискурсивная Архитектура C1",
+    subtitle: "Когнитивная компрессия Левелта, функциональный каталог из 63 каркасов аргументации, социопрагматика Face-Saving Браун-Левинсона и дидактический протокол 4-3-2.",
+    description: "Разбор того, почему беглая речь на 97% состоит из первых 3 000 частотных слов, как готовые предикативные рамки снимают ступор в дебатах и как автоматизировать речевые блоки.",
+    category: "chunks",
+    categoryLabel: "Дебаты & Речь C1",
+    readTime: "18 мин",
+    badge: "Дискурс 💎",
+    badgeColor: "cyan",
+    targetLevel: "B2 → C1",
+    scientificPillars: [
+      "Willem Levelt (Speech Production Model)",
+      "Michael Lewis (The Lexical Approach)",
+      "Pawley & Syder (Two Puzzles for Linguistic Theory)",
+      "Brown & Levinson (Politeness & Face-Saving Acts)",
+      "Paul Nation (Four Strands & 4-3-2 Fluency)",
+    ],
+    toc: [
+      { id: "sec-1", title: "01. Психолингвистические основания беглости речи и когнитивная компрессия" },
+      { id: "sec-2", title: "02. Систематизированный репертуар дискурсивных каркасов аргументации (63 единицы)" },
+      { id: "sec-3", title: "03. Сравнительный анализ дискурсивных регистров: B1–B2 vs Solid B2/C1" },
+      { id: "sec-4", title: "04. Методология дидактической автоматизации формульных единиц в спонтанном дискурсе" },
+      { id: "sec-5", title: "05. Заключение" },
+      { id: "sec-6", title: "06. Научные источники & Библиография" },
+    ],
+    featured: true,
+  },
 ] as const;
 
 export function getLongreadBySlug(slug: string): LongreadItem | undefined {

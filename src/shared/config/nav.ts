@@ -3,11 +3,19 @@ export interface NavItem {
   readonly href: string;
   readonly description: string;
   readonly badge?: string;
-  readonly category: "core" | "trainer" | "methodology";
+  readonly category: "core" | "trainer" | "methodology" | "programming";
   readonly readTime?: string;
 }
 
 export const NAV_ITEMS: readonly NavItem[] = [
+  {
+    title: "Чанки Программирования",
+    href: "/programming",
+    description: "JS, TS, React, Node.js: механики движка, асинхронные потоки, метатипизация и архитектура хуков.",
+    badge: "Кодинг 💻",
+    category: "programming",
+    readTime: "4 стека",
+  },
   {
     title: "Лексические Чанки",
     href: "/longreads?article=chunks",

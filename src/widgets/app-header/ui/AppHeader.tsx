@@ -16,6 +16,7 @@ import {
   Flame, 
   Grid3X3,
   MessageSquare,
+  Code,
 } from "lucide-react";
 import { cn } from "@/shared/lib";
 import { openPwaInstallModal } from "@/features/pwa";
@@ -28,6 +29,12 @@ interface HeaderNavItem {
 }
 
 const HEADER_LINKS: readonly HeaderNavItem[] = [
+  { 
+    title: "Кодинг 💻", 
+    href: "/programming", 
+    desc: "Чанки JS, TS, React, Node.js для Senior-уровня",
+    icon: <Code className="w-5 h-5 text-cyan-400" />
+  },
   { 
     title: "Таблица Времен", 
     href: "/tense-matrix", 

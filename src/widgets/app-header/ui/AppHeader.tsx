@@ -17,6 +17,7 @@ import {
   Grid3X3,
   MessageSquare,
   Code,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/shared/lib";
 import { openPwaInstallModal } from "@/features/pwa";
@@ -40,6 +41,18 @@ const HEADER_LINKS: readonly HeaderNavItem[] = [
     href: "/tense-matrix", 
     desc: "Present, Past, Future в готовых чанках",
     icon: <Grid3X3 className="w-5 h-5 text-indigo-400" />
+  },
+  { 
+    title: "Правила Речи ⚡", 
+    href: "/speaking-rules", 
+    desc: "SVO, смягчение, косвенные вопросы и живые реакции",
+    icon: <Sparkles className="w-5 h-5 text-emerald-400" />
+  },
+  { 
+    title: "Чанки Have / Had ⚡", 
+    href: "/have-chunks", 
+    desc: "Have, Has, Have Had, Каузатив и 3rd Conditionals",
+    icon: <Zap className="w-5 h-5 text-amber-400" />
   },
   { 
     title: "Времена Plug & Play", 

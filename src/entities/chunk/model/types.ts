@@ -92,3 +92,60 @@ export interface TenseMatrixItem {
   readonly sentences: readonly TenseExampleSentence[];
   readonly lifeTip: string;
 }
+
+export type HaveChunkCategory =
+  | "all"
+  | "have-had"         // Have had / Has had (Present Perfect)
+  | "collocations"     // Have/Has устойчивые коллокации
+  | "have-to"          // Have to / Has to (Долженствование)
+  | "have-got"         // Have got / Has got (Разговорное)
+  | "causative"        // Causative have (Делегирование)
+  | "had-had"          // Had had (Past Perfect & Conditionals)
+  | "modal-have";      // Modal + Have (should have, could have)
+
+export interface HaveChunkItem {
+  readonly id: string;
+  readonly chunk: string;
+  readonly category: Exclude<HaveChunkCategory, "all">;
+  readonly categoryName: string;
+  readonly formula: string;
+  readonly meaningRu: string;
+  readonly context: string;
+  readonly trapRu?: string;
+  readonly exampleEn: string;
+  readonly exampleRu: string;
+  readonly drillSlots?: readonly string[];
+}
+
+export type SpeakingRuleCategory =
+  | "all"
+  | "svo-order"          // Жесткий порядок слов и обстоятельств
+  | "softening-hedging"   // Смягчение, вежливость и непрямые просьбы
+  | "embedded-questions"  // Косвенные вопросы (без обратной инверсии)
+  | "time-frames"         // Состояние vs Процесс (Continuous vs Stative)
+  | "past-vs-perfect"     // Точное прошлое vs Связь с моментом речи
+  | "future-intentions"   // Will vs Going to vs Present Continuous
+  | "deduction-modals"    // Модальные глаголы уверенности (Must/Can't/Might)
+  | "reactions-tags"      // Активное слушание, Tag-вопросы и эллипсис
+  | "cause-contrast";     // Разговорные связки причин и противопоставлений
+
+export interface SpeakingRuleItem {
+  readonly id: string;
+  readonly ruleId: string;
+  readonly ruleTitle: string;
+  readonly ruleSummaryRu: string;
+  readonly chunk: string;
+  readonly clean: string;
+  readonly category: Exclude<SpeakingRuleCategory, "all">;
+  readonly categoryName: string;
+  readonly formula: string;
+  readonly meaningRu: string;
+  readonly context: string;
+  readonly trapRu: string;
+  readonly antidoteRu: string;
+  readonly exampleEn: string;
+  readonly exampleRu: string;
+  readonly drillSlots?: readonly string[];
+}
+
+

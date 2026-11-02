@@ -40,6 +40,22 @@ export const NAV_ITEMS: readonly NavItem[] = [
     category: "trainer",
   },
   {
+    title: "Правила Живой Речи (Speaking Rules)",
+    href: "/speaking-rules",
+    description: "9 ключевых правил общения без академизма: SVO, дипломатичное смягчение, косвенные вопросы, времена и живые реакции.",
+    badge: "Разговор ⚡",
+    category: "core",
+    readTime: "15 мин",
+  },
+  {
+    title: "Чанки Have / Has / Have Had",
+    href: "/have-chunks",
+    description: "Полный репертуар с have: от Present Perfect (have had) и каузатива до коллокаций и 3rd Conditionals.",
+    badge: "Грамматика ⚡",
+    category: "core",
+    readTime: "12 мин",
+  },
+  {
     title: "Плотные Связки (3 Уровня)",
     href: "/dense-structure",
     description: "От базовых оправданий до тонкой дипломатии и естественных связующих оборотов.",

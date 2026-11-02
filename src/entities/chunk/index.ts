@@ -6,3 +6,6 @@ export * from "./model/audit-chunks-data";
 export * from "./model/tense-matrix-data";
 export * from "./model/question-conditional-data";
 export * from "./model/discourse-chunks-data";
+export * from "./model/have-chunks-data";
+export * from "./model/speaking-rules-data";
+
